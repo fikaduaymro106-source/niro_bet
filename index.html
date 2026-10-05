@@ -55,14 +55,14 @@
         .win-game { font-size: 0.72rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .win-payout { font-size: 0.8rem; color: var(--niro-green); font-weight: 800; margin-top: 2px; }
 
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 6px 10px 16px; }
-        .game-tile { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.1s; }
-        .game-tile:active { transform: scale(0.96); }
-        .game-poster { height: 95px; background: linear-gradient(135deg, #1f2732, #0d1117); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; position: relative; }
+        .game-grid { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 6px 10px 16px; }
+        .game-tile { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; overflow: hidden; cursor: pointer; display: flex; align-items: center; padding: 12px; gap: 14px; }
+        .game-poster { width: 70px; height: 70px; background: linear-gradient(135deg, #2b1117, #0d1117); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; border: 1px solid #3d1b27; }
         .game-badge { position: absolute; top: 4px; left: 4px; background: var(--niro-red); color: #fff; font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 3px; }
-        .game-label { padding: 6px; font-size: 0.75rem; font-weight: 700; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .game-info-col h4 { font-size: 1.1rem; font-weight: 900; margin-bottom: 4px; }
+        .game-info-col p { font-size: 0.8rem; color: var(--text-secondary); }
 
-        /* 2. AVIATOR PRO COMPONENT */
+        /* 2. REALISTIC AVIATOR COMPONENT */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-topbar { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; }
         .aviator-history-ribbon { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
@@ -70,8 +70,13 @@
         .hist-chip { background: #181d24; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #b388ff; white-space: nowrap; }
         .hist-chip.high { color: var(--niro-green); border-color: rgba(0, 230, 118, 0.4); }
 
-        .radar-box { position: relative; width: 100%; height: 230px; background: radial-gradient(circle at 10% 90%, #2e0814 0%, #0d0f14 75%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
-        .stage-svg { width: 100%; height: 100%; display: block; }
+        /* Radar Box & Motion Horizon */
+        .radar-box { position: relative; width: 100%; height: 235px; background: radial-gradient(circle at 10% 90%, #2e0814 0%, #0d0f14 75%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
+        .radar-dots-axis { position: absolute; bottom: 18px; left: 0; right: 0; height: 10px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
+        .radar-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.25); border-radius: 50%; flex-shrink: 0; }
+        @keyframes slideDots { from { transform: translateX(0); } to { transform: translateX(-18px); } }
+
+        .stage-svg { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
         .flight-curve-fill { fill: url(#curveGrad); }
         .flight-curve-line { fill: none; stroke: #e53935; stroke-width: 3.5; stroke-linecap: round; }
         .plane-group { transition: transform 0.05s linear; }
@@ -80,7 +85,7 @@
         .multiplier-counter { font-size: 3.6rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.9); }
         .multiplier-bust { font-size: 1.15rem; font-weight: 800; color: var(--niro-red); margin-top: 4px; display: none; }
 
-        /* Dual Bet Deck */
+        /* Aviator Dual Deck */
         .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
         .dock-module { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; }
         .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
@@ -91,6 +96,12 @@
         .chip-tag { background: var(--bg-elevated); border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.68rem; font-weight: 700; cursor: pointer; }
         .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; }
         .btn-bet-trigger.cashing { background: var(--niro-gold); color: #000; }
+
+        /* Live Bets Board (Cassa Style) */
+        .live-pot-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 8px; font-size: 0.78rem; }
+        .live-bets-table { margin-top: 6px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; max-height: 170px; overflow-y: auto; }
+        .live-table-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); border-bottom: 1px solid var(--border-dim); padding-bottom: 6px; margin-bottom: 6px; }
+        .live-bet-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
 
         /* 3. WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
@@ -108,7 +119,11 @@
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; }
         .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
 
-        /* 4. BOTTOM FOOTER */
+        /* 4. ADMIN PANEL */
+        .admin-box { background: var(--bg-card); border: 1px solid #e53935; border-radius: 12px; padding: 14px; margin-top: 14px; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; color: var(--niro-gold); font-size: 0.9rem; font-weight: 800; margin-bottom: 10px; }
+
+        /* FOOTER DOCK */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--niro-green); }
@@ -117,88 +132,86 @@
 </head>
 <body>
 
-    <!-- የላይኛው ራስጌ -->
+    <!-- TOP HEADER -->
     <header class="app-header">
         <div class="brand-cluster" onclick="switchNavTab('lobby')">
-            <span class="brand-title">ኒሮ</span>
-            <span class="brand-badge">ቤት</span>
+            <span class="brand-title">NIRO</span>
+            <span class="brand-badge">BET</span>
         </div>
         <div class="wallet-cluster">
             <div class="balance-pill">
-                <span class="curr-sign">ብር</span>
+                <span class="curr-sign">Br</span>
                 <span id="headerBalance">100.00</span>
             </div>
-            <button class="btn-deposit-action" onclick="switchNavTab('wallet', 'dep')">ዲፖዚት</button>
+            <button class="btn-deposit-action" onclick="switchNavTab('wallet', 'dep')">Deposit</button>
         </div>
     </header>
 
-    <!-- 1. ዋናው የካሲኖ ገጽ (LOBBY) -->
+    <!-- 1. CASINO LOBBY -->
     <div id="viewLobby" class="view-pane active">
         <div class="hero-promo">
             <div>
-                <h2>15,000,000 ብር<br><span>ልዩ የጃክፖት ሳምንት!</span></h2>
-                <p>በቴሌብር ያስገቡ እና በእጥፍ ያሸንፉ</p>
+                <h2>15,000,000 ብር<br><span>የዕድል ሳምንት!</span></h2>
+                <p>በቴሌብር ያስገቡ እና በ Aviator ያሸንፉ</p>
             </div>
             <div class="hero-art">🎰</div>
         </div>
 
         <div class="feature-grid">
             <div class="feature-node" onclick="alert('የዕድል ስፒን ገቢ ካደረጉ በኋላ ይከፈታል!')">
-                <span class="node-tag">አዲስ</span>
+                <span class="node-tag">NEW</span>
                 <div class="node-icon">🎡</div>
-                <div class="node-title">የዕድል ስፒን</div>
+                <div class="node-title">Lucky Spin</div>
             </div>
             <div class="feature-node" onclick="alert('ሻሞ ጃክፖት በቅርብ ቀን!')">
                 <div class="node-icon">🎯</div>
-                <div class="node-title">ሻሞ ጃክፖት</div>
+                <div class="node-title">Shamo</div>
             </div>
             <div class="feature-node" onclick="alert('የኩፖን ኮድዎን ያስገቡ')">
                 <div class="node-icon">🎟️</div>
-                <div class="node-title">ኩፖን</div>
+                <div class="node-title">Coupon</div>
             </div>
-            <div class="feature-node" onclick="switchNavTab('profile')">
-                <span class="node-tag">ቪአይፒ</span>
-                <div class="node-icon">👑</div>
-                <div class="node-title">ቪአይፒ ክለብ</div>
+            <div class="feature-node" onclick="switchNavTab('admin')">
+                <span class="node-tag" style="background:#ff9800;">ADMIN</span>
+                <div class="node-icon">⚙️</div>
+                <div class="node-title">Admin</div>
             </div>
         </div>
 
         <div class="section-label">
-            <span>የቅርብ ጊዜ ትልልቅ አሸናፊዎች</span>
-            <span style="color:#00bcd4; cursor:pointer;">ሁሉንም እይ</span>
+            <span>Recent Big Wins</span>
+            <span style="color:#00bcd4; cursor:pointer;">View All</span>
         </div>
         <div class="wins-scroller">
-            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">አቪዬተር</div><div class="win-payout">ብር 84,600</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">🎱</div><div class="win-game">ፈጣን ኬኖ</div><div class="win-payout">ብር 32,500</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">🐔</div><div class="win-game">ቺከን ሮድ</div><div class="win-payout">ብር 44,300</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">💣</div><div class="win-game">ማይንስ</div><div class="win-payout">ብር 55,900</div></div>
+            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 84.6K</div></div>
+            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 32.5K</div></div>
+            <div class="win-card"><div style="font-size:1.5rem;">✈️️</div><div class="win-game">Aviator</div><div class="win-payout">Br 55.9K</div></div>
         </div>
 
-        <div class="section-label">🔥 ተወዳጅ ጨዋታዎች</div>
+        <div class="section-label">🔥 ዋና ጨዋታ (Official Game)</div>
         <div class="game-grid">
             <div class="game-tile" onclick="openAviatorGame()">
-                <div class="game-poster"><span class="game-badge">ቀጥታ</span>✈️</div>
-                <div class="game-label">አቪዬተር (Aviator)</div>
-            </div>
-            <div class="game-tile" onclick="alert('ፈጣን ኬኖ በቅርብ ቀን!')">
-                <div class="game-poster">🎱</div>
-                <div class="game-label">ፈጣን ኬኖ</div>
-            </div>
-            <div class="game-tile" onclick="alert('ጄት-ኤክስ በቅርብ ቀን!')">
-                <div class="game-poster">🚀</div>
-                <div class="game-label">ጄት-ኤክስ</div>
+                <div class="game-poster">
+                    <span class="game-badge">HOT</span>
+                    ✈️
+                </div>
+                <div class="game-info-col">
+                    <h4>Aviator Spribe</h4>
+                    <p>ትክክለኛ ድምፅ እና የበረራ ግራፍ • አሁኑኑ ይጫወቱ</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. የአቪዬተር ጨዋታ ክፍል -->
+    <!-- 2. REALISTIC SOUND & GRAPH AVIATOR -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-topbar">
-                <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ ወደ ዋና ገጽ</span>
-                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">ኒሮ አቪዬተር</span>
+                <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
+                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR | CASSA STYLE</span>
             </div>
 
+            <!-- Multiplier History Chips -->
             <div class="aviator-history-ribbon" id="historyChips">
                 <div class="hist-chip high">5.71x</div>
                 <div class="hist-chip">1.33x</div>
@@ -207,8 +220,12 @@
                 <div class="hist-chip">1.10x</div>
             </div>
 
-            <!-- የቀይ ግራፍ እና የበራሪው አውሮፕላን ስክሪን -->
+            <!-- Dynamic Radar Stage -->
             <div class="radar-box">
+                <div class="radar-dots-axis">
+                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
+                </div>
+
                 <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 200" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
@@ -220,7 +237,7 @@
                     <path id="curveFill" class="flight-curve-fill" d="M 20 180 Q 20 180 20 180 L 20 180 Z" />
                     <path id="curveLine" class="flight-curve-line" d="M 20 180 Q 20 180 20 180" />
 
-                    <!-- ቀይ የ Spribe አቪዬተር አውሮፕላን -->
+                    <!-- Spribe Style Vector Red Plane -->
                     <g id="planeG" class="plane-group" transform="translate(20, 180) rotate(-10)">
                         <line x1="22" y1="-8" x2="22" y2="8" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
                         <path d="M -15 0 C -15 -6 18 -5 22 0 C 18 5 -15 6 -15 0 Z" fill="#e53935"/>
@@ -232,13 +249,12 @@
 
                 <div class="radar-center-hud">
                     <div id="hudMultiplier" class="multiplier-counter">1.00x</div>
-                    <div id="hudCrashText" class="multiplier-bust">አውሮፕላኑ በረረ!</div>
+                    <div id="hudCrashText" class="multiplier-bust">FLEW AWAY!</div>
                 </div>
             </div>
 
-            <!-- ባለ ሁለት መደብ መቆጣጠሪያ -->
+            <!-- Dual Bet Modules -->
             <div class="betting-dock">
-                <!-- መደብ 1 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>መደበኛ</span><span>አውቶ</span></div>
                     <div class="stepper-row">
@@ -255,7 +271,6 @@
                     <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">መድብ<br><span style="font-size:0.75rem;">10.00 ብር</span></button>
                 </div>
 
-                <!-- መደብ 2 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>መደበኛ</span><span>አውቶ</span></div>
                     <div class="stepper-row">
@@ -272,14 +287,34 @@
                     <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">መድብ<br><span style="font-size:0.75rem;">20.00 ብር</span></button>
                 </div>
             </div>
+
+            <!-- Live Bets Count & Total Pot (Cassa Style) -->
+            <div class="live-pot-bar">
+                <div><b id="liveBetsCount" style="color:var(--niro-green);">128/136</b> Bets</div>
+                <div>Total: <b id="liveTotalPot" style="color:var(--niro-gold);">Br 15,062.14</b></div>
+            </div>
+            <div class="live-bets-table">
+                <div class="live-table-header">
+                    <span>User</span>
+                    <span>Bet</span>
+                    <span>X</span>
+                    <span>Win</span>
+                </div>
+                <div id="liveBetsList">
+                    <div class="live-bet-row"><span style="color:#90caf9;">2***9</span><span>143.00</span><span style="color:var(--niro-green);">1.35x</span><span>193.05</span></div>
+                    <div class="live-bet-row"><span style="color:#90caf9;">2***8</span><span>100.00</span><span style="color:var(--niro-green);">2.10x</span><span>210.00</span></div>
+                    <div class="live-bet-row"><span style="color:#90caf9;">2***1</span><span>500.00</span><span style="color:var(--niro-green);">-</span><span>-</span></div>
+                    <div class="live-bet-row"><span style="color:#90caf9;">2***4</span><span>250.00</span><span style="color:var(--niro-green);">1.85x</span><span>462.50</span></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 3. የዋሌት ክፍል (ዲፖዚት እና ዊዝድሮው) -->
+    <!-- 3. WALLET VIEW -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <span style="font-size:1.1rem; font-weight:800;">የእኔ ዋሌት</span>
+                <span style="font-size:1.1rem; font-weight:800;">My Wallet</span>
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
             </div>
 
@@ -303,11 +338,11 @@
                 </div>
             </div>
 
-            <!-- የዲፖዚት ክፍል -->
+            <!-- Deposit Box -->
             <div id="boxDepSection">
                 <div style="background:#131d17; border:1px solid #1e3f28; border-radius:8px; padding:12px; margin-bottom:12px; font-size:0.85rem;">
                     ገንዘቡን ወደዚህ የቴሌብር ቁጥር ያስተላልፉ፦<br>
-                    <b style="color:var(--niro-green); font-size:1.15rem; display:block; margin-top:4px;">0974107425 (Niro Bet)</b>
+                    <b id="displayDepositNum" style="color:var(--niro-green); font-size:1.15rem; display:block; margin-top:4px;">0974107425 (Niro Bet)</b>
                 </div>
                 <div class="input-group">
                     <label>የገንዘብ መጠን (ብር)</label>
@@ -320,7 +355,7 @@
                 <button class="btn-confirm-action" onclick="submitDepositAction()">ዲፖዚት አረጋግጥ</button>
             </div>
 
-            <!-- የወጪ ክፍል -->
+            <!-- Withdraw Box -->
             <div id="boxWithSection" style="display:none;">
                 <div class="input-group">
                     <label>ማውጣት የሚፈልጉት መጠን (ብር)</label>
@@ -335,7 +370,35 @@
         </div>
     </div>
 
-    <!-- 4. ፕሮፋይል -->
+    <!-- 4. ADMIN PANEL (ማስተዳደሪያ) -->
+    <div id="viewAdmin" class="view-pane">
+        <div class="wallet-viewport">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:1.1rem; font-weight:800; color:var(--niro-gold);">⚙️ Admin Settings (አድሚን)</span>
+                <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
+            </div>
+
+            <div class="admin-box">
+                <div class="admin-header">የዲፖዚት ቴሌብር ቁጥር መቀየሪያ</div>
+                <div class="input-group">
+                    <label>አዲስ የቴሌብር ቁጥር</label>
+                    <input type="text" id="admPhoneInput" class="form-input" value="0974107425">
+                </div>
+                <button class="btn-confirm-action" onclick="updateAdminPhone()">ቁጥሩን ቀይር</button>
+            </div>
+
+            <div class="admin-box" style="border-color:#ff9800; margin-top:14px;">
+                <div class="admin-header">የአቪዬተር ቀጣይ ዙር መቆጣጠሪያ</div>
+                <div class="input-group">
+                    <label>ቀጣዩ አውሮፕላን የሚወድቅበት ማባዣ (ለምሳሌ 2.50 ወይም 10.0)</label>
+                    <input type="number" step="0.1" id="admNextCrash" class="form-input" placeholder="አውቶማቲክ እንዲሆን ባዶ ይተውት">
+                </div>
+                <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="setAdminNextCrash()">ውጤቱን ወስን</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. PROFILE VIEW -->
     <div id="viewProfile" class="view-pane">
         <div style="padding:20px; text-align:center;">
             <div style="width:70px; height:70px; border-radius:50%; background:#1c242e; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:2rem;">👤</div>
@@ -344,7 +407,7 @@
         </div>
     </div>
 
-    <!-- የታችኛው አዝራሮች -->
+    <!-- APP BOTTOM DOCK -->
     <nav class="app-footer-dock">
         <button class="footer-item active" id="tabLobbyBtn" onclick="switchNavTab('lobby')">
             <span class="f-icon">🏛️</span>
@@ -369,11 +432,104 @@
             window.Telegram.WebApp.expand();
         }
 
+        /* --- WEB AUDIO API (እውነተኛ ድምፅ ማመንጫ) --- */
+        let audioCtx;
+        function getAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            return audioCtx;
+        }
+
+        let engineOsc = null;
+        let engineGain = null;
+
+        function playEngineSound() {
+            try {
+                let ctx = getAudio();
+                if (ctx.state === 'suspended') ctx.resume();
+                engineOsc = ctx.createOscillator();
+                engineGain = ctx.createGain();
+
+                engineOsc.type = 'sawtooth';
+                engineOsc.frequency.setValueAtTime(65, ctx.currentTime);
+
+                // Low-pass filter for engine rumbling
+                let filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(300, ctx.currentTime);
+
+                engineGain.gain.setValueAtTime(0.08, ctx.currentTime);
+
+                engineOsc.connect(filter);
+                filter.connect(engineGain);
+                engineGain.connect(ctx.destination);
+                engineOsc.start();
+            } catch(e) {}
+        }
+
+        function updateEnginePitch(mult) {
+            try {
+                if (engineOsc && audioCtx) {
+                    let newFreq = Math.min(260, 65 + (mult - 1) * 35);
+                    engineOsc.frequency.setValueAtTime(newFreq, audioCtx.currentTime);
+                }
+            } catch(e) {}
+        }
+
+        function stopEngineSound() {
+            try {
+                if (engineOsc) {
+                    engineOsc.stop();
+                    engineOsc.disconnect();
+                    engineOsc = null;
+                }
+            } catch(e) {}
+        }
+
+        function playCrashSound() {
+            try {
+                let ctx = getAudio();
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(140, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.35);
+
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.4);
+            } catch(e) {}
+        }
+
+        function playWinSound() {
+            try {
+                let ctx = getAudio();
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
+
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.35);
+            } catch(e) {}
+        }
+
+        /* --- STATE VARIABLES --- */
         let balance = 100.00;
         let isFlying = false;
         let flightMultiplier = 1.00;
         let flightCrash = 1.50;
         let flightInterval;
+        let adminForcedCrash = null;
 
         let activeBets = {
             1: { on: false, stake: 10, cashed: false },
@@ -399,6 +555,8 @@
             } else if (tabName === 'profile') {
                 document.getElementById('viewProfile').classList.add('active');
                 document.getElementById('tabProfileBtn').classList.add('active');
+            } else if (tabName === 'admin') {
+                document.getElementById('viewAdmin').classList.add('active');
             }
         }
 
@@ -414,12 +572,20 @@
         function startContinuousFlight() {
             isFlying = true;
             flightMultiplier = 1.00;
-            flightCrash = (Math.random() < 0.4) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
-            flightCrash = parseFloat(flightCrash.toFixed(2));
+
+            if (adminForcedCrash) {
+                flightCrash = parseFloat(adminForcedCrash);
+                adminForcedCrash = null;
+            } else {
+                flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
+                flightCrash = parseFloat(flightCrash.toFixed(2));
+            }
 
             document.getElementById('hudCrashText').style.display = 'none';
             let hud = document.getElementById('hudMultiplier');
             hud.style.color = '#fff';
+
+            playEngineSound();
 
             for (let i = 1; i <= 2; i++) {
                 if (activeBets[i].on && !activeBets[i].cashed) {
@@ -437,6 +603,12 @@
                 flightMultiplier = 1.00 + (elapsed * 0.28) + Math.pow(elapsed * 0.14, 2);
                 hud.innerText = flightMultiplier.toFixed(2) + "x";
 
+                updateEnginePitch(flightMultiplier);
+
+                // Update Total pot and dynamic bets counter
+                let currentPot = 14000 + (flightMultiplier * 1150);
+                document.getElementById('liveTotalPot').innerText = `Br ${currentPot.toFixed(2)}`;
+
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
                         let winSum = (activeBets[i].stake * flightMultiplier).toFixed(2);
@@ -444,7 +616,8 @@
                     }
                 }
 
-                let progress = Math.min(elapsed / 7, 1);
+                // S-Curve & Plane coordinate generator
+                let progress = Math.min(elapsed / 7.2, 1);
                 let currentX = 20 + 290 * progress;
                 let currentY = 180 - 145 * Math.pow(progress, 1.4);
                 let controlX = 20 + (currentX - 20) * 0.45;
@@ -466,11 +639,15 @@
             clearInterval(flightInterval);
             isFlying = false;
 
+            stopEngineSound();
+            playCrashSound();
+
             let hud = document.getElementById('hudMultiplier');
             hud.style.color = 'var(--niro-red)';
             document.getElementById('hudCrashText').style.display = 'block';
 
-            document.getElementById('planeG').setAttribute('transform', `translate(400, -50) rotate(-35)`);
+            // Plane blasts off screen
+            document.getElementById('planeG').setAttribute('transform', `translate(420, -60) rotate(-35)`);
 
             let rib = document.getElementById('historyChips');
             let chip = document.createElement('div');
@@ -524,6 +701,8 @@
                     syncBalanceViews();
                     btn.classList.remove('cashing');
                     btn.innerHTML = `መድብ<br><span style="font-size:0.75rem;">${stake.toFixed(2)} ብር</span>`;
+
+                    playWinSound();
                     alert(`🎉 አሸንፈዋል! ${win.toFixed(2)} ብር ገቢ ተደርጓል!`);
                 }
             }
@@ -546,6 +725,7 @@
             }
         }
 
+        /* --- WALLET LOGIC --- */
         function setWalletMode(m) {
             if (m === 'dep') {
                 document.getElementById('btnWDepToggle').classList.add('active');
@@ -600,6 +780,23 @@
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
+        }
+
+        /* --- ADMIN CONTROLS --- */
+        function updateAdminPhone() {
+            let p = document.getElementById('admPhoneInput').value;
+            if (p.trim() !== "") {
+                document.getElementById('displayDepositNum').innerText = `${p} (Niro Bet)`;
+                alert("የዲፖዚት ቁጥሩ በተሳካ ሁኔታ ተቀይሯል!");
+            }
+        }
+
+        function setAdminNextCrash() {
+            let c = document.getElementById('admNextCrash').value;
+            if (c && parseFloat(c) >= 1.0) {
+                adminForcedCrash = parseFloat(c);
+                alert(`የቀጣዩ ዙር ውጤት ${adminForcedCrash}x እንዲሆን ተወስኗል!`);
+            }
         }
 
         startContinuousFlight();
