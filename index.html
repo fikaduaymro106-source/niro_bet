@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="am">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>ኒሮ ቤት - Niro Bet</title>
+    <title>Niro Bet</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
@@ -22,7 +22,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg-base); color: var(--text-primary); padding-bottom: 65px; overflow-x: hidden; user-select: none; }
 
-        /* Top Header */
+        /* Header */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-surface); border-bottom: 1px solid var(--border-dim); position: sticky; top: 0; z-index: 1000; }
         .brand-cluster { display: flex; align-items: center; gap: 6px; cursor: pointer; }
         .brand-title { font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
@@ -35,7 +35,7 @@
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* 1. LOBBY VIEW */
+        /* Lobby */
         .hero-promo { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 85% 50%, #1b5e20 0%, #071f0b 100%); border: 1px solid #2e7d32; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
         .hero-promo h2 { font-size: 1.25rem; font-weight: 900; line-height: 1.2; }
         .hero-promo h2 span { color: var(--niro-gold); font-size: 1.45rem; }
@@ -62,7 +62,7 @@
         .game-info-col h4 { font-size: 1.1rem; font-weight: 900; margin-bottom: 4px; }
         .game-info-col p { font-size: 0.8rem; color: var(--text-secondary); }
 
-        /* 2. REALISTIC AVIATOR COMPONENT */
+        /* AVIATOR REALISTIC COMPONENT */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-topbar { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; }
         .aviator-history-ribbon { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
@@ -70,7 +70,6 @@
         .hist-chip { background: #181d24; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #b388ff; white-space: nowrap; }
         .hist-chip.high { color: var(--niro-green); border-color: rgba(0, 230, 118, 0.4); }
 
-        /* Radar Box & Motion Horizon */
         .radar-box { position: relative; width: 100%; height: 235px; background: radial-gradient(circle at 10% 90%, #2e0814 0%, #0d0f14 75%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
         .radar-dots-axis { position: absolute; bottom: 18px; left: 0; right: 0; height: 10px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
         .radar-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.25); border-radius: 50%; flex-shrink: 0; }
@@ -85,7 +84,7 @@
         .multiplier-counter { font-size: 3.6rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.9); }
         .multiplier-bust { font-size: 1.15rem; font-weight: 800; color: var(--niro-red); margin-top: 4px; display: none; }
 
-        /* Aviator Dual Deck */
+        /* Dual Bet Deck */
         .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
         .dock-module { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; }
         .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
@@ -94,16 +93,23 @@
         .step-val { width: 55px; text-align: center; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.95rem; }
         .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 8px; }
         .chip-tag { background: var(--bg-elevated); border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.68rem; font-weight: 700; cursor: pointer; }
-        .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; }
+        .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; text-transform: uppercase; }
         .btn-bet-trigger.cashing { background: var(--niro-gold); color: #000; }
+        .btn-bet-trigger.waiting { background: #263238; color: var(--text-secondary); cursor: not-allowed; }
 
-        /* Live Bets Board (Cassa Style) */
+        /* Live Bets Board */
         .live-pot-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 8px; font-size: 0.78rem; }
-        .live-bets-table { margin-top: 6px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; max-height: 170px; overflow-y: auto; }
+        .live-bets-table { margin-top: 6px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; max-height: 160px; overflow-y: auto; }
         .live-table-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); border-bottom: 1px solid var(--border-dim); padding-bottom: 6px; margin-bottom: 6px; }
-        .live-bet-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .live-bet-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
 
-        /* 3. WALLET VIEW */
+        /* Win Banner Modal */
+        .win-modal { position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1b5e20, #0a290d); border: 2px solid var(--niro-gold); border-radius: 12px; padding: 16px 24px; text-align: center; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.8); display: none; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .win-modal h3 { font-size: 1.1rem; color: #fff; margin-bottom: 4px; }
+        .win-modal .win-amt { font-size: 1.8rem; font-weight: 900; color: var(--niro-gold); }
+        @keyframes popIn { from { transform: translate(-50%, -20px) scale(0.8); opacity: 0; } to { transform: translate(-50%, 0) scale(1); opacity: 1; } }
+
+        /* WALLET VIEW (Deposit / Withdraw) */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
         .wallet-balance-box { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
         .wallet-nav-switch { display: grid; grid-template-columns: 1fr 1fr; background: #080a0e; border-radius: 8px; padding: 3px; gap: 4px; margin-top: 10px; }
@@ -117,13 +123,18 @@
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; }
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; }
-        .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
+        .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; margin-top: 8px; }
 
-        /* 4. ADMIN PANEL */
-        .admin-box { background: var(--bg-card); border: 1px solid #e53935; border-radius: 12px; padding: 14px; margin-top: 14px; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; color: var(--niro-gold); font-size: 0.9rem; font-weight: 800; margin-bottom: 10px; }
+        /* Payment Details Order Box */
+        .order-details-box { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 16px; margin-top: 10px; display: none; }
+        .timer-badge { background: #261719; color: var(--niro-red); border: 1px solid #4a191f; border-radius: 20px; padding: 4px 10px; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
+        .copy-chip { background: #1f2732; border: 1px solid var(--border-dim); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 1rem; font-weight: 800; cursor: pointer; }
 
-        /* FOOTER DOCK */
+        /* Lucky Spin Modal */
+        .spin-wheel-box { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; }
+        .wheel-circle { width: 220px; height: 220px; border-radius: 50%; border: 6px solid var(--niro-gold); background: conic-gradient(#ff334b 0deg 60deg, #00d665 60deg 120deg, #00bcd4 120deg 180deg, #ffb300 180deg 240deg, #9c27b0 240deg 300deg, #ff9800 300deg 360deg); transition: transform 3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+        /* Footer */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--niro-green); }
@@ -151,30 +162,30 @@
     <div id="viewLobby" class="view-pane active">
         <div class="hero-promo">
             <div>
-                <h2>15,000,000 ብር<br><span>የዕድል ሳምንት!</span></h2>
-                <p>በቴሌብር ያስገቡ እና በ Aviator ያሸንፉ</p>
+                <h2>15,000,000 ETB<br><span>MEGA RAIN!</span></h2>
+                <p>Deposit with Telebirr & Win Aviator</p>
             </div>
             <div class="hero-art">🎰</div>
         </div>
 
         <div class="feature-grid">
-            <div class="feature-node" onclick="alert('የዕድል ስፒን ገቢ ካደረጉ በኋላ ይከፈታል!')">
+            <div class="feature-node" onclick="openLuckySpin()">
                 <span class="node-tag">NEW</span>
                 <div class="node-icon">🎡</div>
                 <div class="node-title">Lucky Spin</div>
             </div>
-            <div class="feature-node" onclick="alert('ሻሞ ጃክፖት በቅርብ ቀን!')">
+            <div class="feature-node" onclick="alert('Shamo Jackpot coming soon!')">
                 <div class="node-icon">🎯</div>
                 <div class="node-title">Shamo</div>
             </div>
-            <div class="feature-node" onclick="alert('የኩፖን ኮድዎን ያስገቡ')">
+            <div class="feature-node" onclick="openCouponModal()">
                 <div class="node-icon">🎟️</div>
                 <div class="node-title">Coupon</div>
             </div>
-            <div class="feature-node" onclick="switchNavTab('admin')">
-                <span class="node-tag" style="background:#ff9800;">ADMIN</span>
-                <div class="node-icon">⚙️</div>
-                <div class="node-title">Admin</div>
+            <div class="feature-node" onclick="switchNavTab('profile')">
+                <span class="node-tag" style="background:#ff9800;">VIP</span>
+                <div class="node-icon">👑</div>
+                <div class="node-title">VIP Club</div>
             </div>
         </div>
 
@@ -185,10 +196,10 @@
         <div class="wins-scroller">
             <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 84.6K</div></div>
             <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 32.5K</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">✈️️</div><div class="win-game">Aviator</div><div class="win-payout">Br 55.9K</div></div>
+            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 55.9K</div></div>
         </div>
 
-        <div class="section-label">🔥 ዋና ጨዋታ (Official Game)</div>
+        <div class="section-label">🔥 Official Game</div>
         <div class="game-grid">
             <div class="game-tile" onclick="openAviatorGame()">
                 <div class="game-poster">
@@ -197,7 +208,7 @@
                 </div>
                 <div class="game-info-col">
                     <h4>Aviator Spribe</h4>
-                    <p>ትክክለኛ ድምፅ እና የበረራ ግራፍ • አሁኑኑ ይጫወቱ</p>
+                    <p>Realistic Sounds, Motion Horizon & Curve</p>
                 </div>
             </div>
         </div>
@@ -208,7 +219,7 @@
         <div class="aviator-viewport">
             <div class="aviator-topbar">
                 <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
-                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR | CASSA STYLE</span>
+                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR SPRIBE</span>
             </div>
 
             <!-- Multiplier History Chips -->
@@ -223,13 +234,13 @@
             <!-- Dynamic Radar Stage -->
             <div class="radar-box">
                 <div class="radar-dots-axis">
-                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
+                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
                 </div>
 
                 <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 200" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#e53935" stop-opacity="0.45"/>
+                            <stop offset="0%" stop-color="#e53935" stop-opacity="0.5"/>
                             <stop offset="100%" stop-color="#e53935" stop-opacity="0.0"/>
                         </linearGradient>
                     </defs>
@@ -237,7 +248,7 @@
                     <path id="curveFill" class="flight-curve-fill" d="M 20 180 Q 20 180 20 180 L 20 180 Z" />
                     <path id="curveLine" class="flight-curve-line" d="M 20 180 Q 20 180 20 180" />
 
-                    <!-- Spribe Style Vector Red Plane -->
+                    <!-- Spribe Red Aviator Plane -->
                     <g id="planeG" class="plane-group" transform="translate(20, 180) rotate(-10)">
                         <line x1="22" y1="-8" x2="22" y2="8" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
                         <path d="M -15 0 C -15 -6 18 -5 22 0 C 18 5 -15 6 -15 0 Z" fill="#e53935"/>
@@ -253,10 +264,10 @@
                 </div>
             </div>
 
-            <!-- Dual Bet Modules -->
+            <!-- Dual Bet Modules (Cassa Layout) -->
             <div class="betting-dock">
                 <div class="dock-module">
-                    <div class="dock-mode-tabs"><span>መደበኛ</span><span>አውቶ</span></div>
+                    <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
                     <div class="stepper-row">
                         <button class="step-btn" onclick="adjustStake(1, -5)">-</button>
                         <input type="number" id="stakeInput1" class="step-val" value="10">
@@ -268,11 +279,11 @@
                         <button class="chip-tag" onclick="setStake(1, 50)">50</button>
                         <button class="chip-tag" onclick="setStake(1, 100)">100</button>
                     </div>
-                    <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">መድብ<br><span style="font-size:0.75rem;">10.00 ብር</span></button>
+                    <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">Bet<br><span style="font-size:0.75rem;">10.00 ETB</span></button>
                 </div>
 
                 <div class="dock-module">
-                    <div class="dock-mode-tabs"><span>መደበኛ</span><span>አውቶ</span></div>
+                    <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
                     <div class="stepper-row">
                         <button class="step-btn" onclick="adjustStake(2, -5)">-</button>
                         <input type="number" id="stakeInput2" class="step-val" value="20">
@@ -284,11 +295,11 @@
                         <button class="chip-tag" onclick="setStake(2, 50)">50</button>
                         <button class="chip-tag" onclick="setStake(2, 100)">100</button>
                     </div>
-                    <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">መድብ<br><span style="font-size:0.75rem;">20.00 ብር</span></button>
+                    <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">Bet<br><span style="font-size:0.75rem;">20.00 ETB</span></button>
                 </div>
             </div>
 
-            <!-- Live Bets Count & Total Pot (Cassa Style) -->
+            <!-- Live Bets Count & Total Pot -->
             <div class="live-pot-bar">
                 <div><b id="liveBetsCount" style="color:var(--niro-green);">128/136</b> Bets</div>
                 <div>Total: <b id="liveTotalPot" style="color:var(--niro-gold);">Br 15,062.14</b></div>
@@ -310,7 +321,7 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW -->
+    <!-- 3. WALLET VIEW (Deposit / Withdraw) -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -319,128 +330,121 @@
             </div>
 
             <div class="wallet-balance-box">
-                <small style="color:var(--text-secondary); font-weight:700;">ሊወጣ የሚችል ቀሪ ሂሳብ</small>
-                <div style="font-size:1.8rem; font-weight:900; margin:4px 0 8px;"><span id="walletBalVal">100.00</span> ብር</div>
+                <small style="color:var(--text-secondary); font-weight:700;">Withdrawable Balance</small>
+                <div style="font-size:1.8rem; font-weight:900; margin:4px 0 8px;">ETB <span id="walletBalVal">100.00</span></div>
                 <div class="wallet-nav-switch">
-                    <button id="btnWDepToggle" class="w-toggle-btn active" onclick="setWalletMode('dep')">ገቢ አድርግ (Deposit)</button>
-                    <button id="btnWWithToggle" class="w-toggle-btn" onclick="setWalletMode('with')">ወጪ አድርግ (Withdraw)</button>
+                    <button id="btnWDepToggle" class="w-toggle-btn active" onclick="setWalletMode('dep')">Deposit</button>
+                    <button id="btnWWithToggle" class="w-toggle-btn" onclick="setWalletMode('with')">Withdraw</button>
                 </div>
             </div>
 
             <div class="payment-method-row">
                 <div id="pmTelebirr" class="pm-card selected" onclick="pickPaymentType('telebirr')">
-                    <b>📱 ቴሌብር (Telebirr)</b>
-                    <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:3px;">ፈጣን አውቶማቲክ</p>
+                    <b>📱 Telebirr</b>
+                    <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:3px;">Instant</p>
                 </div>
                 <div id="pmCBE" class="pm-card" onclick="pickPaymentType('cbe')">
-                    <b>🏦 ሲቢኢ ብር (CBE)</b>
-                    <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:3px;">የኢትዮጵያ ንግድ ባንክ</p>
+                    <b>🏦 CBE Birr</b>
+                    <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:3px;">Bank of Ethiopia</p>
                 </div>
             </div>
 
-            <!-- Deposit Box -->
+            <!-- Deposit Workflow -->
             <div id="boxDepSection">
-                <div style="background:#131d17; border:1px solid #1e3f28; border-radius:8px; padding:12px; margin-bottom:12px; font-size:0.85rem;">
-                    ገንዘቡን ወደዚህ የቴሌብር ቁጥር ያስተላልፉ፦<br>
-                    <b id="displayDepositNum" style="color:var(--niro-green); font-size:1.15rem; display:block; margin-top:4px;">0974107425 (Niro Bet)</b>
-                </div>
                 <div class="input-group">
-                    <label>የገንዘብ መጠን (ብር)</label>
-                    <input type="number" id="inDepSum" class="form-input" placeholder="ምሳሌ፦ 100">
+                    <label>Deposit Amount (Minimum 100 ETB)</label>
+                    <input type="number" id="inDepSum" class="form-input" placeholder="Min 100">
                 </div>
-                <div class="input-group">
-                    <label>የቴሌብር ደረሰኝ ቁጥር (Transaction ID)</label>
-                    <input type="text" id="inDepReceipt" class="form-input" placeholder="ደረሰኝ ቁጥሩን ያስገቡ">
+                <button class="btn-confirm-action" onclick="createDepositOrder()">Continue to Payment</button>
+
+                <!-- Order Invoice Details -->
+                <div id="depositOrderBox" class="order-details-box">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span>Time Remaining:</span>
+                        <div class="timer-badge">⏱ <span id="timerCountdown">29:59</span></div>
+                    </div>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:6px;">Transfer strictly to this account:</p>
+                    <div class="copy-chip" onclick="copyDepositNumber()">
+                        <span id="targetTelebirrNumber">0974107425</span>
+                        <span style="font-size:0.75rem; color:var(--niro-green);">📋 Copy</span>
+                    </div>
+                    <div class="input-group" style="margin-top:12px;">
+                        <label>Enter Telebirr Transaction ID (SMS)</label>
+                        <input type="text" id="inDepReceipt" class="form-input" placeholder="e.g. 9JA48DFK92">
+                    </div>
+                    <button class="btn-confirm-action" onclick="submitDepositAction()">I've Paid (Submit)</button>
                 </div>
-                <button class="btn-confirm-action" onclick="submitDepositAction()">ዲፖዚት አረጋግጥ</button>
             </div>
 
-            <!-- Withdraw Box -->
+            <!-- Withdraw Workflow -->
             <div id="boxWithSection" style="display:none;">
                 <div class="input-group">
-                    <label>ማውጣት የሚፈልጉት መጠን (ብር)</label>
-                    <input type="number" id="inWithSum" class="form-input" placeholder="አነስተኛ 50 ብር">
+                    <label>Withdraw Amount (Minimum 100 ETB)</label>
+                    <input type="number" id="inWithSum" class="form-input" placeholder="Min 100">
                 </div>
                 <div class="input-group">
-                    <label>ገንዘቡ የሚላክበት ስልክ ወይም የባንክ አካውንት</label>
-                    <input type="text" id="inWithDest" class="form-input" placeholder="09xxxxxxxx ወይም የሂሳብ ቁጥር">
+                    <label>Recipient Telebirr / CBE Account Number</label>
+                    <input type="text" id="inWithDest" class="form-input" placeholder="09xxxxxxxx">
                 </div>
-                <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="submitWithdrawAction()">ገንዘብ አውጣ</button>
+                <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="submitWithdrawAction()">Request Withdrawal</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. ADMIN PANEL (ማስተዳደሪያ) -->
-    <div id="viewAdmin" class="view-pane">
-        <div class="wallet-viewport">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <span style="font-size:1.1rem; font-weight:800; color:var(--niro-gold);">⚙️ Admin Settings (አድሚን)</span>
-                <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
-            </div>
-
-            <div class="admin-box">
-                <div class="admin-header">የዲፖዚት ቴሌብር ቁጥር መቀየሪያ</div>
-                <div class="input-group">
-                    <label>አዲስ የቴሌብር ቁጥር</label>
-                    <input type="text" id="admPhoneInput" class="form-input" value="0974107425">
-                </div>
-                <button class="btn-confirm-action" onclick="updateAdminPhone()">ቁጥሩን ቀይር</button>
-            </div>
-
-            <div class="admin-box" style="border-color:#ff9800; margin-top:14px;">
-                <div class="admin-header">የአቪዬተር ቀጣይ ዙር መቆጣጠሪያ</div>
-                <div class="input-group">
-                    <label>ቀጣዩ አውሮፕላን የሚወድቅበት ማባዣ (ለምሳሌ 2.50 ወይም 10.0)</label>
-                    <input type="number" step="0.1" id="admNextCrash" class="form-input" placeholder="አውቶማቲክ እንዲሆን ባዶ ይተውት">
-                </div>
-                <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="setAdminNextCrash()">ውጤቱን ወስን</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. PROFILE VIEW -->
+    <!-- 4. PROFILE VIEW -->
     <div id="viewProfile" class="view-pane">
         <div style="padding:20px; text-align:center;">
             <div style="width:70px; height:70px; border-radius:50%; background:#1c242e; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:2rem;">👤</div>
-            <h3>የኒሮ ቤት ተጫዋች</h3>
-            <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:4px;">ደረጃ፦ ቪአይፒ 1</p>
+            <h3>Niro VIP Player</h3>
+            <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:4px;">Status: VIP Level 1</p>
         </div>
+    </div>
+
+    <!-- WIN MODAL POPUP -->
+    <div id="winModal" class="win-modal">
+        <h3>🎉 YOU WON!</h3>
+        <div class="win-amt" id="winModalAmt">+0.00 ETB</div>
+    </div>
+
+    <!-- LUCKY SPIN MODAL -->
+    <div id="spinModal" class="spin-wheel-box">
+        <div class="wheel-circle" id="wheelCircle"></div>
+        <button class="btn-confirm-action" style="max-width:180px; margin-top:20px;" onclick="spinNow()">SPIN NOW</button>
+        <span onclick="closeSpinModal()" style="color:var(--text-secondary); margin-top:14px; cursor:pointer;">Close</span>
     </div>
 
     <!-- APP BOTTOM DOCK -->
     <nav class="app-footer-dock">
         <button class="footer-item active" id="tabLobbyBtn" onclick="switchNavTab('lobby')">
             <span class="f-icon">🏛️</span>
-            <span>ካሲኖ</span>
+            <span>Casino</span>
         </button>
         <button class="footer-item" id="tabAviatorBtn" onclick="openAviatorGame()">
             <span class="f-icon">✈️</span>
-            <span>አቪዬተር</span>
+            <span>Aviator</span>
         </button>
         <button class="footer-item" id="tabWalletBtn" onclick="switchNavTab('wallet')">
             <span class="f-icon">💳</span>
-            <span>ዲፖዚት</span>
+            <span>Deposit</span>
         </button>
         <button class="footer-item" id="tabProfileBtn" onclick="switchNavTab('profile')">
             <span class="f-icon">👤</span>
-            <span>ፕሮፋይል</span>
+            <span>Profile</span>
         </button>
     </nav>
 
     <script>
-        if (window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.expand();
-        }
+        const tg = window.Telegram?.WebApp;
+        if (tg) tg.expand();
 
-        /* --- WEB AUDIO API (እውነተኛ ድምፅ ማመንጫ) --- */
+        /* --- AUDIO SYNTHESIS (REALISTIC AVIATOR AUDIO) --- */
         let audioCtx;
         function getAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             return audioCtx;
         }
 
-        let engineOsc = null;
-        let engineGain = null;
+        let engineOsc = null, engineGain = null;
 
         function playEngineSound() {
             try {
@@ -452,10 +456,9 @@
                 engineOsc.type = 'sawtooth';
                 engineOsc.frequency.setValueAtTime(65, ctx.currentTime);
 
-                // Low-pass filter for engine rumbling
                 let filter = ctx.createBiquadFilter();
                 filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(300, ctx.currentTime);
+                filter.frequency.setValueAtTime(320, ctx.currentTime);
 
                 engineGain.gain.setValueAtTime(0.08, ctx.currentTime);
 
@@ -469,8 +472,8 @@
         function updateEnginePitch(mult) {
             try {
                 if (engineOsc && audioCtx) {
-                    let newFreq = Math.min(260, 65 + (mult - 1) * 35);
-                    engineOsc.frequency.setValueAtTime(newFreq, audioCtx.currentTime);
+                    let freq = Math.min(270, 65 + (mult - 1) * 38);
+                    engineOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
                 }
             } catch(e) {}
         }
@@ -494,7 +497,7 @@
                 osc.frequency.setValueAtTime(140, ctx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.35);
 
-                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.setValueAtTime(0.25, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
 
                 osc.connect(gain);
@@ -504,7 +507,7 @@
             } catch(e) {}
         }
 
-        function playWinSound() {
+        function playCashoutSound() {
             try {
                 let ctx = getAudio();
                 let osc = ctx.createOscillator();
@@ -513,7 +516,7 @@
                 osc.frequency.setValueAtTime(587.33, ctx.currentTime);
                 osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
 
-                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
 
                 osc.connect(gain);
@@ -526,15 +529,18 @@
         /* --- STATE VARIABLES --- */
         let balance = 100.00;
         let isFlying = false;
+        let isWaiting = false;
         let flightMultiplier = 1.00;
         let flightCrash = 1.50;
         let flightInterval;
-        let adminForcedCrash = null;
 
         let activeBets = {
             1: { on: false, stake: 10, cashed: false },
             2: { on: false, stake: 20, cashed: false }
         };
+
+        // Cache for anti-duplicate receipts
+        let usedReceipts = new Set(["TX000000"]);
 
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
@@ -555,8 +561,6 @@
             } else if (tabName === 'profile') {
                 document.getElementById('viewProfile').classList.add('active');
                 document.getElementById('tabProfileBtn').classList.add('active');
-            } else if (tabName === 'admin') {
-                document.getElementById('viewAdmin').classList.add('active');
             }
         }
 
@@ -565,21 +569,16 @@
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
             document.getElementById('viewAviator').classList.add('active');
             document.getElementById('tabAviatorBtn').classList.add('active');
-            if (!isFlying) startContinuousFlight();
+            if (!isFlying && !isWaiting) startContinuousFlight();
         }
 
-        /* የቀጥታ የበረራ ሞተር */
+        /* --- CONTINUOUS AVIATOR ENGINE --- */
         function startContinuousFlight() {
             isFlying = true;
+            isWaiting = false;
             flightMultiplier = 1.00;
-
-            if (adminForcedCrash) {
-                flightCrash = parseFloat(adminForcedCrash);
-                adminForcedCrash = null;
-            } else {
-                flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
-                flightCrash = parseFloat(flightCrash.toFixed(2));
-            }
+            flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
+            flightCrash = parseFloat(flightCrash.toFixed(2));
 
             document.getElementById('hudCrashText').style.display = 'none';
             let hud = document.getElementById('hudMultiplier');
@@ -588,10 +587,14 @@
             playEngineSound();
 
             for (let i = 1; i <= 2; i++) {
+                let b = document.getElementById('btnDockAction' + i);
+                b.classList.remove('waiting');
                 if (activeBets[i].on && !activeBets[i].cashed) {
-                    let b = document.getElementById('btnDockAction' + i);
-                    b.innerHTML = `ገንዘብ አውጣ<br><span style="font-size:0.75rem;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ብር</span>`;
+                    b.innerHTML = `CASH OUT<br><span style="font-size:0.75rem;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ETB</span>`;
                     b.classList.add('cashing');
+                } else {
+                    let cur = document.getElementById('stakeInput' + i).value;
+                    b.innerHTML = `Bet<br><span style="font-size:0.75rem;">${parseFloat(cur).toFixed(2)} ETB</span>`;
                 }
             }
 
@@ -605,18 +608,16 @@
 
                 updateEnginePitch(flightMultiplier);
 
-                // Update Total pot and dynamic bets counter
-                let currentPot = 14000 + (flightMultiplier * 1150);
-                document.getElementById('liveTotalPot').innerText = `Br ${currentPot.toFixed(2)}`;
+                let pot = 14000 + (flightMultiplier * 1150);
+                document.getElementById('liveTotalPot').innerText = `Br ${pot.toFixed(2)}`;
 
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
-                        let winSum = (activeBets[i].stake * flightMultiplier).toFixed(2);
-                        document.getElementById('btnDockAction' + i).innerHTML = `ገንዘብ አውጣ<br><span style="font-size:0.75rem;">${winSum} ብር</span>`;
+                        let win = (activeBets[i].stake * flightMultiplier).toFixed(2);
+                        document.getElementById('btnDockAction' + i).innerHTML = `CASH OUT<br><span style="font-size:0.75rem;">${win} ETB</span>`;
                     }
                 }
 
-                // S-Curve & Plane coordinate generator
                 let progress = Math.min(elapsed / 7.2, 1);
                 let currentX = 20 + 290 * progress;
                 let currentY = 180 - 145 * Math.pow(progress, 1.4);
@@ -638,6 +639,7 @@
         function triggerCrashState() {
             clearInterval(flightInterval);
             isFlying = false;
+            isWaiting = true;
 
             stopEngineSound();
             playCrashSound();
@@ -646,7 +648,6 @@
             hud.style.color = 'var(--niro-red)';
             document.getElementById('hudCrashText').style.display = 'block';
 
-            // Plane blasts off screen
             document.getElementById('planeG').setAttribute('transform', `translate(420, -60) rotate(-35)`);
 
             let rib = document.getElementById('historyChips');
@@ -660,13 +661,15 @@
                 activeBets[i].cashed = false;
                 let b = document.getElementById('btnDockAction' + i);
                 b.classList.remove('cashing');
-                let amt = document.getElementById('stakeInput' + i).value;
-                b.innerHTML = `መድብ<br><span style="font-size:0.75rem;">${parseFloat(amt).toFixed(2)} ብር</span>`;
+                b.classList.add('waiting');
+                b.innerHTML = `Waiting for next round...`;
             }
 
             setTimeout(() => {
                 if (document.getElementById('viewAviator').classList.contains('active')) {
                     startContinuousFlight();
+                } else {
+                    isWaiting = false;
                 }
             }, 2800);
         }
@@ -676,8 +679,9 @@
             let stake = parseFloat(document.getElementById('stakeInput' + slot).value);
 
             if (!activeBets[slot].on) {
+                if (isWaiting) return;
                 if (stake > balance || stake <= 0 || isNaN(stake)) {
-                    alert("በቂ ቀሪ ሂሳብ የለዎትም!");
+                    alert("Insufficient Balance!");
                     return;
                 }
                 balance -= stake;
@@ -687,10 +691,8 @@
                 syncBalanceViews();
 
                 if (isFlying) {
-                    btn.innerHTML = `ገንዘብ አውጣ<br><span style="font-size:0.75rem;">${(stake * flightMultiplier).toFixed(2)} ብር</span>`;
+                    btn.innerHTML = `CASH OUT<br><span style="font-size:0.75rem;">${(stake * flightMultiplier).toFixed(2)} ETB</span>`;
                     btn.classList.add('cashing');
-                } else {
-                    btn.innerHTML = `በመጠባበቅ ላይ...`;
                 }
             } else {
                 if (isFlying && !activeBets[slot].cashed) {
@@ -699,33 +701,41 @@
                     activeBets[slot].cashed = true;
                     activeBets[slot].on = false;
                     syncBalanceViews();
-                    btn.classList.remove('cashing');
-                    btn.innerHTML = `መድብ<br><span style="font-size:0.75rem;">${stake.toFixed(2)} ብር</span>`;
 
-                    playWinSound();
-                    alert(`🎉 አሸንፈዋል! ${win.toFixed(2)} ብር ገቢ ተደርጓል!`);
+                    btn.classList.remove('cashing');
+                    btn.innerHTML = `Bet<br><span style="font-size:0.75rem;">${stake.toFixed(2)} ETB</span>`;
+
+                    playCashoutSound();
+                    showWinBanner(win);
                 }
             }
+        }
+
+        function showWinBanner(amt) {
+            let m = document.getElementById('winModal');
+            document.getElementById('winModalAmt').innerText = `+${amt.toFixed(2)} ETB`;
+            m.style.display = 'block';
+            setTimeout(() => { m.style.display = 'none'; }, 2200);
         }
 
         function adjustStake(slot, step) {
             let el = document.getElementById('stakeInput' + slot);
             let val = Math.max(5, (parseFloat(el.value) || 0) + step);
             el.value = val;
-            if (!activeBets[slot].on) {
-                document.getElementById('btnDockAction' + slot).innerHTML = `መድብ<br><span style="font-size:0.75rem;">${val.toFixed(2)} ብር</span>`;
+            if (!activeBets[slot].on && !isWaiting) {
+                document.getElementById('btnDockAction' + slot).innerHTML = `Bet<br><span style="font-size:0.75rem;">${val.toFixed(2)} ETB</span>`;
             }
         }
 
         function setStake(slot, val) {
             let el = document.getElementById('stakeInput' + slot);
             el.value = val;
-            if (!activeBets[slot].on) {
-                document.getElementById('btnDockAction' + slot).innerHTML = `መድብ<br><span style="font-size:0.75rem;">${val.toFixed(2)} ብር</span>`;
+            if (!activeBets[slot].on && !isWaiting) {
+                document.getElementById('btnDockAction' + slot).innerHTML = `Bet<br><span style="font-size:0.75rem;">${val.toFixed(2)} ETB</span>`;
             }
         }
 
-        /* --- WALLET LOGIC --- */
+        /* --- WALLET (DEPOSIT & WITHDRAW) --- */
         function setWalletMode(m) {
             if (m === 'dep') {
                 document.getElementById('btnWDepToggle').classList.add('active');
@@ -750,14 +760,70 @@
             }
         }
 
-        function submitDepositAction() {
+        let orderCountdownInterval;
+        function createDepositOrder() {
             let amt = parseFloat(document.getElementById('inDepSum').value);
-            let tx = document.getElementById('inDepReceipt').value;
-            if (!amt || amt <= 0 || tx.trim() === "") {
-                alert("እባክዎ ትክክለኛ የብር መጠን እና የቴሌብር ደረሰኝ ቁጥር ያስገቡ!");
+            if (!amt || amt < 100) {
+                alert("Minimum deposit amount is 100 ETB!");
                 return;
             }
-            alert("የዲፖዚት ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በ 1-5 ደቂቃ ውስጥ ይረጋገጣል።");
+            document.getElementById('depositOrderBox').style.display = 'block';
+            startOrderTimer(30 * 60);
+        }
+
+        function startOrderTimer(seconds) {
+            clearInterval(orderCountdownInterval);
+            let remaining = seconds;
+            orderCountdownInterval = setInterval(() => {
+                let m = Math.floor(remaining / 60);
+                let s = remaining % 60;
+                document.getElementById('timerCountdown').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                if (remaining <= 0) {
+                    clearInterval(orderCountdownInterval);
+                    alert("Order expired. Please create a new deposit order.");
+                    document.getElementById('depositOrderBox').style.display = 'none';
+                }
+                remaining--;
+            }, 1000);
+        }
+
+        function copyDepositNumber() {
+            let num = document.getElementById('targetTelebirrNumber').innerText;
+            navigator.clipboard.writeText(num);
+            alert("Number copied: " + num);
+        }
+
+        function submitDepositAction() {
+            let amt = parseFloat(document.getElementById('inDepSum').value);
+            let receipt = document.getElementById('inDepReceipt').value.trim();
+
+            if (!amt || amt < 100) {
+                alert("Minimum deposit is 100 ETB!");
+                return;
+            }
+            if (!receipt || receipt.length < 5) {
+                alert("Please enter a valid Transaction ID / SMS code!");
+                return;
+            }
+            if (usedReceipts.has(receipt)) {
+                alert("This receipt has already been submitted or is duplicate!");
+                return;
+            }
+
+            usedReceipts.add(receipt);
+
+            // Send payload to Telegram Bot
+            if (tg) {
+                tg.sendData(JSON.stringify({
+                    type: "deposit_request",
+                    amount: amt,
+                    receipt: receipt,
+                    date: new Date().toISOString()
+                }));
+            }
+
+            alert("Deposit request submitted! Admin will verify and credit your balance.");
+            document.getElementById('depositOrderBox').style.display = 'none';
             document.getElementById('inDepSum').value = "";
             document.getElementById('inDepReceipt').value = "";
             switchNavTab('lobby');
@@ -765,37 +831,64 @@
 
         function submitWithdrawAction() {
             let amt = parseFloat(document.getElementById('inWithSum').value);
-            let dest = document.getElementById('inWithDest').value;
-            if (!amt || amt > balance || amt < 50) {
-                alert("ማውጣት የሚችሉት አነስተኛ መጠን 50 ብር ነው ወይም በቂ ቀሪ ሂሳብ የለዎትም!");
+            let dest = document.getElementById('inWithDest').value.trim();
+
+            if (!amt || amt < 100 || amt > balance) {
+                alert("Minimum withdraw is 100 ETB and cannot exceed your balance!");
                 return;
             }
-            if (dest.trim() === "") {
-                alert("እባክዎ ገንዘቡ የሚላክበትን ስልክ ቁጥር ወይም የባንክ አካውንት ያስገቡ!");
+            if (!dest || dest.length < 9) {
+                alert("Please enter a valid Phone or Account number!");
                 return;
             }
+
             balance -= amt;
             syncBalanceViews();
-            alert(`የ ${amt.toFixed(2)} ብር የወጪ ጥያቄዎ ተልኳል! ወደ ${dest} ይተላለፋል።`);
+
+            // Send payload to Telegram Bot
+            if (tg) {
+                tg.sendData(JSON.stringify({
+                    type: "withdraw_request",
+                    amount: amt,
+                    account: dest,
+                    date: new Date().toISOString()
+                }));
+            }
+
+            alert(`Withdrawal request of ${amt.toFixed(2)} ETB sent to Admin!`);
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
         }
 
-        /* --- ADMIN CONTROLS --- */
-        function updateAdminPhone() {
-            let p = document.getElementById('admPhoneInput').value;
-            if (p.trim() !== "") {
-                document.getElementById('displayDepositNum').innerText = `${p} (Niro Bet)`;
-                alert("የዲፖዚት ቁጥሩ በተሳካ ሁኔታ ተቀይሯል!");
-            }
+        /* --- LUCKY SPIN & COUPONS --- */
+        function openLuckySpin() {
+            document.getElementById('spinModal').style.display = 'flex';
+        }
+        function closeSpinModal() {
+            document.getElementById('spinModal').style.display = 'none';
+        }
+        function spinNow() {
+            let w = document.getElementById('wheelCircle');
+            let deg = 1440 + Math.floor(Math.random() * 360);
+            w.style.transform = `rotate(${deg}deg)`;
+            setTimeout(() => {
+                let winBonus = 25.00;
+                balance += winBonus;
+                syncBalanceViews();
+                alert(`🎉 Congratulations! You won ${winBonus} ETB Spin Bonus!`);
+                closeSpinModal();
+            }, 3200);
         }
 
-        function setAdminNextCrash() {
-            let c = document.getElementById('admNextCrash').value;
-            if (c && parseFloat(c) >= 1.0) {
-                adminForcedCrash = parseFloat(c);
-                alert(`የቀጣዩ ዙር ውጤት ${adminForcedCrash}x እንዲሆን ተወስኗል!`);
+        function openCouponModal() {
+            let c = prompt("Enter Coupon Code (e.g. NIRO2026):");
+            if (c && c.toUpperCase() === "NIRO2026") {
+                balance += 100;
+                syncBalanceViews();
+                alert("🎉 Coupon Applied! +100 ETB added to your balance!");
+            } else if (c) {
+                alert("Invalid or expired coupon code!");
             }
         }
 
