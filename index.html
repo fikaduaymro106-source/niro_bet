@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Niro Bet</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: #0f1519; color: #fff; text-align: center; }
+        
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #161f26; border-bottom: 1px solid #23303b; }
+        .logo { font-size: 1.2rem; font-weight: bold; color: #00e676; }
+        .balance-box { background: #0a0e11; padding: 6px 12px; border-radius: 8px; border: 1px solid #2d3f4d; }
+        .deposit-btn { background: #00c853; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+
+        /* Game Screen */
+        .game-area { margin: 15px; background: #18222a; border-radius: 12px; height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; border: 1px solid #2a3b47; }
+        .multiplier { font-size: 3rem; font-weight: bold; color: #fff; z-index: 2; }
+        .plane { font-size: 2.5rem; position: absolute; transition: all 0.1s linear; }
+
+        /* Betting Controls */
+        .controls { padding: 15px; }
+        .input-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        input[type="number"] { width: 120px; padding: 10px; background: #0a0e11; border: 1px solid #334454; color: white; font-size: 1.1rem; border-radius: 8px; text-align: center; }
+        .btn-bet { width: 100%; max-width: 280px; padding: 12px; background: #00c853; border: none; color: white; font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer; }
+        .btn-bet.cashing { background: #d50000; }
+
+        /* Telebirr Modal */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 10; }
+        .modal-content { background: #161f26; padding: 20px; border-radius: 12px; width: 85%; max-width: 320px; border: 1px solid #334454; }
+        .close-btn { float: right; cursor: pointer; font-size: 1.2rem; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">⚡ NIRO BET</div>
+        <div class="balance-box">ብር <span id="balance">100.00</span></div>
+        <button class="deposit-btn" onclick="openDeposit()">+ ዲፖዚት</button>
+    </div>
+
+    <!-- Aviator Screen -->
+    <div class="game-area">
+        <div id="multiplier" class="multiplier">1.00x</div>
+        <div id="plane" class="plane">✈️</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <div class="input-box">
+            <input type="number" id="betAmount" value="10" min="5">
+        </div>
+        <button id="mainBtn" class="btn-bet" onclick="handleGameAction()">መድብ (BET)</button>
+    </div>
+
+    <!-- Deposit Modal (Telebirr) -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeDeposit()">&times;</span>
+            <h3 style="color:#00e676; margin-bottom:10px;">ቴሌብር ዲፖዚት</h3>
+            <p style="font-size:0.9rem; color:#ccc; margin-bottom:10px;">ገንዘብ ወደዚህ ቁጥር ልከው Transaction ID ያስገቡ፦</p>
+            <p style="font-weight:bold; background:#0a0e11; padding:8px; border-radius:6px;">09XXXXXXXX (Niro)</p>
+            <br>
+            <input type="text" id="txId" placeholder="Transaction ID አስገባ" style="width:100%; padding:8px; margin-bottom:10px; border-radius:6px; border:1px solid #334454; background:#0a0e11; color:white;">
+            <button class="btn-bet" style="width:100%;" onclick="confirmDeposit()">አረጋግጥ</button>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // ማያ ገጹን ሙሉ ያደርገዋል
+
+        let balance = 100.00;
+        let isPlaying = false;
+        let isFlying = false;
+        let currentMultiplier = 1.00;
+        let flightInterval;
+        let crashPoint;
+
+        function updateUI() {
+            document.getElementById('balance').innerText = balance.toFixed(2);
+        }
+
+        function handleGameAction() {
+            let btn = document.getElementById('mainBtn');
+            let amount = parseFloat(document.getElementById('betAmount').value);
+
+            if (!isPlaying) {
+                // መደብ መያዝ
+                if (amount > balance || isNaN(amount) || amount <= 0) {
+                    alert("በቂ ሂሳብ የለዎትም!");
+                    return;
+                }
+                balance -= amount;
+                updateUI();
+                isPlaying = true;
+                btn.innerText = "ገንዘቡን ውሰድ (CASH OUT)";
+                btn.classList.add('cashing');
+                startFlight(amount);
+            } else {
+                // ገንዘቡን ወዲያው መውሰድ (Cash Out)
+                if (isFlying) {
+                    clearInterval(flightInterval);
+                    let win = amount * currentMultiplier;
+                    balance += win;
+                    updateUI();
+                    alert(`🎉 እንኳን ደስ አለዎት! ብር ${win.toFixed(2)} አሸንፈዋል!`);
+                    resetGame();
+                }
+            }
+        }
+
+        function startFlight(amount) {
+            isFlying = true;
+            currentMultiplier = 1.00;
+            // ሮኬቱ የሚከስክስበትን ነጥብ በዘፈቀደ መምረጥ
+            crashPoint = (Math.random() * 3 + 1.1).toFixed(2);
+
+            let multText = document.getElementById('multiplier');
+            let plane = document.getElementById('plane');
+            plane.style.bottom = "20px";
+            plane.style.left = "20px";
+
+            flightInterval = setInterval(() => {
+                currentMultiplier += 0.02;
+                multText.innerText = currentMultiplier.toFixed(2) + "x";
+
+                // አውሮፕላኑ ወደ ላይ እንዲወጣ ማድረግ
+                plane.style.bottom = (20 + currentMultiplier * 15) + "px";
+                plane.style.left = (20 + currentMultiplier * 25) + "px";
+
+                if (currentMultiplier >= crashPoint) {
+                    clearInterval(flightInterval);
+                    isFlying = false;
+                    multText.innerText = "FLEW AWAY!";
+                    multText.style.color = "#d50000";
+                    setTimeout(resetGame, 2000);
+                }
+            }, 80);
+        }
+
+        function resetGame() {
+            isPlaying = false;
+            isFlying = false;
+            let btn = document.getElementById('mainBtn');
+            btn.innerText = "መድብ (BET)";
+            btn.classList.remove('cashing');
+            document.getElementById('multiplier').style.color = "#fff";
+            document.getElementById('multiplier').innerText = "1.00x";
+            document.getElementById('plane').style.bottom = "20px";
+            document.getElementById('plane').style.left = "20px";
+        }
+
+        function openDeposit() { document.getElementById('depositModal').style.display = 'flex'; }
+        function closeDeposit() { document.getElementById('depositModal').style.display = 'none'; }
+        function confirmDeposit() {
+            let tx = document.getElementById('txId').value;
+            if(tx.trim() !== "") {
+                alert("ደረሰኝዎ ተልኳል! አድሚኑ እንደፈተሸው ብር ይጨመራል።");
+                closeDeposit();
+            }
+        }
+    </script>
+</body>
+</html>
