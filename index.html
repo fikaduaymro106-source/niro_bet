@@ -12,7 +12,6 @@
             --bg-card: #161b22;
             --bg-elevated: #1f2631;
             --niro-green: #00e676;
-            --niro-green-dark: #00a854;
             --niro-red: #e53935;
             --niro-gold: #ffb300;
             --text-primary: #ffffff;
@@ -33,7 +32,6 @@
         .curr-sign { background: #00bcd4; color: #fff; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.65rem; }
         .btn-deposit-action { background: var(--niro-green); color: #000; border: none; font-weight: 800; font-size: 0.85rem; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
 
-        /* Page Layout Router */
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
@@ -64,7 +62,7 @@
         .game-badge { position: absolute; top: 4px; left: 4px; background: var(--niro-red); color: #fff; font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 3px; }
         .game-label { padding: 6px; font-size: 0.75rem; font-weight: 700; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* AVIATOR COMPONENT */
+        /* REALISTIC CASSA AVIATOR COMPONENT */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-topbar { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; }
         .aviator-history-ribbon { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
@@ -72,11 +70,19 @@
         .hist-chip { background: #181d24; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #b388ff; white-space: nowrap; }
         .hist-chip.high { color: var(--niro-green); border-color: rgba(0, 230, 118, 0.4); }
 
-        .radar-box { position: relative; width: 100%; height: 215px; background: radial-gradient(circle at 10% 90%, #2b0b14 0%, #0c0f14 70%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
-        .radar-canvas { width: 100%; height: 100%; display: block; }
-        .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
-        .multiplier-counter { font-size: 3.4rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.8); }
-        .multiplier-bust { font-size: 1.1rem; font-weight: 800; color: var(--niro-red); text-transform: uppercase; margin-top: 4px; display: none; }
+        .radar-box { position: relative; width: 100%; height: 230px; background: radial-gradient(circle at 10% 90%, #2e0814 0%, #0d0f14 75%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
+        
+        /* Realistic SVG Stage */
+        .stage-svg { width: 100%; height: 100%; display: block; }
+        .flight-curve-fill { fill: url(#curveGrad); }
+        .flight-curve-line { fill: none; stroke: #e53935; stroke-width: 3.5; stroke-linecap: round; }
+
+        /* Plane Object */
+        .plane-group { transition: transform 0.08s linear; }
+
+        .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
+        .multiplier-counter { font-size: 3.6rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.9); }
+        .multiplier-bust { font-size: 1.15rem; font-weight: 800; color: var(--niro-red); text-transform: uppercase; margin-top: 4px; display: none; }
 
         /* Aviator Dual Deck */
         .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
@@ -89,13 +95,6 @@
         .chip-tag { background: var(--bg-elevated); border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.68rem; font-weight: 700; cursor: pointer; }
         .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; text-transform: uppercase; }
         .btn-bet-trigger.cashing { background: var(--niro-gold); color: #000; }
-
-        /* All Bets Live Table */
-        .live-bets-table { margin-top: 12px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; max-height: 180px; overflow-y: auto; }
-        .live-table-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); border-bottom: 1px solid var(--border-dim); padding-bottom: 6px; margin-bottom: 6px; }
-        .live-bet-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .live-user { color: #90caf9; }
-        .live-mult { color: var(--niro-green); font-weight: 700; }
 
         /* WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
@@ -113,18 +112,7 @@
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; }
         .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; margin-top: 8px; }
 
-        .tx-history-box { margin-top: 18px; }
-        .tx-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 0.78rem; }
-        .tx-status-completed { color: var(--niro-green); font-weight: bold; }
-        .tx-status-expired { color: var(--niro-red); font-weight: bold; }
-
-        /* PROFILE VIEW */
-        .profile-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
-        .profile-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 14px; }
-        .profile-avatar { width: 64px; height: 64px; border-radius: 50%; background: #263140; display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 8px; }
-        .action-link-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
-
-        /* BOTTOM APP FOOTER */
+        /* APP BOTTOM DOCK */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--niro-green); }
@@ -188,7 +176,6 @@
             <div class="win-card"><div style="font-size:1.5rem;">🎱</div><div class="win-game">Fast Keno</div><div class="win-payout">Br 32.5K</div></div>
             <div class="win-card"><div style="font-size:1.5rem;">🐔</div><div class="win-game">Chicken Road</div><div class="win-payout">Br 44.3K</div></div>
             <div class="win-card"><div style="font-size:1.5rem;">💣</div><div class="win-game">Mines</div><div class="win-payout">Br 55.9K</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">🚀</div><div class="win-game">JetX</div><div class="win-payout">Br 49.1K</div></div>
         </div>
 
         <div class="section-label">🔥 Hot Games</div>
@@ -205,30 +192,17 @@
                 <div class="game-poster">🚀</div>
                 <div class="game-label">Jet-X</div>
             </div>
-            <div class="game-tile" onclick="alert('Multi Hot Slot በቅርብ ቀን!')">
-                <div class="game-poster">🎰</div>
-                <div class="game-label">Multi Hot 5</div>
-            </div>
-            <div class="game-tile" onclick="alert('Gold Gold Gold በቅርብ ቀን!')">
-                <div class="game-poster">🪙</div>
-                <div class="game-label">Gold Gold Gold</div>
-            </div>
-            <div class="game-tile" onclick="alert('Chicken Road በቅርብ ቀን!')">
-                <div class="game-poster">🐔</div>
-                <div class="game-label">Chicken Road</div>
-            </div>
         </div>
     </div>
 
-    <!-- 2. AVIATOR PRO GAME SCREEN -->
+    <!-- 2. REAL CASSA-STYLE AVIATOR -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-topbar">
                 <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
-                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR | NIRO BET</span>
+                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR SPRIBE</span>
             </div>
 
-            <!-- Multiplier History Chips -->
             <div class="aviator-history-ribbon" id="historyChips">
                 <div class="hist-chip high">5.71x</div>
                 <div class="hist-chip">1.33x</div>
@@ -237,9 +211,35 @@
                 <div class="hist-chip">1.10x</div>
             </div>
 
-            <!-- Radar Curved Flight Display -->
+            <!-- SVG Realistic Dynamic Screen -->
             <div class="radar-box">
-                <canvas id="flightRadarCanvas" class="radar-canvas"></canvas>
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#e53935" stop-opacity="0.45"/>
+                            <stop offset="100%" stop-color="#e53935" stop-opacity="0.0"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Dynamic Fill & Stroke -->
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 180 Q 20 180 20 180 L 20 180 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 180 Q 20 180 20 180" />
+
+                    <!-- Spribe Style Red Aviator Plane -->
+                    <g id="planeG" class="plane-group" transform="translate(20, 180) rotate(-10)">
+                        <!-- Propeller -->
+                        <line x1="22" y1="-8" x2="22" y2="8" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
+                        <!-- Body -->
+                        <path d="M -15 0 C -15 -6 18 -5 22 0 C 18 5 -15 6 -15 0 Z" fill="#e53935"/>
+                        <!-- Top Wing -->
+                        <polygon points="-4,-14 6,-1 2,1 -8,-10" fill="#d32f2f"/>
+                        <!-- Bottom Wing -->
+                        <polygon points="-6,1 2,1 -2,12 -8,10" fill="#c62828"/>
+                        <!-- Tail -->
+                        <polygon points="-14,0 -19,-10 -15,-10 -11,0" fill="#b71c1c"/>
+                    </g>
+                </svg>
+
                 <div class="radar-center-hud">
                     <div id="hudMultiplier" class="multiplier-counter">1.00x</div>
                     <div id="hudCrashText" class="multiplier-bust">FLEW AWAY!</div>
@@ -248,7 +248,6 @@
 
             <!-- Dual Bet Modules -->
             <div class="betting-dock">
-                <!-- Module 1 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
                     <div class="stepper-row">
@@ -265,7 +264,6 @@
                     <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">Bet<br><span style="font-size:0.75rem;">10.00 ETB</span></button>
                 </div>
 
-                <!-- Module 2 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
                     <div class="stepper-row">
@@ -282,25 +280,10 @@
                     <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">Bet<br><span style="font-size:0.75rem;">20.00 ETB</span></button>
                 </div>
             </div>
-
-            <!-- All Bets Live Simulation -->
-            <div class="live-bets-table">
-                <div class="live-table-header">
-                    <span>User</span>
-                    <span>Bet</span>
-                    <span>X</span>
-                    <span>Win</span>
-                </div>
-                <div id="liveBetsContainer">
-                    <div class="live-bet-row"><span class="live-user">2***9</span><span>143.00</span><span class="live-mult">1.35x</span><span>193.05</span></div>
-                    <div class="live-bet-row"><span class="live-user">2***8</span><span>100.00</span><span class="live-mult">2.10x</span><span>210.00</span></div>
-                    <div class="live-bet-row"><span class="live-user">2***1</span><span>500.00</span><span class="live-mult">-</span><span>-</span></div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (Deposit & Withdraw & Transaction History) -->
+    <!-- 3. WALLET VIEW -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -357,42 +340,15 @@
                 </div>
                 <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="submitWithdrawAction()">ወጪ አድርግ (Request)</button>
             </div>
-
-            <!-- Recent Transactions Stream -->
-            <div class="tx-history-box">
-                <div class="section-label" style="padding-left:0;">Recent Transactions</div>
-                <div id="txListContainer">
-                    <div class="tx-item">
-                        <div><b>Deposit</b><br><small style="color:var(--text-secondary);">Telebirr • Oct 5, 2026</small></div>
-                        <div style="text-align:right;"><span class="tx-status-completed">+ETB 200.00</span><br><small class="tx-status-completed">COMPLETED</small></div>
-                    </div>
-                    <div class="tx-item">
-                        <div><b>Withdrawal</b><br><small style="color:var(--text-secondary);">Telebirr • Oct 3, 2026</small></div>
-                        <div style="text-align:right;"><span style="color:#fff;">-ETB 500.00</span><br><small class="tx-status-completed">COMPLETED</small></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
     <!-- 4. PROFILE VIEW -->
     <div id="viewProfile" class="view-pane">
-        <div class="profile-viewport">
-            <div class="profile-card">
-                <div class="profile-avatar">👤</div>
-                <h3>Niro VIP Player</h3>
-                <p style="color:var(--text-secondary); font-size:0.8rem; margin-top:2px;">VIP Level 1 • Explorer</p>
-                <div style="display:flex; justify-content:space-around; margin-top:14px; border-top:1px solid var(--border-dim); padding-top:10px;">
-                    <div><small style="color:var(--text-secondary);">BETS</small><br><b>710</b></div>
-                    <div><small style="color:var(--text-secondary);">HIGHEST WIN</small><br><b style="color:var(--niro-gold);">ETB 4,300</b></div>
-                    <div><small style="color:var(--text-secondary);">BALANCE</small><br><b style="color:var(--niro-green);">ETB <span id="profBalVal">100.00</span></b></div>
-                </div>
-            </div>
-
-            <div class="action-link-item" onclick="switchNavTab('wallet', 'dep')"><span>💳 ዲፖዚት ታሪክ</span><span>›</span></div>
-            <div class="action-link-item" onclick="switchNavTab('wallet', 'with')"><span>🏦 የወጪ ታሪክ</span><span>›</span></div>
-            <div class="action-link-item" onclick="alert('የመጋበዣ ሊንክዎ ተቀድቷል! ለእያንዳንዱ ተጋባዥ 100 ብር ያገኛሉ።')"><span>🎁 Invite Friends (Earn Br 100)</span><span>›</span></div>
-            <div class="action-link-item" onclick="alert('የቴሌግራም ድጋፍ ሰጪ፦ @EthioTKDAdmin')"><span>🎧 Customer Support</span><span>›</span></div>
+        <div style="padding:20px; text-align:center;">
+            <div style="width:70px; height:70px; border-radius:50%; background:#1c242e; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:2rem;">👤</div>
+            <h3>Niro VIP Player</h3>
+            <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:4px;">VIP Level 1 • Explorer</p>
         </div>
     </div>
 
@@ -410,10 +366,6 @@
             <span class="f-icon">💳</span>
             <span>Deposit</span>
         </button>
-        <button class="footer-item" id="tabInviteBtn" onclick="alert('የመጋበዣ ሊንክዎ ተቀድቷል!')">
-            <span class="f-icon">🎁</span>
-            <span>Invite</span>
-        </button>
         <button class="footer-item" id="tabProfileBtn" onclick="switchNavTab('profile')">
             <span class="f-icon">👤</span>
             <span>Profile</span>
@@ -421,18 +373,15 @@
     </nav>
 
     <script>
-        // Telegram WebApp Setup
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.expand();
         }
 
-        // Global State
         let balance = 100.00;
         let isFlying = false;
         let flightMultiplier = 1.00;
         let flightCrash = 1.50;
-        let radarAnimId;
-        let radarCanvas, radarCtx;
+        let flightInterval;
 
         let activeBets = {
             1: { on: false, stake: 10, cashed: false },
@@ -442,7 +391,6 @@
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
             document.getElementById('walletBalVal').innerText = balance.toFixed(2);
-            document.getElementById('profBalVal').innerText = balance.toFixed(2);
         }
 
         function switchNavTab(tabName, modeOpt) {
@@ -467,23 +415,14 @@
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
             document.getElementById('viewAviator').classList.add('active');
             document.getElementById('tabAviatorBtn').classList.add('active');
-            initRadarCanvas();
-            if (!isFlying) startRadarFlight();
+            if (!isFlying) startContinuousFlight();
         }
 
-        /* --- ACCURATE AVIATOR GRAPH ENGINE --- */
-        function initRadarCanvas() {
-            radarCanvas = document.getElementById('flightRadarCanvas');
-            radarCtx = radarCanvas.getContext('2d');
-            radarCanvas.width = radarCanvas.parentElement.clientWidth;
-            radarCanvas.height = radarCanvas.parentElement.clientHeight;
-        }
-
-        function startRadarFlight() {
+        /* --- CONTINUOUS DYNAMIC AVIATOR ENGINE --- */
+        function startContinuousFlight() {
             isFlying = true;
             flightMultiplier = 1.00;
-            // Spribe-like random crash distribution
-            flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
+            flightCrash = (Math.random() < 0.4) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
             flightCrash = parseFloat(flightCrash.toFixed(2));
 
             document.getElementById('hudCrashText').style.display = 'none';
@@ -498,13 +437,15 @@
                 }
             }
 
-            let startTick = performance.now();
+            let elapsed = 0;
+            clearInterval(flightInterval);
 
-            function frameLoop(time) {
-                let duration = (time - startTick) / 1000;
-                flightMultiplier = 1.00 + (duration * 0.3) + Math.pow(duration * 0.16, 2);
+            flightInterval = setInterval(() => {
+                elapsed += 0.05;
+                flightMultiplier = 1.00 + (elapsed * 0.28) + Math.pow(elapsed * 0.14, 2);
                 hud.innerText = flightMultiplier.toFixed(2) + "x";
 
+                // Update Cashout Buttons
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
                         let winSum = (activeBets[i].stake * flightMultiplier).toFixed(2);
@@ -512,89 +453,35 @@
                     }
                 }
 
-                drawFlightPath(duration);
+                // Animate Curve & Plane coordinates
+                let progress = Math.min(elapsed / 7, 1);
+                let currentX = 20 + 290 * progress;
+                let currentY = 180 - 145 * Math.pow(progress, 1.4);
+                let controlX = 20 + (currentX - 20) * 0.45;
+
+                let dLine = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY}`;
+                let dFill = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY} L ${currentX} 180 Z`;
+
+                document.getElementById('curveLine').setAttribute('d', dLine);
+                document.getElementById('curveFill').setAttribute('d', dFill);
+                document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(-14)`);
 
                 if (flightMultiplier >= flightCrash) {
-                    terminateFlight();
-                } else {
-                    radarAnimId = requestAnimationFrame(frameLoop);
+                    triggerCrashState();
                 }
-            }
-            radarAnimId = requestAnimationFrame(frameLoop);
+            }, 50);
         }
 
-        function drawFlightPath(duration) {
-            if (!radarCtx) return;
-            radarCtx.clearRect(0, 0, radarCanvas.width, radarCanvas.height);
-
-            let w = radarCanvas.width;
-            let h = radarCanvas.height;
-            let progress = Math.min(duration / 7.5, 1);
-
-            let endX = 35 + (w - 90) * progress;
-            let endY = (h - 25) - (h - 75) * Math.pow(progress, 1.45);
-
-            // Red Filled Area Under Curve
-            radarCtx.beginPath();
-            radarCtx.moveTo(25, h - 20);
-            radarCtx.quadraticCurveTo(endX * 0.5, h - 20, endX, endY);
-            radarCtx.lineTo(endX, h - 20);
-            radarCtx.closePath();
-            let grad = radarCtx.createLinearGradient(0, endY, 0, h - 20);
-            grad.addColorStop(0, 'rgba(229, 57, 53, 0.45)');
-            grad.addColorStop(1, 'rgba(229, 57, 53, 0.0)');
-            radarCtx.fillStyle = grad;
-            radarCtx.fill();
-
-            // Glow Curve
-            radarCtx.beginPath();
-            radarCtx.moveTo(25, h - 20);
-            radarCtx.quadraticCurveTo(endX * 0.5, h - 20, endX, endY);
-            radarCtx.strokeStyle = '#e53935';
-            radarCtx.lineWidth = 3.5;
-            radarCtx.stroke();
-
-            // Spribe Red Aviator Plane (Vector render)
-            radarCtx.save();
-            radarCtx.translate(endX, endY);
-            radarCtx.rotate(-0.18);
-            radarCtx.fillStyle = '#e53935';
-            
-            // Fuselage & Wing Drawing
-            radarCtx.beginPath();
-            radarCtx.ellipse(0, 0, 16, 5, 0, 0, Math.PI * 2);
-            radarCtx.fill();
-            radarCtx.beginPath();
-            radarCtx.moveTo(-3, -12);
-            radarCtx.lineTo(4, 0);
-            radarCtx.lineTo(-6, 2);
-            radarCtx.closePath();
-            radarCtx.fill();
-            radarCtx.beginPath();
-            radarCtx.moveTo(-14, 0);
-            radarCtx.lineTo(-18, -6);
-            radarCtx.lineTo(-14, -6);
-            radarCtx.closePath();
-            radarCtx.fill();
-
-            // Propeller spin effect
-            radarCtx.strokeStyle = 'rgba(255,255,255,0.7)';
-            radarCtx.lineWidth = 2;
-            radarCtx.beginPath();
-            radarCtx.moveTo(16, -6);
-            radarCtx.lineTo(16, 6);
-            radarCtx.stroke();
-
-            radarCtx.restore();
-        }
-
-        function terminateFlight() {
-            cancelAnimationFrame(radarAnimId);
+        function triggerCrashState() {
+            clearInterval(flightInterval);
             isFlying = false;
 
             let hud = document.getElementById('hudMultiplier');
             hud.style.color = 'var(--niro-red)';
             document.getElementById('hudCrashText').style.display = 'block';
+
+            // Blast plane off screen
+            document.getElementById('planeG').setAttribute('transform', `translate(400, -50) rotate(-35)`);
 
             // Add round to history chips
             let rib = document.getElementById('historyChips');
@@ -612,11 +499,12 @@
                 b.innerHTML = `Bet<br><span style="font-size:0.75rem;">${parseFloat(amt).toFixed(2)} ETB</span>`;
             }
 
+            // Continuous Round Loop (Restart in 3s)
             setTimeout(() => {
                 if (document.getElementById('viewAviator').classList.contains('active')) {
-                    startRadarFlight();
+                    startContinuousFlight();
                 }
-            }, 3000);
+            }, 2800);
         }
 
         function onBetTrigger(slot) {
@@ -704,14 +592,6 @@
                 return;
             }
             alert("የዲፖዚት ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በ 1-5 ደቂቃ ውስጥ ይረጋገጣል።");
-
-            // Add to transaction stream
-            let box = document.getElementById('txListContainer');
-            let item = document.createElement('div');
-            item.className = 'tx-item';
-            item.innerHTML = `<div><b>Deposit</b><br><small style="color:var(--text-secondary);">Telebirr • አሁን</small></div><div style="text-align:right;"><span class="tx-status-completed">+ETB ${amt.toFixed(2)}</span><br><small class="tx-status-completed">PENDING</small></div>`;
-            box.insertBefore(item, box.firstChild);
-
             document.getElementById('inDepSum').value = "";
             document.getElementById('inDepReceipt').value = "";
             switchNavTab('lobby');
@@ -730,18 +610,14 @@
             }
             balance -= amt;
             syncBalanceViews();
-
-            let box = document.getElementById('txListContainer');
-            let item = document.createElement('div');
-            item.className = 'tx-item';
-            item.innerHTML = `<div><b>Withdrawal</b><br><small style="color:var(--text-secondary);">Telebirr • አሁን</small></div><div style="text-align:right;"><span style="color:#fff;">-ETB ${amt.toFixed(2)}</span><br><small class="tx-status-completed">PENDING</small></div>`;
-            box.insertBefore(item, box.firstChild);
-
             alert(`የ ብር ${amt.toFixed(2)} የወጪ ጥያቄዎ ተልኳል! ወደ ${dest} ይተላለፋል።`);
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
         }
+
+        // Start flight loop immediately
+        startContinuousFlight();
     </script>
 </body>
 </html>
@@ -759,7 +635,6 @@
             --bg-card: #161b22;
             --bg-elevated: #1f2631;
             --niro-green: #00e676;
-            --niro-green-dark: #00a854;
             --niro-red: #e53935;
             --niro-gold: #ffb300;
             --text-primary: #ffffff;
@@ -780,7 +655,6 @@
         .curr-sign { background: #00bcd4; color: #fff; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.65rem; }
         .btn-deposit-action { background: var(--niro-green); color: #000; border: none; font-weight: 800; font-size: 0.85rem; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
 
-        /* Page Layout Router */
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
@@ -811,7 +685,7 @@
         .game-badge { position: absolute; top: 4px; left: 4px; background: var(--niro-red); color: #fff; font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 3px; }
         .game-label { padding: 6px; font-size: 0.75rem; font-weight: 700; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* AVIATOR COMPONENT */
+        /* REALISTIC CASSA AVIATOR COMPONENT */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-topbar { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; }
         .aviator-history-ribbon { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
@@ -819,11 +693,19 @@
         .hist-chip { background: #181d24; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #b388ff; white-space: nowrap; }
         .hist-chip.high { color: var(--niro-green); border-color: rgba(0, 230, 118, 0.4); }
 
-        .radar-box { position: relative; width: 100%; height: 215px; background: radial-gradient(circle at 10% 90%, #2b0b14 0%, #0c0f14 70%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
-        .radar-canvas { width: 100%; height: 100%; display: block; }
-        .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
-        .multiplier-counter { font-size: 3.4rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.8); }
-        .multiplier-bust { font-size: 1.1rem; font-weight: 800; color: var(--niro-red); text-transform: uppercase; margin-top: 4px; display: none; }
+        .radar-box { position: relative; width: 100%; height: 230px; background: radial-gradient(circle at 10% 90%, #2e0814 0%, #0d0f14 75%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
+        
+        /* Realistic SVG Stage */
+        .stage-svg { width: 100%; height: 100%; display: block; }
+        .flight-curve-fill { fill: url(#curveGrad); }
+        .flight-curve-line { fill: none; stroke: #e53935; stroke-width: 3.5; stroke-linecap: round; }
+
+        /* Plane Object */
+        .plane-group { transition: transform 0.08s linear; }
+
+        .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
+        .multiplier-counter { font-size: 3.6rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.9); }
+        .multiplier-bust { font-size: 1.15rem; font-weight: 800; color: var(--niro-red); text-transform: uppercase; margin-top: 4px; display: none; }
 
         /* Aviator Dual Deck */
         .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
@@ -836,13 +718,6 @@
         .chip-tag { background: var(--bg-elevated); border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.68rem; font-weight: 700; cursor: pointer; }
         .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; text-transform: uppercase; }
         .btn-bet-trigger.cashing { background: var(--niro-gold); color: #000; }
-
-        /* All Bets Live Table */
-        .live-bets-table { margin-top: 12px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; max-height: 180px; overflow-y: auto; }
-        .live-table-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); border-bottom: 1px solid var(--border-dim); padding-bottom: 6px; margin-bottom: 6px; }
-        .live-bet-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .live-user { color: #90caf9; }
-        .live-mult { color: var(--niro-green); font-weight: 700; }
 
         /* WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
@@ -860,18 +735,7 @@
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; }
         .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; margin-top: 8px; }
 
-        .tx-history-box { margin-top: 18px; }
-        .tx-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 0.78rem; }
-        .tx-status-completed { color: var(--niro-green); font-weight: bold; }
-        .tx-status-expired { color: var(--niro-red); font-weight: bold; }
-
-        /* PROFILE VIEW */
-        .profile-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
-        .profile-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 14px; }
-        .profile-avatar { width: 64px; height: 64px; border-radius: 50%; background: #263140; display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 8px; }
-        .action-link-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
-
-        /* BOTTOM APP FOOTER */
+        /* APP BOTTOM DOCK */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--niro-green); }
@@ -935,7 +799,6 @@
             <div class="win-card"><div style="font-size:1.5rem;">🎱</div><div class="win-game">Fast Keno</div><div class="win-payout">Br 32.5K</div></div>
             <div class="win-card"><div style="font-size:1.5rem;">🐔</div><div class="win-game">Chicken Road</div><div class="win-payout">Br 44.3K</div></div>
             <div class="win-card"><div style="font-size:1.5rem;">💣</div><div class="win-game">Mines</div><div class="win-payout">Br 55.9K</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">🚀</div><div class="win-game">JetX</div><div class="win-payout">Br 49.1K</div></div>
         </div>
 
         <div class="section-label">🔥 Hot Games</div>
@@ -952,30 +815,17 @@
                 <div class="game-poster">🚀</div>
                 <div class="game-label">Jet-X</div>
             </div>
-            <div class="game-tile" onclick="alert('Multi Hot Slot በቅርብ ቀን!')">
-                <div class="game-poster">🎰</div>
-                <div class="game-label">Multi Hot 5</div>
-            </div>
-            <div class="game-tile" onclick="alert('Gold Gold Gold በቅርብ ቀን!')">
-                <div class="game-poster">🪙</div>
-                <div class="game-label">Gold Gold Gold</div>
-            </div>
-            <div class="game-tile" onclick="alert('Chicken Road በቅርብ ቀን!')">
-                <div class="game-poster">🐔</div>
-                <div class="game-label">Chicken Road</div>
-            </div>
         </div>
     </div>
 
-    <!-- 2. AVIATOR PRO GAME SCREEN -->
+    <!-- 2. REAL CASSA-STYLE AVIATOR -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-topbar">
                 <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
-                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR | NIRO BET</span>
+                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR SPRIBE</span>
             </div>
 
-            <!-- Multiplier History Chips -->
             <div class="aviator-history-ribbon" id="historyChips">
                 <div class="hist-chip high">5.71x</div>
                 <div class="hist-chip">1.33x</div>
@@ -984,9 +834,35 @@
                 <div class="hist-chip">1.10x</div>
             </div>
 
-            <!-- Radar Curved Flight Display -->
+            <!-- SVG Realistic Dynamic Screen -->
             <div class="radar-box">
-                <canvas id="flightRadarCanvas" class="radar-canvas"></canvas>
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#e53935" stop-opacity="0.45"/>
+                            <stop offset="100%" stop-color="#e53935" stop-opacity="0.0"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Dynamic Fill & Stroke -->
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 180 Q 20 180 20 180 L 20 180 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 180 Q 20 180 20 180" />
+
+                    <!-- Spribe Style Red Aviator Plane -->
+                    <g id="planeG" class="plane-group" transform="translate(20, 180) rotate(-10)">
+                        <!-- Propeller -->
+                        <line x1="22" y1="-8" x2="22" y2="8" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
+                        <!-- Body -->
+                        <path d="M -15 0 C -15 -6 18 -5 22 0 C 18 5 -15 6 -15 0 Z" fill="#e53935"/>
+                        <!-- Top Wing -->
+                        <polygon points="-4,-14 6,-1 2,1 -8,-10" fill="#d32f2f"/>
+                        <!-- Bottom Wing -->
+                        <polygon points="-6,1 2,1 -2,12 -8,10" fill="#c62828"/>
+                        <!-- Tail -->
+                        <polygon points="-14,0 -19,-10 -15,-10 -11,0" fill="#b71c1c"/>
+                    </g>
+                </svg>
+
                 <div class="radar-center-hud">
                     <div id="hudMultiplier" class="multiplier-counter">1.00x</div>
                     <div id="hudCrashText" class="multiplier-bust">FLEW AWAY!</div>
@@ -995,7 +871,6 @@
 
             <!-- Dual Bet Modules -->
             <div class="betting-dock">
-                <!-- Module 1 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
                     <div class="stepper-row">
@@ -1012,7 +887,6 @@
                     <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">Bet<br><span style="font-size:0.75rem;">10.00 ETB</span></button>
                 </div>
 
-                <!-- Module 2 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
                     <div class="stepper-row">
@@ -1029,25 +903,10 @@
                     <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">Bet<br><span style="font-size:0.75rem;">20.00 ETB</span></button>
                 </div>
             </div>
-
-            <!-- All Bets Live Simulation -->
-            <div class="live-bets-table">
-                <div class="live-table-header">
-                    <span>User</span>
-                    <span>Bet</span>
-                    <span>X</span>
-                    <span>Win</span>
-                </div>
-                <div id="liveBetsContainer">
-                    <div class="live-bet-row"><span class="live-user">2***9</span><span>143.00</span><span class="live-mult">1.35x</span><span>193.05</span></div>
-                    <div class="live-bet-row"><span class="live-user">2***8</span><span>100.00</span><span class="live-mult">2.10x</span><span>210.00</span></div>
-                    <div class="live-bet-row"><span class="live-user">2***1</span><span>500.00</span><span class="live-mult">-</span><span>-</span></div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (Deposit & Withdraw & Transaction History) -->
+    <!-- 3. WALLET VIEW -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -1104,42 +963,15 @@
                 </div>
                 <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="submitWithdrawAction()">ወጪ አድርግ (Request)</button>
             </div>
-
-            <!-- Recent Transactions Stream -->
-            <div class="tx-history-box">
-                <div class="section-label" style="padding-left:0;">Recent Transactions</div>
-                <div id="txListContainer">
-                    <div class="tx-item">
-                        <div><b>Deposit</b><br><small style="color:var(--text-secondary);">Telebirr • Oct 5, 2026</small></div>
-                        <div style="text-align:right;"><span class="tx-status-completed">+ETB 200.00</span><br><small class="tx-status-completed">COMPLETED</small></div>
-                    </div>
-                    <div class="tx-item">
-                        <div><b>Withdrawal</b><br><small style="color:var(--text-secondary);">Telebirr • Oct 3, 2026</small></div>
-                        <div style="text-align:right;"><span style="color:#fff;">-ETB 500.00</span><br><small class="tx-status-completed">COMPLETED</small></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
     <!-- 4. PROFILE VIEW -->
     <div id="viewProfile" class="view-pane">
-        <div class="profile-viewport">
-            <div class="profile-card">
-                <div class="profile-avatar">👤</div>
-                <h3>Niro VIP Player</h3>
-                <p style="color:var(--text-secondary); font-size:0.8rem; margin-top:2px;">VIP Level 1 • Explorer</p>
-                <div style="display:flex; justify-content:space-around; margin-top:14px; border-top:1px solid var(--border-dim); padding-top:10px;">
-                    <div><small style="color:var(--text-secondary);">BETS</small><br><b>710</b></div>
-                    <div><small style="color:var(--text-secondary);">HIGHEST WIN</small><br><b style="color:var(--niro-gold);">ETB 4,300</b></div>
-                    <div><small style="color:var(--text-secondary);">BALANCE</small><br><b style="color:var(--niro-green);">ETB <span id="profBalVal">100.00</span></b></div>
-                </div>
-            </div>
-
-            <div class="action-link-item" onclick="switchNavTab('wallet', 'dep')"><span>💳 ዲፖዚት ታሪክ</span><span>›</span></div>
-            <div class="action-link-item" onclick="switchNavTab('wallet', 'with')"><span>🏦 የወጪ ታሪክ</span><span>›</span></div>
-            <div class="action-link-item" onclick="alert('የመጋበዣ ሊንክዎ ተቀድቷል! ለእያንዳንዱ ተጋባዥ 100 ብር ያገኛሉ።')"><span>🎁 Invite Friends (Earn Br 100)</span><span>›</span></div>
-            <div class="action-link-item" onclick="alert('የቴሌግራም ድጋፍ ሰጪ፦ @EthioTKDAdmin')"><span>🎧 Customer Support</span><span>›</span></div>
+        <div style="padding:20px; text-align:center;">
+            <div style="width:70px; height:70px; border-radius:50%; background:#1c242e; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:2rem;">👤</div>
+            <h3>Niro VIP Player</h3>
+            <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:4px;">VIP Level 1 • Explorer</p>
         </div>
     </div>
 
@@ -1157,10 +989,6 @@
             <span class="f-icon">💳</span>
             <span>Deposit</span>
         </button>
-        <button class="footer-item" id="tabInviteBtn" onclick="alert('የመጋበዣ ሊንክዎ ተቀድቷል!')">
-            <span class="f-icon">🎁</span>
-            <span>Invite</span>
-        </button>
         <button class="footer-item" id="tabProfileBtn" onclick="switchNavTab('profile')">
             <span class="f-icon">👤</span>
             <span>Profile</span>
@@ -1168,18 +996,15 @@
     </nav>
 
     <script>
-        // Telegram WebApp Setup
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.expand();
         }
 
-        // Global State
         let balance = 100.00;
         let isFlying = false;
         let flightMultiplier = 1.00;
         let flightCrash = 1.50;
-        let radarAnimId;
-        let radarCanvas, radarCtx;
+        let flightInterval;
 
         let activeBets = {
             1: { on: false, stake: 10, cashed: false },
@@ -1189,7 +1014,6 @@
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
             document.getElementById('walletBalVal').innerText = balance.toFixed(2);
-            document.getElementById('profBalVal').innerText = balance.toFixed(2);
         }
 
         function switchNavTab(tabName, modeOpt) {
@@ -1214,23 +1038,14 @@
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
             document.getElementById('viewAviator').classList.add('active');
             document.getElementById('tabAviatorBtn').classList.add('active');
-            initRadarCanvas();
-            if (!isFlying) startRadarFlight();
+            if (!isFlying) startContinuousFlight();
         }
 
-        /* --- ACCURATE AVIATOR GRAPH ENGINE --- */
-        function initRadarCanvas() {
-            radarCanvas = document.getElementById('flightRadarCanvas');
-            radarCtx = radarCanvas.getContext('2d');
-            radarCanvas.width = radarCanvas.parentElement.clientWidth;
-            radarCanvas.height = radarCanvas.parentElement.clientHeight;
-        }
-
-        function startRadarFlight() {
+        /* --- CONTINUOUS DYNAMIC AVIATOR ENGINE --- */
+        function startContinuousFlight() {
             isFlying = true;
             flightMultiplier = 1.00;
-            // Spribe-like random crash distribution
-            flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
+            flightCrash = (Math.random() < 0.4) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
             flightCrash = parseFloat(flightCrash.toFixed(2));
 
             document.getElementById('hudCrashText').style.display = 'none';
@@ -1245,13 +1060,15 @@
                 }
             }
 
-            let startTick = performance.now();
+            let elapsed = 0;
+            clearInterval(flightInterval);
 
-            function frameLoop(time) {
-                let duration = (time - startTick) / 1000;
-                flightMultiplier = 1.00 + (duration * 0.3) + Math.pow(duration * 0.16, 2);
+            flightInterval = setInterval(() => {
+                elapsed += 0.05;
+                flightMultiplier = 1.00 + (elapsed * 0.28) + Math.pow(elapsed * 0.14, 2);
                 hud.innerText = flightMultiplier.toFixed(2) + "x";
 
+                // Update Cashout Buttons
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
                         let winSum = (activeBets[i].stake * flightMultiplier).toFixed(2);
@@ -1259,89 +1076,35 @@
                     }
                 }
 
-                drawFlightPath(duration);
+                // Animate Curve & Plane coordinates
+                let progress = Math.min(elapsed / 7, 1);
+                let currentX = 20 + 290 * progress;
+                let currentY = 180 - 145 * Math.pow(progress, 1.4);
+                let controlX = 20 + (currentX - 20) * 0.45;
+
+                let dLine = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY}`;
+                let dFill = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY} L ${currentX} 180 Z`;
+
+                document.getElementById('curveLine').setAttribute('d', dLine);
+                document.getElementById('curveFill').setAttribute('d', dFill);
+                document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(-14)`);
 
                 if (flightMultiplier >= flightCrash) {
-                    terminateFlight();
-                } else {
-                    radarAnimId = requestAnimationFrame(frameLoop);
+                    triggerCrashState();
                 }
-            }
-            radarAnimId = requestAnimationFrame(frameLoop);
+            }, 50);
         }
 
-        function drawFlightPath(duration) {
-            if (!radarCtx) return;
-            radarCtx.clearRect(0, 0, radarCanvas.width, radarCanvas.height);
-
-            let w = radarCanvas.width;
-            let h = radarCanvas.height;
-            let progress = Math.min(duration / 7.5, 1);
-
-            let endX = 35 + (w - 90) * progress;
-            let endY = (h - 25) - (h - 75) * Math.pow(progress, 1.45);
-
-            // Red Filled Area Under Curve
-            radarCtx.beginPath();
-            radarCtx.moveTo(25, h - 20);
-            radarCtx.quadraticCurveTo(endX * 0.5, h - 20, endX, endY);
-            radarCtx.lineTo(endX, h - 20);
-            radarCtx.closePath();
-            let grad = radarCtx.createLinearGradient(0, endY, 0, h - 20);
-            grad.addColorStop(0, 'rgba(229, 57, 53, 0.45)');
-            grad.addColorStop(1, 'rgba(229, 57, 53, 0.0)');
-            radarCtx.fillStyle = grad;
-            radarCtx.fill();
-
-            // Glow Curve
-            radarCtx.beginPath();
-            radarCtx.moveTo(25, h - 20);
-            radarCtx.quadraticCurveTo(endX * 0.5, h - 20, endX, endY);
-            radarCtx.strokeStyle = '#e53935';
-            radarCtx.lineWidth = 3.5;
-            radarCtx.stroke();
-
-            // Spribe Red Aviator Plane (Vector render)
-            radarCtx.save();
-            radarCtx.translate(endX, endY);
-            radarCtx.rotate(-0.18);
-            radarCtx.fillStyle = '#e53935';
-            
-            // Fuselage & Wing Drawing
-            radarCtx.beginPath();
-            radarCtx.ellipse(0, 0, 16, 5, 0, 0, Math.PI * 2);
-            radarCtx.fill();
-            radarCtx.beginPath();
-            radarCtx.moveTo(-3, -12);
-            radarCtx.lineTo(4, 0);
-            radarCtx.lineTo(-6, 2);
-            radarCtx.closePath();
-            radarCtx.fill();
-            radarCtx.beginPath();
-            radarCtx.moveTo(-14, 0);
-            radarCtx.lineTo(-18, -6);
-            radarCtx.lineTo(-14, -6);
-            radarCtx.closePath();
-            radarCtx.fill();
-
-            // Propeller spin effect
-            radarCtx.strokeStyle = 'rgba(255,255,255,0.7)';
-            radarCtx.lineWidth = 2;
-            radarCtx.beginPath();
-            radarCtx.moveTo(16, -6);
-            radarCtx.lineTo(16, 6);
-            radarCtx.stroke();
-
-            radarCtx.restore();
-        }
-
-        function terminateFlight() {
-            cancelAnimationFrame(radarAnimId);
+        function triggerCrashState() {
+            clearInterval(flightInterval);
             isFlying = false;
 
             let hud = document.getElementById('hudMultiplier');
             hud.style.color = 'var(--niro-red)';
             document.getElementById('hudCrashText').style.display = 'block';
+
+            // Blast plane off screen
+            document.getElementById('planeG').setAttribute('transform', `translate(400, -50) rotate(-35)`);
 
             // Add round to history chips
             let rib = document.getElementById('historyChips');
@@ -1359,11 +1122,12 @@
                 b.innerHTML = `Bet<br><span style="font-size:0.75rem;">${parseFloat(amt).toFixed(2)} ETB</span>`;
             }
 
+            // Continuous Round Loop (Restart in 3s)
             setTimeout(() => {
                 if (document.getElementById('viewAviator').classList.contains('active')) {
-                    startRadarFlight();
+                    startContinuousFlight();
                 }
-            }, 3000);
+            }, 2800);
         }
 
         function onBetTrigger(slot) {
@@ -1451,14 +1215,6 @@
                 return;
             }
             alert("የዲፖዚት ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በ 1-5 ደቂቃ ውስጥ ይረጋገጣል።");
-
-            // Add to transaction stream
-            let box = document.getElementById('txListContainer');
-            let item = document.createElement('div');
-            item.className = 'tx-item';
-            item.innerHTML = `<div><b>Deposit</b><br><small style="color:var(--text-secondary);">Telebirr • አሁን</small></div><div style="text-align:right;"><span class="tx-status-completed">+ETB ${amt.toFixed(2)}</span><br><small class="tx-status-completed">PENDING</small></div>`;
-            box.insertBefore(item, box.firstChild);
-
             document.getElementById('inDepSum').value = "";
             document.getElementById('inDepReceipt').value = "";
             switchNavTab('lobby');
@@ -1477,18 +1233,14 @@
             }
             balance -= amt;
             syncBalanceViews();
-
-            let box = document.getElementById('txListContainer');
-            let item = document.createElement('div');
-            item.className = 'tx-item';
-            item.innerHTML = `<div><b>Withdrawal</b><br><small style="color:var(--text-secondary);">Telebirr • አሁን</small></div><div style="text-align:right;"><span style="color:#fff;">-ETB ${amt.toFixed(2)}</span><br><small class="tx-status-completed">PENDING</small></div>`;
-            box.insertBefore(item, box.firstChild);
-
             alert(`የ ብር ${amt.toFixed(2)} የወጪ ጥያቄዎ ተልኳል! ወደ ${dest} ይተላለፋል።`);
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
         }
+
+        // Start flight loop immediately
+        startContinuousFlight();
     </script>
 </body>
 </html>
