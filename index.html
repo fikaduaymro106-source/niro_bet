@@ -35,7 +35,7 @@
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* LOBBY VIEW */
+        /* 1. LOBBY VIEW */
         .hero-promo { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 85% 50%, #1b5e20 0%, #071f0b 100%); border: 1px solid #2e7d32; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
         .hero-promo h2 { font-size: 1.25rem; font-weight: 900; line-height: 1.2; }
         .hero-promo h2 span { color: var(--niro-gold); font-size: 1.45rem; }
@@ -48,61 +48,65 @@
         .node-icon { font-size: 1.4rem; margin-bottom: 3px; }
         .node-title { font-size: 0.7rem; font-weight: 700; color: #cbd5e1; }
 
-        /* Game Catalog with Official Spribe Logo */
         .official-card { margin: 10px; background: #0c0f13; border: 1px solid #2a1118; border-radius: 14px; padding: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
         .official-left { display: flex; align-items: center; gap: 12px; }
         .official-logo-box { width: 75px; height: 50px; background: #16070a; border-radius: 8px; border: 1px solid #4a1520; display: flex; align-items: center; justify-content: center; }
         .aviator-font-logo { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-weight: 900; color: #e5283b; font-style: italic; letter-spacing: -1px; }
 
-        /* 2. AVIATOR ARENA (EXACT AS PHOTO) */
+        /* 2. COMPACT AVIATOR ARENA (CASSA STYLE) */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
-        .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 6px 4px 8px; }
+        .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 4px 4px 6px; }
         .aviator-brand-text { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.6rem; font-style: italic; font-weight: 900; color: #e5283b; }
         
-        .aviator-history-ribbon { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+        .aviator-history-ribbon { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
         .aviator-history-ribbon::-webkit-scrollbar { display: none; }
-        .hist-chip { background: #151a21; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #00bcd4; white-space: nowrap; }
+        .hist-chip { background: #151a21; border: 1px solid var(--border-dim); padding: 2px 7px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; color: #00bcd4; white-space: nowrap; }
         .hist-chip.high { color: #9c27b0; border-color: rgba(156,39,176,0.4); }
 
-        /* Radial Sunburst Arena Screen */
-        .radar-box { position: relative; width: 100%; height: 245px; background: radial-gradient(circle at 75% 45%, #2a0b14 0%, #0c080e 75%); border: 1px solid #3d1b27; border-radius: 14px; overflow: hidden; }
-        .sunburst-bg { position: absolute; inset: -40px; background: repeating-conic-gradient(from 0deg, rgba(229,40,59,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 50s linear infinite; pointer-events: none; }
+        /* Compact Arena Height (190px) */
+        .radar-box { position: relative; width: 100%; height: 190px; background: radial-gradient(circle at 85% 45%, #2a0b14 0%, #0c080e 75%); border: 1px solid #3d1b27; border-radius: 10px; overflow: hidden; }
+        .sunburst-bg { position: absolute; inset: -30px; background: repeating-conic-gradient(from 0deg, rgba(229,40,59,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 50s linear infinite; pointer-events: none; }
         @keyframes rotateSunburst { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .radar-dots-axis { position: absolute; bottom: 18px; left: 0; right: 0; height: 8px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
-        .radar-dot { width: 3.5px; height: 3.5px; background: rgba(255,255,255,0.2); border-radius: 50%; flex-shrink: 0; }
-        @keyframes slideDots { from { transform: translateX(0); } to { transform: translateX(-18px); } }
+        .radar-dots-axis { position: absolute; bottom: 12px; left: 0; right: 0; height: 6px; display: flex; gap: 12px; animation: slideDots 1s linear infinite; pointer-events: none; }
+        .radar-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.22); border-radius: 50%; flex-shrink: 0; }
+        @keyframes slideDots { from { transform: translateX(0); } to { transform: translateX(-15px); } }
 
         .stage-svg { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
         .flight-curve-fill { fill: url(#curveGrad); }
-        .flight-curve-line { fill: none; stroke: #e5283b; stroke-width: 4; stroke-linecap: round; }
+        .flight-curve-line { fill: none; stroke: #e5283b; stroke-width: 3.5; stroke-linecap: round; }
         .plane-group { transition: transform 0.05s linear; }
 
         .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
-        .multiplier-counter { font-size: 3.8rem; font-weight: 900; color: #ffffff; letter-spacing: -2px; text-shadow: 0 4px 18px rgba(0,0,0,0.95); }
-        .multiplier-bust { font-size: 1.25rem; font-weight: 900; color: var(--niro-red); margin-top: 4px; display: none; letter-spacing: 0.5px; }
+        .multiplier-counter { font-size: 3.2rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.95); }
+        .multiplier-bust { font-size: 1.1rem; font-weight: 900; color: var(--niro-red); margin-top: 2px; display: none; }
 
         /* Dual Betting Controls */
-        .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-        .dock-module { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 8px; }
-        .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
-        .stepper-row { display: flex; justify-content: space-between; align-items: center; background: #080a0e; border: 1px solid var(--border-dim); border-radius: 6px; padding: 4px; margin-bottom: 6px; }
-        .step-btn { background: none; border: none; color: #fff; font-size: 1.1rem; width: 26px; cursor: pointer; }
-        .step-val { width: 55px; text-align: center; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.95rem; }
-        .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 8px; }
+        .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+        .dock-module { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 7px; }
+        .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.72rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
+        .dock-mode-tabs span { cursor: pointer; padding: 2px 8px; border-radius: 4px; }
+        .dock-mode-tabs span.active { color: #fff; background: var(--bg-elevated); }
+
+        .stepper-row { display: flex; justify-content: space-between; align-items: center; background: #080a0e; border: 1px solid var(--border-dim); border-radius: 6px; padding: 3px; margin-bottom: 5px; }
+        .step-btn { background: none; border: none; color: #fff; font-size: 1.1rem; width: 24px; cursor: pointer; }
+        .step-val { width: 50px; text-align: center; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.95rem; }
+        
+        .auto-cash-row { display: none; margin-bottom: 5px; font-size: 0.7rem; color: var(--text-secondary); align-items: center; justify-content: space-between; background: #0c0f13; padding: 3px 6px; border-radius: 4px; }
+        .auto-cash-row input { width: 50px; background: #000; border: 1px solid var(--border-dim); color: #fff; text-align: center; font-weight: 800; border-radius: 3px; font-size: 0.75rem; }
+
+        .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 6px; }
         .chip-tag { background: var(--bg-elevated); border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.68rem; font-weight: 700; cursor: pointer; }
-        .btn-bet-trigger { width: 100%; padding: 13px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; }
+        .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; }
         .btn-bet-trigger.cashing { background: #ff9800; color: #000; }
         .btn-bet-trigger.waiting { background: #212833; color: var(--text-secondary); cursor: not-allowed; }
 
-        /* Live User Status Bar */
-        .my-live-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 8px; font-size: 0.78rem; }
+        .my-live-bar { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 6px; font-size: 0.75rem; }
 
-        /* Beautiful Popup Notifications */
-        .toast-notify { position: fixed; top: 22%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1b5e20, #0a290d); border: 2px solid #ffb300; border-radius: 12px; padding: 16px 26px; text-align: center; z-index: 3000; box-shadow: 0 10px 35px rgba(0,0,0,0.9); display: none; animation: popIn 0.3s ease; }
-        .toast-notify h3 { font-size: 1.1rem; color: #fff; }
-        .toast-notify .toast-val { font-size: 1.9rem; font-weight: 900; color: #ffb300; margin-top: 4px; }
-        @keyframes popIn { from { transform: translate(-50%, -20px) scale(0.8); opacity: 0; } to { transform: translate(-50%, 0) scale(1); opacity: 1; } }
+        /* Notification */
+        .toast-notify { position: fixed; top: 18%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1b5e20, #0a290d); border: 2px solid #ffb300; border-radius: 12px; padding: 14px 24px; text-align: center; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; }
+        .toast-notify h3 { font-size: 1rem; color: #fff; }
+        .toast-notify .toast-val { font-size: 1.8rem; font-weight: 900; color: #ffb300; margin-top: 2px; }
 
         /* WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
@@ -124,21 +128,21 @@
         .timer-badge { background: #261719; color: var(--niro-red); border: 1px solid #4a191f; border-radius: 20px; padding: 4px 10px; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
         .copy-chip { background: #1f2732; border: 1px solid var(--border-dim); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 1rem; font-weight: 800; cursor: pointer; }
 
-        /* LUCKY SPIN MODAL */
-        .spin-wheel-box { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; }
-        .wheel-circle { width: 230px; height: 230px; border-radius: 50%; border: 6px solid #ffb300; background: conic-gradient(#e5283b 0deg 60deg, #00e676 60deg 120deg, #00bcd4 120deg 180deg, #ff9800 180deg 240deg, #9c27b0 240deg 300deg, #e91e63 300deg 360deg); transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        /* Popups */
+        .generic-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; padding: 16px; }
+        .modal-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 14px; padding: 18px; width: 100%; max-width: 320px; text-align: center; }
+        .wheel-circle { width: 220px; height: 220px; border-radius: 50%; border: 6px solid #ffb300; background: conic-gradient(#e5283b 0deg 60deg, #00e676 60deg 120deg, #00bcd4 120deg 180deg, #ff9800 180deg 240deg, #9c27b0 240deg 300deg, #e91e63 300deg 360deg); transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin: 0 auto 16px; }
 
-        /* ADMIN VIEW */
+        /* Admin */
         .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
         .admin-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
         .admin-card h4 { font-size: 0.95rem; color: #ffb300; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
         .btn-adm { background: #1f2631; border: 1px solid var(--border-dim); color: #fff; padding: 8px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
         .btn-adm.danger { background: #b71c1c; }
-
         .req-item { background: #0b0e12; border: 1px solid var(--border-dim); border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 0.78rem; }
         .req-action-row { display: flex; gap: 8px; margin-top: 8px; }
 
-        /* FOOTER DOCK */
+        /* Footer */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--niro-green); }
@@ -178,13 +182,13 @@
                 <div class="node-icon">🎡</div>
                 <div class="node-title">Lucky Spin (<span id="spinCountText">2</span>)</div>
             </div>
-            <div class="feature-node" onclick="alert('Shamo Jackpot coming soon!')">
-                <div class="node-icon">🎯</div>
-                <div class="node-title">Shamo</div>
-            </div>
             <div class="feature-node" onclick="openCouponModal()">
                 <div class="node-icon">🎟️</div>
                 <div class="node-title">Coupon</div>
+            </div>
+            <div class="feature-node" onclick="switchNavTab('profile')">
+                <div class="node-icon">👥</div>
+                <div class="node-title">Referral</div>
             </div>
             <div class="feature-node" onclick="switchNavTab('admin')">
                 <span class="node-tag" style="background:#ff9800;">ADMIN</span>
@@ -193,8 +197,7 @@
             </div>
         </div>
 
-        <div class="section-label">🔥 Official Aviator</div>
-        <!-- Card as in photo -->
+        <div class="section-label">🔥 Official Crash Game</div>
         <div class="official-card" onclick="openAviatorGame()">
             <div class="official-left">
                 <div class="official-logo-box">
@@ -202,14 +205,14 @@
                 </div>
                 <div>
                     <h4 style="font-size:1.05rem; font-weight:800;">Aviator Spribe</h4>
-                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Official Crash Game • High RTP</p>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Compact Engine • Real Sound</p>
                 </div>
             </div>
             <div style="font-size:1.3rem; color:var(--niro-green);">▶</div>
         </div>
     </div>
 
-    <!-- 2. AVIATOR ARENA (EXACT DESIGN AS PHOTO) -->
+    <!-- 2. AVIATOR ARENA (COMPACT CASSA DESIGN) -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-top-nav">
@@ -217,7 +220,7 @@
                 <span class="aviator-brand-text">Aviator</span>
             </div>
 
-            <!-- History Ribbon -->
+            <!-- Chips -->
             <div class="aviator-history-ribbon" id="historyChips">
                 <div class="hist-chip high">7.07x</div>
                 <div class="hist-chip">1.38x</div>
@@ -226,14 +229,14 @@
                 <div class="hist-chip">1.02x</div>
             </div>
 
-            <!-- Radial Sunburst Radar Stage -->
+            <!-- Compact Radar Arena (190px) -->
             <div class="radar-box">
                 <div class="sunburst-bg"></div>
                 <div class="radar-dots-axis">
-                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
+                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
                 </div>
 
-                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 210" preserveAspectRatio="none">
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 190" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#e5283b" stop-opacity="0.6"/>
@@ -241,20 +244,15 @@
                         </linearGradient>
                     </defs>
 
-                    <path id="curveFill" class="flight-curve-fill" d="M 20 185 Q 20 185 20 185 L 20 185 Z" />
-                    <path id="curveLine" class="flight-curve-line" d="M 20 185 Q 20 185 20 185" />
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 170 Q 20 170 20 170 L 20 170 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 170 Q 20 170 20 170" />
 
-                    <!-- Vector Plane (Exact matching photo with 'X' tail & prop) -->
-                    <g id="planeG" class="plane-group" transform="translate(20, 185) rotate(-10)">
-                        <!-- Propeller -->
-                        <line x1="25" y1="-12" x2="25" y2="12" stroke="#e5283b" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="25" y1="-12" x2="25" y2="12" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
-                        <!-- Body Fuselage -->
-                        <path d="M -22 2 C -18 -7 18 -6 25 0 C 18 6 -18 7 -22 2 Z" fill="#e5283b"/>
-                        <!-- Wings -->
-                        <polygon points="-6,-16 8,-2 3,2 -11,-12" fill="#d32f2f"/>
-                        <polygon points="-8,2 3,2 -2,14 -11,11" fill="#b71c1c"/>
-                        <!-- Tail Fin with X Logo -->
+                    <!-- Vector Spribe Plane (Exact X-Tail & Spinner) -->
+                    <g id="planeG" class="plane-group" transform="translate(20, 170) rotate(-10)">
+                        <line id="propellerLine" x1="24" y1="-12" x2="24" y2="12" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M -22 2 C -18 -7 18 -6 24 0 C 18 6 -18 7 -22 2 Z" fill="#e5283b"/>
+                        <polygon points="-6,-15 8,-2 3,2 -11,-11" fill="#d32f2f"/>
+                        <polygon points="-8,2 3,2 -2,13 -11,10" fill="#b71c1c"/>
                         <polygon points="-18,2 -25,-12 -20,-12 -14,2" fill="#d32f2f"/>
                         <text x="-23" y="-3" font-size="7" font-weight="900" fill="#ffffff">X</text>
                     </g>
@@ -266,14 +264,22 @@
                 </div>
             </div>
 
-            <!-- Dual Bet Modules (Cassa Style) -->
+            <!-- Dual Bet Modules -->
             <div class="betting-dock">
+                <!-- Slot 1 -->
                 <div class="dock-module">
-                    <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
+                    <div class="dock-mode-tabs">
+                        <span id="tabBet1" class="active" onclick="switchBetMode(1, 'manual')">Bet</span>
+                        <span id="tabAuto1" onclick="switchBetMode(1, 'auto')">Auto</span>
+                    </div>
                     <div class="stepper-row">
                         <button class="step-btn" onclick="adjustStake(1, -5)">-</button>
                         <input type="number" id="stakeInput1" class="step-val" value="10">
                         <button class="step-btn" onclick="adjustStake(1, 5)">+</button>
+                    </div>
+                    <div id="autoCashRow1" class="auto-cash-row">
+                        <span>Auto Cash:</span>
+                        <input type="number" step="0.1" id="autoCashVal1" value="2.0">
                     </div>
                     <div class="chip-shortcuts">
                         <button class="chip-tag" onclick="setStake(1, 10)">10</button>
@@ -284,12 +290,20 @@
                     <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">Bet<br><span style="font-size:0.75rem;">10.00 ETB</span></button>
                 </div>
 
+                <!-- Slot 2 -->
                 <div class="dock-module">
-                    <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
+                    <div class="dock-mode-tabs">
+                        <span id="tabBet2" class="active" onclick="switchBetMode(2, 'manual')">Bet</span>
+                        <span id="tabAuto2" onclick="switchBetMode(2, 'auto')">Auto</span>
+                    </div>
                     <div class="stepper-row">
                         <button class="step-btn" onclick="adjustStake(2, -5)">-</button>
                         <input type="number" id="stakeInput2" class="step-val" value="20">
                         <button class="step-btn" onclick="adjustStake(2, 5)">+</button>
+                    </div>
+                    <div id="autoCashRow2" class="auto-cash-row">
+                        <span>Auto Cash:</span>
+                        <input type="number" step="0.1" id="autoCashVal2" value="2.0">
                     </div>
                     <div class="chip-shortcuts">
                         <button class="chip-tag" onclick="setStake(2, 10)">10</button>
@@ -301,7 +315,7 @@
                 </div>
             </div>
 
-            <!-- Honest User Status Bar (No fake bots) -->
+            <!-- Status Bar -->
             <div class="my-live-bar">
                 <span>Active Bets: <b id="myActiveBetsCount" style="color:var(--niro-green);">0</b></span>
                 <span>Current Stake: <b id="myTotalStake" style="color:var(--niro-gold);">0.00 ETB</b></span>
@@ -309,7 +323,7 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (Deposit & Withdraw) -->
+    <!-- 3. WALLET VIEW -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -345,7 +359,6 @@
                 </div>
                 <button class="btn-confirm-action" onclick="createDepositOrder()">Continue to Payment</button>
 
-                <!-- Order Details & 30-min Timer -->
                 <div id="depositOrderBox" class="order-details-box">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                         <span>Time Remaining:</span>
@@ -354,7 +367,7 @@
                     <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">Transfer strictly to this account:</p>
                     <div class="copy-chip" onclick="copyDepositNumber()">
                         <div>
-                            <span id="targetTelebirrNumber">0974107425</span>
+                            <span>0974107425</span>
                             <small style="display:block; color:var(--text-secondary); font-size:0.7rem;">Name: Mulualem</small>
                         </div>
                         <span style="font-size:0.75rem; color:var(--niro-green);">📋 Copy</span>
@@ -382,7 +395,7 @@
         </div>
     </div>
 
-    <!-- 4. ADMIN CONTROL PANEL (WITH WEB APPROVE/REJECT) -->
+    <!-- 4. ADMIN CONTROL PANEL -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -390,7 +403,6 @@
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
             </div>
 
-            <!-- Pending Requests Queue -->
             <div class="admin-card">
                 <h4>📥 Pending Deposits & Withdrawals</h4>
                 <div id="adminQueueList">
@@ -398,9 +410,8 @@
                 </div>
             </div>
 
-            <!-- Aviator Multiplier Lock -->
             <div class="admin-card">
-                <h4>✈️️ Aviator Control</h4>
+                <h4>✈️ Aviator Control</h4>
                 <div class="input-group">
                     <label>Preset Next Round Multiplier</label>
                     <input type="number" step="0.1" id="admNextCrashInput" class="form-input" placeholder="e.g. 5.5">
@@ -408,12 +419,11 @@
                 </div>
             </div>
 
-            <!-- Coupon Generator -->
             <div class="admin-card">
-                <h4>🎟️ Add Coupon Code</h4>
+                <h4>🎟️ Create Time-Locked Coupon</h4>
                 <div class="input-group">
                     <label>Coupon Code Name</label>
-                    <input type="text" id="admCouponName" class="form-input" placeholder="e.g. BONUS50">
+                    <input type="text" id="admCouponName" class="form-input" placeholder="e.g. WIN50">
                 </div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
                     <div class="input-group">
@@ -425,12 +435,12 @@
                         <input type="number" id="admCouponDuration" class="form-input" placeholder="5">
                     </div>
                 </div>
-                <button class="btn-confirm-action" onclick="adminCreateCoupon()">Create Time-Locked Coupon</button>
+                <button class="btn-confirm-action" onclick="adminCreateCoupon()">Generate Coupon</button>
             </div>
         </div>
     </div>
 
-    <!-- 5. PROFILE & TRANSACTIONS LOG -->
+    <!-- 5. PROFILE & REFERRAL VIEW -->
     <div id="viewProfile" class="view-pane">
         <div style="padding:16px;">
             <div style="text-align:center; margin-bottom:14px;">
@@ -441,8 +451,8 @@
 
             <div class="admin-card">
                 <h4>📜 Transaction History (Permanent Log)</h4>
-                <div id="profileTxHistory" style="max-height:220px; overflow-y:auto;">
-                    <div style="font-size:0.75rem; color:var(--text-secondary);">No completed transactions yet.</div>
+                <div id="profileTxHistory" style="max-height:200px; overflow-y:auto;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary);">No transactions yet.</div>
                 </div>
             </div>
 
@@ -457,17 +467,27 @@
         </div>
     </div>
 
-    <!-- TOAST POPUP NOTIFICATION -->
+    <!-- NOTIFICATION POPUP -->
     <div id="toastNotification" class="toast-notify">
         <h3 id="toastTitle">🎉 CASH OUT!</h3>
         <div class="toast-val" id="toastAmount">+0.00 ETB</div>
     </div>
 
     <!-- LUCKY SPIN MODAL -->
-    <div id="spinModal" class="spin-wheel-box">
+    <div id="spinModal" class="generic-modal">
         <div class="wheel-circle" id="wheelCircle"></div>
-        <button class="btn-confirm-action" style="max-width:180px; margin-top:20px;" onclick="spinNow()">SPIN NOW</button>
-        <span onclick="closeSpinModal()" style="color:var(--text-secondary); margin-top:14px; cursor:pointer;">Close</span>
+        <button class="btn-confirm-action" style="max-width:180px;" onclick="spinNow()">SPIN NOW</button>
+        <span onclick="closeSpinModal()" style="color:var(--text-secondary); margin-top:14px; cursor:pointer; font-size:0.85rem;">Close</span>
+    </div>
+
+    <!-- COUPON MODAL -->
+    <div id="couponModal" class="generic-modal">
+        <div class="modal-card">
+            <h4 style="margin-bottom:10px; color:#ffb300;">🎟️️ Redeem Coupon</h4>
+            <input type="text" id="couponInputBox" class="form-input" placeholder="Enter coupon code" style="text-align:center; text-transform:uppercase; margin-bottom:10px;">
+            <button class="btn-confirm-action" onclick="claimCouponCode()">Apply Coupon</button>
+            <span onclick="closeCouponModal()" style="display:block; color:var(--text-secondary); margin-top:10px; cursor:pointer; font-size:0.8rem;">Cancel</span>
+        </div>
     </div>
 
     <!-- FOOTER DOCK -->
@@ -494,64 +514,73 @@
         const tg = window.Telegram?.WebApp;
         if (tg) tg.expand();
 
-        /* --- AUDIO SYNTHESIS (REALISTIC SOUND FX) --- */
+        /* --- ACCURATE AVIATOR AUDIO SYNTHESIZER --- */
         let audioCtx;
         function getAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             return audioCtx;
         }
 
-        let engineOsc = null, engineGain = null;
+        let engineOsc = null, engineGain = null, whistleOsc = null, whistleGain = null;
 
-        function playEngineSound() {
+        function startAviatorSounds() {
             try {
                 let ctx = getAudio();
                 if (ctx.state === 'suspended') ctx.resume();
+
+                // 1. Engine low rumble
                 engineOsc = ctx.createOscillator();
                 engineGain = ctx.createGain();
-
                 engineOsc.type = 'sawtooth';
-                engineOsc.frequency.setValueAtTime(65, ctx.currentTime);
+                engineOsc.frequency.setValueAtTime(60, ctx.currentTime);
 
-                let filter = ctx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(320, ctx.currentTime);
+                let lowFilter = ctx.createBiquadFilter();
+                lowFilter.type = 'lowpass';
+                lowFilter.frequency.setValueAtTime(250, ctx.currentTime);
 
-                engineGain.gain.setValueAtTime(0.08, ctx.currentTime);
-
-                engineOsc.connect(filter);
-                filter.connect(engineGain);
+                engineGain.gain.setValueAtTime(0.06, ctx.currentTime);
+                engineOsc.connect(lowFilter);
+                lowFilter.connect(engineGain);
                 engineGain.connect(ctx.destination);
                 engineOsc.start();
+
+                // 2. High pitch whistle (rising tone)
+                whistleOsc = ctx.createOscillator();
+                whistleGain = ctx.createGain();
+                whistleOsc.type = 'sine';
+                whistleOsc.frequency.setValueAtTime(280, ctx.currentTime);
+                whistleGain.gain.setValueAtTime(0.04, ctx.currentTime);
+
+                whistleOsc.connect(whistleGain);
+                whistleGain.connect(ctx.destination);
+                whistleOsc.start();
             } catch(e) {}
         }
 
-        function updateEnginePitch(mult) {
+        function updateAviatorTone(mult) {
             try {
-                if (engineOsc && audioCtx) {
-                    let freq = Math.min(270, 65 + (mult - 1) * 38);
-                    engineOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                let ctx = getAudio();
+                if (whistleOsc && ctx) {
+                    let nextPitch = Math.min(1400, 280 + (mult - 1) * 110);
+                    whistleOsc.frequency.setValueAtTime(nextPitch, ctx.currentTime);
                 }
             } catch(e) {}
         }
 
-        function stopEngineSound() {
+        function stopAviatorSounds() {
             try {
-                if (engineOsc) {
-                    engineOsc.stop();
-                    engineOsc.disconnect();
-                    engineOsc = null;
-                }
+                if (engineOsc) { engineOsc.stop(); engineOsc.disconnect(); engineOsc = null; }
+                if (whistleOsc) { whistleOsc.stop(); whistleOsc.disconnect(); whistleOsc = null; }
             } catch(e) {}
         }
 
-        function playCrashSound() {
+        function playExplosionSound() {
             try {
                 let ctx = getAudio();
                 let osc = ctx.createOscillator();
                 let gain = ctx.createGain();
                 osc.type = 'square';
-                osc.frequency.setValueAtTime(140, ctx.currentTime);
+                osc.frequency.setValueAtTime(160, ctx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.35);
 
                 gain.gain.setValueAtTime(0.25, ctx.currentTime);
@@ -564,14 +593,14 @@
             } catch(e) {}
         }
 
-        function playCashoutSound() {
+        function playCoinWinSound() {
             try {
                 let ctx = getAudio();
                 let osc = ctx.createOscillator();
                 let gain = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(659.25, ctx.currentTime);
+                osc.frequency.setValueAtTime(987.77, ctx.currentTime + 0.08);
 
                 gain.gain.setValueAtTime(0.2, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
@@ -592,12 +621,12 @@
         let flightInterval;
 
         let activeBets = {
-            1: { on: false, stake: 10, cashed: false },
-            2: { on: false, stake: 20, cashed: false }
+            1: { on: false, stake: 10, cashed: false, auto: false, autoX: 2.0 },
+            2: { on: false, stake: 20, cashed: false, auto: false, autoX: 2.0 }
         };
 
         let userSpins = 2;
-        let activeCoupons = {};
+        let activeCoupons = { "NIRO2026": { amount: 100, expiresAt: Date.now() + 86400000 } };
         let usedReceipts = new Set(["TX000000"]);
         let adminPresetCrash = null;
         let pendingRequests = [];
@@ -640,7 +669,15 @@
             if (!isFlying && !isWaiting) startContinuousFlight();
         }
 
-        /* --- REALISTIC AVIATOR ENGINE --- */
+        function switchBetMode(slot, mode) {
+            let isAuto = (mode === 'auto');
+            activeBets[slot].auto = isAuto;
+            document.getElementById(`tabBet${slot}`).classList.toggle('active', !isAuto);
+            document.getElementById(`tabAuto${slot}`).classList.toggle('active', isAuto);
+            document.getElementById(`autoCashRow${slot}`).style.display = isAuto ? 'flex' : 'none';
+        }
+
+        /* --- COMPACT AVIATOR ENGINE --- */
         function startContinuousFlight() {
             isFlying = true;
             isWaiting = false;
@@ -658,7 +695,7 @@
             let hud = document.getElementById('hudMultiplier');
             hud.style.color = '#fff';
 
-            playEngineSound();
+            startAviatorSounds();
 
             for (let i = 1; i <= 2; i++) {
                 let b = document.getElementById('btnDockAction' + i);
@@ -680,26 +717,35 @@
                 flightMultiplier = 1.00 + (elapsed * 0.28) + Math.pow(elapsed * 0.14, 2);
                 hud.innerText = flightMultiplier.toFixed(2) + "x";
 
-                updateEnginePitch(flightMultiplier);
+                updateAviatorTone(flightMultiplier);
 
+                // Auto Cash Out Trigger
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
                         let win = (activeBets[i].stake * flightMultiplier).toFixed(2);
                         document.getElementById('btnDockAction' + i).innerHTML = `Cash out<br><span style="font-size:0.75rem;">${win} ETB</span>`;
+
+                        if (activeBets[i].auto) {
+                            let targetX = parseFloat(document.getElementById(`autoCashVal${i}`).value) || 2.0;
+                            if (flightMultiplier >= targetX) {
+                                executeCashOut(i);
+                            }
+                        }
                     }
                 }
 
+                // S-Curve inside 190px Box
                 let progress = Math.min(elapsed / 7.2, 1);
                 let currentX = 20 + 290 * progress;
-                let currentY = 185 - 145 * Math.pow(progress, 1.4);
+                let currentY = 170 - 130 * Math.pow(progress, 1.4);
                 let controlX = 20 + (currentX - 20) * 0.45;
 
-                let dLine = `M 20 185 Q ${controlX} 185 ${currentX} ${currentY}`;
-                let dFill = `M 20 185 Q ${controlX} 185 ${currentX} ${currentY} L ${currentX} 185 Z`;
+                let dLine = `M 20 170 Q ${controlX} 170 ${currentX} ${currentY}`;
+                let dFill = `M 20 170 Q ${controlX} 170 ${currentX} ${currentY} L ${currentX} 170 Z`;
 
                 document.getElementById('curveLine').setAttribute('d', dLine);
                 document.getElementById('curveFill').setAttribute('d', dFill);
-                document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(-14)`);
+                document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(-13)`);
 
                 if (flightMultiplier >= flightCrash) {
                     triggerCrashState();
@@ -712,14 +758,14 @@
             isFlying = false;
             isWaiting = true;
 
-            stopEngineSound();
-            playCrashSound();
+            stopAviatorSounds();
+            playExplosionSound();
 
             let hud = document.getElementById('hudMultiplier');
             hud.style.color = 'var(--niro-red)';
             document.getElementById('hudCrashText').style.display = 'block';
 
-            document.getElementById('planeG').setAttribute('transform', `translate(420, -60) rotate(-35)`);
+            document.getElementById('planeG').setAttribute('transform', `translate(420, -50) rotate(-35)`);
 
             let rib = document.getElementById('historyChips');
             let chip = document.createElement('div');
@@ -744,7 +790,7 @@
                 } else {
                     isWaiting = false;
                 }
-            }, 2800);
+            }, 2600);
         }
 
         function onBetTrigger(slot) {
@@ -768,19 +814,24 @@
                     btn.classList.add('cashing');
                 }
             } else {
-                if (isFlying && !activeBets[slot].cashed) {
-                    let win = activeBets[slot].stake * flightMultiplier;
-                    balance += win;
-                    activeBets[slot].cashed = true;
-                    activeBets[slot].on = false;
-                    syncBalanceViews();
+                executeCashOut(slot);
+            }
+        }
 
-                    btn.classList.remove('cashing');
-                    btn.innerHTML = `Bet<br><span style="font-size:0.75rem;">${stake.toFixed(2)} ETB</span>`;
+        function executeCashOut(slot) {
+            if (isFlying && !activeBets[slot].cashed) {
+                let win = activeBets[slot].stake * flightMultiplier;
+                balance += win;
+                activeBets[slot].cashed = true;
+                activeBets[slot].on = false;
+                syncBalanceViews();
 
-                    playCashoutSound();
-                    showToastNotify("🎉 CASH OUT!", `+${win.toFixed(2)} ETB`);
-                }
+                let btn = document.getElementById('btnDockAction' + slot);
+                btn.classList.remove('cashing');
+                btn.innerHTML = `Bet<br><span style="font-size:0.75rem;">${activeBets[slot].stake.toFixed(2)} ETB</span>`;
+
+                playCoinWinSound();
+                showToastNotify("🎉 CASH OUT!", `+${win.toFixed(2)} ETB`);
             }
         }
 
@@ -789,7 +840,7 @@
             document.getElementById('toastTitle').innerText = title;
             document.getElementById('toastAmount').innerText = amount;
             m.style.display = 'block';
-            setTimeout(() => { m.style.display = 'none'; }, 2400);
+            setTimeout(() => { m.style.display = 'none'; }, 2200);
         }
 
         function adjustStake(slot, step) {
@@ -809,7 +860,7 @@
             }
         }
 
-        /* --- WALLET WORKFLOW --- */
+        /* --- WALLET --- */
         function setWalletMode(m) {
             if (m === 'dep') {
                 document.getElementById('btnWDepToggle').classList.add('active');
@@ -854,7 +905,7 @@
                 document.getElementById('timerCountdown').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                 if (remaining <= 0) {
                     clearInterval(orderCountdownInterval);
-                    showToastNotify("ALERT", "Order Expired!");
+                    showToastNotify("EXPIRED", "Order Timed Out");
                     document.getElementById('depositOrderBox').style.display = 'none';
                 }
                 remaining--;
@@ -862,8 +913,7 @@
         }
 
         function copyDepositNumber() {
-            let num = "0974107425";
-            navigator.clipboard.writeText(num);
+            navigator.clipboard.writeText("0974107425");
             showToastNotify("COPIED", "0974107425");
         }
 
@@ -871,43 +921,27 @@
             let amt = parseFloat(document.getElementById('inDepSum').value);
             let receipt = document.getElementById('inDepReceipt').value.trim();
 
-            if (!amt || amt < 100) {
-                showToastNotify("ALERT", "Minimum 100 ETB!");
-                return;
-            }
-            if (!receipt || receipt.length < 5) {
-                showToastNotify("ALERT", "Invalid SMS Receipt!");
-                return;
-            }
-            if (usedReceipts.has(receipt)) {
-                showToastNotify("SECURITY ALERT", "Duplicate Receipt!");
-                return;
-            }
+            if (!amt || amt < 100) { showToastNotify("ALERT", "Minimum 100 ETB!"); return; }
+            if (!receipt || receipt.length < 5) { showToastNotify("ALERT", "Invalid SMS Receipt!"); return; }
+            if (usedReceipts.has(receipt)) { showToastNotify("ALERT", "Duplicate Receipt!"); return; }
 
             usedReceipts.add(receipt);
 
-            // Queue for Web Admin Approval
             let reqId = "DEP_" + Date.now();
             pendingRequests.push({
                 id: reqId,
                 type: "Deposit",
                 amount: amt,
-                account: "Mulualem (0974107425)",
-                receipt: receipt,
-                status: "Pending"
+                account: "0974107425",
+                receipt: receipt
             });
             renderAdminQueue();
 
             if (tg) {
-                tg.sendData(JSON.stringify({
-                    type: "deposit_request",
-                    amount: amt,
-                    receipt: receipt,
-                    date: new Date().toISOString()
-                }));
+                tg.sendData(JSON.stringify({ type: "deposit_request", amount: amt, receipt: receipt }));
             }
 
-            showToastNotify("SUBMITTED", "Pending Admin Approval");
+            showToastNotify("SUBMITTED", "Pending Approval");
             document.getElementById('depositOrderBox').style.display = 'none';
             document.getElementById('inDepSum').value = "";
             document.getElementById('inDepReceipt').value = "";
@@ -918,14 +952,8 @@
             let amt = parseFloat(document.getElementById('inWithSum').value);
             let dest = document.getElementById('inWithDest').value.trim();
 
-            if (!amt || amt < 100 || amt > balance) {
-                showToastNotify("ALERT", "Min 100 ETB / Check Bal");
-                return;
-            }
-            if (!dest || dest.length < 9) {
-                showToastNotify("ALERT", "Enter valid phone/account!");
-                return;
-            }
+            if (!amt || amt < 100 || amt > balance) { showToastNotify("ALERT", "Check balance / Min 100"); return; }
+            if (!dest || dest.length < 9) { showToastNotify("ALERT", "Invalid account!"); return; }
 
             balance -= amt;
             syncBalanceViews();
@@ -936,18 +964,12 @@
                 type: "Withdrawal",
                 amount: amt,
                 account: dest,
-                receipt: "N/A",
-                status: "Pending"
+                receipt: "N/A"
             });
             renderAdminQueue();
 
             if (tg) {
-                tg.sendData(JSON.stringify({
-                    type: "withdraw_request",
-                    amount: amt,
-                    account: dest,
-                    date: new Date().toISOString()
-                }));
+                tg.sendData(JSON.stringify({ type: "withdraw_request", amount: amt, account: dest }));
             }
 
             showToastNotify("REQUESTED", `Pending: -${amt.toFixed(2)} ETB`);
@@ -956,7 +978,7 @@
             switchNavTab('lobby');
         }
 
-        /* --- WEB ADMIN APPROVAL ENGINE --- */
+        /* --- ADMIN CONTROLS --- */
         function renderAdminQueue() {
             let box = document.getElementById('adminQueueList');
             if (pendingRequests.length === 0) {
@@ -995,7 +1017,7 @@
         function adminRejectReq(idx) {
             let req = pendingRequests[idx];
             if (req.type === "Withdrawal") {
-                balance += req.amount; // Refund
+                balance += req.amount;
                 syncBalanceViews();
             }
             addProfileHistory(req.type, req.amount, "Rejected");
@@ -1006,7 +1028,7 @@
 
         function addProfileHistory(type, amt, status) {
             let log = document.getElementById('profileTxHistory');
-            if (log.innerHTML.includes("No completed transactions")) log.innerHTML = "";
+            if (log.innerHTML.includes("No transactions")) log.innerHTML = "";
             let item = document.createElement('div');
             item.style.padding = "6px 0";
             item.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
@@ -1047,28 +1069,19 @@
             document.getElementById('admCouponDuration').value = "";
         }
 
-        /* --- LUCKY SPIN (WEIGHTED PERCENTAGES) --- */
-        function openLuckySpin() {
-            document.getElementById('spinModal').style.display = 'flex';
-        }
-        function closeSpinModal() {
-            document.getElementById('spinModal').style.display = 'none';
-        }
+        /* --- LUCKY SPIN --- */
+        function openLuckySpin() { document.getElementById('spinModal').style.display = 'flex'; }
+        function closeSpinModal() { document.getElementById('spinModal').style.display = 'none'; }
         function spinNow() {
-            if (userSpins <= 0) {
-                showToastNotify("SPINS", "No spins left! Invite friends.");
-                return;
-            }
+            if (userSpins <= 0) { showToastNotify("SPINS", "Invite friends to get 3 spins!"); return; }
             userSpins--;
             syncBalanceViews();
 
             let rand = Math.random() * 100;
             let winBonus = 0;
-
             if (rand < 2) winBonus = 100;
             else if (rand < 7) winBonus = 10;
             else if (rand < 17) winBonus = 5;
-            else winBonus = 0;
 
             let w = document.getElementById('wheelCircle');
             let deg = 1440 + Math.floor(Math.random() * 360);
@@ -1087,17 +1100,18 @@
         }
 
         function copyReferralLink() {
-            let l = document.getElementById('refLinkText').innerText;
-            navigator.clipboard.writeText(l);
+            navigator.clipboard.writeText(document.getElementById('refLinkText').innerText);
             showToastNotify("COPIED", "Referral Link");
             userSpins += 3;
             syncBalanceViews();
         }
 
-        function openCouponModal() {
-            let code = prompt("Enter Coupon Code:");
+        /* --- COUPON MODAL --- */
+        function openCouponModal() { document.getElementById('couponModal').style.display = 'flex'; }
+        function closeCouponModal() { document.getElementById('couponModal').style.display = 'none'; }
+        function claimCouponCode() {
+            let code = document.getElementById('couponInputBox').value.trim().toUpperCase();
             if (!code) return;
-            code = code.trim().toUpperCase();
 
             if (activeCoupons[code]) {
                 let cp = activeCoupons[code];
@@ -1109,13 +1123,10 @@
                     syncBalanceViews();
                     showToastNotify("🎉 BONUS APPLIED!", `+${cp.amount} ETB`);
                     delete activeCoupons[code];
+                    closeCouponModal();
                 }
-            } else if (code === "NIRO2026") {
-                balance += 100;
-                syncBalanceViews();
-                showToastNotify("WELCOME BONUS", "+100 ETB");
             } else {
-                showToastNotify("INVALID", "Coupon inactive!");
+                showToastNotify("INVALID", "Coupon does not exist!");
             }
         }
 
