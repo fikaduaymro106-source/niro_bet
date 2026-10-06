@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Niro Bet - Official Casino</title>
+    <title>Niro Bet - Official Aviator</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
@@ -12,15 +12,15 @@
             --bg-card: #161b22;
             --bg-elevated: #1f2631;
             --niro-green: #00e676;
-            --niro-red: #e53935;
-            --niro-gold: #ffb300;
+            --niro-red: #e5283b;
+            --niro-gold: #ff9800;
             --text-primary: #ffffff;
             --text-secondary: #8b949e;
             --border-dim: #21262d;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg-base); color: var(--text-primary); padding-bottom: 68px; overflow-x: hidden; user-select: none; }
+        body { background: var(--bg-base); color: var(--text-primary); padding-bottom: 65px; overflow-x: hidden; user-select: none; }
 
         /* Top Header */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-surface); border-bottom: 1px solid var(--border-dim); position: sticky; top: 0; z-index: 1000; }
@@ -35,7 +35,7 @@
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* LOBBY */
+        /* LOBBY VIEW */
         .hero-promo { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 85% 50%, #1b5e20 0%, #071f0b 100%); border: 1px solid #2e7d32; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
         .hero-promo h2 { font-size: 1.25rem; font-weight: 900; line-height: 1.2; }
         .hero-promo h2 span { color: var(--niro-gold); font-size: 1.45rem; }
@@ -48,64 +48,61 @@
         .node-icon { font-size: 1.4rem; margin-bottom: 3px; }
         .node-title { font-size: 0.7rem; font-weight: 700; color: #cbd5e1; }
 
-        .section-label { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px 6px; font-size: 0.82rem; font-weight: 800; color: var(--text-secondary); }
-        .wins-scroller { display: flex; gap: 8px; overflow-x: auto; padding: 0 10px 10px; scrollbar-width: none; }
-        .wins-scroller::-webkit-scrollbar { display: none; }
-        .win-card { min-width: 110px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; padding: 8px; text-align: center; }
-        .win-game { font-size: 0.72rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .win-payout { font-size: 0.8rem; color: var(--niro-green); font-weight: 800; margin-top: 2px; }
+        /* Game Catalog with Official Spribe Logo */
+        .official-card { margin: 10px; background: #0c0f13; border: 1px solid #2a1118; border-radius: 14px; padding: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+        .official-left { display: flex; align-items: center; gap: 12px; }
+        .official-logo-box { width: 75px; height: 50px; background: #16070a; border-radius: 8px; border: 1px solid #4a1520; display: flex; align-items: center; justify-content: center; }
+        .aviator-font-logo { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-weight: 900; color: #e5283b; font-style: italic; letter-spacing: -1px; }
 
-        .game-grid { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 6px 10px 16px; }
-        .game-tile { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; overflow: hidden; cursor: pointer; display: flex; align-items: center; padding: 12px; gap: 14px; }
-        .game-poster { width: 70px; height: 70px; background: linear-gradient(135deg, #2b1117, #0d1117); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; border: 1px solid #3d1b27; }
-        .game-badge { position: absolute; top: 4px; left: 4px; background: var(--niro-red); color: #fff; font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 3px; }
-        .game-info-col h4 { font-size: 1.1rem; font-weight: 900; margin-bottom: 4px; }
-        .game-info-col p { font-size: 0.8rem; color: var(--text-secondary); }
-
-        /* AVIATOR COMPONENT */
+        /* 2. AVIATOR ARENA (EXACT AS PHOTO) */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
-        .aviator-topbar { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; }
+        .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 6px 4px 8px; }
+        .aviator-brand-text { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.6rem; font-style: italic; font-weight: 900; color: #e5283b; }
+        
         .aviator-history-ribbon { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
         .aviator-history-ribbon::-webkit-scrollbar { display: none; }
-        .hist-chip { background: #181d24; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #b388ff; white-space: nowrap; }
-        .hist-chip.high { color: var(--niro-green); border-color: rgba(0, 230, 118, 0.4); }
+        .hist-chip { background: #151a21; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #00bcd4; white-space: nowrap; }
+        .hist-chip.high { color: #9c27b0; border-color: rgba(156,39,176,0.4); }
 
-        .radar-box { position: relative; width: 100%; height: 235px; background: radial-gradient(circle at 10% 90%, #2e0814 0%, #0d0f14 75%); border: 1px solid #3d1b27; border-radius: 12px; overflow: hidden; }
-        .radar-dots-axis { position: absolute; bottom: 18px; left: 0; right: 0; height: 10px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
-        .radar-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.25); border-radius: 50%; flex-shrink: 0; }
+        /* Radial Sunburst Arena Screen */
+        .radar-box { position: relative; width: 100%; height: 245px; background: radial-gradient(circle at 75% 45%, #2a0b14 0%, #0c080e 75%); border: 1px solid #3d1b27; border-radius: 14px; overflow: hidden; }
+        .sunburst-bg { position: absolute; inset: -40px; background: repeating-conic-gradient(from 0deg, rgba(229,40,59,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 50s linear infinite; pointer-events: none; }
+        @keyframes rotateSunburst { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .radar-dots-axis { position: absolute; bottom: 18px; left: 0; right: 0; height: 8px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
+        .radar-dot { width: 3.5px; height: 3.5px; background: rgba(255,255,255,0.2); border-radius: 50%; flex-shrink: 0; }
         @keyframes slideDots { from { transform: translateX(0); } to { transform: translateX(-18px); } }
 
         .stage-svg { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
         .flight-curve-fill { fill: url(#curveGrad); }
-        .flight-curve-line { fill: none; stroke: #e53935; stroke-width: 3.5; stroke-linecap: round; }
+        .flight-curve-line { fill: none; stroke: #e5283b; stroke-width: 4; stroke-linecap: round; }
         .plane-group { transition: transform 0.05s linear; }
 
         .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
-        .multiplier-counter { font-size: 3.6rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.9); }
-        .multiplier-bust { font-size: 1.15rem; font-weight: 800; color: var(--niro-red); margin-top: 4px; display: none; }
+        .multiplier-counter { font-size: 3.8rem; font-weight: 900; color: #ffffff; letter-spacing: -2px; text-shadow: 0 4px 18px rgba(0,0,0,0.95); }
+        .multiplier-bust { font-size: 1.25rem; font-weight: 900; color: var(--niro-red); margin-top: 4px; display: none; letter-spacing: 0.5px; }
 
-        /* Dual Bet Deck */
+        /* Dual Betting Controls */
         .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-        .dock-module { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; }
-        .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
+        .dock-module { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 8px; }
+        .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
         .stepper-row { display: flex; justify-content: space-between; align-items: center; background: #080a0e; border: 1px solid var(--border-dim); border-radius: 6px; padding: 4px; margin-bottom: 6px; }
         .step-btn { background: none; border: none; color: #fff; font-size: 1.1rem; width: 26px; cursor: pointer; }
         .step-val { width: 55px; text-align: center; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.95rem; }
         .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 8px; }
         .chip-tag { background: var(--bg-elevated); border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.68rem; font-weight: 700; cursor: pointer; }
-        .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; text-transform: uppercase; }
-        .btn-bet-trigger.cashing { background: var(--niro-gold); color: #000; }
-        .btn-bet-trigger.waiting { background: #263238; color: var(--text-secondary); cursor: not-allowed; }
+        .btn-bet-trigger { width: 100%; padding: 13px 6px; border-radius: 8px; border: none; font-size: 0.95rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; }
+        .btn-bet-trigger.cashing { background: #ff9800; color: #000; }
+        .btn-bet-trigger.waiting { background: #212833; color: var(--text-secondary); cursor: not-allowed; }
 
-        .live-pot-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 8px; font-size: 0.78rem; }
-        .live-bets-table { margin-top: 6px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 8px; max-height: 160px; overflow-y: auto; }
-        .live-table-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); border-bottom: 1px solid var(--border-dim); padding-bottom: 6px; margin-bottom: 6px; }
-        .live-bet-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        /* Live User Status Bar */
+        .my-live-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 8px; font-size: 0.78rem; }
 
-        /* Win Modal */
-        .win-modal { position: fixed; top: 22%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1b5e20, #0a290d); border: 2px solid var(--niro-gold); border-radius: 12px; padding: 16px 24px; text-align: center; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.8); display: none; }
-        .win-modal h3 { font-size: 1.1rem; color: #fff; margin-bottom: 4px; }
-        .win-modal .win-amt { font-size: 1.8rem; font-weight: 900; color: var(--niro-gold); }
+        /* Beautiful Popup Notifications */
+        .toast-notify { position: fixed; top: 22%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1b5e20, #0a290d); border: 2px solid #ffb300; border-radius: 12px; padding: 16px 26px; text-align: center; z-index: 3000; box-shadow: 0 10px 35px rgba(0,0,0,0.9); display: none; animation: popIn 0.3s ease; }
+        .toast-notify h3 { font-size: 1.1rem; color: #fff; }
+        .toast-notify .toast-val { font-size: 1.9rem; font-weight: 900; color: #ffb300; margin-top: 4px; }
+        @keyframes popIn { from { transform: translate(-50%, -20px) scale(0.8); opacity: 0; } to { transform: translate(-50%, 0) scale(1); opacity: 1; } }
 
         /* WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
@@ -121,7 +118,7 @@
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; }
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; }
-        .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; margin-top: 8px; }
+        .btn-confirm-action { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
 
         .order-details-box { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 16px; margin-top: 10px; display: none; }
         .timer-badge { background: #261719; color: var(--niro-red); border: 1px solid #4a191f; border-radius: 20px; padding: 4px 10px; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
@@ -129,17 +126,20 @@
 
         /* LUCKY SPIN MODAL */
         .spin-wheel-box { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; }
-        .wheel-circle { width: 220px; height: 220px; border-radius: 50%; border: 6px solid var(--niro-gold); background: conic-gradient(#ff334b 0deg 60deg, #00d665 60deg 120deg, #00bcd4 120deg 180deg, #ffb300 180deg 240deg, #9c27b0 240deg 300deg, #ff9800 300deg 360deg); transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .wheel-circle { width: 230px; height: 230px; border-radius: 50%; border: 6px solid #ffb300; background: conic-gradient(#e5283b 0deg 60deg, #00e676 60deg 120deg, #00bcd4 120deg 180deg, #ff9800 180deg 240deg, #9c27b0 240deg 300deg, #e91e63 300deg 360deg); transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
-        /* ADMIN PANEL CARDS */
+        /* ADMIN VIEW */
         .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
         .admin-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
-        .admin-card h4 { font-size: 0.95rem; color: var(--niro-gold); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .admin-card h4 { font-size: 0.95rem; color: #ffb300; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
         .btn-adm { background: #1f2631; border: 1px solid var(--border-dim); color: #fff; padding: 8px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
         .btn-adm.danger { background: #b71c1c; }
 
+        .req-item { background: #0b0e12; border: 1px solid var(--border-dim); border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 0.78rem; }
+        .req-action-row { display: flex; gap: 8px; margin-top: 8px; }
+
         /* FOOTER DOCK */
-        .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+        .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--niro-green); }
         .footer-item .f-icon { font-size: 1.3rem; }
@@ -193,68 +193,70 @@
             </div>
         </div>
 
-        <div class="section-label">
-            <span>Recent Big Wins</span>
-            <span style="color:#00bcd4; cursor:pointer;">View All</span>
-        </div>
-        <div class="wins-scroller">
-            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 84.6K</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 32.5K</div></div>
-            <div class="win-card"><div style="font-size:1.5rem;">✈️</div><div class="win-game">Aviator</div><div class="win-payout">Br 55.9K</div></div>
-        </div>
-
-        <div class="section-label">🔥 Game Catalog</div>
-        <div class="game-grid" id="gameCatalogContainer">
-            <div class="game-tile" onclick="openAviatorGame()">
-                <div class="game-poster"><span class="game-badge">HOT</span>✈️</div>
-                <div class="game-info-col">
-                    <h4>Aviator Spribe</h4>
-                    <p>Realistic Sounds, Motion Horizon & Curve</p>
+        <div class="section-label">🔥 Official Aviator</div>
+        <!-- Card as in photo -->
+        <div class="official-card" onclick="openAviatorGame()">
+            <div class="official-left">
+                <div class="official-logo-box">
+                    <span class="aviator-font-logo">Aviator</span>
+                </div>
+                <div>
+                    <h4 style="font-size:1.05rem; font-weight:800;">Aviator Spribe</h4>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Official Crash Game • High RTP</p>
                 </div>
             </div>
+            <div style="font-size:1.3rem; color:var(--niro-green);">▶</div>
         </div>
     </div>
 
-    <!-- 2. AVIATOR PRO SCREEN -->
+    <!-- 2. AVIATOR ARENA (EXACT DESIGN AS PHOTO) -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
-            <div class="aviator-topbar">
+            <div class="aviator-top-nav">
                 <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
-                <span style="font-weight:900; color:var(--niro-red); font-size:0.9rem;">AVIATOR SPRIBE</span>
+                <span class="aviator-brand-text">Aviator</span>
             </div>
 
+            <!-- History Ribbon -->
             <div class="aviator-history-ribbon" id="historyChips">
-                <div class="hist-chip high">5.71x</div>
-                <div class="hist-chip">1.33x</div>
-                <div class="hist-chip high">11.38x</div>
-                <div class="hist-chip">2.53x</div>
-                <div class="hist-chip">1.10x</div>
+                <div class="hist-chip high">7.07x</div>
+                <div class="hist-chip">1.38x</div>
+                <div class="hist-chip">2.14x</div>
+                <div class="hist-chip high">17.53x</div>
+                <div class="hist-chip">1.02x</div>
             </div>
 
-            <!-- Curved Flight Radar -->
+            <!-- Radial Sunburst Radar Stage -->
             <div class="radar-box">
+                <div class="sunburst-bg"></div>
                 <div class="radar-dots-axis">
-                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
+                    <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
                 </div>
 
-                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 200" preserveAspectRatio="none">
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 210" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#e53935" stop-opacity="0.5"/>
-                            <stop offset="100%" stop-color="#e53935" stop-opacity="0.0"/>
+                            <stop offset="0%" stop-color="#e5283b" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="#e5283b" stop-opacity="0.0"/>
                         </linearGradient>
                     </defs>
 
-                    <path id="curveFill" class="flight-curve-fill" d="M 20 180 Q 20 180 20 180 L 20 180 Z" />
-                    <path id="curveLine" class="flight-curve-line" d="M 20 180 Q 20 180 20 180" />
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 185 Q 20 185 20 185 L 20 185 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 185 Q 20 185 20 185" />
 
-                    <!-- Vector Aviator Plane -->
-                    <g id="planeG" class="plane-group" transform="translate(20, 180) rotate(-10)">
-                        <line x1="22" y1="-8" x2="22" y2="8" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
-                        <path d="M -15 0 C -15 -6 18 -5 22 0 C 18 5 -15 6 -15 0 Z" fill="#e53935"/>
-                        <polygon points="-4,-14 6,-1 2,1 -8,-10" fill="#d32f2f"/>
-                        <polygon points="-6,1 2,1 -2,12 -8,10" fill="#c62828"/>
-                        <polygon points="-14,0 -19,-10 -15,-10 -11,0" fill="#b71c1c"/>
+                    <!-- Vector Plane (Exact matching photo with 'X' tail & prop) -->
+                    <g id="planeG" class="plane-group" transform="translate(20, 185) rotate(-10)">
+                        <!-- Propeller -->
+                        <line x1="25" y1="-12" x2="25" y2="12" stroke="#e5283b" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="25" y1="-12" x2="25" y2="12" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+                        <!-- Body Fuselage -->
+                        <path d="M -22 2 C -18 -7 18 -6 25 0 C 18 6 -18 7 -22 2 Z" fill="#e5283b"/>
+                        <!-- Wings -->
+                        <polygon points="-6,-16 8,-2 3,2 -11,-12" fill="#d32f2f"/>
+                        <polygon points="-8,2 3,2 -2,14 -11,11" fill="#b71c1c"/>
+                        <!-- Tail Fin with X Logo -->
+                        <polygon points="-18,2 -25,-12 -20,-12 -14,2" fill="#d32f2f"/>
+                        <text x="-23" y="-3" font-size="7" font-weight="900" fill="#ffffff">X</text>
                     </g>
                 </svg>
 
@@ -264,7 +266,7 @@
                 </div>
             </div>
 
-            <!-- Dual Bet Modules -->
+            <!-- Dual Bet Modules (Cassa Style) -->
             <div class="betting-dock">
                 <div class="dock-module">
                     <div class="dock-mode-tabs"><span>Bet</span><span>Auto</span></div>
@@ -299,24 +301,10 @@
                 </div>
             </div>
 
-            <!-- Live Bets Count & Pot -->
-            <div class="live-pot-bar">
-                <div><b id="liveBetsCount" style="color:var(--niro-green);">128/136</b> Bets</div>
-                <div>Total: <b id="liveTotalPot" style="color:var(--niro-gold);">Br 15,062.14</b></div>
-            </div>
-            <div class="live-bets-table">
-                <div class="live-table-header">
-                    <span>User</span>
-                    <span>Bet</span>
-                    <span>X</span>
-                    <span>Win</span>
-                </div>
-                <div id="liveBetsList">
-                    <div class="live-bet-row"><span style="color:#90caf9;">2***9</span><span>143.00</span><span style="color:var(--niro-green);">1.35x</span><span>193.05</span></div>
-                    <div class="live-bet-row"><span style="color:#90caf9;">2***8</span><span>100.00</span><span style="color:var(--niro-green);">2.10x</span><span>210.00</span></div>
-                    <div class="live-bet-row"><span style="color:#90caf9;">2***1</span><span>500.00</span><span style="color:var(--niro-green);">-</span><span>-</span></div>
-                    <div class="live-bet-row"><span style="color:#90caf9;">2***4</span><span>250.00</span><span style="color:var(--niro-green);">1.85x</span><span>462.50</span></div>
-                </div>
+            <!-- Honest User Status Bar (No fake bots) -->
+            <div class="my-live-bar">
+                <span>Active Bets: <b id="myActiveBetsCount" style="color:var(--niro-green);">0</b></span>
+                <span>Current Stake: <b id="myTotalStake" style="color:var(--niro-gold);">0.00 ETB</b></span>
             </div>
         </div>
     </div>
@@ -349,7 +337,7 @@
                 </div>
             </div>
 
-            <!-- Deposit Order Creation -->
+            <!-- Deposit Workflow -->
             <div id="boxDepSection">
                 <div class="input-group">
                     <label>Deposit Amount (Minimum 100 ETB)</label>
@@ -363,9 +351,12 @@
                         <span>Time Remaining:</span>
                         <div class="timer-badge">⏱ <span id="timerCountdown">29:59</span></div>
                     </div>
-                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:6px;">Transfer to this account:</p>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">Transfer strictly to this account:</p>
                     <div class="copy-chip" onclick="copyDepositNumber()">
-                        <span id="targetTelebirrNumber">0974107425</span>
+                        <div>
+                            <span id="targetTelebirrNumber">0974107425</span>
+                            <small style="display:block; color:var(--text-secondary); font-size:0.7rem;">Name: Mulualem</small>
+                        </div>
                         <span style="font-size:0.75rem; color:var(--niro-green);">📋 Copy</span>
                     </div>
                     <div class="input-group" style="margin-top:12px;">
@@ -376,7 +367,7 @@
                 </div>
             </div>
 
-            <!-- Withdraw Box -->
+            <!-- Withdraw Workflow -->
             <div id="boxWithSection" style="display:none;">
                 <div class="input-group">
                     <label>Withdraw Amount (Minimum 100 ETB)</label>
@@ -386,82 +377,38 @@
                     <label>Recipient Telebirr / CBE Account Number</label>
                     <input type="text" id="inWithDest" class="form-input" placeholder="09xxxxxxxx">
                 </div>
-                <button class="btn-confirm-action" style="background:var(--niro-gold);" onclick="submitWithdrawAction()">Request Withdrawal</button>
+                <button class="btn-confirm-action" style="background:#ff9800;" onclick="submitWithdrawAction()">Request Withdrawal</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. ADMIN CONTROL PANEL -->
+    <!-- 4. ADMIN CONTROL PANEL (WITH WEB APPROVE/REJECT) -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <span style="font-size:1.15rem; font-weight:900; color:var(--niro-gold);">⚙️ Admin Master Panel</span>
+                <span style="font-size:1.15rem; font-weight:900; color:#ffb300;">⚙️ Admin Master Panel</span>
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
             </div>
 
-            <!-- Add / Remove Game -->
+            <!-- Pending Requests Queue -->
             <div class="admin-card">
-                <h4>🎮 Game Management</h4>
-                <div class="input-group">
-                    <label>Game Title</label>
-                    <input type="text" id="admNewGameName" class="form-input" placeholder="e.g. Fortune Wheel">
-                </div>
-                <div class="input-group">
-                    <label>Emoji / Poster Icon</label>
-                    <input type="text" id="admNewGameIcon" class="form-input" placeholder="e.g. 🎡">
-                </div>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn-adm" style="flex:1; background:var(--niro-green); color:#000;" onclick="adminAddGame()">Add Game</button>
-                    <button class="btn-adm danger" style="flex:1;" onclick="adminRemoveGame()">Remove Game</button>
+                <h4>📥 Pending Deposits & Withdrawals</h4>
+                <div id="adminQueueList">
+                    <div style="font-size:0.75rem; color:var(--text-secondary);">No pending user requests.</div>
                 </div>
             </div>
 
-            <!-- Scammer Control -->
+            <!-- Aviator Multiplier Lock -->
             <div class="admin-card">
-                <h4>
-                    <span>🛡️ Scammer Control</span>
-                    <button id="btnScamToggle" class="btn-adm" onclick="toggleScammerControl()">Status: ON</button>
-                </h4>
-                <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:8px;">Detect duplicate receipts and bot injection attempts.</p>
-                <div id="scammerLogList" style="font-size:0.72rem; color:#ef5350; max-height:80px; overflow-y:auto; background:#080a0e; padding:6px; border-radius:6px;">
-                    <div>No threats detected. System secure.</div>
-                </div>
-            </div>
-
-            <!-- Aviator Control -->
-            <div class="admin-card">
-                <h4>
-                    <span>✈️ Aviator Control</span>
-                    <button id="btnAviatorModeToggle" class="btn-adm" onclick="toggleAviatorManualMode()">Mode: AUTO</button>
-                </h4>
-                <div id="admManualControls" style="display:none; margin-top:8px;">
-                    <div style="display:flex; gap:8px; margin-bottom:8px;">
-                        <button class="btn-adm" style="flex:1; background:var(--niro-green); color:#000; padding:12px;" onclick="adminStartFlight()">START FLIGHT</button>
-                        <button class="btn-adm danger" style="flex:1; padding:12px;" onclick="adminBustFlight()">CRASH / STOP</button>
-                    </div>
-                </div>
-                <div class="input-group" style="margin-top:8px;">
+                <h4>✈️️ Aviator Control</h4>
+                <div class="input-group">
                     <label>Preset Next Round Multiplier</label>
                     <input type="number" step="0.1" id="admNextCrashInput" class="form-input" placeholder="e.g. 5.5">
-                    <button class="btn-adm" style="width:100%; margin-top:6px;" onclick="adminSetNextCrash()">Lock Multiplier</button>
+                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--niro-green); color:#000;" onclick="adminSetNextCrash()">Lock Multiplier</button>
                 </div>
             </div>
 
-            <!-- Broadcast Engine -->
-            <div class="admin-card">
-                <h4>📢 Broadcast Messages</h4>
-                <div class="input-group">
-                    <label>Broadcast Text</label>
-                    <textarea id="admBroadcastText" class="form-input" rows="2" placeholder="Announce bonuses to all players..."></textarea>
-                </div>
-                <div class="input-group">
-                    <label>Image URL (Optional)</label>
-                    <input type="text" id="admBroadcastImg" class="form-input" placeholder="https://...">
-                </div>
-                <button class="btn-confirm-action" onclick="adminSendBroadcast()">Send Broadcast</button>
-            </div>
-
-            <!-- Add Coupon Code -->
+            <!-- Coupon Generator -->
             <div class="admin-card">
                 <h4>🎟️ Add Coupon Code</h4>
                 <div class="input-group">
@@ -483,27 +430,37 @@
         </div>
     </div>
 
-    <!-- 5. PROFILE & REFERRAL VIEW -->
+    <!-- 5. PROFILE & TRANSACTIONS LOG -->
     <div id="viewProfile" class="view-pane">
-        <div style="padding:20px; text-align:center;">
-            <div style="width:70px; height:70px; border-radius:50%; background:#1c242e; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:2rem;">👤</div>
-            <h3>Niro VIP Player</h3>
-            <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:4px;">Status: VIP Level 1</p>
-            <div style="margin:20px 0; background:var(--bg-card); padding:16px; border-radius:10px; border:1px solid var(--border-dim); text-align:left;">
-                <p style="font-size:0.85rem; margin-bottom:8px;">🎁 <b>Refer Friends & Earn:</b></p>
+        <div style="padding:16px;">
+            <div style="text-align:center; margin-bottom:14px;">
+                <div style="width:64px; height:64px; border-radius:50%; background:#1c242e; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-size:1.8rem;">👤</div>
+                <h3>Niro VIP Player</h3>
+                <p style="color:var(--text-secondary); font-size:0.8rem;">Status: VIP Level 1</p>
+            </div>
+
+            <div class="admin-card">
+                <h4>📜 Transaction History (Permanent Log)</h4>
+                <div id="profileTxHistory" style="max-height:220px; overflow-y:auto;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary);">No completed transactions yet.</div>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <p style="font-size:0.85rem; margin-bottom:8px;">🎁 <b>Refer Friends:</b></p>
                 <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:10px;">Get 3 Free Spins for each active friend you invite!</p>
                 <div class="copy-chip" onclick="copyReferralLink()">
-                    <span id="refLinkText" style="font-size:0.75rem;">https://t.me/Niro_1Bet_Bot?start=ref106</span>
+                    <span id="refLinkText" style="font-size:0.72rem;">https://t.me/Niro_1Bet_Bot?start=ref106</span>
                     <span style="font-size:0.75rem; color:var(--niro-green);">📋 Copy</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- WIN MODAL POPUP -->
-    <div id="winModal" class="win-modal">
-        <h3>🎉 YOU WON!</h3>
-        <div class="win-amt" id="winModalAmt">+0.00 ETB</div>
+    <!-- TOAST POPUP NOTIFICATION -->
+    <div id="toastNotification" class="toast-notify">
+        <h3 id="toastTitle">🎉 CASH OUT!</h3>
+        <div class="toast-val" id="toastAmount">+0.00 ETB</div>
     </div>
 
     <!-- LUCKY SPIN MODAL -->
@@ -513,10 +470,10 @@
         <span onclick="closeSpinModal()" style="color:var(--text-secondary); margin-top:14px; cursor:pointer;">Close</span>
     </div>
 
-    <!-- APP BOTTOM DOCK -->
+    <!-- FOOTER DOCK -->
     <nav class="app-footer-dock">
         <button class="footer-item active" id="tabLobbyBtn" onclick="switchNavTab('lobby')">
-            <span class="f-icon">🏛️️</span>
+            <span class="f-icon">🏛️</span>
             <span>Casino</span>
         </button>
         <button class="footer-item" id="tabAviatorBtn" onclick="openAviatorGame()">
@@ -537,7 +494,7 @@
         const tg = window.Telegram?.WebApp;
         if (tg) tg.expand();
 
-        /* --- WEB AUDIO FX (AVIATOR AUDIO) --- */
+        /* --- AUDIO SYNTHESIS (REALISTIC SOUND FX) --- */
         let audioCtx;
         function getAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -642,14 +599,18 @@
         let userSpins = 2;
         let activeCoupons = {};
         let usedReceipts = new Set(["TX000000"]);
-        let scammerControlOn = true;
-        let aviatorManualMode = false;
         let adminPresetCrash = null;
+        let pendingRequests = [];
 
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
             document.getElementById('walletBalVal').innerText = balance.toFixed(2);
             document.getElementById('spinCountText').innerText = userSpins;
+
+            let activeCount = (activeBets[1].on ? 1 : 0) + (activeBets[2].on ? 1 : 0);
+            let totalStake = (activeBets[1].on ? activeBets[1].stake : 0) + (activeBets[2].on ? activeBets[2].stake : 0);
+            document.getElementById('myActiveBetsCount').innerText = activeCount;
+            document.getElementById('myTotalStake').innerText = totalStake.toFixed(2) + " ETB";
         }
 
         function switchNavTab(tabName, modeOpt) {
@@ -676,10 +637,10 @@
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
             document.getElementById('viewAviator').classList.add('active');
             document.getElementById('tabAviatorBtn').classList.add('active');
-            if (!isFlying && !isWaiting && !aviatorManualMode) startContinuousFlight();
+            if (!isFlying && !isWaiting) startContinuousFlight();
         }
 
-        /* --- FLIGHT ENGINE --- */
+        /* --- REALISTIC AVIATOR ENGINE --- */
         function startContinuousFlight() {
             isFlying = true;
             isWaiting = false;
@@ -703,7 +664,7 @@
                 let b = document.getElementById('btnDockAction' + i);
                 b.classList.remove('waiting');
                 if (activeBets[i].on && !activeBets[i].cashed) {
-                    b.innerHTML = `CASH OUT<br><span style="font-size:0.75rem;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ETB</span>`;
+                    b.innerHTML = `Cash out<br><span style="font-size:0.75rem;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ETB</span>`;
                     b.classList.add('cashing');
                 } else {
                     let cur = document.getElementById('stakeInput' + i).value;
@@ -721,29 +682,26 @@
 
                 updateEnginePitch(flightMultiplier);
 
-                let pot = 14000 + (flightMultiplier * 1150);
-                document.getElementById('liveTotalPot').innerText = `Br ${pot.toFixed(2)}`;
-
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
                         let win = (activeBets[i].stake * flightMultiplier).toFixed(2);
-                        document.getElementById('btnDockAction' + i).innerHTML = `CASH OUT<br><span style="font-size:0.75rem;">${win} ETB</span>`;
+                        document.getElementById('btnDockAction' + i).innerHTML = `Cash out<br><span style="font-size:0.75rem;">${win} ETB</span>`;
                     }
                 }
 
                 let progress = Math.min(elapsed / 7.2, 1);
                 let currentX = 20 + 290 * progress;
-                let currentY = 180 - 145 * Math.pow(progress, 1.4);
+                let currentY = 185 - 145 * Math.pow(progress, 1.4);
                 let controlX = 20 + (currentX - 20) * 0.45;
 
-                let dLine = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY}`;
-                let dFill = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY} L ${currentX} 180 Z`;
+                let dLine = `M 20 185 Q ${controlX} 185 ${currentX} ${currentY}`;
+                let dFill = `M 20 185 Q ${controlX} 185 ${currentX} ${currentY} L ${currentX} 185 Z`;
 
                 document.getElementById('curveLine').setAttribute('d', dLine);
                 document.getElementById('curveFill').setAttribute('d', dFill);
                 document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(-14)`);
 
-                if (!aviatorManualMode && flightMultiplier >= flightCrash) {
+                if (flightMultiplier >= flightCrash) {
                     triggerCrashState();
                 }
             }, 50);
@@ -765,8 +723,8 @@
 
             let rib = document.getElementById('historyChips');
             let chip = document.createElement('div');
-            chip.className = 'hist-chip' + (flightMultiplier >= 2.0 ? ' high' : '');
-            chip.innerText = flightMultiplier.toFixed(2) + 'x';
+            chip.className = 'hist-chip' + (flightCrash >= 2.0 ? ' high' : '');
+            chip.innerText = flightCrash.toFixed(2) + 'x';
             rib.insertBefore(chip, rib.firstChild);
 
             for (let i = 1; i <= 2; i++) {
@@ -778,15 +736,15 @@
                 b.innerHTML = `Waiting for next round...`;
             }
 
-            if (!aviatorManualMode) {
-                setTimeout(() => {
-                    if (document.getElementById('viewAviator').classList.contains('active')) {
-                        startContinuousFlight();
-                    } else {
-                        isWaiting = false;
-                    }
-                }, 2800);
-            }
+            syncBalanceViews();
+
+            setTimeout(() => {
+                if (document.getElementById('viewAviator').classList.contains('active')) {
+                    startContinuousFlight();
+                } else {
+                    isWaiting = false;
+                }
+            }, 2800);
         }
 
         function onBetTrigger(slot) {
@@ -796,7 +754,7 @@
             if (!activeBets[slot].on) {
                 if (isWaiting) return;
                 if (stake > balance || stake <= 0 || isNaN(stake)) {
-                    alert("Insufficient Balance!");
+                    showToastNotify("ALERT", "Insufficient Balance!");
                     return;
                 }
                 balance -= stake;
@@ -806,7 +764,7 @@
                 syncBalanceViews();
 
                 if (isFlying) {
-                    btn.innerHTML = `CASH OUT<br><span style="font-size:0.75rem;">${(stake * flightMultiplier).toFixed(2)} ETB</span>`;
+                    btn.innerHTML = `Cash out<br><span style="font-size:0.75rem;">${(stake * flightMultiplier).toFixed(2)} ETB</span>`;
                     btn.classList.add('cashing');
                 }
             } else {
@@ -821,16 +779,17 @@
                     btn.innerHTML = `Bet<br><span style="font-size:0.75rem;">${stake.toFixed(2)} ETB</span>`;
 
                     playCashoutSound();
-                    showWinBanner(win);
+                    showToastNotify("🎉 CASH OUT!", `+${win.toFixed(2)} ETB`);
                 }
             }
         }
 
-        function showWinBanner(amt) {
-            let m = document.getElementById('winModal');
-            document.getElementById('winModalAmt').innerText = `+${amt.toFixed(2)} ETB`;
+        function showToastNotify(title, amount) {
+            let m = document.getElementById('toastNotification');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastAmount').innerText = amount;
             m.style.display = 'block';
-            setTimeout(() => { m.style.display = 'none'; }, 2200);
+            setTimeout(() => { m.style.display = 'none'; }, 2400);
         }
 
         function adjustStake(slot, step) {
@@ -850,7 +809,7 @@
             }
         }
 
-        /* --- WALLET (DEPOSIT & WITHDRAW) --- */
+        /* --- WALLET WORKFLOW --- */
         function setWalletMode(m) {
             if (m === 'dep') {
                 document.getElementById('btnWDepToggle').classList.add('active');
@@ -879,7 +838,7 @@
         function createDepositOrder() {
             let amt = parseFloat(document.getElementById('inDepSum').value);
             if (!amt || amt < 100) {
-                alert("Minimum deposit amount is 100 ETB!");
+                showToastNotify("ALERT", "Minimum 100 ETB!");
                 return;
             }
             document.getElementById('depositOrderBox').style.display = 'block';
@@ -895,7 +854,7 @@
                 document.getElementById('timerCountdown').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                 if (remaining <= 0) {
                     clearInterval(orderCountdownInterval);
-                    alert("Order expired. Please create a new deposit order.");
+                    showToastNotify("ALERT", "Order Expired!");
                     document.getElementById('depositOrderBox').style.display = 'none';
                 }
                 remaining--;
@@ -903,9 +862,9 @@
         }
 
         function copyDepositNumber() {
-            let num = document.getElementById('targetTelebirrNumber').innerText;
+            let num = "0974107425";
             navigator.clipboard.writeText(num);
-            alert("Number copied: " + num);
+            showToastNotify("COPIED", "0974107425");
         }
 
         function submitDepositAction() {
@@ -913,21 +872,31 @@
             let receipt = document.getElementById('inDepReceipt').value.trim();
 
             if (!amt || amt < 100) {
-                alert("Minimum deposit is 100 ETB!");
+                showToastNotify("ALERT", "Minimum 100 ETB!");
                 return;
             }
             if (!receipt || receipt.length < 5) {
-                alert("Please enter a valid Transaction ID / SMS code!");
+                showToastNotify("ALERT", "Invalid SMS Receipt!");
                 return;
             }
-
-            if (scammerControlOn && usedReceipts.has(receipt)) {
-                logScammerThreat("Duplicate Receipt Attempt: " + receipt);
-                alert("Security Alert: Duplicate or already used receipt!");
+            if (usedReceipts.has(receipt)) {
+                showToastNotify("SECURITY ALERT", "Duplicate Receipt!");
                 return;
             }
 
             usedReceipts.add(receipt);
+
+            // Queue for Web Admin Approval
+            let reqId = "DEP_" + Date.now();
+            pendingRequests.push({
+                id: reqId,
+                type: "Deposit",
+                amount: amt,
+                account: "Mulualem (0974107425)",
+                receipt: receipt,
+                status: "Pending"
+            });
+            renderAdminQueue();
 
             if (tg) {
                 tg.sendData(JSON.stringify({
@@ -938,7 +907,7 @@
                 }));
             }
 
-            alert("Deposit submitted! Request sent to Admin Bot for verification.");
+            showToastNotify("SUBMITTED", "Pending Admin Approval");
             document.getElementById('depositOrderBox').style.display = 'none';
             document.getElementById('inDepSum').value = "";
             document.getElementById('inDepReceipt').value = "";
@@ -950,16 +919,27 @@
             let dest = document.getElementById('inWithDest').value.trim();
 
             if (!amt || amt < 100 || amt > balance) {
-                alert("Minimum withdraw is 100 ETB and cannot exceed balance!");
+                showToastNotify("ALERT", "Min 100 ETB / Check Bal");
                 return;
             }
             if (!dest || dest.length < 9) {
-                alert("Please enter a valid Phone or Account number!");
+                showToastNotify("ALERT", "Enter valid phone/account!");
                 return;
             }
 
             balance -= amt;
             syncBalanceViews();
+
+            let reqId = "WITH_" + Date.now();
+            pendingRequests.push({
+                id: reqId,
+                type: "Withdrawal",
+                amount: amt,
+                account: dest,
+                receipt: "N/A",
+                status: "Pending"
+            });
+            renderAdminQueue();
 
             if (tg) {
                 tg.sendData(JSON.stringify({
@@ -970,10 +950,101 @@
                 }));
             }
 
-            alert(`Withdrawal request of ${amt.toFixed(2)} ETB sent to Admin!`);
+            showToastNotify("REQUESTED", `Pending: -${amt.toFixed(2)} ETB`);
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
+        }
+
+        /* --- WEB ADMIN APPROVAL ENGINE --- */
+        function renderAdminQueue() {
+            let box = document.getElementById('adminQueueList');
+            if (pendingRequests.length === 0) {
+                box.innerHTML = `<div style="font-size:0.75rem; color:var(--text-secondary);">No pending user requests.</div>`;
+                return;
+            }
+            box.innerHTML = "";
+            pendingRequests.forEach((req, idx) => {
+                let div = document.createElement('div');
+                div.className = "req-item";
+                div.innerHTML = `
+                    <div><b>${req.type}</b>: <span style="color:var(--niro-gold);">${req.amount} ETB</span></div>
+                    <div>Account: <code>${req.account}</code></div>
+                    ${req.receipt !== "N/A" ? `<div>Receipt: <code>${req.receipt}</code></div>` : ''}
+                    <div class="req-action-row">
+                        <button class="btn-adm" style="flex:1; background:var(--niro-green); color:#000;" onclick="adminApproveReq(${idx})">✅ Approve</button>
+                        <button class="btn-adm danger" style="flex:1;" onclick="adminRejectReq(${idx})">❌ Reject</button>
+                    </div>
+                `;
+                box.appendChild(div);
+            });
+        }
+
+        function adminApproveReq(idx) {
+            let req = pendingRequests[idx];
+            if (req.type === "Deposit") {
+                balance += req.amount;
+                syncBalanceViews();
+            }
+            addProfileHistory(req.type, req.amount, "Completed");
+            pendingRequests.splice(idx, 1);
+            renderAdminQueue();
+            showToastNotify("APPROVED", `${req.type} ${req.amount} ETB`);
+        }
+
+        function adminRejectReq(idx) {
+            let req = pendingRequests[idx];
+            if (req.type === "Withdrawal") {
+                balance += req.amount; // Refund
+                syncBalanceViews();
+            }
+            addProfileHistory(req.type, req.amount, "Rejected");
+            pendingRequests.splice(idx, 1);
+            renderAdminQueue();
+            showToastNotify("REJECTED", `${req.type} Cancelled`);
+        }
+
+        function addProfileHistory(type, amt, status) {
+            let log = document.getElementById('profileTxHistory');
+            if (log.innerHTML.includes("No completed transactions")) log.innerHTML = "";
+            let item = document.createElement('div');
+            item.style.padding = "6px 0";
+            item.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
+            item.style.fontSize = "0.75rem";
+            item.style.display = "flex";
+            item.style.justifyContent = "space-between";
+            item.innerHTML = `
+                <div><b>${type}</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleDateString()}</small></div>
+                <div style="text-align:right;"><span style="color:${status === 'Completed' ? 'var(--niro-green)' : 'var(--niro-red)'}; font-weight:800;">${status === 'Completed' ? '+' : ''}${amt.toFixed(2)} ETB</span><br><small style="color:var(--text-secondary);">${status}</small></div>
+            `;
+            log.insertBefore(item, log.firstChild);
+        }
+
+        function adminSetNextCrash() {
+            let val = parseFloat(document.getElementById('admNextCrashInput').value);
+            if (val && val >= 1.0) {
+                adminPresetCrash = val;
+                showToastNotify("LOCKED", `Crash at ${val}x`);
+                document.getElementById('admNextCrashInput').value = "";
+            }
+        }
+
+        function adminCreateCoupon() {
+            let name = document.getElementById('admCouponName').value.trim().toUpperCase();
+            let amt = parseFloat(document.getElementById('admCouponAmt').value);
+            let mins = parseFloat(document.getElementById('admCouponDuration').value);
+
+            if (!name || !amt || !mins) { showToastNotify("ALERT", "Fill all fields!"); return; }
+
+            activeCoupons[name] = {
+                amount: amt,
+                expiresAt: Date.now() + (mins * 60 * 1000)
+            };
+
+            showToastNotify("COUPON READY", `${name} (${amt} ETB)`);
+            document.getElementById('admCouponName').value = "";
+            document.getElementById('admCouponAmt').value = "";
+            document.getElementById('admCouponDuration').value = "";
         }
 
         /* --- LUCKY SPIN (WEIGHTED PERCENTAGES) --- */
@@ -985,7 +1056,7 @@
         }
         function spinNow() {
             if (userSpins <= 0) {
-                alert("No spins remaining! Invite friends to get 3 more spins.");
+                showToastNotify("SPINS", "No spins left! Invite friends.");
                 return;
             }
             userSpins--;
@@ -1007,9 +1078,9 @@
                 if (winBonus > 0) {
                     balance += winBonus;
                     syncBalanceViews();
-                    alert(`🎉 Congratulations! You won ${winBonus} ETB from Lucky Spin!`);
+                    showToastNotify("🎉 SPIN WIN!", `+${winBonus} ETB`);
                 } else {
-                    alert("Better luck next time! (0 ETB)");
+                    showToastNotify("BETTER LUCK", "0 ETB");
                 }
                 closeSpinModal();
             }, 3600);
@@ -1018,12 +1089,11 @@
         function copyReferralLink() {
             let l = document.getElementById('refLinkText').innerText;
             navigator.clipboard.writeText(l);
-            alert("Referral link copied! Invite friends to earn 3 spins.");
+            showToastNotify("COPIED", "Referral Link");
             userSpins += 3;
             syncBalanceViews();
         }
 
-        /* --- COUPON ENGINE (TIME-LOCKED) --- */
         function openCouponModal() {
             let code = prompt("Enter Coupon Code:");
             if (!code) return;
@@ -1032,112 +1102,21 @@
             if (activeCoupons[code]) {
                 let cp = activeCoupons[code];
                 if (Date.now() > cp.expiresAt) {
-                    alert("This coupon has expired!");
+                    showToastNotify("EXPIRED", "Coupon timed out!");
                     delete activeCoupons[code];
                 } else {
                     balance += cp.amount;
                     syncBalanceViews();
-                    alert(`🎉 Coupon Applied! +${cp.amount} ETB added to balance!`);
+                    showToastNotify("🎉 BONUS APPLIED!", `+${cp.amount} ETB`);
                     delete activeCoupons[code];
                 }
             } else if (code === "NIRO2026") {
                 balance += 100;
                 syncBalanceViews();
-                alert("🎉 Welcome Bonus! +100 ETB added!");
+                showToastNotify("WELCOME BONUS", "+100 ETB");
             } else {
-                alert("Invalid or inactive coupon code!");
+                showToastNotify("INVALID", "Coupon inactive!");
             }
-        }
-
-        /* --- ADMIN PANEL ENGINE --- */
-        function adminAddGame() {
-            let title = document.getElementById('admNewGameName').value.trim();
-            let icon = document.getElementById('admNewGameIcon').value.trim() || '🎰';
-            if (!title) { alert("Please enter game title"); return; }
-
-            let cont = document.getElementById('gameCatalogContainer');
-            let item = document.createElement('div');
-            item.className = 'game-tile';
-            item.innerHTML = `<div class="game-poster">${icon}</div><div class="game-info-col"><h4>${title}</h4><p>Custom Added Game • Ready to play</p></div>`;
-            cont.appendChild(item);
-            alert(`Game "${title}" successfully added to Catalog!`);
-            document.getElementById('admNewGameName').value = "";
-        }
-
-        function adminRemoveGame() {
-            let cont = document.getElementById('gameCatalogContainer');
-            if (cont.children.length > 1) {
-                cont.removeChild(cont.lastElementChild);
-                alert("Last added game removed successfully!");
-            } else {
-                alert("Cannot remove the default Aviator game!");
-            }
-        }
-
-        function toggleScammerControl() {
-            scammerControlOn = !scammerControlOn;
-            let b = document.getElementById('btnScamToggle');
-            b.innerText = "Status: " + (scammerControlOn ? "ON" : "OFF");
-            b.style.background = scammerControlOn ? "var(--niro-green)" : "#b71c1c";
-        }
-
-        function logScammerThreat(msg) {
-            let box = document.getElementById('scammerLogList');
-            let row = document.createElement('div');
-            row.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
-            box.insertBefore(row, box.firstChild);
-        }
-
-        function toggleAviatorManualMode() {
-            aviatorManualMode = !aviatorManualMode;
-            let b = document.getElementById('btnAviatorModeToggle');
-            b.innerText = "Mode: " + (aviatorManualMode ? "MANUAL" : "AUTO");
-            document.getElementById('admManualControls').style.display = aviatorManualMode ? "block" : "none";
-        }
-
-        function adminStartFlight() {
-            if (!isFlying) startContinuousFlight();
-        }
-
-        function adminBustFlight() {
-            if (isFlying) triggerCrashState();
-        }
-
-        function adminSetNextCrash() {
-            let val = parseFloat(document.getElementById('admNextCrashInput').value);
-            if (val && val >= 1.0) {
-                adminPresetCrash = val;
-                alert(`Next round locked to crash at ${val}x!`);
-                document.getElementById('admNextCrashInput').value = "";
-            }
-        }
-
-        function adminSendBroadcast() {
-            let txt = document.getElementById('admBroadcastText').value.trim();
-            let img = document.getElementById('admBroadcastImg').value.trim();
-            if (!txt && !img) { alert("Please provide text or image URL!"); return; }
-
-            alert(`📢 Broadcast sent successfully!\nText: ${txt}\nImage: ${img || 'None'}`);
-            document.getElementById('admBroadcastText').value = "";
-            document.getElementById('admBroadcastImg').value = "";
-        }
-
-        function adminCreateCoupon() {
-            let name = document.getElementById('admCouponName').value.trim().toUpperCase();
-            let amt = parseFloat(document.getElementById('admCouponAmt').value);
-            let mins = parseFloat(document.getElementById('admCouponDuration').value);
-
-            if (!name || !amt || !mins) { alert("Please fill all coupon fields!"); return; }
-
-            activeCoupons[name] = {
-                amount: amt,
-                expiresAt: Date.now() + (mins * 60 * 1000)
-            };
-
-            alert(`Coupon "${name}" created!\nValue: ${amt} ETB\nExpires in: ${mins} minutes`);
-            document.getElementById('admCouponName').value = "";
-            document.getElementById('admCouponAmt').value = "";
-            document.getElementById('admCouponDuration').value = "";
         }
 
         startContinuousFlight();
