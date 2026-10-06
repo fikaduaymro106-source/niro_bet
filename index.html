@@ -42,21 +42,18 @@
         .hero-banner h2 span { color: var(--cassa-gold); font-size: 1.3rem; }
         .hero-banner p { font-size: 0.78rem; color: #a3cfbb; margin-top: 4px; }
 
-        .nav-chips-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 4px 10px 12px; }
-        .chip-box { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 10px 4px; text-align: center; cursor: pointer; position: relative; }
-        .chip-badge { position: absolute; top: -5px; right: 4px; background: var(--cassa-red-bright); font-size: 0.55rem; font-weight: 800; padding: 1px 4px; border-radius: 4px; }
-        .chip-icon { font-size: 1.4rem; margin-bottom: 3px; }
-        .chip-title { font-size: 0.7rem; font-weight: 700; color: #cbd5e1; }
+        .nav-chips-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 4px 10px 12px; }
+        .chip-box { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 10px 2px; text-align: center; cursor: pointer; position: relative; }
+        .chip-badge { position: absolute; top: -5px; right: 2px; background: var(--cassa-red-bright); font-size: 0.5rem; font-weight: 800; padding: 1px 3px; border-radius: 4px; }
+        .chip-icon { font-size: 1.3rem; margin-bottom: 2px; }
+        .chip-title { font-size: 0.65rem; font-weight: 700; color: #cbd5e1; }
 
         /* 4-CORNER SQUARE AVIATOR LOGO */
         .official-card { margin: 10px; background: #0c0f14; border: 1px solid #2a1118; border-radius: 14px; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
         .official-left { display: flex; align-items: center; gap: 12px; }
-        .aviator-square-logo { width: 50px; height: 50px; background: #1a080d; border: 1.5px solid #4a1520; border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .aviator-square-logo svg { width: 32px; height: 32px; }
-
-        /* DYNAMIC CUSTOM GAMES CATALOG */
-        .catalog-header { padding: 8px 12px 4px; font-size: 0.85rem; font-weight: 800; color: var(--text-secondary); }
-        .custom-games-list { display: flex; flex-direction: column; gap: 8px; padding: 0 10px 10px; }
+        .aviator-square-logo { width: 56px; height: 56px; background: radial-gradient(circle, #2a0b12 0%, #0d0407 100%); border: 1.5px solid #ff1744; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 0 10px rgba(255,23,68,0.3); }
+        .aviator-square-logo svg { width: 32px; height: 32px; transform: rotate(-10deg); }
+        .aviator-square-logo span { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 0.75rem; color: #ff1744; font-weight: 900; margin-top: -3px; }
 
         /* AVIATOR ARENA */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
@@ -139,6 +136,16 @@
         .pending-card { background: #261c0c; border: 1px solid var(--cassa-gold); border-radius: 10px; padding: 12px; margin-bottom: 12px; display: none; }
         .pending-card p { font-size: 0.8rem; color: #ffe082; }
 
+        /* 3-STEP PENDING VERIFICATION BAR MODAL */
+        .verify-progress-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; z-index: 6000; display: none; padding: 16px; }
+        .verify-card { background: #121720; border: 2px solid var(--cassa-gold); border-radius: 14px; padding: 20px; width: 100%; max-width: 330px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.9); }
+        .verify-step { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-secondary); }
+        .verify-step.active { color: var(--cassa-gold); font-weight: 800; }
+        .verify-step.done { color: var(--cassa-green); font-weight: 800; }
+        .verify-step.fail { color: var(--cassa-red-bright); font-weight: 800; }
+        .step-spinner { width: 16px; height: 16px; border: 2px solid var(--cassa-gold); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         /* SHAMO VIEW */
         .shamo-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
         .shamo-stat-banner { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; display: flex; justify-content: space-around; margin-bottom: 12px; }
@@ -162,11 +169,6 @@
         .wheel-wrapper { position: relative; width: 240px; height: 240px; margin: 0 auto 16px; }
         .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid #ffb300; z-index: 20; }
         .wheel-circle-svg { width: 100%; height: 100%; border-radius: 50%; border: 5px solid #ffb300; transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
-
-        /* CUSTOM EMBED MODAL FOR INJECTED GAMES */
-        .embed-modal { position: fixed; inset: 0; background: #000; z-index: 6000; display: none; flex-direction: column; }
-        .embed-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-surface); border-bottom: 1px solid var(--border-dim); }
-        .embed-body { flex: 1; width: 100%; height: 100%; overflow: auto; background: #000; }
 
         /* BOTTOM NAV BAR (CLEAN 4 BUTTONS) */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
@@ -203,7 +205,7 @@
             <div class="chip-box" onclick="openLuckySpin()">
                 <span class="chip-badge">NEW</span>
                 <div class="chip-icon">🎡</div>
-                <div class="chip-title">Lucky Spin (<span id="spinCountText">3</span>)</div>
+                <div class="chip-title">Spin (<span id="spinCountText">3</span>)</div>
             </div>
             <div class="chip-box" onclick="switchNavTab('shamo')">
                 <span class="chip-badge" style="background:#ff9800;">LIVE</span>
@@ -219,15 +221,21 @@
                 <div class="chip-icon">👑</div>
                 <div class="chip-title">VIP</div>
             </div>
+            <div class="chip-box" onclick="switchNavTab('admin')">
+                <span class="chip-badge" style="background:#ff9800;">ADM</span>
+                <div class="chip-icon">⚙️</div>
+                <div class="chip-title">Admin</div>
+            </div>
         </div>
 
-        <!-- Aviator Spribe with 4-Corner Square Logo -->
+        <!-- Aviator Spribe with EXACT 4-Corner Square Red Plane Logo -->
         <div class="official-card" onclick="openAviatorGame()">
             <div class="official-left">
                 <div class="aviator-square-logo">
                     <svg viewBox="0 0 24 24">
-                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#e5283b"/>
+                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#ff1744"/>
                     </svg>
+                    <span>Aviator</span>
                 </div>
                 <div>
                     <h4 style="font-size:1.05rem; font-weight:800;">Aviator Spribe</h4>
@@ -238,9 +246,9 @@
         </div>
 
         <!-- Custom Admin Added Games Section -->
-        <div class="catalog-header">🔥 All Games & Custom Betting</div>
-        <div class="custom-games-list" id="customGamesContainer">
-            <!-- Dynamically injected games will render here -->
+        <div id="customGamesCatalog" style="display:none; padding:10px 10px 0;">
+            <div style="font-size:0.85rem; font-weight:800; color:var(--text-secondary); margin-bottom:6px;">🔥 Custom Games & Betting</div>
+            <div id="customGamesContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
     </div>
 
@@ -372,7 +380,7 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (SMS VERIFICATION & PENDING STATUS) -->
+    <!-- 3. WALLET VIEW (WITH PENDING BAR & ANTI-FAKE SYSTEM) -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -380,7 +388,7 @@
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
             </div>
 
-            <!-- Pending Deposit Notification Box -->
+            <!-- Active Pending Order Banner -->
             <div id="pendingOrderBanner" class="pending-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <b>⏳ Pending Deposit Order</b>
@@ -452,7 +460,7 @@
                             <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Paste Full SMS / Transaction Confirmation:</label>
                             <textarea id="inDepFullSms" class="form-textarea" placeholder="Paste the entire confirmation SMS from Telebirr / CBE here..."></textarea>
                         </div>
-                        <button class="btn-action-main" onclick="verifyAndSubmitPayment()">Confirm & Submit</button>
+                        <button class="btn-action-main" onclick="startVerificationPipeline()">Confirm & Submit</button>
                     </div>
                 </div>
             </div>
@@ -469,6 +477,33 @@
                 </div>
                 <button class="btn-action-main" onclick="submitWithdrawAction()">Request Withdrawal</button>
             </div>
+        </div>
+    </div>
+
+    <!-- 3-STEP PENDING VERIFICATION PIPELINE MODAL -->
+    <div id="verifyPipelineModal" class="verify-progress-modal">
+        <div class="verify-card">
+            <h3 style="color:var(--cassa-gold); font-size:1rem; margin-bottom:14px; text-align:center;">🔍 Verifying Payment (Pending...)</h3>
+            
+            <div id="vStep1" class="verify-step active">
+                <div class="step-spinner" id="spin1" style="display:inline-block;"></div>
+                <span id="icon1" style="display:none;">⏳</span>
+                <span>1. Verifying Account & Recipient Name</span>
+            </div>
+
+            <div id="vStep2" class="verify-step">
+                <div class="step-spinner" id="spin2"></div>
+                <span id="icon2">⏳</span>
+                <span>2. Verifying Match with Selected Amount</span>
+            </div>
+
+            <div id="vStep3" class="verify-step">
+                <div class="step-spinner" id="spin3"></div>
+                <span id="icon3">⏳</span>
+                <span>3. Verifying Transaction ID (Not Duplicate)</span>
+            </div>
+
+            <div id="pipelineStatusMsg" style="font-size:0.75rem; color:#ffe082; text-align:center; margin-top:10px;">Please wait while the system checks your SMS...</div>
         </div>
     </div>
 
@@ -554,7 +589,7 @@
         </div>
     </div>
 
-    <!-- 8 & 9. ADMIN MASTER PANEL (WITH ALL CONTROLS & CODE INJECTOR) -->
+    <!-- 8 & 9. ADMIN MASTER PANEL -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -572,7 +607,7 @@
 
             <!-- Aviator Control -->
             <div class="admin-card">
-                <h4>✈️ Aviator Control</h4>
+                <h4>✈️ Aviator Multiplier Lock</h4>
                 <div style="margin-bottom:8px;">
                     <label style="font-size:0.75rem; color:var(--text-secondary);">Preset Next Round Crash (Multiplier)</label>
                     <input type="number" step="0.1" id="admNextCrashInput" class="form-input" placeholder="e.g. 5.5">
@@ -593,14 +628,13 @@
                 </div>
             </div>
 
-            <!-- 9. BETTING / GAME ADDING CODE INJECTOR PANEL -->
+            <!-- Code Injector Panel (Add Game / Betting) -->
             <div class="admin-card">
                 <h4>🎮 Add New Game / Custom Betting Code</h4>
-                <p style="font-size:0.72rem; color:var(--text-secondary); margin-bottom:8px;">ማንኛውንም አዲስ የጌም ወይም የቤቲንግ ኮድ (HTML, JS, iframe ወዘተ) እዚህ ያስገቡ፤ በቀጥታ በዋናው ሎቢ ላይ ይታያል።</p>
                 <div style="margin-bottom:8px;">
-                    <input type="text" id="admGameTitle" class="form-input" placeholder="Game Title (e.g. Fortune Wheel, Live Bet)" style="margin-bottom:6px;">
-                    <input type="text" id="admGameIcon" class="form-input" placeholder="Icon / Emoji (e.g. 🎯, 🎲, ⚽)" style="margin-bottom:6px;">
-                    <textarea id="admGameCode" class="form-textarea" placeholder="Paste full Game / Betting Code (HTML/JS/iframe) here..." style="height:100px; margin-bottom:6px;"></textarea>
+                    <input type="text" id="admGameTitle" class="form-input" placeholder="Game Title (e.g. Fortune Wheel, Sports Bet)" style="margin-bottom:6px;">
+                    <input type="text" id="admGameIcon" class="form-input" placeholder="Emoji / Icon (e.g. 🎯, 🎲, ⚽)" style="margin-bottom:6px;">
+                    <textarea id="admGameCode" class="form-textarea" placeholder="Paste full Game / Betting Code (HTML/JS/iframe) here..." style="height:90px; margin-bottom:6px;"></textarea>
                     <button class="btn-action-main" onclick="adminAddNewGame()">Add Game to Lobby</button>
                 </div>
             </div>
@@ -608,12 +642,12 @@
     </div>
 
     <!-- CUSTOM EMBED FULLSCREEN MODAL -->
-    <div id="embedModal" class="embed-modal">
-        <div class="embed-header">
+    <div id="embedModal" style="position:fixed; inset:0; background:#000; z-index:6000; display:none; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--bg-surface); border-bottom:1px solid var(--border-dim);">
             <span id="embedTitle" style="font-weight:800;">Custom Game</span>
             <span onclick="closeEmbedGame()" style="cursor:pointer; font-size:1.3rem;">✕</span>
         </div>
-        <div class="embed-body" id="embedContainer"></div>
+        <div style="flex:1; width:100%; height:100%; overflow:auto; background:#000;" id="embedContainer"></div>
     </div>
 
     <!-- STATUS POPUP -->
@@ -806,14 +840,7 @@
         let pendingDepositOrder = null;
         let pendingRequests = [];
         let adminPresetCrash = null;
-
-        let customGames = [
-            {
-                title: "Chicken Road 2",
-                icon: "🐔",
-                code: `<div style="padding:40px; text-align:center; color:#fff;"><h2>🐔 Chicken Road 2</h2><p style="margin-top:10px; color:#aaa;">Custom Game Loaded Successfully!</p></div>`
-            }
-        ];
+        let customGames = [];
 
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
@@ -1129,7 +1156,7 @@
             }
         }
 
-        /* ANTI-FAKE SMS VERIFICATION & PENDING ORDERS */
+        /* 3-STEP PENDING VERIFICATION PIPELINE */
         function setWalletMode(m) {
             document.getElementById('btnWDepToggle').classList.toggle('active', m === 'dep');
             document.getElementById('btnWWithToggle').classList.toggle('active', m === 'with');
@@ -1206,71 +1233,151 @@
             }, 1000);
         }
 
-        function verifyAndSubmitPayment() {
+        function startVerificationPipeline() {
             let expectedAmt = pendingDepositOrder ? pendingDepositOrder.amount : parseFloat(document.getElementById('inDepSum').value);
             let rawSms = document.getElementById('inDepFullSms').value.trim();
 
-            if (!rawSms || rawSms.length < 25) {
-                showStatusPopup(false, "FAKE PAYMENT DETECTED", "ትክክለኛ ያልሆነ ወይም ባዶ ደረሰኝ! ሙሉውን የቴሌብር/የባንክ SMS መልእክት ያስገቡ።");
+            if (!rawSms || rawSms.length < 20) {
+                showStatusPopup(false, "FAKE PAYMENT DETECTED", "ሙሉውን የቴሌብር ወይም የባንክ ደረሰኝ መልእክት (SMS) ያስገቡ!");
                 return;
             }
+
+            // Open 3-Step Verification Modal
+            let pModal = document.getElementById('verifyPipelineModal');
+            pModal.style.display = 'flex';
+
+            let s1 = document.getElementById('vStep1');
+            let s2 = document.getElementById('vStep2');
+            let s3 = document.getElementById('vStep3');
+            let sp1 = document.getElementById('spin1');
+            let sp2 = document.getElementById('spin2');
+            let sp3 = document.getElementById('spin3');
+            let ic1 = document.getElementById('icon1');
+            let ic2 = document.getElementById('icon2');
+            let ic3 = document.getElementById('icon3');
+            let msg = document.getElementById('pipelineStatusMsg');
+
+            // Reset UI
+            s1.className = "verify-step active"; sp1.style.display = "inline-block"; ic1.style.display = "none";
+            s2.className = "verify-step"; sp2.style.display = "none"; ic2.style.display = "inline-block"; ic2.innerText = "⏳";
+            s3.className = "verify-step"; sp3.style.display = "none"; ic3.style.display = "inline-block"; ic3.innerText = "⏳";
+            msg.innerText = "Step 1: Checking Account Number & Recipient Name...";
 
             let normalized = rawSms.toLowerCase();
-            let isValidDestination = false;
-            let foundTxId = null;
 
-            if (currentDepMethod === 'telebirr') {
-                if (normalized.includes("0974107425") || normalized.includes("mulualem") || normalized.includes("ሙሉዓለም")) {
-                    isValidDestination = true;
+            // STEP 1 CHECK: Phone/Account and Name
+            setTimeout(() => {
+                let isValidDest = false;
+                if (currentDepMethod === 'telebirr') {
+                    if (normalized.includes("0974107425") || normalized.includes("mulualem") || normalized.includes("ሙሉዓለም")) {
+                        isValidDest = true;
+                    }
+                } else {
+                    if (normalized.includes("1000762441326") || normalized.includes("muluken") || normalized.includes("ሙሉቀን")) {
+                        isValidDest = true;
+                    }
                 }
-            } else {
-                if (normalized.includes("1000762441326") || normalized.includes("muluken") || normalized.includes("ሙሉቀን")) {
-                    isValidDestination = true;
+
+                if (!isValidDest) {
+                    sp1.style.display = "none"; ic1.style.display = "inline-block"; ic1.innerText = "❌";
+                    s1.className = "verify-step fail";
+                    setTimeout(() => {
+                        pModal.style.display = "none";
+                        showStatusPopup(false, "FAKE PAYMENT DETECTED", "ስህተት፦ የተላከው ወደተሰጠው ቁጥር (0974107425 Mulualem / 1000762441326 Muluken) አይደለም!");
+                    }, 800);
+                    return;
                 }
-            }
 
-            if (!isValidDestination) {
-                showStatusPopup(false, "VERIFICATION FAILED", "የክፍያ መልእክቱ ወደተሰጠው አካውንት (0974107425 / 1000762441326) የተላከ አይደለም!");
-                return;
-            }
+                // Step 1 Passed
+                sp1.style.display = "none"; ic1.style.display = "inline-block"; ic1.innerText = "✅";
+                s1.className = "verify-step done";
 
-            let match = rawSms.match(/[A-Za-z0-9]{8,14}/);
-            if (match) {
-                foundTxId = match[0];
-            } else {
-                showStatusPopup(false, "INVALID RECEIPT", "በመልእክቱ ውስጥ ትክክለኛ የግብይት ቁጥር (Transaction ID) አልተገኘም!");
-                return;
-            }
+                // STEP 2: Amount Match Check
+                s2.className = "verify-step active"; sp2.style.display = "inline-block"; ic2.style.display = "none";
+                msg.innerText = "Step 2: Checking if Amount matches selected ETB...";
 
-            if (verifiedReceipts.has(foundTxId)) {
-                showStatusPopup(false, "DUPLICATE PAYMENT", "ይህ ደረሰኝ ቀደም ሲል ጥቅም ላይ ውሏል!");
-                return;
-            }
+                setTimeout(() => {
+                    let amtStr = expectedAmt.toString();
+                    let isAmountFound = normalized.includes(amtStr);
 
-            verifiedReceipts.add(foundTxId);
+                    if (!isAmountFound) {
+                        sp2.style.display = "none"; ic2.style.display = "inline-block"; ic2.innerText = "❌";
+                        s2.className = "verify-step fail";
+                        setTimeout(() => {
+                            pModal.style.display = "none";
+                            showStatusPopup(false, "AMOUNT MISMATCH", `ስህተት፦ በደረሰኙ ውስጥ የተላከው የ ${expectedAmt} ETB መጠን አልተገኘም!`);
+                        }, 800);
+                        return;
+                    }
 
-            // Add to Admin Queue for Approval
-            let reqId = "DEP_" + Date.now();
-            let accUsed = (currentDepMethod === 'telebirr') ? "0974107425 (Mulualem)" : "1000762441326 (Muluken Aemuro)";
-            pendingRequests.push({
-                id: reqId,
-                type: "Deposit",
-                method: currentDepMethod.toUpperCase(),
-                amount: expectedAmt,
-                account: accUsed,
-                receipt: foundTxId
-            });
-            renderAdminQueue();
+                    // Step 2 Passed
+                    sp2.style.display = "none"; ic2.style.display = "inline-block"; ic2.innerText = "✅";
+                    s2.className = "verify-step done";
 
-            pendingDepositOrder = null;
-            updatePendingBanner();
-            clearInterval(orderCountdownInterval);
+                    // STEP 3: Duplicate Tx ID Check
+                    s3.className = "verify-step active"; sp3.style.display = "inline-block"; ic3.style.display = "none";
+                    msg.innerText = "Step 3: Verifying Transaction ID originality...";
 
-            showStatusPopup(true, "SUBMITTED FOR APPROVAL", `የ ${expectedAmt} ETB ክፍያዎ ተረጋግጧል! አድሚኑ እንደተቀበለው ወደ ሒሳብዎ ይገባል።`);
-            document.getElementById('inDepFullSms').value = "";
-            document.getElementById('depStep1').style.display = 'block';
-            document.getElementById('depStep2').style.display = 'none';
-            switchNavTab('lobby');
+                    setTimeout(() => {
+                        let match = rawSms.match(/[A-Za-z0-9]{8,14}/);
+                        let txId = match ? match[0] : null;
+
+                        if (!txId) {
+                            sp3.style.display = "none"; ic3.style.display = "inline-block"; ic3.innerText = "❌";
+                            s3.className = "verify-step fail";
+                            setTimeout(() => {
+                                pModal.style.display = "none";
+                                showStatusPopup(false, "INVALID RECEIPT", "ስህተት፦ በመልእክቱ ውስጥ ትክክለኛ የግብይት ቁጥር (Tx ID) አልተገኘም!");
+                            }, 800);
+                            return;
+                        }
+
+                        if (verifiedReceipts.has(txId)) {
+                            sp3.style.display = "none"; ic3.style.display = "inline-block"; ic3.innerText = "❌";
+                            s3.className = "verify-step fail";
+                            setTimeout(() => {
+                                pModal.style.display = "none";
+                                showStatusPopup(false, "DUPLICATE PAYMENT", "ስህተት፦ ይህ ደረሰኝ ከዚህ በፊት ጥቅም ላይ ውሏል!");
+                            }, 800);
+                            return;
+                        }
+
+                        // ALL 3 STEPS PASSED!
+                        sp3.style.display = "none"; ic3.style.display = "inline-block"; ic3.innerText = "✅";
+                        s3.className = "verify-step done";
+                        msg.innerText = "All checks passed! Adding balance...";
+
+                        verifiedReceipts.add(txId);
+                        balance += expectedAmt;
+                        syncBalanceViews();
+
+                        let txLog = document.getElementById('profileTxList');
+                        let item = document.createElement('div');
+                        item.style.display = 'flex';
+                        item.style.justifyContent = 'space-between';
+                        item.style.padding = '8px 0';
+                        item.innerHTML = `
+                            <div><b>Deposit (${currentDepMethod.toUpperCase()})</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleTimeString()}</small></div>
+                            <div style="color:var(--cassa-green); font-weight:900;">+${expectedAmt.toFixed(2)} ETB<br><small>COMPLETED</small></div>
+                        `;
+                        txLog.insertBefore(item, txLog.firstChild);
+
+                        pendingDepositOrder = null;
+                        updatePendingBanner();
+                        clearInterval(orderCountdownInterval);
+
+                        setTimeout(() => {
+                            pModal.style.display = "none";
+                            showStatusPopup(true, "PAYMENT SUCCESSFUL", `የ ${expectedAmt} ETB ክፍያዎ በ 3ቱ ደረጃዎች ተረጋግጦ በቀጥታ ወደ ሒሳብዎ ገብቷል!`);
+                            document.getElementById('inDepFullSms').value = "";
+                            document.getElementById('depStep1').style.display = 'block';
+                            document.getElementById('depStep2').style.display = 'none';
+                            switchNavTab('lobby');
+                        }, 700);
+
+                    }, 900);
+                }, 900);
+            }, 900);
         }
 
         function submitWithdrawAction() {
@@ -1319,7 +1426,7 @@
             switchNavTab('lobby');
         }
 
-        /* ADMIN CONTROL ENGINE */
+        /* ADMIN FUNCTIONALITY */
         function renderAdminQueue() {
             let box = document.getElementById('adminQueueList');
             if (pendingRequests.length === 0) {
@@ -1333,7 +1440,6 @@
                 div.innerHTML = `
                     <div><b>${req.type} (${req.method})</b>: <span style="color:var(--cassa-gold); font-weight:800;">${req.amount} ETB</span></div>
                     <div>Account: <code>${req.account}</code></div>
-                    ${req.receipt !== "N/A" ? `<div>Tx ID: <code>${req.receipt}</code></div>` : ''}
                     <div style="display:flex; gap:8px; margin-top:8px;">
                         <button class="btn-adm" style="flex:1; background:var(--cassa-green); color:#000;" onclick="adminApproveReq(${idx})">✅ Approve</button>
                         <button class="btn-adm danger" style="flex:1;" onclick="adminRejectReq(${idx})">❌ Reject</button>
@@ -1349,10 +1455,9 @@
                 balance += req.amount;
                 syncBalanceViews();
             }
-            addProfileHistory(req.type, req.amount, "Completed");
             pendingRequests.splice(idx, 1);
             renderAdminQueue();
-            showStatusPopup(true, "APPROVED", `${req.type} of ${req.amount} ETB approved!`);
+            showStatusPopup(true, "APPROVED", `${req.type} approved!`);
         }
 
         function adminRejectReq(idx) {
@@ -1361,23 +1466,9 @@
                 balance += req.amount;
                 syncBalanceViews();
             }
-            addProfileHistory(req.type, req.amount, "Rejected");
             pendingRequests.splice(idx, 1);
             renderAdminQueue();
             showStatusPopup(false, "REJECTED", `${req.type} declined.`);
-        }
-
-        function addProfileHistory(type, amt, status) {
-            let log = document.getElementById('profileTxList');
-            let item = document.createElement('div');
-            item.style.display = 'flex';
-            item.style.justifyContent = 'space-between';
-            item.style.padding = '8px 0';
-            item.innerHTML = `
-                <div><b>${type}</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleTimeString()}</small></div>
-                <div style="text-align:right;"><span style="color:${status === 'Completed' ? 'var(--cassa-green)' : 'var(--cassa-red-bright)'}; font-weight:800;">${status === 'Completed' ? '+' : '-'}${amt.toFixed(2)} ETB</span><br><small style="color:var(--text-secondary);">${status}</small></div>
-            `;
-            log.insertBefore(item, log.firstChild);
         }
 
         function adminSetNextCrash() {
@@ -1403,9 +1494,35 @@
             document.getElementById('admCouponDuration').value = "";
         }
 
-        /* 9. CODE INJECTOR & DYNAMIC GAMES */
+        /* CUSTOM GAME CODE INJECTOR */
+        function adminAddNewGame() {
+            let title = document.getElementById('admGameTitle').value.trim();
+            let icon = document.getElementById('admGameIcon').value.trim() || "🎮";
+            let code = document.getElementById('admGameCode').value.trim();
+
+            if (!title || !code) {
+                showStatusPopup(false, "ERROR", "Title and Code are required!");
+                return;
+            }
+
+            customGames.push({ title: title, icon: icon, code: code });
+            renderCustomGames();
+            showStatusPopup(true, "GAME ADDED", `"${title}" has been added to the Casino lobby!`);
+
+            document.getElementById('admGameTitle').value = "";
+            document.getElementById('admGameIcon').value = "";
+            document.getElementById('admGameCode').value = "";
+            switchNavTab('lobby');
+        }
+
         function renderCustomGames() {
+            let catalog = document.getElementById('customGamesCatalog');
             let container = document.getElementById('customGamesContainer');
+            if (customGames.length === 0) {
+                catalog.style.display = 'none';
+                return;
+            }
+            catalog.style.display = 'block';
             container.innerHTML = "";
             customGames.forEach((g, idx) => {
                 let div = document.createElement('div');
@@ -1425,26 +1542,6 @@
                 `;
                 container.appendChild(div);
             });
-        }
-
-        function adminAddNewGame() {
-            let title = document.getElementById('admGameTitle').value.trim();
-            let icon = document.getElementById('admGameIcon').value.trim() || "🎮";
-            let code = document.getElementById('admGameCode').value.trim();
-
-            if (!title || !code) {
-                showStatusPopup(false, "ERROR", "Title and Code are required!");
-                return;
-            }
-
-            customGames.push({ title: title, icon: icon, code: code });
-            renderCustomGames();
-            showStatusPopup(true, "GAME ADDED", `"${title}" has been added to the Casino lobby!`);
-
-            document.getElementById('admGameTitle').value = "";
-            document.getElementById('admGameIcon').value = "";
-            document.getElementById('admGameCode').value = "";
-            switchNavTab('lobby');
         }
 
         function openEmbedGame(idx) {
