@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Niro Bet - Official Cassa Style</title>
+    <title>Niro Games - Casino & Aviator</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --bg-base: #06080b;
-            --bg-surface: #0e1218;
-            --bg-card: #151a22;
-            --bg-elevated: #1e2430;
-            --cassa-green: #00c853;
+            --bg-base: #05070a;
+            --bg-surface: #0c1017;
+            --bg-card: #131923;
+            --bg-elevated: #1c2432;
+            --niro-green: #00e676;
+            --niro-green-glow: rgba(0, 230, 118, 0.45);
             --cassa-red: #d32f2f;
             --cassa-red-bright: #e5283b;
             --cassa-gold: #ffb300;
             --text-primary: #ffffff;
             --text-secondary: #94a3b8;
-            --border-dim: #222b38;
+            --border-dim: #202a38;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -26,20 +27,20 @@
         /* HEADER */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-surface); border-bottom: 1px solid var(--border-dim); position: sticky; top: 0; z-index: 1000; }
         .brand-cluster { display: flex; align-items: center; gap: 6px; cursor: pointer; }
-        .brand-title { font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
-        .brand-badge { background: var(--cassa-green); color: #000; font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+        .brand-title { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.5px; color: #fff; text-shadow: 0 0 10px var(--niro-green-glow); }
+        .brand-badge { background: var(--niro-green); color: #000; font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
         .wallet-cluster { display: flex; align-items: center; gap: 8px; }
         .balance-pill { display: flex; align-items: center; gap: 6px; background: var(--bg-card); border: 1px solid var(--border-dim); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; }
         .curr-sign { background: #00bcd4; color: #fff; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.65rem; }
-        .btn-deposit-header { background: var(--cassa-green); color: #000; border: none; font-weight: 800; font-size: 0.85rem; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
+        .btn-deposit-header { background: var(--niro-green); color: #000; border: none; font-weight: 800; font-size: 0.85rem; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
 
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* LOBBY */
-        .hero-banner { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 90% 40%, #155724 0%, #061f0d 100%); border: 1px solid #1e7e34; padding: 16px; position: relative; overflow: hidden; }
-        .hero-banner h2 { font-size: 1.2rem; font-weight: 900; line-height: 1.25; }
-        .hero-banner h2 span { color: var(--cassa-gold); font-size: 1.3rem; }
+        /* 1. LOBBY HERO BANNER (NIRO GAMES) */
+        .hero-banner { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 90% 30%, #0d381e 0%, #06130b 100%); border: 1.5px solid #00e676; padding: 16px; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,230,118,0.2); }
+        .hero-banner h2 { font-size: 1.25rem; font-weight: 900; line-height: 1.25; }
+        .hero-banner h2 span { color: var(--cassa-gold); font-size: 1.35rem; text-shadow: 0 0 12px rgba(255,179,0,0.5); }
         .hero-banner p { font-size: 0.78rem; color: #a3cfbb; margin-top: 4px; }
 
         .nav-chips-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 4px 10px 12px; }
@@ -48,46 +49,47 @@
         .chip-icon { font-size: 1.3rem; margin-bottom: 2px; }
         .chip-title { font-size: 0.65rem; font-weight: 700; color: #cbd5e1; }
 
-        /* 4-CORNER SQUARE AVIATOR LOGO */
-        .official-card { margin: 10px; background: #0c0f14; border: 1px solid #2a1118; border-radius: 14px; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
-        .official-left { display: flex; align-items: center; gap: 12px; }
-        .aviator-square-logo { width: 56px; height: 56px; background: radial-gradient(circle, #2a0b12 0%, #0d0407 100%); border: 1.5px solid #ff1744; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 0 10px rgba(255,23,68,0.3); }
-        .aviator-square-logo svg { width: 32px; height: 32px; transform: rotate(-10deg); }
-        .aviator-square-logo span { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 0.75rem; color: #ff1744; font-weight: 900; margin-top: -3px; }
+        /* LARGE & BEAUTIFUL 4-CORNER AVIATOR CARD */
+        .official-card { margin: 10px; background: radial-gradient(circle at 80% 50%, #15241b 0%, #0c1218 100%); border: 1.5px solid rgba(0,230,118,0.35); border-radius: 16px; padding: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+        .official-left { display: flex; align-items: center; gap: 14px; }
+        .aviator-square-logo { width: 68px; height: 68px; background: radial-gradient(circle, #10331e 0%, #06130b 100%); border: 2px solid var(--niro-green); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 0 16px var(--niro-green-glow); }
+        .aviator-square-logo svg { width: 38px; height: 38px; transform: rotate(-10deg); filter: drop-shadow(0 0 4px #00e676); }
+        .aviator-square-logo span { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 0.85rem; color: #fff; font-weight: 900; margin-top: -2px; }
 
-        /* AVIATOR ARENA */
+        /* 2. AVIATOR CASINO NIGHT ARENA */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 6px; }
-        .aviator-brand-text { display: flex; align-items: center; gap: 6px; font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-style: italic; font-weight: 900; color: var(--cassa-red-bright); }
+        .aviator-brand-text { display: flex; align-items: center; gap: 6px; font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.8rem; font-style: italic; font-weight: 900; color: var(--niro-green); text-shadow: 0 0 10px var(--niro-green-glow); }
         
         .aviator-history-ribbon { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
         .aviator-history-ribbon::-webkit-scrollbar { display: none; }
-        .hist-chip { background: #12151b; border: 1px solid var(--border-dim); padding: 2px 7px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; color: #3f51b5; white-space: nowrap; }
-        .hist-chip.high { color: #9c27b0; border-color: rgba(156,39,176,0.4); }
+        .hist-chip { background: #121722; border: 1px solid var(--border-dim); padding: 2px 7px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; color: #3f51b5; white-space: nowrap; }
+        .hist-chip.high { color: #00e676; border-color: rgba(0,230,118,0.4); }
 
-        .radar-box { position: relative; width: 100%; height: 165px; background: radial-gradient(circle at 85% 50%, #290813 0%, #09090d 80%); border: 1px solid #331520; border-radius: 10px; overflow: hidden; }
-        .sunburst-bg { position: absolute; inset: -40px; background: repeating-conic-gradient(from 0deg, rgba(229,40,59,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 55s linear infinite; pointer-events: none; }
+        /* CASINO NIGHT RADAR SCREEN */
+        .radar-box { position: relative; width: 100%; height: 175px; background: radial-gradient(circle at 80% 50%, #092415 0%, #04090c 85%); border: 1.5px solid rgba(0,230,118,0.4); border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 25px rgba(0,230,118,0.15), 0 0 15px rgba(0,0,0,0.8); }
+        .sunburst-bg { position: absolute; inset: -50px; background: repeating-conic-gradient(from 0deg, rgba(0,230,118,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 55s linear infinite; pointer-events: none; }
         @keyframes rotateSunburst { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .radar-dots-axis { position: absolute; bottom: 10px; left: 0; right: 0; height: 6px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
-        .radar-dot { width: 3.5px; height: 3.5px; background: rgba(255,255,255,0.22); border-radius: 50%; flex-shrink: 0; }
+        .radar-dot { width: 3.5px; height: 3.5px; background: rgba(0,230,118,0.35); border-radius: 50%; flex-shrink: 0; }
         @keyframes slideDots { from { transform: translateX(0); } to { transform: translateX(-17.5px); } }
 
         .stage-svg { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
         .flight-curve-fill { fill: url(#curveGrad); }
-        .flight-curve-line { fill: none; stroke: var(--cassa-red-bright); stroke-width: 3.5; stroke-linecap: round; }
+        .flight-curve-line { fill: none; stroke: var(--niro-green); stroke-width: 4; stroke-linecap: round; filter: drop-shadow(0 0 6px #00e676); }
         .plane-group { transition: transform 0.05s linear; }
 
         .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
-        .multiplier-counter { font-size: 3.2rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.95); }
-        .multiplier-bust { font-size: 1.2rem; font-weight: 900; color: var(--cassa-red-bright); margin-top: 2px; display: none; }
+        .multiplier-counter { font-size: 3.3rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 18px rgba(0,0,0,0.95); }
+        .multiplier-bust { font-size: 1.25rem; font-weight: 900; color: var(--cassa-red-bright); margin-top: 2px; display: none; }
 
         .waiting-bar-container { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: rgba(255,255,255,0.1); display: none; }
-        .waiting-bar-progress { height: 100%; width: 100%; background: var(--cassa-red-bright); transition: width 0.05s linear; }
+        .waiting-bar-progress { height: 100%; width: 100%; background: var(--niro-green); transition: width 0.05s linear; }
 
-        .cashout-banner { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); background: #132418; border: 1.5px solid var(--cassa-green); border-radius: 8px; padding: 4px 12px; text-align: center; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.8); display: none; white-space: nowrap; }
+        .cashout-banner { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); background: #132418; border: 1.5px solid var(--niro-green); border-radius: 8px; padding: 4px 14px; text-align: center; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.8); display: none; white-space: nowrap; }
         .cashout-banner span { font-size: 0.72rem; color: #fff; font-weight: 700; }
-        .cashout-banner .cashout-num { font-size: 0.85rem; font-weight: 900; color: var(--cassa-green); margin-left: 4px; }
+        .cashout-banner .cashout-num { font-size: 0.85rem; font-weight: 900; color: var(--niro-green); margin-left: 4px; }
 
         /* Dual Vertical Bet Modules */
         .betting-dock-vertical { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
@@ -107,7 +109,7 @@
         .auto-cash-row { display: none; margin-top: 6px; font-size: 0.72rem; color: var(--text-secondary); align-items: center; justify-content: space-between; background: #0c0f13; padding: 4px 8px; border-radius: 4px; }
         .auto-cash-row input { width: 55px; background: #000; border: 1px solid var(--border-dim); color: #fff; text-align: center; font-weight: 800; border-radius: 3px; font-size: 0.8rem; }
 
-        .btn-bet-trigger { width: 100%; height: 100%; min-height: 52px; border-radius: 10px; border: none; font-size: 1.1rem; font-weight: 900; background: var(--cassa-green); color: #fff; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .btn-bet-trigger { width: 100%; height: 100%; min-height: 52px; border-radius: 10px; border: none; font-size: 1.1rem; font-weight: 900; background: var(--niro-green); color: #000; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .btn-bet-trigger.cashing { background: #ff9800; color: #000; }
         .btn-bet-trigger.cancel-state { background: var(--cassa-red) !important; color: #fff !important; }
         .btn-bet-trigger.waiting-state { background: var(--cassa-red) !important; color: #fff !important; cursor: not-allowed; font-size: 0.85rem; }
@@ -121,27 +123,27 @@
 
         .method-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
         .method-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; padding: 12px 8px; text-align: center; cursor: pointer; }
-        .method-card.selected { border-color: var(--cassa-green); background: #0c2014; }
+        .method-card.selected { border-color: var(--niro-green); background: #0c2014; }
 
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; outline: none; }
-        .form-input:focus { border-color: var(--cassa-green); }
+        .form-input:focus { border-color: var(--niro-green); }
         .form-textarea { width: 100%; padding: 10px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.82rem; height: 80px; resize: none; outline: none; }
-        .form-textarea:focus { border-color: var(--cassa-green); }
+        .form-textarea:focus { border-color: var(--niro-green); }
 
         .payment-info-box { background: #0c1017; border: 1px solid var(--border-dim); border-radius: 10px; padding: 14px; margin-top: 10px; }
         .copy-row { background: #17202c; border: 1px solid var(--border-dim); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; margin: 6px 0 10px; cursor: pointer; }
-        .btn-action-main { width: 100%; padding: 14px; background: var(--cassa-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
+        .btn-action-main { width: 100%; padding: 14px; background: var(--niro-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
 
         /* PENDING ORDERS BOX */
         .pending-card { background: #261c0c; border: 1px solid var(--cassa-gold); border-radius: 10px; padding: 12px; margin-bottom: 12px; display: none; }
         .pending-card p { font-size: 0.8rem; color: #ffe082; }
 
-        /* 3-STEP PENDING VERIFICATION BAR MODAL */
+        /* 3-STEP PENDING VERIFICATION PIPELINE MODAL */
         .verify-progress-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; z-index: 6000; display: none; padding: 16px; }
         .verify-card { background: #121720; border: 2px solid var(--cassa-gold); border-radius: 14px; padding: 20px; width: 100%; max-width: 330px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.9); }
         .verify-step { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-secondary); }
         .verify-step.active { color: var(--cassa-gold); font-weight: 800; }
-        .verify-step.done { color: var(--cassa-green); font-weight: 800; }
+        .verify-step.done { color: var(--niro-green); font-weight: 800; }
         .verify-step.fail { color: var(--cassa-red-bright); font-weight: 800; }
         .step-spinner { width: 16px; height: 16px; border: 2px solid var(--cassa-gold); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -151,7 +153,7 @@
         .shamo-stat-banner { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; display: flex; justify-content: space-around; margin-bottom: 12px; }
         .shamo-boxes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
         .shamo-box-item { background: #121824; border: 1px solid #233148; border-radius: 10px; height: 70px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; }
-        .shamo-box-item.opened { background: #0c2014; border-color: var(--cassa-green); font-size: 0.95rem; font-weight: 900; color: var(--cassa-green); }
+        .shamo-box-item.opened { background: #0c2014; border-color: var(--niro-green); font-size: 0.95rem; font-weight: 900; color: var(--niro-green); }
 
         /* ADMIN PANEL VIEW */
         .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
@@ -173,7 +175,7 @@
         /* BOTTOM NAV BAR (CLEAN 4 BUTTONS) */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
-        .footer-item.active { color: var(--cassa-green); }
+        .footer-item.active { color: var(--niro-green); }
         .footer-item .f-icon { font-size: 1.3rem; }
     </style>
 </head>
@@ -182,8 +184,8 @@
     <!-- TOP HEADER -->
     <header class="app-header">
         <div class="brand-cluster" onclick="switchNavTab('lobby')">
-            <span class="brand-title">Cassa</span>
-            <span class="brand-badge">BET</span>
+            <span class="brand-title">NIRO</span>
+            <span class="brand-badge">GAMES</span>
         </div>
         <div class="wallet-cluster">
             <div class="balance-pill">
@@ -197,8 +199,8 @@
     <!-- 1. CASINO LOBBY -->
     <div id="viewLobby" class="view-pane active">
         <div class="hero-banner">
-            <h2>15,000,000 ብር<br><span>የበዓል ስጦታ! 🎰</span></h2>
-            <p>በቴሌብር እና በኢትዮጵያ ንግድ ባንክ ፈጣን ዲፖዚት ያድርጉ።</p>
+            <h2>እንኳን ደህና መጡ ወደ NIRO GAMES! 🎰<br><span>ጓደኛዎን ይጋብዙ፣ ነፃ ስፒን ይሸለሙ!</span></h2>
+            <p>በቴሌብር እና በኢትዮጵያ ንግድ ባንክ ፈጣን ዲፖዚትና ክፍያ።</p>
         </div>
 
         <div class="nav-chips-grid">
@@ -228,31 +230,26 @@
             </div>
         </div>
 
-        <!-- Aviator Spribe with EXACT 4-Corner Square Red Plane Logo -->
+        <!-- LARGE & ATTRACTIVE 4-CORNER AVIATOR CARD -->
         <div class="official-card" onclick="openAviatorGame()">
             <div class="official-left">
                 <div class="aviator-square-logo">
+                    <!-- Emerald Green Jet Vector -->
                     <svg viewBox="0 0 24 24">
-                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#ff1744"/>
+                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#00e676"/>
                     </svg>
                     <span>Aviator</span>
                 </div>
                 <div>
-                    <h4 style="font-size:1.05rem; font-weight:800;">Aviator Spribe</h4>
-                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Real Crash Sound • Official Engine</p>
+                    <h4 style="font-size:1.15rem; font-weight:900; color:#fff;">Aviator Emerald</h4>
+                    <p style="font-size:0.75rem; color:#a3cfbb; margin-top:2px;">Casino Night Glow • Wave Flight</p>
                 </div>
             </div>
-            <div style="font-size:1.3rem; color:var(--cassa-green);">▶</div>
-        </div>
-
-        <!-- Custom Admin Added Games Section -->
-        <div id="customGamesCatalog" style="display:none; padding:10px 10px 0;">
-            <div style="font-size:0.85rem; font-weight:800; color:var(--text-secondary); margin-bottom:6px;">🔥 Custom Games & Betting</div>
-            <div id="customGamesContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
+            <div style="font-size:1.4rem; color:var(--niro-green); font-weight:900;">▶</div>
         </div>
     </div>
 
-    <!-- 2. AVIATOR ARENA (EXACT CASSA DESIGN & SOUND) -->
+    <!-- 2. AVIATOR CASINO NIGHT ARENA -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-top-nav">
@@ -283,25 +280,29 @@
                     <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
                 </div>
 
-                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 165" preserveAspectRatio="none">
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 175" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#e5283b" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="#e5283b" stop-opacity="0.0"/>
+                            <stop offset="0%" stop-color="#00e676" stop-opacity="0.55"/>
+                            <stop offset="100%" stop-color="#00e676" stop-opacity="0.0"/>
                         </linearGradient>
                     </defs>
 
-                    <path id="curveFill" class="flight-curve-fill" d="M 20 150 Q 20 150 20 150 L 20 150 Z" />
-                    <path id="curveLine" class="flight-curve-line" d="M 20 150 Q 20 150 20 150" />
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 160 Q 20 160 20 160 L 20 160 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 160 Q 20 160 20 160" />
 
-                    <!-- Vector Plane (Exact matching red Spribe with spinning blade & X) -->
-                    <g id="planeG" class="plane-group" transform="translate(20, 150) rotate(-10)">
-                        <line x1="26" y1="-14" x2="26" y2="14" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
-                        <path d="M -22 2 C -18 -8 18 -6 25 0 C 18 6 -18 8 -22 2 Z" fill="#e5283b"/>
-                        <polygon points="-6,-16 8,-2 3,2 -11,-12" fill="#d32f2f"/>
-                        <polygon points="-8,2 3,2 -2,14 -11,11" fill="#b71c1c"/>
-                        <polygon points="-18,2 -25,-12 -20,-12 -14,2" fill="#d32f2f"/>
-                        <text x="-23" y="-3" font-size="7" font-weight="900" fill="#ffffff">X</text>
+                    <!-- Beautiful Emerald Green Jet (With Spinning Blade & Tail Fin) -->
+                    <g id="planeG" class="plane-group" transform="translate(20, 160) rotate(-10)">
+                        <!-- Spinning White Propeller Blade -->
+                        <line x1="28" y1="-15" x2="28" y2="15" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity="0.95"/>
+                        <!-- Emerald Body -->
+                        <path d="M -24 3 C -20 -9 20 -7 27 0 C 20 7 -20 9 -24 3 Z" fill="#00e676"/>
+                        <!-- Wings -->
+                        <polygon points="-7,-18 9,-2 4,2 -12,-14" fill="#00c853"/>
+                        <polygon points="-9,2 4,2 -2,16 -12,12" fill="#009624"/>
+                        <!-- Tail with X Motif -->
+                        <polygon points="-20,2 -27,-13 -22,-13 -15,2" fill="#00c853"/>
+                        <text x="-25" y="-3" font-size="7.5" font-weight="900" fill="#ffffff">X</text>
                     </g>
                 </svg>
 
@@ -380,7 +381,7 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (WITH PENDING BAR & ANTI-FAKE SYSTEM) -->
+    <!-- 3. WALLET VIEW (STRICT ANTI-FAKE & PENDING ORDERS) -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -441,7 +442,7 @@
                                     <div style="font-weight:900; font-size:1.05rem;">0974107425</div>
                                     <small style="color:var(--text-secondary);">Name: Mulualem</small>
                                 </div>
-                                <span style="font-size:0.8rem; color:var(--cassa-green); font-weight:800;">📋 Copy</span>
+                                <span style="font-size:0.8rem; color:var(--niro-green); font-weight:800;">📋 Copy</span>
                             </div>
                         </div>
 
@@ -452,7 +453,7 @@
                                     <div style="font-weight:900; font-size:1.05rem;">1000762441326</div>
                                     <small style="color:var(--text-secondary);">Name: Muluken Aemuro</small>
                                 </div>
-                                <span style="font-size:0.8rem; color:var(--cassa-green); font-weight:800;">📋 Copy</span>
+                                <span style="font-size:0.8rem; color:var(--niro-green); font-weight:800;">📋 Copy</span>
                             </div>
                         </div>
 
@@ -545,7 +546,7 @@
                 <div style="display:flex; justify-content:space-around; margin-top:14px;">
                     <div>
                         <small style="color:var(--text-secondary);">CASHBACK</small>
-                        <div style="font-size:1.2rem; font-weight:900; color:var(--cassa-green);">10%</div>
+                        <div style="font-size:1.2rem; font-weight:900; color:var(--niro-green);">10%</div>
                     </div>
                     <div>
                         <small style="color:var(--text-secondary);">MAX BENEFIT</small>
@@ -556,16 +557,18 @@
         </div>
     </div>
 
-    <!-- 6. INVITE -->
+    <!-- 6. INVITE FRIENDS (EARN 3 FREE SPINS) -->
     <div id="viewInvite" class="view-pane">
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-weight:700;">⬅ Back</span>
-                <span style="font-weight:900;">Referral</span>
+                <span style="font-weight:900;">Referral Rewards</span>
             </div>
-            <div style="background:radial-gradient(circle at 90% 40%, #0d381e 0%, #081a10 100%); border:1px solid #1b5e20; border-radius:14px; padding:18px;">
-                <h2 style="font-size:1.4rem; font-weight:900; margin:8px 0 4px;">Invite friends.<br>Earn Br 100.</h2>
-                <button class="btn-action-main" style="margin-top:14px; background:#fff; color:#000;" onclick="copyReferralLink()">🔗 Copy Invite Link</button>
+            <div style="background:radial-gradient(circle at 90% 40%, #0d381e 0%, #081a10 100%); border:1.5px solid var(--niro-green); border-radius:14px; padding:20px; box-shadow: 0 4px 20px rgba(0,230,118,0.2);">
+                <span style="background:rgba(0,230,118,0.2); color:var(--niro-green); padding:3px 10px; border-radius:12px; font-size:0.75rem; font-weight:800;">🎁 SPECIAL BONUS</span>
+                <h2 style="font-size:1.45rem; font-weight:900; margin:10px 0 6px;">Invite friends.<br>Earn 3 Free Spins! 🎡</h2>
+                <p style="font-size:0.8rem; color:#a3cfbb; line-height:1.4;">ለእያንዳንዱ ለሚጋብዙት ወዳጅ 3 ነፃ የ Lucky Spin ዕድሎችን ወዲያውኑ ይሸለሙ!</p>
+                <button class="btn-action-main" style="margin-top:16px; background:#fff; color:#000;" onclick="copyReferralLink()">🔗 Copy Invite Link</button>
             </div>
         </div>
     </div>
@@ -575,21 +578,21 @@
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div style="text-align:center; margin-bottom:16px;">
                 <div style="font-size:2.5rem;">👑</div>
-                <h3>Niro Player</h3>
+                <h3>Niro VIP Player</h3>
             </div>
             <div style="background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px;">
                 <h4 style="margin-bottom:10px;">TRANSACTION HISTORY</h4>
                 <div id="profileTxList">
                     <div style="display:flex; justify-content:space-between; padding:8px 0;">
                         <div><b>Deposit (Telebirr)</b><br><small style="color:var(--text-secondary);">Registration Bonus</small></div>
-                        <div style="color:var(--cassa-green); font-weight:900;">+10.00 ETB<br><small>COMPLETED</small></div>
+                        <div style="color:var(--niro-green); font-weight:900;">+10.00 ETB<br><small>COMPLETED</small></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 8 & 9. ADMIN MASTER PANEL -->
+    <!-- 8. ADMIN MASTER PANEL -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -611,7 +614,7 @@
                 <div style="margin-bottom:8px;">
                     <label style="font-size:0.75rem; color:var(--text-secondary);">Preset Next Round Crash (Multiplier)</label>
                     <input type="number" step="0.1" id="admNextCrashInput" class="form-input" placeholder="e.g. 5.5">
-                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--cassa-green); color:#000;" onclick="adminSetNextCrash()">Lock Multiplier</button>
+                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--niro-green); color:#000;" onclick="adminSetNextCrash()">Lock Multiplier</button>
                 </div>
             </div>
 
@@ -624,30 +627,10 @@
                         <input type="number" id="admCouponAmt" class="form-input" placeholder="Amount (ETB)">
                         <input type="number" id="admCouponDuration" class="form-input" placeholder="Duration (Mins)">
                     </div>
-                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--cassa-green); color:#000;" onclick="adminCreateCoupon()">Generate Coupon</button>
-                </div>
-            </div>
-
-            <!-- Code Injector Panel (Add Game / Betting) -->
-            <div class="admin-card">
-                <h4>🎮 Add New Game / Custom Betting Code</h4>
-                <div style="margin-bottom:8px;">
-                    <input type="text" id="admGameTitle" class="form-input" placeholder="Game Title (e.g. Fortune Wheel, Sports Bet)" style="margin-bottom:6px;">
-                    <input type="text" id="admGameIcon" class="form-input" placeholder="Emoji / Icon (e.g. 🎯, 🎲, ⚽)" style="margin-bottom:6px;">
-                    <textarea id="admGameCode" class="form-textarea" placeholder="Paste full Game / Betting Code (HTML/JS/iframe) here..." style="height:90px; margin-bottom:6px;"></textarea>
-                    <button class="btn-action-main" onclick="adminAddNewGame()">Add Game to Lobby</button>
+                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--niro-green); color:#000;" onclick="adminCreateCoupon()">Generate Coupon</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- CUSTOM EMBED FULLSCREEN MODAL -->
-    <div id="embedModal" style="position:fixed; inset:0; background:#000; z-index:6000; display:none; flex-direction:column;">
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--bg-surface); border-bottom:1px solid var(--border-dim);">
-            <span id="embedTitle" style="font-weight:800;">Custom Game</span>
-            <span onclick="closeEmbedGame()" style="cursor:pointer; font-size:1.3rem;">✕</span>
-        </div>
-        <div style="flex:1; width:100%; height:100%; overflow:auto; background:#000;" id="embedContainer"></div>
     </div>
 
     <!-- STATUS POPUP -->
@@ -666,7 +649,7 @@
             <div class="wheel-pointer"></div>
             <svg id="wheelSvg" class="wheel-circle-svg" viewBox="0 0 200 200">
                 <path d="M100,100 L100,0 A100,100 0 0,1 170.7,29.3 Z" fill="#0d47a1"/>
-                <path d="M100,100 L170.7,29.3 A100,100 0 0,1 200,100 Z" fill="#e5283b"/>
+                <path d="M100,100 L170.7,29.3 A100,100 0 0,1 200,100 Z" fill="#00e676"/>
                 <path d="M100,100 L200,100 A100,100 0 0,1 170.7,170.7 Z" fill="#1565c0"/>
                 <path d="M100,100 L170.7,170.7 A100,100 0 0,1 100,200 Z" fill="#00c853"/>
                 <path d="M100,100 L100,200 A100,100 0 0,1 29.3,170.7 Z" fill="#ffb300"/>
@@ -722,7 +705,7 @@
         const tg = window.Telegram?.WebApp;
         if (tg) tg.expand();
 
-        /* AUDIO SYNTHESIS */
+        /* CASINO SOUND FX */
         let audioCtx;
         function getAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -840,7 +823,6 @@
         let pendingDepositOrder = null;
         let pendingRequests = [];
         let adminPresetCrash = null;
-        let customGames = [];
 
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
@@ -903,7 +885,7 @@
             document.getElementById(`autoCashRow${slot}`).style.display = isAuto ? 'flex' : 'none';
         }
 
-        /* AVIATOR LOGIC */
+        /* AVIATOR LOGIC WITH FLOATING WAVE ANIMATION */
         function startRoundCountdown() {
             isWaiting = true;
             isFlying = false;
@@ -1012,17 +994,23 @@
                     }
                 }
 
-                let progress = Math.min(elapsed / 7.2, 1);
-                let currentX = 20 + 290 * progress;
-                let currentY = 150 - 120 * Math.pow(progress, 1.4);
+                // S-Curve with Floating Wave Motion
+                let progress = Math.min(elapsed / 8.5, 1);
+                let currentX = 20 + 295 * progress;
+                // Add soft undulating wave effect
+                let waveOffset = Math.sin(elapsed * 3.8) * 5.5;
+                let currentY = (160 - 130 * Math.pow(progress, 1.35)) + waveOffset;
                 let controlX = 20 + (currentX - 20) * 0.45;
 
-                let dLine = `M 20 150 Q ${controlX} 150 ${currentX} ${currentY}`;
-                let dFill = `M 20 150 Q ${controlX} 150 ${currentX} ${currentY} L ${currentX} 150 Z`;
+                let dLine = `M 20 160 Q ${controlX} 160 ${currentX} ${currentY}`;
+                let dFill = `M 20 160 Q ${controlX} 160 ${currentX} ${currentY} L ${currentX} 160 Z`;
 
                 document.getElementById('curveLine').setAttribute('d', dLine);
                 document.getElementById('curveFill').setAttribute('d', dFill);
-                document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(-13)`);
+                
+                // Tilt rotation reacts to wave
+                let planeAngle = -12 + (Math.cos(elapsed * 3.8) * 4);
+                document.getElementById('planeG').setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(${planeAngle})`);
 
                 if (flightMultiplier >= flightCrash) {
                     triggerCrashState();
@@ -1156,7 +1144,7 @@
             }
         }
 
-        /* 3-STEP PENDING VERIFICATION PIPELINE */
+        /* 3-STEP STRICT ANTI-FAKE VERIFICATION */
         function setWalletMode(m) {
             document.getElementById('btnWDepToggle').classList.toggle('active', m === 'dep');
             document.getElementById('btnWWithToggle').classList.toggle('active', m === 'with');
@@ -1242,7 +1230,6 @@
                 return;
             }
 
-            // Open 3-Step Verification Modal
             let pModal = document.getElementById('verifyPipelineModal');
             pModal.style.display = 'flex';
 
@@ -1257,7 +1244,6 @@
             let ic3 = document.getElementById('icon3');
             let msg = document.getElementById('pipelineStatusMsg');
 
-            // Reset UI
             s1.className = "verify-step active"; sp1.style.display = "inline-block"; ic1.style.display = "none";
             s2.className = "verify-step"; sp2.style.display = "none"; ic2.style.display = "inline-block"; ic2.innerText = "⏳";
             s3.className = "verify-step"; sp3.style.display = "none"; ic3.style.display = "inline-block"; ic3.innerText = "⏳";
@@ -1265,7 +1251,7 @@
 
             let normalized = rawSms.toLowerCase();
 
-            // STEP 1 CHECK: Phone/Account and Name
+            // STEP 1 CHECK: Exact Phone/Account and Name
             setTimeout(() => {
                 let isValidDest = false;
                 if (currentDepMethod === 'telebirr') {
@@ -1288,11 +1274,10 @@
                     return;
                 }
 
-                // Step 1 Passed
                 sp1.style.display = "none"; ic1.style.display = "inline-block"; ic1.innerText = "✅";
                 s1.className = "verify-step done";
 
-                // STEP 2: Amount Match Check
+                // STEP 2: Exact Amount Match Check
                 s2.className = "verify-step active"; sp2.style.display = "inline-block"; ic2.style.display = "none";
                 msg.innerText = "Step 2: Checking if Amount matches selected ETB...";
 
@@ -1310,11 +1295,10 @@
                         return;
                     }
 
-                    // Step 2 Passed
                     sp2.style.display = "none"; ic2.style.display = "inline-block"; ic2.innerText = "✅";
                     s2.className = "verify-step done";
 
-                    // STEP 3: Duplicate Tx ID Check
+                    // STEP 3: Duplicate Transaction ID Check
                     s3.className = "verify-step active"; sp3.style.display = "inline-block"; ic3.style.display = "none";
                     msg.innerText = "Step 3: Verifying Transaction ID originality...";
 
@@ -1358,7 +1342,7 @@
                         item.style.padding = '8px 0';
                         item.innerHTML = `
                             <div><b>Deposit (${currentDepMethod.toUpperCase()})</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleTimeString()}</small></div>
-                            <div style="color:var(--cassa-green); font-weight:900;">+${expectedAmt.toFixed(2)} ETB<br><small>COMPLETED</small></div>
+                            <div style="color:var(--niro-green); font-weight:900;">+${expectedAmt.toFixed(2)} ETB<br><small>COMPLETED</small></div>
                         `;
                         txLog.insertBefore(item, txLog.firstChild);
 
@@ -1426,7 +1410,7 @@
             switchNavTab('lobby');
         }
 
-        /* ADMIN FUNCTIONALITY */
+        /* ADMIN CONTROL ENGINE */
         function renderAdminQueue() {
             let box = document.getElementById('adminQueueList');
             if (pendingRequests.length === 0) {
@@ -1441,7 +1425,7 @@
                     <div><b>${req.type} (${req.method})</b>: <span style="color:var(--cassa-gold); font-weight:800;">${req.amount} ETB</span></div>
                     <div>Account: <code>${req.account}</code></div>
                     <div style="display:flex; gap:8px; margin-top:8px;">
-                        <button class="btn-adm" style="flex:1; background:var(--cassa-green); color:#000;" onclick="adminApproveReq(${idx})">✅ Approve</button>
+                        <button class="btn-adm" style="flex:1; background:var(--niro-green); color:#000;" onclick="adminApproveReq(${idx})">✅ Approve</button>
                         <button class="btn-adm danger" style="flex:1;" onclick="adminRejectReq(${idx})">❌ Reject</button>
                     </div>
                 `;
@@ -1492,68 +1476,6 @@
             document.getElementById('admCouponName').value = "";
             document.getElementById('admCouponAmt').value = "";
             document.getElementById('admCouponDuration').value = "";
-        }
-
-        /* CUSTOM GAME CODE INJECTOR */
-        function adminAddNewGame() {
-            let title = document.getElementById('admGameTitle').value.trim();
-            let icon = document.getElementById('admGameIcon').value.trim() || "🎮";
-            let code = document.getElementById('admGameCode').value.trim();
-
-            if (!title || !code) {
-                showStatusPopup(false, "ERROR", "Title and Code are required!");
-                return;
-            }
-
-            customGames.push({ title: title, icon: icon, code: code });
-            renderCustomGames();
-            showStatusPopup(true, "GAME ADDED", `"${title}" has been added to the Casino lobby!`);
-
-            document.getElementById('admGameTitle').value = "";
-            document.getElementById('admGameIcon').value = "";
-            document.getElementById('admGameCode').value = "";
-            switchNavTab('lobby');
-        }
-
-        function renderCustomGames() {
-            let catalog = document.getElementById('customGamesCatalog');
-            let container = document.getElementById('customGamesContainer');
-            if (customGames.length === 0) {
-                catalog.style.display = 'none';
-                return;
-            }
-            catalog.style.display = 'block';
-            container.innerHTML = "";
-            customGames.forEach((g, idx) => {
-                let div = document.createElement('div');
-                div.className = "official-card";
-                div.onclick = () => openEmbedGame(idx);
-                div.innerHTML = `
-                    <div class="official-left">
-                        <div class="aviator-square-logo" style="border-color:#2a3b4f; background:#0e1622; font-size:1.6rem;">
-                            ${g.icon}
-                        </div>
-                        <div>
-                            <h4 style="font-size:1rem; font-weight:800;">${g.title}</h4>
-                            <p style="font-size:0.75rem; color:var(--text-secondary);">Custom Game • Real Engine</p>
-                        </div>
-                    </div>
-                    <div style="font-size:1.2rem; color:var(--cassa-green);">▶</div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function openEmbedGame(idx) {
-            let game = customGames[idx];
-            document.getElementById('embedTitle').innerText = game.title;
-            document.getElementById('embedContainer').innerHTML = game.code;
-            document.getElementById('embedModal').style.display = 'flex';
-        }
-
-        function closeEmbedGame() {
-            document.getElementById('embedModal').style.display = 'none';
-            document.getElementById('embedContainer').innerHTML = "";
         }
 
         /* SHAMO LOGIC (3 CHANCES • 5% WIN • 95% ZERO) */
@@ -1630,9 +1552,12 @@
             }
         }
 
+        /* INVITE FRIENDS: 3 FREE SPINS REWARD */
         function copyReferralLink() {
             navigator.clipboard.writeText("https://t.me/Niro_1Bet_Bot?start=ref106");
-            showStatusPopup(true, "COPIED", "የመጋበዣ ሊንክዎ ተቀድቷል!");
+            userSpins += 3;
+            syncBalanceViews();
+            showStatusPopup(true, "INVITE REWARD", "የመጋበዣ ሊንክዎ ተቀድቷል! +3 ነፃ ስፒኖች ወደ ሒሳብዎ ገብተዋል።");
         }
 
         function copyText(txt, msg) {
@@ -1644,7 +1569,7 @@
             let modal = document.getElementById('modalStatusPopup');
             let card = document.getElementById('statusPopupCard');
             let icon = document.getElementById('statusIcon');
-            card.style.borderColor = isSuccess ? 'var(--cassa-green)' : 'var(--cassa-red-bright)';
+            card.style.borderColor = isSuccess ? 'var(--niro-green)' : 'var(--cassa-red-bright)';
             icon.innerText = isSuccess ? '✅' : '⚠️';
             document.getElementById('statusTitle').innerText = title;
             document.getElementById('statusMsg').innerText = msg;
@@ -1653,7 +1578,6 @@
         function closeStatusModal() { document.getElementById('modalStatusPopup').style.display = 'none'; }
 
         initShamoGrid();
-        renderCustomGames();
         syncBalanceViews();
     </script>
 </body>
