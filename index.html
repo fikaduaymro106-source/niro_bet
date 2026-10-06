@@ -12,7 +12,6 @@
             --bg-card: #151a22;
             --bg-elevated: #1e2430;
             --cassa-green: #00c853;
-            --cassa-green-dark: #0f3d1f;
             --cassa-red: #d32f2f;
             --cassa-red-bright: #e5283b;
             --cassa-gold: #ffb300;
@@ -37,10 +36,10 @@
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* 1. LOBBY VIEW */
+        /* LOBBY */
         .hero-banner { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 90% 40%, #155724 0%, #061f0d 100%); border: 1px solid #1e7e34; padding: 16px; position: relative; overflow: hidden; }
-        .hero-banner h2 { font-size: 1.25rem; font-weight: 900; line-height: 1.25; }
-        .hero-banner h2 span { color: var(--cassa-gold); font-size: 1.35rem; }
+        .hero-banner h2 { font-size: 1.2rem; font-weight: 900; line-height: 1.25; }
+        .hero-banner h2 span { color: var(--cassa-gold); font-size: 1.3rem; }
         .hero-banner p { font-size: 0.78rem; color: #a3cfbb; margin-top: 4px; }
 
         .nav-chips-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 4px 10px 12px; }
@@ -49,15 +48,20 @@
         .chip-icon { font-size: 1.4rem; margin-bottom: 3px; }
         .chip-title { font-size: 0.7rem; font-weight: 700; color: #cbd5e1; }
 
-        .official-card { margin: 10px; background: #0c0f14; border: 1px solid #2a1118; border-radius: 14px; padding: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+        /* 4-CORNER SQUARE AVIATOR LOGO */
+        .official-card { margin: 10px; background: #0c0f14; border: 1px solid #2a1118; border-radius: 14px; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
         .official-left { display: flex; align-items: center; gap: 12px; }
-        .official-logo-box { width: 85px; height: 50px; background: #16070a; border-radius: 8px; border: 1px solid #4a1520; display: flex; align-items: center; justify-content: center; position: relative; }
-        .aviator-font-logo { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-weight: 900; color: var(--cassa-red-bright); font-style: italic; }
+        .aviator-square-logo { width: 50px; height: 50px; background: #1a080d; border: 1.5px solid #4a1520; border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .aviator-square-logo svg { width: 32px; height: 32px; }
 
-        /* 2. AVIATOR ARENA (EXACT CASSA VIDEO) */
+        /* DYNAMIC CUSTOM GAMES CATALOG */
+        .catalog-header { padding: 8px 12px 4px; font-size: 0.85rem; font-weight: 800; color: var(--text-secondary); }
+        .custom-games-list { display: flex; flex-direction: column; gap: 8px; padding: 0 10px 10px; }
+
+        /* AVIATOR ARENA */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 6px; }
-        .aviator-brand-text { display: flex; align-items: center; gap: 5px; font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-style: italic; font-weight: 900; color: var(--cassa-red-bright); }
+        .aviator-brand-text { display: flex; align-items: center; gap: 6px; font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-style: italic; font-weight: 900; color: var(--cassa-red-bright); }
         
         .aviator-history-ribbon { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
         .aviator-history-ribbon::-webkit-scrollbar { display: none; }
@@ -84,7 +88,6 @@
         .waiting-bar-container { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: rgba(255,255,255,0.1); display: none; }
         .waiting-bar-progress { height: 100%; width: 100%; background: var(--cassa-red-bright); transition: width 0.05s linear; }
 
-        /* Slim Cashed Out Banner (Exact Video) */
         .cashout-banner { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); background: #132418; border: 1.5px solid var(--cassa-green); border-radius: 8px; padding: 4px 12px; text-align: center; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.8); display: none; white-space: nowrap; }
         .cashout-banner span { font-size: 0.72rem; color: #fff; font-weight: 700; }
         .cashout-banner .cashout-num { font-size: 0.85rem; font-weight: 900; color: var(--cassa-green); margin-left: 4px; }
@@ -112,7 +115,7 @@
         .btn-bet-trigger.cancel-state { background: var(--cassa-red) !important; color: #fff !important; }
         .btn-bet-trigger.waiting-state { background: var(--cassa-red) !important; color: #fff !important; cursor: not-allowed; font-size: 0.85rem; }
 
-        /* 3. WALLET VIEW (EXACT CASSA VIDEO) */
+        /* WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
         .wallet-balance-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
         .wallet-nav-switch { display: grid; grid-template-columns: 1fr 1fr; background: #080a0e; border-radius: 8px; padding: 3px; gap: 4px; margin-top: 10px; }
@@ -125,25 +128,33 @@
 
         .form-input { width: 100%; padding: 12px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; outline: none; }
         .form-input:focus { border-color: var(--cassa-green); }
-        .form-textarea { width: 100%; padding: 10px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.82rem; height: 75px; resize: none; }
+        .form-textarea { width: 100%; padding: 10px; background: #090c0f; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; font-size: 0.82rem; height: 80px; resize: none; outline: none; }
+        .form-textarea:focus { border-color: var(--cassa-green); }
 
         .payment-info-box { background: #0c1017; border: 1px solid var(--border-dim); border-radius: 10px; padding: 14px; margin-top: 10px; }
         .copy-row { background: #17202c; border: 1px solid var(--border-dim); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; margin: 6px 0 10px; cursor: pointer; }
         .btn-action-main { width: 100%; padding: 14px; background: var(--cassa-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
 
-        /* 4. SHAMO ARENA (EXACT VIDEO) */
+        /* PENDING ORDERS BOX */
+        .pending-card { background: #261c0c; border: 1px solid var(--cassa-gold); border-radius: 10px; padding: 12px; margin-bottom: 12px; display: none; }
+        .pending-card p { font-size: 0.8rem; color: #ffe082; }
+
+        /* SHAMO VIEW */
         .shamo-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
         .shamo-stat-banner { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; display: flex; justify-content: space-around; margin-bottom: 12px; }
         .shamo-boxes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
         .shamo-box-item { background: #121824; border: 1px solid #233148; border-radius: 10px; height: 70px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; }
-        .shamo-box-item.opened { background: #0c2014; border-color: var(--cassa-green); font-size: 1rem; font-weight: 900; color: var(--cassa-green); }
+        .shamo-box-item.opened { background: #0c2014; border-color: var(--cassa-green); font-size: 0.95rem; font-weight: 900; color: var(--cassa-green); }
 
-        /* 5. VIP & PROFILE (EXACT VIDEO) */
-        .vip-card { background: radial-gradient(circle at 50% 30%, #1f2735 0%, #0d1117 100%); border: 1px solid var(--border-dim); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 14px; }
-        .tx-history-box { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; }
-        .tx-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        /* ADMIN PANEL VIEW */
+        .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
+        .admin-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+        .admin-card h4 { font-size: 0.95rem; color: var(--cassa-gold); margin-bottom: 10px; }
+        .btn-adm { background: #1f2631; border: 1px solid var(--border-dim); color: #fff; padding: 8px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
+        .btn-adm.danger { background: #b71c1c; }
+        .req-item { background: #0b0e12; border: 1px solid var(--border-dim); border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 0.78rem; }
 
-        /* POPUPS */
+        /* POPUP MODALS */
         .status-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 5000; display: none; padding: 16px; }
         .status-card { background: #141a24; border-radius: 14px; padding: 22px; width: 100%; max-width: 320px; text-align: center; border: 2px solid var(--border-dim); }
 
@@ -152,7 +163,12 @@
         .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid #ffb300; z-index: 20; }
         .wheel-circle-svg { width: 100%; height: 100%; border-radius: 50%; border: 5px solid #ffb300; transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
-        /* FOOTER */
+        /* CUSTOM EMBED MODAL FOR INJECTED GAMES */
+        .embed-modal { position: fixed; inset: 0; background: #000; z-index: 6000; display: none; flex-direction: column; }
+        .embed-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-surface); border-bottom: 1px solid var(--border-dim); }
+        .embed-body { flex: 1; width: 100%; height: 100%; overflow: auto; background: #000; }
+
+        /* BOTTOM NAV BAR (CLEAN 4 BUTTONS) */
         .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-surface); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; flex: 1; }
         .footer-item.active { color: var(--cassa-green); }
@@ -192,7 +208,7 @@
             <div class="chip-box" onclick="switchNavTab('shamo')">
                 <span class="chip-badge" style="background:#ff9800;">LIVE</span>
                 <div class="chip-icon">🎁</div>
-                <div class="chip-title">Shamo</div>
+                <div class="chip-title">Shamo (<span id="shamoUserChances">3</span>)</div>
             </div>
             <div class="chip-box" onclick="openCouponModal()">
                 <div class="chip-icon">🎟️</div>
@@ -205,10 +221,13 @@
             </div>
         </div>
 
+        <!-- Aviator Spribe with 4-Corner Square Logo -->
         <div class="official-card" onclick="openAviatorGame()">
             <div class="official-left">
-                <div class="official-logo-box">
-                    <span class="aviator-font-logo">Aviator</span>
+                <div class="aviator-square-logo">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#e5283b"/>
+                    </svg>
                 </div>
                 <div>
                     <h4 style="font-size:1.05rem; font-weight:800;">Aviator Spribe</h4>
@@ -217,19 +236,24 @@
             </div>
             <div style="font-size:1.3rem; color:var(--cassa-green);">▶</div>
         </div>
+
+        <!-- Custom Admin Added Games Section -->
+        <div class="catalog-header">🔥 All Games & Custom Betting</div>
+        <div class="custom-games-list" id="customGamesContainer">
+            <!-- Dynamically injected games will render here -->
+        </div>
     </div>
 
-    <!-- 2. AVIATOR ARENA (EXACT VIDEO MATCH) -->
+    <!-- 2. AVIATOR ARENA (EXACT CASSA DESIGN & SOUND) -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-top-nav">
-                <span onclick="switchNavTab('lobby')" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
+                <span onclick="exitAviatorGame()" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
                 <div class="aviator-brand-text">
                     <span>Aviator</span>
                 </div>
             </div>
 
-            <!-- Multiplier Chips -->
             <div class="aviator-history-ribbon" id="historyChips">
                 <div class="hist-chip high">4.59x</div>
                 <div class="hist-chip high">19.23x</div>
@@ -262,7 +286,7 @@
                     <path id="curveFill" class="flight-curve-fill" d="M 20 150 Q 20 150 20 150 L 20 150 Z" />
                     <path id="curveLine" class="flight-curve-line" d="M 20 150 Q 20 150 20 150" />
 
-                    <!-- Vector Spribe Plane (Exact Match) -->
+                    <!-- Vector Plane (Exact matching red Spribe with spinning blade & X) -->
                     <g id="planeG" class="plane-group" transform="translate(20, 150) rotate(-10)">
                         <line x1="26" y1="-14" x2="26" y2="14" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
                         <path d="M -22 2 C -18 -8 18 -6 25 0 C 18 6 -18 8 -22 2 Z" fill="#e5283b"/>
@@ -283,9 +307,8 @@
                 </div>
             </div>
 
-            <!-- Dual Stacked Bet Controls -->
+            <!-- Bet Modules -->
             <div class="betting-dock-vertical">
-                <!-- Deck 1 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs">
                         <span id="tabBet1" class="active" onclick="switchBetMode(1, 'manual')">Bet</span>
@@ -316,7 +339,6 @@
                     </div>
                 </div>
 
-                <!-- Deck 2 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs">
                         <span id="tabBet2" class="active" onclick="switchBetMode(2, 'manual')">Bet</span>
@@ -350,12 +372,22 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (FULL SMS RECEIPT VERIFICATION) -->
+    <!-- 3. WALLET VIEW (SMS VERIFICATION & PENDING STATUS) -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                 <span style="font-size:1.15rem; font-weight:900;">My Wallet</span>
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
+            </div>
+
+            <!-- Pending Deposit Notification Box -->
+            <div id="pendingOrderBanner" class="pending-card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <b>⏳ Pending Deposit Order</b>
+                    <span style="color:var(--cassa-red-bright); cursor:pointer; font-weight:800;" onclick="cancelPendingOrder()">[Cancel]</span>
+                </div>
+                <p style="margin-top:4px;">You have an active deposit of <b id="pendingOrderAmt">0</b> ETB waiting for verification.</p>
+                <button class="btn-action-main" style="padding:6px; margin-top:8px; font-size:0.8rem;" onclick="resumePendingOrder()">Resume Order</button>
             </div>
 
             <div class="wallet-balance-card">
@@ -367,7 +399,7 @@
                 </div>
             </div>
 
-            <!-- Deposit Section -->
+            <!-- Deposit Workflow -->
             <div id="boxDepSection">
                 <div id="depStep1">
                     <div style="margin-bottom:12px;">
@@ -428,19 +460,19 @@
             <!-- Withdraw Section -->
             <div id="boxWithSection" style="display:none;">
                 <div style="margin-bottom:12px;">
-                    <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:5px;">Amount (ETB) * (300 - 10000 ብር)</label>
+                    <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:5px;">Amount (ETB) * (300 - 10,000 ETB)</label>
                     <input type="number" id="inWithSum" class="form-input" placeholder="300" min="300">
                 </div>
                 <div style="margin-bottom:12px;">
                     <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:5px;">Recipient Mobile / Bank Account</label>
-                    <input type="text" id="inWithDest" class="form-input" placeholder="0974107425">
+                    <input type="text" id="inWithDest" class="form-input" placeholder="09xxxxxxxx">
                 </div>
-                <button class="btn-action-main" style="background:var(--cassa-green);" onclick="submitWithdrawAction()">Request Withdrawal</button>
+                <button class="btn-action-main" onclick="submitWithdrawAction()">Request Withdrawal</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. SHAMO VIEW (EXACT CASSA VIDEO) -->
+    <!-- 4. SHAMO (3 CHANCES • 5% WIN • 95% ZERO) -->
     <div id="viewShamo" class="view-pane">
         <div class="shamo-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -454,40 +486,34 @@
                     <div style="font-size:1.1rem; font-weight:900;">2,000 ETB</div>
                 </div>
                 <div>
-                    <small style="color:var(--text-secondary);">PRIZES REMAINING</small>
-                    <div style="font-size:1.1rem; font-weight:900;" id="shamoRemaining">100</div>
+                    <small style="color:var(--text-secondary);">YOUR CHANCES</small>
+                    <div style="font-size:1.1rem; font-weight:900; color:var(--cassa-gold);" id="shamoRemaining">3</div>
                 </div>
             </div>
 
-            <p style="font-size:0.78rem; color:var(--text-secondary); text-align:center;">Once Shamo opens, click on the gift boxes:</p>
-            <div class="shamo-boxes-grid" id="shamoBoxesGrid">
-                <!-- 12 Boxes -->
-            </div>
+            <p style="font-size:0.78rem; color:var(--text-secondary); text-align:center;">Click on any box to reveal your gift:</p>
+            <div class="shamo-boxes-grid" id="shamoBoxesGrid"></div>
         </div>
     </div>
 
-    <!-- 5. VIP VIEW (EXACT CASSA VIDEO) -->
+    <!-- 5. VIP VIEW -->
     <div id="viewVip" class="view-pane">
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-weight:700;">⬅ Back</span>
                 <span style="font-weight:900;">VIP Club</span>
             </div>
-
-            <div class="vip-card">
+            <div style="background: radial-gradient(circle at 50% 30%, #1f2735 0%, #0d1117 100%); border: 1px solid var(--border-dim); border-radius: 14px; padding: 20px; text-align: center;">
                 <div style="font-size:2.8rem; margin-bottom:6px;">🏆</div>
                 <small style="color:var(--text-secondary); font-weight:800;">YOUR LEVEL</small>
                 <h2 style="font-size:1.6rem; font-weight:900; margin-bottom:4px;">STARTER</h2>
-                <div style="background:#263447; border-radius:10px; height:8px; width:80%; margin:10px auto; overflow:hidden;">
-                    <div style="background:var(--cassa-green); height:100%; width:100%;"></div>
-                </div>
                 <div style="display:flex; justify-content:space-around; margin-top:14px;">
                     <div>
                         <small style="color:var(--text-secondary);">CASHBACK</small>
                         <div style="font-size:1.2rem; font-weight:900; color:var(--cassa-green);">10%</div>
                     </div>
                     <div>
-                        <small style="color:var(--text-secondary);">CASHBACK MAX</small>
+                        <small style="color:var(--text-secondary);">MAX BENEFIT</small>
                         <div style="font-size:1.2rem; font-weight:900; color:var(--cassa-gold);">50,000 ETB</div>
                     </div>
                 </div>
@@ -495,56 +521,112 @@
         </div>
     </div>
 
-    <!-- 6. INVITE FRIENDS VIEW (EXACT CASSA VIDEO) -->
+    <!-- 6. INVITE -->
     <div id="viewInvite" class="view-pane">
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-weight:700;">⬅ Back</span>
                 <span style="font-weight:900;">Referral</span>
             </div>
-
-            <div style="background:radial-gradient(circle at 90% 40%, #0d381e 0%, #081a10 100%); border:1px solid #1b5e20; border-radius:14px; padding:18px; margin-bottom:14px;">
-                <span style="background:rgba(255,255,255,0.1); padding:2px 8px; border-radius:12px; font-size:0.7rem; font-weight:800;">✨ REFERRAL</span>
+            <div style="background:radial-gradient(circle at 90% 40%, #0d381e 0%, #081a10 100%); border:1px solid #1b5e20; border-radius:14px; padding:18px;">
                 <h2 style="font-size:1.4rem; font-weight:900; margin:8px 0 4px;">Invite friends.<br>Earn Br 100.</h2>
-                <p style="font-size:0.78rem; color:#a3cfbb;">You earn Br 100 when a new friend makes their first external deposit.</p>
-                
-                <button class="btn-action-main" style="margin-top:14px; background:#fff; color:#000;" onclick="copyReferralLink()">🔗 Invite friends</button>
+                <button class="btn-action-main" style="margin-top:14px; background:#fff; color:#000;" onclick="copyReferralLink()">🔗 Copy Invite Link</button>
             </div>
         </div>
     </div>
 
-    <!-- 7. PROFILE VIEW (EXACT CASSA VIDEO) -->
+    <!-- 7. PROFILE -->
     <div id="viewProfile" class="view-pane">
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div style="text-align:center; margin-bottom:16px;">
-                <div style="font-size:2.5rem; margin-bottom:4px;">👑</div>
-                <h3>Niro VIP</h3>
-                <small style="color:var(--text-secondary);">VIP CLUB • LEVEL 0</small>
+                <div style="font-size:2.5rem;">👑</div>
+                <h3>Niro Player</h3>
             </div>
-
-            <div class="tx-history-box">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 12px; padding: 14px;">
                 <h4 style="margin-bottom:10px;">TRANSACTION HISTORY</h4>
                 <div id="profileTxList">
-                    <div class="tx-item">
-                        <div><b>Deposit (Telebirr)</b><br><small style="color:var(--text-secondary);">Bonus Welcome</small></div>
-                        <div style="color:var(--cassa-green); font-weight:900;">+10.00 ETB<br><small style="color:var(--cassa-green);">COMPLETED</small></div>
+                    <div style="display:flex; justify-content:space-between; padding:8px 0;">
+                        <div><b>Deposit (Telebirr)</b><br><small style="color:var(--text-secondary);">Registration Bonus</small></div>
+                        <div style="color:var(--cassa-green); font-weight:900;">+10.00 ETB<br><small>COMPLETED</small></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 8 & 9. ADMIN MASTER PANEL (WITH ALL CONTROLS & CODE INJECTOR) -->
+    <div id="viewAdmin" class="view-pane">
+        <div class="admin-viewport">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <span style="font-size:1.15rem; font-weight:900; color:var(--cassa-gold);">⚙️ Admin Master Panel</span>
+                <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
+            </div>
+
+            <!-- Approval Queue -->
+            <div class="admin-card">
+                <h4>📥 Pending Deposits & Withdrawals</h4>
+                <div id="adminQueueList">
+                    <div style="font-size:0.75rem; color:var(--text-secondary);">No pending requests.</div>
+                </div>
+            </div>
+
+            <!-- Aviator Control -->
+            <div class="admin-card">
+                <h4>✈️ Aviator Control</h4>
+                <div style="margin-bottom:8px;">
+                    <label style="font-size:0.75rem; color:var(--text-secondary);">Preset Next Round Crash (Multiplier)</label>
+                    <input type="number" step="0.1" id="admNextCrashInput" class="form-input" placeholder="e.g. 5.5">
+                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--cassa-green); color:#000;" onclick="adminSetNextCrash()">Lock Multiplier</button>
+                </div>
+            </div>
+
+            <!-- Coupon Generator -->
+            <div class="admin-card">
+                <h4>🎟️ Generate Coupon Code</h4>
+                <div style="margin-bottom:8px;">
+                    <input type="text" id="admCouponName" class="form-input" placeholder="Coupon Name (e.g. BONUS50)" style="margin-bottom:6px;">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px;">
+                        <input type="number" id="admCouponAmt" class="form-input" placeholder="Amount (ETB)">
+                        <input type="number" id="admCouponDuration" class="form-input" placeholder="Duration (Mins)">
+                    </div>
+                    <button class="btn-adm" style="width:100%; margin-top:6px; background:var(--cassa-green); color:#000;" onclick="adminCreateCoupon()">Generate Coupon</button>
+                </div>
+            </div>
+
+            <!-- 9. BETTING / GAME ADDING CODE INJECTOR PANEL -->
+            <div class="admin-card">
+                <h4>🎮 Add New Game / Custom Betting Code</h4>
+                <p style="font-size:0.72rem; color:var(--text-secondary); margin-bottom:8px;">ማንኛውንም አዲስ የጌም ወይም የቤቲንግ ኮድ (HTML, JS, iframe ወዘተ) እዚህ ያስገቡ፤ በቀጥታ በዋናው ሎቢ ላይ ይታያል።</p>
+                <div style="margin-bottom:8px;">
+                    <input type="text" id="admGameTitle" class="form-input" placeholder="Game Title (e.g. Fortune Wheel, Live Bet)" style="margin-bottom:6px;">
+                    <input type="text" id="admGameIcon" class="form-input" placeholder="Icon / Emoji (e.g. 🎯, 🎲, ⚽)" style="margin-bottom:6px;">
+                    <textarea id="admGameCode" class="form-textarea" placeholder="Paste full Game / Betting Code (HTML/JS/iframe) here..." style="height:100px; margin-bottom:6px;"></textarea>
+                    <button class="btn-action-main" onclick="adminAddNewGame()">Add Game to Lobby</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM EMBED FULLSCREEN MODAL -->
+    <div id="embedModal" class="embed-modal">
+        <div class="embed-header">
+            <span id="embedTitle" style="font-weight:800;">Custom Game</span>
+            <span onclick="closeEmbedGame()" style="cursor:pointer; font-size:1.3rem;">✕</span>
+        </div>
+        <div class="embed-body" id="embedContainer"></div>
+    </div>
+
     <!-- STATUS POPUP -->
     <div id="modalStatusPopup" class="status-modal">
         <div id="statusPopupCard" class="status-card">
             <div id="statusIcon" style="font-size:3rem; margin-bottom:8px;">✅</div>
-            <h3 id="statusTitle" style="margin-bottom:6px;">SUCCESSFUL</h3>
+            <h3 id="statusTitle" style="margin-bottom:6px;">PAYMENT</h3>
             <p id="statusMsg" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Message</p>
             <button class="btn-action-main" onclick="closeStatusModal()">OK</button>
         </div>
     </div>
 
-    <!-- LUCKY SPIN MODAL (EXACT CASSA VIDEO) -->
+    <!-- LUCKY SPIN MODAL -->
     <div id="spinModal" class="generic-modal">
         <div class="wheel-wrapper">
             <div class="wheel-pointer"></div>
@@ -575,23 +657,18 @@
     <!-- COUPON MODAL -->
     <div id="couponModal" class="generic-modal">
         <div style="background:var(--bg-card); border:1px solid var(--border-dim); border-radius:14px; padding:18px; width:100%; max-width:320px; text-align:center;">
-            <div style="font-size:2rem; margin-bottom:6px;">🎁</div>
             <h4 style="margin-bottom:10px;">Claim Coupon</h4>
             <input type="text" id="couponInputBox" class="form-input" placeholder="Enter coupon code" style="text-align:center; text-transform:uppercase; margin-bottom:10px;">
-            <button class="btn-action-main" onclick="claimCouponCode()">Claim Coupon</button>
+            <button class="btn-action-main" onclick="claimCouponCode()">Claim</button>
             <span onclick="closeCouponModal()" style="display:block; color:var(--text-secondary); margin-top:10px; cursor:pointer; font-size:0.8rem;">Cancel</span>
         </div>
     </div>
 
-    <!-- FOOTER DOCK (EXACT CASSA VIDEO) -->
+    <!-- BOTTOM DOCK (CLEAN 4 BUTTONS) -->
     <nav class="app-footer-dock">
         <button class="footer-item active" id="tabLobbyBtn" onclick="switchNavTab('lobby')">
             <span class="f-icon">🏛️</span>
             <span>Casino</span>
-        </button>
-        <button class="footer-item" id="tabAviatorBtn" onclick="openAviatorGame()">
-            <span class="f-icon">✈️</span>
-            <span>Aviator</span>
         </button>
         <button class="footer-item" id="tabWalletBtn" onclick="switchNavTab('wallet')">
             <span class="f-icon">💳</span>
@@ -611,7 +688,7 @@
         const tg = window.Telegram?.WebApp;
         if (tg) tg.expand();
 
-        /* SOUND ENGINE */
+        /* AUDIO SYNTHESIS */
         let audioCtx;
         function getAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -708,7 +785,7 @@
         }
 
         /* STATE */
-        let balance = 10.00; // Free 10 Birr Registration Bonus
+        let balance = 10.00;
         let isFlying = false;
         let isWaiting = false;
         let flightMultiplier = 1.00;
@@ -721,18 +798,36 @@
         };
 
         let userSpins = 3;
+        let shamoChances = 3;
         let activeCoupons = { "CASSA2026": { amount: 50, expiresAt: Date.now() + 86400000 } };
         let verifiedReceipts = new Set();
         let currentDepMethod = 'telebirr';
         let orderCountdownInterval;
+        let pendingDepositOrder = null;
+        let pendingRequests = [];
+        let adminPresetCrash = null;
+
+        let customGames = [
+            {
+                title: "Chicken Road 2",
+                icon: "🐔",
+                code: `<div style="padding:40px; text-align:center; color:#fff;"><h2>🐔 Chicken Road 2</h2><p style="margin-top:10px; color:#aaa;">Custom Game Loaded Successfully!</p></div>`
+            }
+        ];
 
         function syncBalanceViews() {
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
             document.getElementById('walletBalVal').innerText = balance.toFixed(2);
             document.getElementById('spinCountText').innerText = userSpins;
+            document.getElementById('shamoUserChances').innerText = shamoChances;
+            document.getElementById('shamoRemaining').innerText = shamoChances;
         }
 
         function switchNavTab(tabName, modeOpt) {
+            if (tabName !== 'aviator') {
+                stopAviatorSounds();
+            }
+
             document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
 
@@ -753,6 +848,8 @@
                 document.getElementById('viewShamo').classList.add('active');
             } else if (tabName === 'vip') {
                 document.getElementById('viewVip').classList.add('active');
+            } else if (tabName === 'admin') {
+                document.getElementById('viewAdmin').classList.add('active');
             }
         }
 
@@ -760,8 +857,15 @@
             document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
             document.getElementById('viewAviator').classList.add('active');
-            document.getElementById('tabAviatorBtn').classList.add('active');
             if (!isFlying && !isWaiting) startRoundCountdown();
+        }
+
+        function exitAviatorGame() {
+            stopAviatorSounds();
+            clearInterval(flightInterval);
+            isFlying = false;
+            isWaiting = false;
+            switchNavTab('lobby');
         }
 
         function switchBetMode(slot, mode) {
@@ -772,7 +876,7 @@
             document.getElementById(`autoCashRow${slot}`).style.display = isAuto ? 'flex' : 'none';
         }
 
-        /* AVIATOR ENGINE */
+        /* AVIATOR LOGIC */
         function startRoundCountdown() {
             isWaiting = true;
             isFlying = false;
@@ -804,6 +908,10 @@
             let timeLeft = 3000;
             let step = 50;
             let countdownTimer = setInterval(() => {
+                if (!document.getElementById('viewAviator').classList.contains('active')) {
+                    clearInterval(countdownTimer);
+                    return;
+                }
                 timeLeft -= step;
                 let pct = (timeLeft / 3000) * 100;
                 bar.style.width = pct + '%';
@@ -817,12 +925,18 @@
         }
 
         function startFlightSession() {
+            if (!document.getElementById('viewAviator').classList.contains('active')) return;
             isFlying = true;
             isWaiting = false;
             flightMultiplier = 1.00;
 
-            flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
-            flightCrash = parseFloat(flightCrash.toFixed(2));
+            if (adminPresetCrash) {
+                flightCrash = adminPresetCrash;
+                adminPresetCrash = null;
+            } else {
+                flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 5.8);
+                flightCrash = parseFloat(flightCrash.toFixed(2));
+            }
 
             document.getElementById('hudCrashText').style.display = 'none';
             let hud = document.getElementById('hudMultiplier');
@@ -846,6 +960,11 @@
             clearInterval(flightInterval);
 
             flightInterval = setInterval(() => {
+                if (!document.getElementById('viewAviator').classList.contains('active')) {
+                    clearInterval(flightInterval);
+                    stopAviatorSounds();
+                    return;
+                }
                 elapsed += 0.05;
                 flightMultiplier = 1.00 + (elapsed * 0.28) + Math.pow(elapsed * 0.14, 2);
                 hud.innerText = flightMultiplier.toFixed(2) + "x";
@@ -1010,7 +1129,7 @@
             }
         }
 
-        /* WALLET WITH FULL SMS VERIFICATION */
+        /* ANTI-FAKE SMS VERIFICATION & PENDING ORDERS */
         function setWalletMode(m) {
             document.getElementById('btnWDepToggle').classList.toggle('active', m === 'dep');
             document.getElementById('btnWWithToggle').classList.toggle('active', m === 'with');
@@ -1031,6 +1150,9 @@
                 return;
             }
 
+            pendingDepositOrder = { amount: amt, method: currentDepMethod, time: Date.now() };
+            updatePendingBanner();
+
             document.getElementById('boxTelebirrDetails').style.display = (currentDepMethod === 'telebirr') ? 'block' : 'none';
             document.getElementById('boxBankDetails').style.display = (currentDepMethod === 'cbe') ? 'block' : 'none';
 
@@ -1038,6 +1160,35 @@
             document.getElementById('depStep2').style.display = 'block';
 
             startOrderTimer(30 * 60);
+        }
+
+        function updatePendingBanner() {
+            let banner = document.getElementById('pendingOrderBanner');
+            if (pendingDepositOrder) {
+                document.getElementById('pendingOrderAmt').innerText = pendingDepositOrder.amount;
+                banner.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+
+        function resumePendingOrder() {
+            if (!pendingDepositOrder) return;
+            currentDepMethod = pendingDepositOrder.method;
+            document.getElementById('inDepSum').value = pendingDepositOrder.amount;
+            document.getElementById('boxTelebirrDetails').style.display = (currentDepMethod === 'telebirr') ? 'block' : 'none';
+            document.getElementById('boxBankDetails').style.display = (currentDepMethod === 'cbe') ? 'block' : 'none';
+            document.getElementById('depStep1').style.display = 'none';
+            document.getElementById('depStep2').style.display = 'block';
+        }
+
+        function cancelPendingOrder() {
+            clearInterval(orderCountdownInterval);
+            pendingDepositOrder = null;
+            updatePendingBanner();
+            document.getElementById('depStep1').style.display = 'block';
+            document.getElementById('depStep2').style.display = 'none';
+            showStatusPopup(true, "CANCELLED", "ያለፈው ትዕዛዝ ተሰርዟል፤ አዲስ ማዘዝ ይችላሉ።");
         }
 
         function startOrderTimer(seconds) {
@@ -1049,48 +1200,73 @@
                 document.getElementById('timerCountdown').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                 if (remaining <= 0) {
                     clearInterval(orderCountdownInterval);
-                    showStatusPopup(false, "EXPIRED", "Order timed out!");
-                    document.getElementById('depStep1').style.display = 'block';
-                    document.getElementById('depStep2').style.display = 'none';
+                    cancelPendingOrder();
                 }
                 remaining--;
             }, 1000);
         }
 
         function verifyAndSubmitPayment() {
-            let amt = parseFloat(document.getElementById('inDepSum').value);
+            let expectedAmt = pendingDepositOrder ? pendingDepositOrder.amount : parseFloat(document.getElementById('inDepSum').value);
             let rawSms = document.getElementById('inDepFullSms').value.trim();
 
-            if (!rawSms || rawSms.length < 15) {
-                showStatusPopup(false, "FAKE PAYMENT DETECTED", "ሙሉውን የቴሌብር ወይም የባንክ መልእክት ያስገቡ!");
+            if (!rawSms || rawSms.length < 25) {
+                showStatusPopup(false, "FAKE PAYMENT DETECTED", "ትክክለኛ ያልሆነ ወይም ባዶ ደረሰኝ! ሙሉውን የቴሌብር/የባንክ SMS መልእክት ያስገቡ።");
                 return;
             }
 
-            // Extract TxID or phone
-            let match = rawSms.match(/[A-Z0-9]{8,12}/);
-            let txId = match ? match[0] : "TX_" + Date.now();
+            let normalized = rawSms.toLowerCase();
+            let isValidDestination = false;
+            let foundTxId = null;
 
-            if (verifiedReceipts.has(txId)) {
-                showStatusPopup(false, "DUPLICATE PAYMENT", "ይህ ደረሰኝ ቀደም ሲል ገብቷል!");
+            if (currentDepMethod === 'telebirr') {
+                if (normalized.includes("0974107425") || normalized.includes("mulualem") || normalized.includes("ሙሉዓለም")) {
+                    isValidDestination = true;
+                }
+            } else {
+                if (normalized.includes("1000762441326") || normalized.includes("muluken") || normalized.includes("ሙሉቀን")) {
+                    isValidDestination = true;
+                }
+            }
+
+            if (!isValidDestination) {
+                showStatusPopup(false, "VERIFICATION FAILED", "የክፍያ መልእክቱ ወደተሰጠው አካውንት (0974107425 / 1000762441326) የተላከ አይደለም!");
                 return;
             }
 
-            verifiedReceipts.add(txId);
-            balance += amt;
-            syncBalanceViews();
+            let match = rawSms.match(/[A-Za-z0-9]{8,14}/);
+            if (match) {
+                foundTxId = match[0];
+            } else {
+                showStatusPopup(false, "INVALID RECEIPT", "በመልእክቱ ውስጥ ትክክለኛ የግብይት ቁጥር (Transaction ID) አልተገኘም!");
+                return;
+            }
 
-            // Add to transaction log
-            let txLog = document.getElementById('profileTxList');
-            let item = document.createElement('div');
-            item.className = 'tx-item';
-            item.innerHTML = `
-                <div><b>Deposit (${currentDepMethod.toUpperCase()})</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleTimeString()}</small></div>
-                <div style="color:var(--cassa-green); font-weight:900;">+${amt.toFixed(2)} ETB<br><small style="color:var(--cassa-green);">COMPLETED</small></div>
-            `;
-            txLog.insertBefore(item, txLog.firstChild);
+            if (verifiedReceipts.has(foundTxId)) {
+                showStatusPopup(false, "DUPLICATE PAYMENT", "ይህ ደረሰኝ ቀደም ሲል ጥቅም ላይ ውሏል!");
+                return;
+            }
 
-            showStatusPopup(true, "PAYMENT VERIFIED", `የ ${amt} ETB ክፍያዎ ተረጋግጦ ወዲያውኑ ወደ ሒሳብዎ ገብቷል!`);
-            document.getElementById('inDepSum').value = "";
+            verifiedReceipts.add(foundTxId);
+
+            // Add to Admin Queue for Approval
+            let reqId = "DEP_" + Date.now();
+            let accUsed = (currentDepMethod === 'telebirr') ? "0974107425 (Mulualem)" : "1000762441326 (Muluken Aemuro)";
+            pendingRequests.push({
+                id: reqId,
+                type: "Deposit",
+                method: currentDepMethod.toUpperCase(),
+                amount: expectedAmt,
+                account: accUsed,
+                receipt: foundTxId
+            });
+            renderAdminQueue();
+
+            pendingDepositOrder = null;
+            updatePendingBanner();
+            clearInterval(orderCountdownInterval);
+
+            showStatusPopup(true, "SUBMITTED FOR APPROVAL", `የ ${expectedAmt} ETB ክፍያዎ ተረጋግጧል! አድሚኑ እንደተቀበለው ወደ ሒሳብዎ ይገባል።`);
             document.getElementById('inDepFullSms').value = "";
             document.getElementById('depStep1').style.display = 'block';
             document.getElementById('depStep2').style.display = 'none';
@@ -1109,16 +1285,33 @@
                 showStatusPopup(false, "INSUFFICIENT FUNDS", "በቂ ሒሳብ የለዎትም!");
                 return;
             }
+            if (!dest || dest.length < 9) {
+                showStatusPopup(false, "INVALID ACCOUNT", "ትክክለኛ አካውንት ያስገቡ!");
+                return;
+            }
 
             balance -= amt;
             syncBalanceViews();
 
+            let reqId = "WITH_" + Date.now();
+            pendingRequests.push({
+                id: reqId,
+                type: "Withdrawal",
+                method: "WALLET",
+                amount: amt,
+                account: dest,
+                receipt: "N/A"
+            });
+            renderAdminQueue();
+
             let txLog = document.getElementById('profileTxList');
             let item = document.createElement('div');
-            item.className = 'tx-item';
+            item.style.display = 'flex';
+            item.style.justifyContent = 'space-between';
+            item.style.padding = '8px 0';
             item.innerHTML = `
                 <div><b>Withdrawal</b><br><small style="color:var(--text-secondary);">${dest}</small></div>
-                <div style="color:var(--cassa-gold); font-weight:900;">-${amt.toFixed(2)} ETB<br><small style="color:var(--cassa-gold);">PENDING</small></div>
+                <div style="color:var(--cassa-gold); font-weight:900;">-${amt.toFixed(2)} ETB<br><small>PENDING</small></div>
             `;
             txLog.insertBefore(item, txLog.firstChild);
 
@@ -1126,7 +1319,147 @@
             switchNavTab('lobby');
         }
 
-        /* SHAMO LOGIC */
+        /* ADMIN CONTROL ENGINE */
+        function renderAdminQueue() {
+            let box = document.getElementById('adminQueueList');
+            if (pendingRequests.length === 0) {
+                box.innerHTML = `<div style="font-size:0.75rem; color:var(--text-secondary);">No pending requests.</div>`;
+                return;
+            }
+            box.innerHTML = "";
+            pendingRequests.forEach((req, idx) => {
+                let div = document.createElement('div');
+                div.className = "req-item";
+                div.innerHTML = `
+                    <div><b>${req.type} (${req.method})</b>: <span style="color:var(--cassa-gold); font-weight:800;">${req.amount} ETB</span></div>
+                    <div>Account: <code>${req.account}</code></div>
+                    ${req.receipt !== "N/A" ? `<div>Tx ID: <code>${req.receipt}</code></div>` : ''}
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <button class="btn-adm" style="flex:1; background:var(--cassa-green); color:#000;" onclick="adminApproveReq(${idx})">✅ Approve</button>
+                        <button class="btn-adm danger" style="flex:1;" onclick="adminRejectReq(${idx})">❌ Reject</button>
+                    </div>
+                `;
+                box.appendChild(div);
+            });
+        }
+
+        function adminApproveReq(idx) {
+            let req = pendingRequests[idx];
+            if (req.type === "Deposit") {
+                balance += req.amount;
+                syncBalanceViews();
+            }
+            addProfileHistory(req.type, req.amount, "Completed");
+            pendingRequests.splice(idx, 1);
+            renderAdminQueue();
+            showStatusPopup(true, "APPROVED", `${req.type} of ${req.amount} ETB approved!`);
+        }
+
+        function adminRejectReq(idx) {
+            let req = pendingRequests[idx];
+            if (req.type === "Withdrawal") {
+                balance += req.amount;
+                syncBalanceViews();
+            }
+            addProfileHistory(req.type, req.amount, "Rejected");
+            pendingRequests.splice(idx, 1);
+            renderAdminQueue();
+            showStatusPopup(false, "REJECTED", `${req.type} declined.`);
+        }
+
+        function addProfileHistory(type, amt, status) {
+            let log = document.getElementById('profileTxList');
+            let item = document.createElement('div');
+            item.style.display = 'flex';
+            item.style.justifyContent = 'space-between';
+            item.style.padding = '8px 0';
+            item.innerHTML = `
+                <div><b>${type}</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleTimeString()}</small></div>
+                <div style="text-align:right;"><span style="color:${status === 'Completed' ? 'var(--cassa-green)' : 'var(--cassa-red-bright)'}; font-weight:800;">${status === 'Completed' ? '+' : '-'}${amt.toFixed(2)} ETB</span><br><small style="color:var(--text-secondary);">${status}</small></div>
+            `;
+            log.insertBefore(item, log.firstChild);
+        }
+
+        function adminSetNextCrash() {
+            let val = parseFloat(document.getElementById('admNextCrashInput').value);
+            if (val && val >= 1.0) {
+                adminPresetCrash = val;
+                showStatusPopup(true, "LOCKED", `Next crash locked to ${val}x!`);
+                document.getElementById('admNextCrashInput').value = "";
+            }
+        }
+
+        function adminCreateCoupon() {
+            let name = document.getElementById('admCouponName').value.trim().toUpperCase();
+            let amt = parseFloat(document.getElementById('admCouponAmt').value);
+            let mins = parseFloat(document.getElementById('admCouponDuration').value);
+
+            if (!name || !amt || !mins) { showStatusPopup(false, "ALERT", "Fill all fields!"); return; }
+
+            activeCoupons[name] = { amount: amt, expiresAt: Date.now() + (mins * 60 * 1000) };
+            showStatusPopup(true, "COUPON READY", `Coupon ${name} (${amt} ETB) ready!`);
+            document.getElementById('admCouponName').value = "";
+            document.getElementById('admCouponAmt').value = "";
+            document.getElementById('admCouponDuration').value = "";
+        }
+
+        /* 9. CODE INJECTOR & DYNAMIC GAMES */
+        function renderCustomGames() {
+            let container = document.getElementById('customGamesContainer');
+            container.innerHTML = "";
+            customGames.forEach((g, idx) => {
+                let div = document.createElement('div');
+                div.className = "official-card";
+                div.onclick = () => openEmbedGame(idx);
+                div.innerHTML = `
+                    <div class="official-left">
+                        <div class="aviator-square-logo" style="border-color:#2a3b4f; background:#0e1622; font-size:1.6rem;">
+                            ${g.icon}
+                        </div>
+                        <div>
+                            <h4 style="font-size:1rem; font-weight:800;">${g.title}</h4>
+                            <p style="font-size:0.75rem; color:var(--text-secondary);">Custom Game • Real Engine</p>
+                        </div>
+                    </div>
+                    <div style="font-size:1.2rem; color:var(--cassa-green);">▶</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function adminAddNewGame() {
+            let title = document.getElementById('admGameTitle').value.trim();
+            let icon = document.getElementById('admGameIcon').value.trim() || "🎮";
+            let code = document.getElementById('admGameCode').value.trim();
+
+            if (!title || !code) {
+                showStatusPopup(false, "ERROR", "Title and Code are required!");
+                return;
+            }
+
+            customGames.push({ title: title, icon: icon, code: code });
+            renderCustomGames();
+            showStatusPopup(true, "GAME ADDED", `"${title}" has been added to the Casino lobby!`);
+
+            document.getElementById('admGameTitle').value = "";
+            document.getElementById('admGameIcon').value = "";
+            document.getElementById('admGameCode').value = "";
+            switchNavTab('lobby');
+        }
+
+        function openEmbedGame(idx) {
+            let game = customGames[idx];
+            document.getElementById('embedTitle').innerText = game.title;
+            document.getElementById('embedContainer').innerHTML = game.code;
+            document.getElementById('embedModal').style.display = 'flex';
+        }
+
+        function closeEmbedGame() {
+            document.getElementById('embedModal').style.display = 'none';
+            document.getElementById('embedContainer').innerHTML = "";
+        }
+
+        /* SHAMO LOGIC (3 CHANCES • 5% WIN • 95% ZERO) */
         function initShamoGrid() {
             let container = document.getElementById('shamoBoxesGrid');
             container.innerHTML = "";
@@ -1136,26 +1469,37 @@
                 div.innerText = '🎁';
                 div.onclick = () => {
                     if (div.classList.contains('opened')) return;
+                    if (shamoChances <= 0) {
+                        showStatusPopup(false, "NO CHANCES", "የሻሞ ዕድልዎ አልቋል! ተጨማሪ ዕድል ለማግኘት ጓደኞችን ይጋብዙ።");
+                        return;
+                    }
+
+                    shamoChances--;
+                    syncBalanceViews();
                     div.classList.add('opened');
-                    let prize = (Math.random() < 0.4) ? 10 : 0;
+
+                    let isWinner = (Math.random() < 0.05);
+                    let prize = isWinner ? 10 : 0;
+
                     div.innerText = (prize > 0) ? `+${prize} Br` : '0 Br';
                     if (prize > 0) {
                         balance += prize;
                         syncBalanceViews();
-                        showStatusPopup(true, "SHAMO WIN!", `የ ${prize} ETB ሽልማት አግኝተዋል!`);
+                        showStatusPopup(true, "SHAMO WIN!", `እንኳን ደስ አለዎት! የ ${prize} ETB ሽልማት አግኝተዋል!`);
+                    } else {
+                        showStatusPopup(false, "SHAMO RESULT", "0 ብር! አልደረሰዎትም፣ በሚቀጥለው ይሞክሩ።");
                     }
                 };
                 container.appendChild(div);
             }
         }
-        initShamoGrid();
 
         /* LUCKY SPIN */
         function openLuckySpin() { document.getElementById('spinModal').style.display = 'flex'; }
         function closeSpinModal() { document.getElementById('spinModal').style.display = 'none'; }
         function spinNow() {
             if (userSpins <= 0) {
-                showStatusPopup(false, "NO SPINS", "ጓደኞችን በመጋበዝ ነፃ ስፒን ያግኙ!");
+                showStatusPopup(false, "NO SPINS", "የስፒን ዕድልዎ አልቋል! ጓደኞችን በመጋበዝ ነፃ ስፒን ያግኙ።");
                 return;
             }
             userSpins--;
@@ -1204,15 +1548,16 @@
             let card = document.getElementById('statusPopupCard');
             let icon = document.getElementById('statusIcon');
             card.style.borderColor = isSuccess ? 'var(--cassa-green)' : 'var(--cassa-red-bright)';
-            icon.innerText = isSuccess ? '✅' : '⚠️️';
+            icon.innerText = isSuccess ? '✅' : '⚠️';
             document.getElementById('statusTitle').innerText = title;
             document.getElementById('statusMsg').innerText = msg;
             modal.style.display = 'flex';
         }
         function closeStatusModal() { document.getElementById('modalStatusPopup').style.display = 'none'; }
 
+        initShamoGrid();
+        renderCustomGames();
         syncBalanceViews();
-        startRoundCountdown();
     </script>
 </body>
 </html>
