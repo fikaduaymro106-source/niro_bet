@@ -9,8 +9,8 @@
         :root {
             --bg-base: #000000;
             --bg-surface: #0f1318;
-            --bg-card: #161b22;
-            --bg-elevated: #1f2631;
+            --bg-card: #14181f;
+            --bg-elevated: #1d232c;
             --niro-green: #28a745;
             --niro-red: #e5283b;
             --niro-gold: #ff9800;
@@ -35,7 +35,7 @@
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* 1. LOBBY VIEW */
+        /* LOBBY VIEW */
         .hero-promo { margin: 10px; border-radius: 14px; background: radial-gradient(circle at 85% 50%, #1b5e20 0%, #071f0b 100%); border: 1px solid #2e7d32; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
         .hero-promo h2 { font-size: 1.25rem; font-weight: 900; line-height: 1.2; }
         .hero-promo h2 span { color: var(--niro-gold); font-size: 1.45rem; }
@@ -53,7 +53,7 @@
         .official-logo-box { width: 75px; height: 50px; background: #16070a; border-radius: 8px; border: 1px solid #4a1520; display: flex; align-items: center; justify-content: center; }
         .aviator-font-logo { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-weight: 900; color: #e5283b; font-style: italic; letter-spacing: -1px; }
 
-        /* 2. AVIATOR ARENA (EXACT VIDEO MATCH) */
+        /* AVIATOR ARENA (EXACT 4-CORNER CASSA SCREEN) */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 6px; }
         .aviator-brand-text { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.7rem; font-style: italic; font-weight: 900; color: #e5283b; }
@@ -63,12 +63,12 @@
         .hist-chip { background: #12151b; border: 1px solid var(--border-dim); padding: 2px 7px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; color: #3f51b5; white-space: nowrap; }
         .hist-chip.high { color: #9c27b0; border-color: rgba(156,39,176,0.4); }
 
-        /* Screen Radar */
-        .radar-box { position: relative; width: 100%; height: 200px; background: radial-gradient(circle at 85% 50%, #290813 0%, #09090d 80%); border: 1px solid #331520; border-radius: 12px; overflow: hidden; }
+        /* Compact 4-Corner Arena (165px) */
+        .radar-box { position: relative; width: 100%; height: 165px; background: radial-gradient(circle at 85% 50%, #290813 0%, #09090d 80%); border: 1px solid #331520; border-radius: 10px; overflow: hidden; }
         .sunburst-bg { position: absolute; inset: -40px; background: repeating-conic-gradient(from 0deg, rgba(229,40,59,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 55s linear infinite; pointer-events: none; }
         @keyframes rotateSunburst { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .radar-dots-axis { position: absolute; bottom: 12px; left: 0; right: 0; height: 6px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
+        .radar-dots-axis { position: absolute; bottom: 10px; left: 0; right: 0; height: 6px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
         .radar-dot { width: 3.5px; height: 3.5px; background: rgba(255,255,255,0.22); border-radius: 50%; flex-shrink: 0; }
         @keyframes slideDots { from { transform: translateX(0); } to { transform: translateX(-17.5px); } }
 
@@ -78,35 +78,38 @@
         .plane-group { transition: transform 0.05s linear; }
 
         .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
-        .multiplier-counter { font-size: 3.4rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.95); }
-        .multiplier-bust { font-size: 1.25rem; font-weight: 900; color: var(--niro-red); margin-top: 2px; display: none; }
+        .multiplier-counter { font-size: 3.2rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; text-shadow: 0 4px 16px rgba(0,0,0,0.95); }
+        .multiplier-bust { font-size: 1.2rem; font-weight: 900; color: var(--niro-red); margin-top: 2px; display: none; }
 
-        /* Dual Betting Controls */
-        .betting-dock { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
-        .dock-module { background: #13171d; border: 1px solid var(--border-dim); border-radius: 12px; padding: 8px; }
-        .dock-mode-tabs { display: flex; justify-content: space-around; font-size: 0.72rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
+        /* Vertical Stacked Betting Modules (ቁልቁል ወደ ታች) */
+        .betting-dock-vertical { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+        .dock-module { background: #13171d; border: 1px solid var(--border-dim); border-radius: 12px; padding: 8px 10px; display: flex; flex-direction: column; }
+        .dock-mode-tabs { display: flex; justify-content: flex-start; gap: 14px; font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
         .dock-mode-tabs span { cursor: pointer; padding: 2px 10px; border-radius: 4px; }
         .dock-mode-tabs span.active { color: #fff; background: var(--bg-elevated); }
 
-        .stepper-row { display: flex; justify-content: space-between; align-items: center; background: #080a0e; border: 1px solid var(--border-dim); border-radius: 6px; padding: 3px 6px; margin-bottom: 6px; }
-        .step-btn { background: none; border: none; color: #fff; font-size: 1.2rem; width: 24px; cursor: pointer; }
-        .step-val { width: 50px; text-align: center; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.95rem; }
+        .dock-row-controls { display: grid; grid-template-columns: 1fr 1.3fr; gap: 10px; align-items: center; }
+        .stepper-row { display: flex; justify-content: space-between; align-items: center; background: #080a0e; border: 1px solid var(--border-dim); border-radius: 6px; padding: 4px 6px; }
+        .step-btn { background: none; border: none; color: #fff; font-size: 1.2rem; width: 26px; cursor: pointer; }
+        .step-val { width: 45px; text-align: center; background: none; border: none; color: #fff; font-weight: 800; font-size: 1rem; }
 
-        .auto-cash-row { display: none; margin-bottom: 6px; font-size: 0.7rem; color: var(--text-secondary); align-items: center; justify-content: space-between; background: #0c0f13; padding: 3px 6px; border-radius: 4px; }
-        .auto-cash-row input { width: 50px; background: #000; border: 1px solid var(--border-dim); color: #fff; text-align: center; font-weight: 800; border-radius: 3px; font-size: 0.75rem; }
+        .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px; }
+        .chip-tag { background: #1c222b; border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
 
-        .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 6px; }
-        .chip-tag { background: #1c222b; border: none; color: #cbd5e1; border-radius: 4px; padding: 5px 0; font-size: 0.7rem; font-weight: 700; cursor: pointer; }
-        .btn-bet-trigger { width: 100%; padding: 12px 6px; border-radius: 10px; border: none; font-size: 1rem; font-weight: 900; background: #00c853; color: #fff; cursor: pointer; }
+        .auto-cash-row { display: none; margin-top: 6px; font-size: 0.72rem; color: var(--text-secondary); align-items: center; justify-content: space-between; background: #0c0f13; padding: 4px 8px; border-radius: 4px; }
+        .auto-cash-row input { width: 55px; background: #000; border: 1px solid var(--border-dim); color: #fff; text-align: center; font-weight: 800; border-radius: 3px; font-size: 0.8rem; }
+
+        .btn-bet-trigger { width: 100%; height: 100%; min-height: 52px; border-radius: 10px; border: none; font-size: 1.1rem; font-weight: 900; background: #00c853; color: #fff; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .btn-bet-trigger.cashing { background: #ff9800; color: #000; }
         .btn-bet-trigger.waiting { background: #212833; color: var(--text-secondary); cursor: not-allowed; }
 
         .my-live-bar { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; margin-top: 6px; font-size: 0.75rem; }
 
-        /* Popups */
-        .toast-notify { position: fixed; top: 18%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1b5e20, #0a290d); border: 2px solid #ffb300; border-radius: 12px; padding: 14px 24px; text-align: center; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; }
-        .toast-notify h3 { font-size: 1rem; color: #fff; }
-        .toast-notify .toast-val { font-size: 1.8rem; font-weight: 900; color: #ffb300; margin-top: 2px; }
+        /* Exact Cash Out Toast Modal */
+        .cashout-banner { position: fixed; top: 16%; left: 50%; transform: translateX(-50%); background: #103319; border: 2.5px solid #ffb300; border-radius: 12px; padding: 12px 24px; text-align: center; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; animation: popIn 0.3s ease; }
+        .cashout-banner h4 { font-size: 0.85rem; color: #e8f5e9; font-weight: 800; }
+        .cashout-banner .cashout-num { font-size: 1.6rem; font-weight: 900; color: #ffb300; margin-top: 2px; }
+        @keyframes popIn { from { transform: translate(-50%, -20px) scale(0.8); opacity: 0; } to { transform: translate(-50%, 0) scale(1); opacity: 1; } }
 
         /* WALLET VIEW */
         .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
@@ -128,10 +131,11 @@
         .timer-badge { background: #261719; color: var(--niro-red); border: 1px solid #4a191f; border-radius: 20px; padding: 4px 10px; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
         .copy-chip { background: #1f2732; border: 1px solid var(--border-dim); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 1rem; font-weight: 800; cursor: pointer; }
 
-        /* Modals */
+        /* Lucky Spin Modal with Visible Slices & Text */
         .generic-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; padding: 16px; }
-        .modal-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 14px; padding: 18px; width: 100%; max-width: 320px; text-align: center; }
-        .wheel-circle { width: 220px; height: 220px; border-radius: 50%; border: 6px solid #ffb300; background: conic-gradient(#e5283b 0deg 60deg, #00e676 60deg 120deg, #00bcd4 120deg 180deg, #ff9800 180deg 240deg, #9c27b0 240deg 300deg, #e91e63 300deg 360deg); transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin: 0 auto 16px; }
+        .wheel-wrapper { position: relative; width: 240px; height: 240px; margin: 0 auto 16px; }
+        .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid #ffb300; z-index: 20; }
+        .wheel-circle-svg { width: 100%; height: 100%; border-radius: 50%; border: 5px solid #ffb300; transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
         /* Admin */
         .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
@@ -212,7 +216,7 @@
         </div>
     </div>
 
-    <!-- 2. AVIATOR ARENA (EXACT VIDEO LOOK) -->
+    <!-- 2. AVIATOR ARENA (EXACT 4-CORNER + VERTICAL BETS) -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-top-nav">
@@ -230,14 +234,14 @@
                 <div class="hist-chip">1.72x</div>
             </div>
 
-            <!-- Radar Screen (200px) -->
+            <!-- 4-Corner Arena (165px) -->
             <div class="radar-box">
                 <div class="sunburst-bg"></div>
                 <div class="radar-dots-axis">
                     <div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div><div class="radar-dot"></div>
                 </div>
 
-                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 200" preserveAspectRatio="none">
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 165" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#e5283b" stop-opacity="0.6"/>
@@ -245,19 +249,15 @@
                         </linearGradient>
                     </defs>
 
-                    <path id="curveFill" class="flight-curve-fill" d="M 20 180 Q 20 180 20 180 L 20 180 Z" />
-                    <path id="curveLine" class="flight-curve-line" d="M 20 180 Q 20 180 20 180" />
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 150 Q 20 150 20 150 L 20 150 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 150 Q 20 150 20 150" />
 
-                    <!-- Vector Spribe Plane (Exact Match) -->
-                    <g id="planeG" class="plane-group" transform="translate(20, 180) rotate(-10)">
-                        <!-- Spinning White Propeller Blade -->
+                    <!-- Vector Spribe Plane (X-Tail & Spinning Propeller) -->
+                    <g id="planeG" class="plane-group" transform="translate(20, 150) rotate(-10)">
                         <line x1="26" y1="-14" x2="26" y2="14" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
-                        <!-- Fuselage -->
                         <path d="M -22 2 C -18 -8 18 -6 25 0 C 18 6 -18 8 -22 2 Z" fill="#e5283b"/>
-                        <!-- Wings -->
                         <polygon points="-6,-16 8,-2 3,2 -11,-12" fill="#d32f2f"/>
                         <polygon points="-8,2 3,2 -2,14 -11,11" fill="#b71c1c"/>
-                        <!-- Tail with X Logo -->
                         <polygon points="-18,2 -25,-12 -20,-12 -14,2" fill="#d32f2f"/>
                         <text x="-23" y="-3" font-size="7" font-weight="900" fill="#ffffff">X</text>
                     </g>
@@ -269,54 +269,68 @@
                 </div>
             </div>
 
-            <!-- Dual Bet Modules -->
-            <div class="betting-dock">
-                <!-- Slot 1 -->
+            <!-- Vertical Stacked Betting Modules (አንዱ ከላይ አንዱ ከስር ቁልቁል) -->
+            <div class="betting-dock-vertical">
+                <!-- Bet Deck 1 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs">
                         <span id="tabBet1" class="active" onclick="switchBetMode(1, 'manual')">Bet</span>
                         <span id="tabAuto1" onclick="switchBetMode(1, 'auto')">Auto</span>
                     </div>
-                    <div class="stepper-row">
-                        <button class="step-btn" onclick="adjustStake(1, -1)">-</button>
-                        <input type="number" id="stakeInput1" class="step-val" value="4">
-                        <button class="step-btn" onclick="adjustStake(1, 1)">+</button>
+                    <div class="dock-row-controls">
+                        <div>
+                            <div class="stepper-row">
+                                <button class="step-btn" onclick="adjustStake(1, -1)">-</button>
+                                <input type="number" id="stakeInput1" class="step-val" value="4">
+                                <button class="step-btn" onclick="adjustStake(1, 1)">+</button>
+                            </div>
+                            <div class="chip-shortcuts">
+                                <button class="chip-tag" onclick="setStake(1, 4)">4</button>
+                                <button class="chip-tag" onclick="setStake(1, 10)">10</button>
+                                <button class="chip-tag" onclick="setStake(1, 40)">40</button>
+                                <button class="chip-tag" onclick="setStake(1, 100)">100</button>
+                            </div>
+                        </div>
+                        <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">
+                            <span>Bet</span>
+                            <span style="font-size:0.8rem; font-weight:700;">4.00 ETB</span>
+                        </button>
                     </div>
                     <div id="autoCashRow1" class="auto-cash-row">
-                        <span>Auto Cash:</span>
+                        <span>Auto Cash Out:</span>
                         <input type="number" step="0.1" id="autoCashVal1" value="2.0">
                     </div>
-                    <div class="chip-shortcuts">
-                        <button class="chip-tag" onclick="setStake(1, 4)">4</button>
-                        <button class="chip-tag" onclick="setStake(1, 10)">10</button>
-                        <button class="chip-tag" onclick="setStake(1, 40)">40</button>
-                        <button class="chip-tag" onclick="setStake(1, 100)">100</button>
-                    </div>
-                    <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">Bet<br><span style="font-size:0.75rem;">4.00 ETB</span></button>
                 </div>
 
-                <!-- Slot 2 -->
+                <!-- Bet Deck 2 -->
                 <div class="dock-module">
                     <div class="dock-mode-tabs">
                         <span id="tabBet2" class="active" onclick="switchBetMode(2, 'manual')">Bet</span>
                         <span id="tabAuto2" onclick="switchBetMode(2, 'auto')">Auto</span>
                     </div>
-                    <div class="stepper-row">
-                        <button class="step-btn" onclick="adjustStake(2, -1)">-</button>
-                        <input type="number" id="stakeInput2" class="step-val" value="4">
-                        <button class="step-btn" onclick="adjustStake(2, 1)">+</button>
+                    <div class="dock-row-controls">
+                        <div>
+                            <div class="stepper-row">
+                                <button class="step-btn" onclick="adjustStake(2, -1)">-</button>
+                                <input type="number" id="stakeInput2" class="step-val" value="4">
+                                <button class="step-btn" onclick="adjustStake(2, 1)">+</button>
+                            </div>
+                            <div class="chip-shortcuts">
+                                <button class="chip-tag" onclick="setStake(2, 4)">4</button>
+                                <button class="chip-tag" onclick="setStake(2, 10)">10</button>
+                                <button class="chip-tag" onclick="setStake(2, 40)">40</button>
+                                <button class="chip-tag" onclick="setStake(2, 100)">100</button>
+                            </div>
+                        </div>
+                        <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">
+                            <span>Bet</span>
+                            <span style="font-size:0.8rem; font-weight:700;">4.00 ETB</span>
+                        </button>
                     </div>
                     <div id="autoCashRow2" class="auto-cash-row">
-                        <span>Auto Cash:</span>
+                        <span>Auto Cash Out:</span>
                         <input type="number" step="0.1" id="autoCashVal2" value="2.0">
                     </div>
-                    <div class="chip-shortcuts">
-                        <button class="chip-tag" onclick="setStake(2, 4)">4</button>
-                        <button class="chip-tag" onclick="setStake(2, 10)">10</button>
-                        <button class="chip-tag" onclick="setStake(2, 40)">40</button>
-                        <button class="chip-tag" onclick="setStake(2, 100)">100</button>
-                    </div>
-                    <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">Bet<br><span style="font-size:0.75rem;">4.00 ETB</span></button>
                 </div>
             </div>
 
@@ -404,7 +418,7 @@
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <span style="font-size:1.15rem; font-weight:900; color:#ffb300;">⚙️️ Admin Master Panel</span>
+                <span style="font-size:1.15rem; font-weight:900; color:#ffb300;">⚙️ Admin Master Panel</span>
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
             </div>
 
@@ -472,23 +486,41 @@
         </div>
     </div>
 
-    <!-- NOTIFICATION POPUP -->
-    <div id="toastNotification" class="toast-notify">
-        <h3 id="toastTitle">🎉 CASH OUT!</h3>
-        <div class="toast-val" id="toastAmount">+0.00 ETB</div>
+    <!-- EXACT CASHOUT MODAL (CASH OUT +9.82 ETB) -->
+    <div id="cashoutNotification" class="cashout-banner">
+        <h4>🎉 CASH OUT!</h4>
+        <div class="cashout-num" id="cashoutAmtVal">+0.00 ETB</div>
     </div>
 
-    <!-- LUCKY SPIN MODAL -->
+    <!-- LUCKY SPIN MODAL (WITH TEXT & SOUND) -->
     <div id="spinModal" class="generic-modal">
-        <div class="wheel-circle" id="wheelCircle"></div>
+        <div class="wheel-wrapper">
+            <div class="wheel-pointer"></div>
+            <svg id="wheelSvg" class="wheel-circle-svg" viewBox="0 0 200 200">
+                <!-- 6 Slices with Colors -->
+                <path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#e5283b"/>
+                <path d="M100,100 L186.6,50 A100,100 0 0,1 186.6,150 Z" fill="#00e676"/>
+                <path d="M100,100 L186.6,150 A100,100 0 0,1 100,200 Z" fill="#00bcd4"/>
+                <path d="M100,100 L100,200 A100,100 0 0,1 13.4,150 Z" fill="#ff9800"/>
+                <path d="M100,100 L13.4,150 A100,100 0 0,1 13.4,50 Z" fill="#9c27b0"/>
+                <path d="M100,100 L13.4,50 A100,100 0 0,1 100,0 Z" fill="#e91e63"/>
+                <!-- Texts on Wheel -->
+                <text x="125" y="45" font-size="11" font-weight="900" fill="#fff" transform="rotate(30 125,45)">0 Br</text>
+                <text x="145" y="105" font-size="11" font-weight="900" fill="#000" transform="rotate(90 145,105)">5 Br</text>
+                <text x="125" y="160" font-size="11" font-weight="900" fill="#000" transform="rotate(150 125,160)">10 Br</text>
+                <text x="65" y="160" font-size="11" font-weight="900" fill="#000" transform="rotate(210 65,160)">100 Br</text>
+                <text x="45" y="105" font-size="11" font-weight="900" fill="#fff" transform="rotate(270 45,105)">0 Br</text>
+                <text x="65" y="45" font-size="11" font-weight="900" fill="#fff" transform="rotate(330 65,45)">5 Br</text>
+            </svg>
+        </div>
         <button class="btn-confirm-action" style="max-width:180px;" onclick="spinNow()">SPIN NOW</button>
         <span onclick="closeSpinModal()" style="color:var(--text-secondary); margin-top:14px; cursor:pointer; font-size:0.85rem;">Close</span>
     </div>
 
     <!-- COUPON MODAL -->
     <div id="couponModal" class="generic-modal">
-        <div class="modal-card">
-            <h4 style="margin-bottom:10px; color:#ffb300;">🎟 Redeem Coupon</h4>
+        <div style="background:var(--bg-card); border:1px solid var(--border-dim); border-radius:14px; padding:18px; width:100%; max-width:320px; text-align:center;">
+            <h4 style="margin-bottom:10px; color:#ffb300;">🎟️ Redeem Coupon</h4>
             <input type="text" id="couponInputBox" class="form-input" placeholder="Enter coupon code" style="text-align:center; text-transform:uppercase; margin-bottom:10px;">
             <button class="btn-confirm-action" onclick="claimCouponCode()">Apply Coupon</button>
             <span onclick="closeCouponModal()" style="display:block; color:var(--text-secondary); margin-top:10px; cursor:pointer; font-size:0.8rem;">Cancel</span>
@@ -519,7 +551,7 @@
         const tg = window.Telegram?.WebApp;
         if (tg) tg.expand();
 
-        /* --- ACCURATE AVIATOR AUDIO SYNTHESIZER --- */
+        /* --- CASINO SOUND SYNTHESIZER --- */
         let audioCtx;
         function getAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -533,7 +565,7 @@
                 let ctx = getAudio();
                 if (ctx.state === 'suspended') ctx.resume();
 
-                // 1. Engine low rumble
+                // 1. Engine Rumble
                 engineOsc = ctx.createOscillator();
                 engineGain = ctx.createGain();
                 engineOsc.type = 'sawtooth';
@@ -549,7 +581,7 @@
                 engineGain.connect(ctx.destination);
                 engineOsc.start();
 
-                // 2. High pitch whistle (rising tone)
+                // 2. High-Pitch Rising Whistle
                 whistleOsc = ctx.createOscillator();
                 whistleGain = ctx.createGain();
                 whistleOsc.type = 'sine';
@@ -598,7 +630,7 @@
             } catch(e) {}
         }
 
-        function playCoinWinSound() {
+        function playCashoutCoinSound() {
             try {
                 let ctx = getAudio();
                 let osc = ctx.createOscillator();
@@ -607,13 +639,29 @@
                 osc.frequency.setValueAtTime(659.25, ctx.currentTime);
                 osc.frequency.setValueAtTime(987.77, ctx.currentTime + 0.08);
 
-                gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
 
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 osc.start();
                 osc.stop(ctx.currentTime + 0.35);
+            } catch(e) {}
+        }
+
+        function playWheelTickSound() {
+            try {
+                let ctx = getAudio();
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, ctx.currentTime);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.05);
             } catch(e) {}
         }
 
@@ -682,7 +730,7 @@
             document.getElementById(`autoCashRow${slot}`).style.display = isAuto ? 'flex' : 'none';
         }
 
-        /* --- COMPACT AVIATOR ENGINE --- */
+        /* --- AVIATOR ENGINE --- */
         function startContinuousFlight() {
             isFlying = true;
             isWaiting = false;
@@ -706,11 +754,11 @@
                 let b = document.getElementById('btnDockAction' + i);
                 b.classList.remove('waiting');
                 if (activeBets[i].on && !activeBets[i].cashed) {
-                    b.innerHTML = `Cash out<br><span style="font-size:0.75rem;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ETB</span>`;
+                    b.innerHTML = `<span>Cash out</span><span style="font-size:0.8rem; font-weight:700;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ETB</span>`;
                     b.classList.add('cashing');
                 } else {
                     let cur = document.getElementById('stakeInput' + i).value;
-                    b.innerHTML = `Bet<br><span style="font-size:0.75rem;">${parseFloat(cur).toFixed(2)} ETB</span>`;
+                    b.innerHTML = `<span>Bet</span><span style="font-size:0.8rem; font-weight:700;">${parseFloat(cur).toFixed(2)} ETB</span>`;
                 }
             }
 
@@ -724,11 +772,10 @@
 
                 updateAviatorTone(flightMultiplier);
 
-                // Auto Cash Out Trigger
                 for (let i = 1; i <= 2; i++) {
                     if (activeBets[i].on && !activeBets[i].cashed) {
                         let win = (activeBets[i].stake * flightMultiplier).toFixed(2);
-                        document.getElementById('btnDockAction' + i).innerHTML = `Cash out<br><span style="font-size:0.75rem;">${win} ETB</span>`;
+                        document.getElementById('btnDockAction' + i).innerHTML = `<span>Cash out</span><span style="font-size:0.8rem; font-weight:700;">${win} ETB</span>`;
 
                         if (activeBets[i].auto) {
                             let targetX = parseFloat(document.getElementById(`autoCashVal${i}`).value) || 2.0;
@@ -739,14 +786,14 @@
                     }
                 }
 
-                // S-Curve inside 200px Box
+                // S-Curve in 165px box
                 let progress = Math.min(elapsed / 7.2, 1);
                 let currentX = 20 + 290 * progress;
-                let currentY = 180 - 140 * Math.pow(progress, 1.4);
+                let currentY = 150 - 120 * Math.pow(progress, 1.4);
                 let controlX = 20 + (currentX - 20) * 0.45;
 
-                let dLine = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY}`;
-                let dFill = `M 20 180 Q ${controlX} 180 ${currentX} ${currentY} L ${currentX} 180 Z`;
+                let dLine = `M 20 150 Q ${controlX} 150 ${currentX} ${currentY}`;
+                let dFill = `M 20 150 Q ${controlX} 150 ${currentX} ${currentY} L ${currentX} 150 Z`;
 
                 document.getElementById('curveLine').setAttribute('d', dLine);
                 document.getElementById('curveFill').setAttribute('d', dFill);
@@ -784,7 +831,7 @@
                 let b = document.getElementById('btnDockAction' + i);
                 b.classList.remove('cashing');
                 b.classList.add('waiting');
-                b.innerHTML = `Waiting for next round...`;
+                b.innerHTML = `<span>Waiting for next round...</span>`;
             }
 
             syncBalanceViews();
@@ -805,7 +852,7 @@
             if (!activeBets[slot].on) {
                 if (isWaiting) return;
                 if (stake > balance || stake <= 0 || isNaN(stake)) {
-                    showToastNotify("ALERT", "Insufficient Balance!");
+                    alert("Insufficient Balance!");
                     return;
                 }
                 balance -= stake;
@@ -815,7 +862,7 @@
                 syncBalanceViews();
 
                 if (isFlying) {
-                    btn.innerHTML = `Cash out<br><span style="font-size:0.75rem;">${(stake * flightMultiplier).toFixed(2)} ETB</span>`;
+                    btn.innerHTML = `<span>Cash out</span><span style="font-size:0.8rem; font-weight:700;">${(stake * flightMultiplier).toFixed(2)} ETB</span>`;
                     btn.classList.add('cashing');
                 }
             } else {
@@ -833,17 +880,16 @@
 
                 let btn = document.getElementById('btnDockAction' + slot);
                 btn.classList.remove('cashing');
-                btn.innerHTML = `Bet<br><span style="font-size:0.75rem;">${activeBets[slot].stake.toFixed(2)} ETB</span>`;
+                btn.innerHTML = `<span>Bet</span><span style="font-size:0.8rem; font-weight:700;">${activeBets[slot].stake.toFixed(2)} ETB</span>`;
 
-                playCoinWinSound();
-                showToastNotify("🎉 CASH OUT!", `+${win.toFixed(2)} ETB`);
+                playCashoutCoinSound();
+                showCashoutPopup(win);
             }
         }
 
-        function showToastNotify(title, amount) {
-            let m = document.getElementById('toastNotification');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastAmount').innerText = amount;
+        function showCashoutPopup(amount) {
+            let m = document.getElementById('cashoutNotification');
+            document.getElementById('cashoutAmtVal').innerText = `+${amount.toFixed(2)} ETB`;
             m.style.display = 'block';
             setTimeout(() => { m.style.display = 'none'; }, 2200);
         }
@@ -853,7 +899,7 @@
             let val = Math.max(1, (parseFloat(el.value) || 0) + step);
             el.value = val;
             if (!activeBets[slot].on && !isWaiting) {
-                document.getElementById('btnDockAction' + slot).innerHTML = `Bet<br><span style="font-size:0.75rem;">${val.toFixed(2)} ETB</span>`;
+                document.getElementById('btnDockAction' + slot).innerHTML = `<span>Bet</span><span style="font-size:0.8rem; font-weight:700;">${val.toFixed(2)} ETB</span>`;
             }
         }
 
@@ -861,11 +907,11 @@
             let el = document.getElementById('stakeInput' + slot);
             el.value = val;
             if (!activeBets[slot].on && !isWaiting) {
-                document.getElementById('btnDockAction' + slot).innerHTML = `Bet<br><span style="font-size:0.75rem;">${val.toFixed(2)} ETB</span>`;
+                document.getElementById('btnDockAction' + slot).innerHTML = `<span>Bet</span><span style="font-size:0.8rem; font-weight:700;">${val.toFixed(2)} ETB</span>`;
             }
         }
 
-        /* --- WALLET --- */
+        /* --- WALLET WORKFLOW --- */
         function setWalletMode(m) {
             if (m === 'dep') {
                 document.getElementById('btnWDepToggle').classList.add('active');
@@ -894,7 +940,7 @@
         function createDepositOrder() {
             let amt = parseFloat(document.getElementById('inDepSum').value);
             if (!amt || amt < 100) {
-                showToastNotify("ALERT", "Minimum 100 ETB!");
+                alert("Minimum deposit is 100 ETB!");
                 return;
             }
             document.getElementById('depositOrderBox').style.display = 'block';
@@ -910,7 +956,7 @@
                 document.getElementById('timerCountdown').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                 if (remaining <= 0) {
                     clearInterval(orderCountdownInterval);
-                    showToastNotify("EXPIRED", "Order Timed Out");
+                    alert("Order Expired!");
                     document.getElementById('depositOrderBox').style.display = 'none';
                 }
                 remaining--;
@@ -919,16 +965,16 @@
 
         function copyDepositNumber() {
             navigator.clipboard.writeText("0974107425");
-            showToastNotify("COPIED", "0974107425");
+            alert("Number Copied: 0974107425 (Mulualem)");
         }
 
         function submitDepositAction() {
             let amt = parseFloat(document.getElementById('inDepSum').value);
             let receipt = document.getElementById('inDepReceipt').value.trim();
 
-            if (!amt || amt < 100) { showToastNotify("ALERT", "Minimum 100 ETB!"); return; }
-            if (!receipt || receipt.length < 5) { showToastNotify("ALERT", "Invalid SMS Receipt!"); return; }
-            if (usedReceipts.has(receipt)) { showToastNotify("ALERT", "Duplicate Receipt!"); return; }
+            if (!amt || amt < 100) { alert("Minimum deposit is 100 ETB!"); return; }
+            if (!receipt || receipt.length < 5) { alert("Invalid SMS Receipt!"); return; }
+            if (usedReceipts.has(receipt)) { alert("Duplicate Receipt!"); return; }
 
             usedReceipts.add(receipt);
 
@@ -946,7 +992,7 @@
                 tg.sendData(JSON.stringify({ type: "deposit_request", amount: amt, receipt: receipt }));
             }
 
-            showToastNotify("SUBMITTED", "Pending Approval");
+            alert("Deposit Request Submitted for Approval!");
             document.getElementById('depositOrderBox').style.display = 'none';
             document.getElementById('inDepSum').value = "";
             document.getElementById('inDepReceipt').value = "";
@@ -957,8 +1003,8 @@
             let amt = parseFloat(document.getElementById('inWithSum').value);
             let dest = document.getElementById('inWithDest').value.trim();
 
-            if (!amt || amt < 100 || amt > balance) { showToastNotify("ALERT", "Check balance / Min 100"); return; }
-            if (!dest || dest.length < 9) { showToastNotify("ALERT", "Invalid account!"); return; }
+            if (!amt || amt < 100 || amt > balance) { alert("Minimum withdraw is 100 ETB and cannot exceed balance!"); return; }
+            if (!dest || dest.length < 9) { alert("Invalid account number!"); return; }
 
             balance -= amt;
             syncBalanceViews();
@@ -977,7 +1023,7 @@
                 tg.sendData(JSON.stringify({ type: "withdraw_request", amount: amt, account: dest }));
             }
 
-            showToastNotify("REQUESTED", `Pending: -${amt.toFixed(2)} ETB`);
+            alert(`Withdrawal request of ${amt.toFixed(2)} ETB sent!`);
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
@@ -1016,7 +1062,7 @@
             addProfileHistory(req.type, req.amount, "Completed");
             pendingRequests.splice(idx, 1);
             renderAdminQueue();
-            showToastNotify("APPROVED", `${req.type} ${req.amount} ETB`);
+            alert(`Approved: ${req.type} ${req.amount} ETB`);
         }
 
         function adminRejectReq(idx) {
@@ -1028,7 +1074,7 @@
             addProfileHistory(req.type, req.amount, "Rejected");
             pendingRequests.splice(idx, 1);
             renderAdminQueue();
-            showToastNotify("REJECTED", `${req.type} Cancelled`);
+            alert(`Rejected: ${req.type} Cancelled`);
         }
 
         function addProfileHistory(type, amt, status) {
@@ -1051,7 +1097,7 @@
             let val = parseFloat(document.getElementById('admNextCrashInput').value);
             if (val && val >= 1.0) {
                 adminPresetCrash = val;
-                showToastNotify("LOCKED", `Crash at ${val}x`);
+                alert(`Next round locked to crash at ${val}x!`);
                 document.getElementById('admNextCrashInput').value = "";
             }
         }
@@ -1061,44 +1107,70 @@
             let amt = parseFloat(document.getElementById('admCouponAmt').value);
             let mins = parseFloat(document.getElementById('admCouponDuration').value);
 
-            if (!name || !amt || !mins) { showToastNotify("ALERT", "Fill all fields!"); return; }
+            if (!name || !amt || !mins) { alert("Fill all fields!"); return; }
 
             activeCoupons[name] = {
                 amount: amt,
                 expiresAt: Date.now() + (mins * 60 * 1000)
             };
 
-            showToastNotify("COUPON READY", `${name} (${amt} ETB)`);
+            alert(`Coupon "${name}" created!\nValue: ${amt} ETB\nExpires in: ${mins} minutes`);
             document.getElementById('admCouponName').value = "";
             document.getElementById('admCouponAmt').value = "";
             document.getElementById('admCouponDuration').value = "";
         }
 
-        /* --- LUCKY SPIN --- */
+        /* --- LUCKY SPIN ENGINE (WITH TICK SOUND & VISIBLE AMOUNTS) --- */
         function openLuckySpin() { document.getElementById('spinModal').style.display = 'flex'; }
         function closeSpinModal() { document.getElementById('spinModal').style.display = 'none'; }
+        
+        let spinTickInterval;
         function spinNow() {
-            if (userSpins <= 0) { showToastNotify("SPINS", "Invite friends to get 3 spins!"); return; }
+            if (userSpins <= 0) { alert("Invite friends to get 3 spins!"); return; }
             userSpins--;
             syncBalanceViews();
 
             let rand = Math.random() * 100;
             let winBonus = 0;
-            if (rand < 2) winBonus = 100;
-            else if (rand < 7) winBonus = 10;
-            else if (rand < 17) winBonus = 5;
+            let targetDegree = 0;
 
-            let w = document.getElementById('wheelCircle');
-            let deg = 1440 + Math.floor(Math.random() * 360);
-            w.style.transform = `rotate(${deg}deg)`;
+            // 6 segments (each 60 deg)
+            // Segments: 0: 0 Br, 1: 5 Br, 2: 10 Br, 3: 100 Br, 4: 0 Br, 5: 5 Br
+            if (rand < 2) { 
+                winBonus = 100; // 100 Br (2% chance)
+                targetDegree = 210;
+            } else if (rand < 7) { 
+                winBonus = 10;  // 10 Br (5% chance)
+                targetDegree = 150;
+            } else if (rand < 17) { 
+                winBonus = 5;   // 5 Br (10% chance)
+                targetDegree = 90;
+            } else {
+                winBonus = 0;   // 0 Br (rest)
+                targetDegree = 30;
+            }
+
+            let w = document.getElementById('wheelSvg');
+            let totalRot = 1440 + (360 - targetDegree);
+            w.style.transform = `rotate(${totalRot}deg)`;
+
+            // Play wheel ticks
+            let tickCount = 0;
+            clearInterval(spinTickInterval);
+            spinTickInterval = setInterval(() => {
+                playWheelTickSound();
+                tickCount++;
+                if (tickCount > 25) clearInterval(spinTickInterval);
+            }, 120);
 
             setTimeout(() => {
+                clearInterval(spinTickInterval);
                 if (winBonus > 0) {
                     balance += winBonus;
                     syncBalanceViews();
-                    showToastNotify("🎉 SPIN WIN!", `+${winBonus} ETB`);
+                    alert(`🎉 Congratulations! Spin stopped on ${winBonus} ETB! Added to your balance.`);
                 } else {
-                    showToastNotify("BETTER LUCK", "0 ETB");
+                    alert(`Spin stopped on 0 ETB. Better luck next time!`);
                 }
                 closeSpinModal();
             }, 3600);
@@ -1106,7 +1178,7 @@
 
         function copyReferralLink() {
             navigator.clipboard.writeText(document.getElementById('refLinkText').innerText);
-            showToastNotify("COPIED", "Referral Link");
+            alert("Referral Link Copied! Invite friends to get 3 spins.");
             userSpins += 3;
             syncBalanceViews();
         }
@@ -1121,17 +1193,17 @@
             if (activeCoupons[code]) {
                 let cp = activeCoupons[code];
                 if (Date.now() > cp.expiresAt) {
-                    showToastNotify("EXPIRED", "Coupon timed out!");
+                    alert("Coupon timed out / expired!");
                     delete activeCoupons[code];
                 } else {
                     balance += cp.amount;
                     syncBalanceViews();
-                    showToastNotify("🎉 BONUS APPLIED!", `+${cp.amount} ETB`);
+                    alert(`🎉 Coupon Applied! +${cp.amount} ETB added!`);
                     delete activeCoupons[code];
                     closeCouponModal();
                 }
             } else {
-                showToastNotify("INVALID", "Coupon does not exist!");
+                alert("Invalid or expired coupon!");
             }
         }
 
