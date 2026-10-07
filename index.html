@@ -37,12 +37,12 @@
         .view-pane { display: none; }
         .view-pane.active { display: block; }
 
-        /* TICKER */
+        /* RUNNING TICKER */
         .casino-ticker { background: #14050a; border-bottom: 1px solid rgba(255,23,68,0.3); color: var(--cassa-gold); font-size: 0.72rem; font-weight: 800; padding: 5px 0; overflow: hidden; white-space: nowrap; }
         .ticker-content { display: inline-block; animation: tickerScroll 20s linear infinite; }
         @keyframes tickerScroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        /* COMPACT FLIGHT ANIMATION */
+        /* COMPACT MINI FLIGHT */
         .mini-flight-card { margin: 10px 10px 6px; height: 60px; background: radial-gradient(circle at 50% 50%, #1a050d 0%, #06090e 100%); border: 1.5px solid rgba(255, 23, 68, 0.4); border-radius: 12px; position: relative; overflow: hidden; }
         .mini-flight-trail { position: absolute; bottom: 8px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,23,68,0.8), #ff1744); }
         .mini-jet { position: absolute; top: 10px; left: 45%; animation: miniJetHover 2.5s ease-in-out infinite; }
@@ -152,6 +152,38 @@
         .verify-step.fail { color: var(--cassa-red-bright); font-weight: 800; }
         .step-spinner { width: 14px; height: 14px; border: 2px solid var(--cassa-gold); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* PROFILE PIC STRICT CONTAINMENT FIX */
+        .profile-header-card { background: radial-gradient(circle at 50% 30%, #20132b 0%, #0d1219 90%); border: 1.5px solid #7c4dff; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 14px; }
+        .avatar-circle { 
+            width: 85px !important; 
+            height: 85px !important; 
+            min-width: 85px !important;
+            min-height: 85px !important;
+            max-width: 85px !important;
+            max-height: 85px !important;
+            border-radius: 50% !important; 
+            border: 2.5px solid var(--cassa-gold) !important; 
+            background: #151d28 !important; 
+            margin: 0 auto 10px !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            font-size: 2.5rem !important; 
+            cursor: pointer !important; 
+            overflow: hidden !important; 
+            position: relative !important; 
+        }
+        .avatar-img-preview { 
+            width: 100% !important; 
+            height: 100% !important; 
+            object-fit: cover !important; 
+            border-radius: 50% !important; 
+            display: block !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+        }
 
         /* MASTER ADMIN SUITE */
         .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
@@ -356,7 +388,7 @@
                 </div>
             </div>
 
-            <!-- BET DOCK (MIN 2 ETB) -->
+            <!-- BET DOCK -->
             <div class="betting-dock-vertical">
                 <div class="dock-module">
                     <div class="dock-mode-tabs">
@@ -411,7 +443,7 @@
                 </div>
             </div>
 
-            <!-- 100% REAL LIVE BETS & STATS (NO FAKE INFO) -->
+            <!-- 100% REAL LIVE BETS STATS -->
             <div class="real-live-stats-bar">
                 <div class="real-stat-col">
                     <small>👥 LIVE BETTORS</small>
@@ -429,7 +461,7 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW (WITH 20-MIN TIMER & RESUME) -->
+    <!-- 3. WALLET VIEW -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -585,7 +617,7 @@
         </div>
     </div>
 
-    <!-- 7. PROFILE (WITH GALLERY PHOTO) -->
+    <!-- 7. PROFILE (WITH STRICT CIRCLE PHOTO) -->
     <div id="viewProfile" class="view-pane">
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div class="profile-header-card">
@@ -617,7 +649,7 @@
         </div>
     </div>
 
-    <!-- 8. COMPLETE MASTER ADMIN PANEL (FOR ID 8797798511 ONLY) -->
+    <!-- 8. MASTER ADMIN PANEL (WITH RESTORED HTML CODE INJECTOR) -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -625,7 +657,7 @@
                 <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
             </div>
 
-            <!-- BIG MASTER ON / OFF TOGGLE -->
+            <!-- MASTER ON / OFF TOGGLE -->
             <button id="masterAdminToggleBtn" class="master-toggle-btn off" onclick="toggleMasterAdminSystem()">
                 🔴 MASTER CONTROLLER: OFF (AUTO RANDOM)
             </button>
@@ -633,7 +665,7 @@
                 ✨ WELCOME TO NIRO BET MASTER CONTROLLER! ACTIVE!
             </div>
 
-            <!-- 10-ROUND MULTIPLIER PROGRAMMER WITH MANUAL START BUTTON -->
+            <!-- 10-ROUND MULTIPLIER PROGRAMMER -->
             <div class="admin-card">
                 <h4>🎯 10-Round Aviator Multiplier Programmer</h4>
                 <p style="font-size:0.75rem; color:var(--text-secondary);">የ 10ሩን ተከታታይ በረራዎች Multiplier ያስገቡ፦</p>
@@ -655,7 +687,15 @@
                 </div>
             </div>
 
-            <!-- MANUAL LIVE AVIATOR PILOT COCKPIT (START / STOP) -->
+            <!-- RESTORED HTML / SCRIPT CODE INJECTOR -->
+            <div class="admin-card">
+                <h4>💻 HTML / Script Code Injector</h4>
+                <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:6px;">አዲስ የ HTML ወይም JavaScript ኮድ በቀጥታ በዌብሳይቱ ላይ ለመጨመር፦</p>
+                <textarea id="adminCustomHtmlCode" class="form-textarea" placeholder="Paste custom HTML, CSS, or Script code here..."></textarea>
+                <button class="btn-adm" style="width:100%; margin-top:8px; background:var(--cassa-cyan); color:#000; font-weight:900;" onclick="adminInjectCustomCode()">Inject Code to Page</button>
+            </div>
+
+            <!-- MANUAL LIVE AVIATOR PILOT COCKPIT -->
             <div class="admin-card">
                 <h4>🕹️ Live Aviator Pilot Cockpit (Manual Start & Stop)</h4>
                 <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:8px;">Stop እስክትለው ድረስ ሳይወድቅ በረራው ይቀጥላል፦</p>
@@ -673,7 +713,7 @@
                 <button class="btn-action-main" onclick="adminCreateNewCoupon()">Create Coupon</button>
             </div>
 
-            <!-- SCAMMER / FAKE LOGS CONTROLLER -->
+            <!-- SCAMMER LOGS -->
             <div class="admin-card">
                 <h4>🚨 Scammer & Anti-Scam Logs</h4>
                 <div id="adminScamLogsList" style="font-size:0.75rem; color:var(--text-secondary); background:#090c12; padding:8px; border-radius:8px; border:1px solid var(--border-dim);">
@@ -784,7 +824,6 @@
         const MASTER_ADMIN_ID = "8797798511";
         const currentUserId = tg?.initDataUnsafe?.user?.id ? tg.initDataUnsafe.user.id.toString() : "8797798511";
 
-        // ONLY DISPLAY ADMIN BUTTON FOR MASTER ADMIN
         if (currentUserId === MASTER_ADMIN_ID) {
             document.getElementById('adminNavBtn').style.display = "block";
         }
@@ -823,13 +862,11 @@
         let verifiedReceipts = new Set();
         let pendingWithdrawRequests = JSON.parse(localStorage.getItem("niro_with_queue") || "[]");
 
-        // 10-ROUND PROGRAMMER SYSTEM
         let programmedRounds = [2.5, 1.8, 5.0, 1.2, 10.0, 3.4, 1.5, 2.0, 8.5, 1.1];
         let currentRoundIndex = 0;
         let masterAdminActive = false;
         let manual10RunTriggered = false;
 
-        // REAL STATS
         let liveTotalStakedSum = 0.0;
         let liveTotalWonSum = 0.0;
 
@@ -847,6 +884,7 @@
             localStorage.setItem("niro_with_queue", JSON.stringify(pendingWithdrawRequests));
         }
 
+        /* STRICT PROFILE PIC UPDATE */
         function updateProfileUI() {
             document.getElementById('profUserName').innerText = profileName;
             document.getElementById('profUserHandle').innerText = profileUser;
@@ -876,9 +914,15 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     galleryImageData = e.target.result;
-                    updateProfileUI();
+                    let imgEl = document.getElementById('userAvatarImg');
+                    let emojiEl = document.getElementById('userAvatarEmoji');
+                    if (imgEl && emojiEl) {
+                        imgEl.src = galleryImageData;
+                        imgEl.style.display = "block";
+                        emojiEl.style.display = "none";
+                    }
                     persistUserData();
-                    showStatusPopup(true, "PROFILE PHOTO", "የመረጡት ፎቶ በፕሮፋይልዎ ላይ ተቀምጧል!");
+                    showStatusPopup(true, "PROFILE PHOTO", "የመረጡት ፎቶ በክቡ ፕሮፋይል ላይ ብቻ ተቀምጧል!");
                 };
                 reader.readAsDataURL(file);
             }
@@ -904,15 +948,11 @@
             document.getElementById('liveTotalWonDisplay').innerText = `${liveTotalWonSum.toFixed(2)} ETB`;
         }
 
-        /* 100% RELIABLE DUAL-OSCILLATOR REAL ENGINE SOUND */
+        /* DUAL OSCILLATOR SYNTH SOUND */
         let audioCtx = null;
         function getAudioContext() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
             return audioCtx;
         }
 
@@ -1070,7 +1110,7 @@
             switchNavTab('lobby');
         }
 
-        /* AVIATOR SIMULATION */
+        /* AVIATOR SIMULATION ENGINE */
         let isFlying = false, isWaiting = false;
         let flightMultiplier = 1.00, flightCrash = 1.50, flightInterval;
 
@@ -1151,10 +1191,8 @@
                     currentRoundIndex = 0;
                 }
             } else if (masterAdminActive && !manual10RunTriggered) {
-                // Plane holds until admin triggers run
                 flightCrash = 1.00;
             } else {
-                // Free random flow
                 flightCrash = (Math.random() < 0.38) ? (1.05 + Math.random() * 0.5) : (1.6 + Math.random() * 6.5);
                 flightCrash = parseFloat(flightCrash.toFixed(2));
             }
@@ -1603,7 +1641,6 @@
                         iconElem.innerText = "❌";
                         stepElem.className = "verify-step fail";
 
-                        // Log scam attempt
                         let logBox = document.getElementById('adminScamLogsList');
                         if (logBox) {
                             logBox.innerHTML = `⚠️ <b>አጠራጣሪ ሙከራ:</b> ${errorTitle} (ID: ${currentUserId}) - ${new Date().toLocaleTimeString()}`;
@@ -1761,6 +1798,20 @@
             currentRoundIndex = 0;
             if (!document.getElementById('viewAviator').classList.contains('active')) openAviatorGame();
             showStatusPopup(true, "STARTED", "የ 10ሩ ዙሮች በረራ ተጀምሯል! በዕቅዱ መሰረት ይበራል።");
+        }
+
+        /* HTML / SCRIPT CODE INJECTOR CONTROLLER */
+        function adminInjectCustomCode() {
+            let code = document.getElementById('adminCustomHtmlCode').value.trim();
+            if (code) {
+                let wrapper = document.createElement('div');
+                wrapper.innerHTML = code;
+                document.body.appendChild(wrapper);
+                showStatusPopup(true, "CODE INJECTED", "አዲሱ የ HTML/Script ኮድ በገጹ ላይ ተተግብሯል!");
+                document.getElementById('adminCustomHtmlCode').value = "";
+            } else {
+                showStatusPopup(false, "EMPTY CODE", "እባክዎ መጀመሪያ ኮዱን በሳጥኑ ውስጥ ያስገቡ!");
+            }
         }
 
         function adminCreateNewCoupon() {
