@@ -13,7 +13,7 @@
             --bg-elevated: #1e2532;
             --cassa-green: #00c853;
             --cassa-red: #d32f2f;
-            --cassa-red-bright: #e5283b;
+            --cassa-red-bright: #ff2a4b;
             --cassa-gold: #ffb300;
             --text-primary: #ffffff;
             --text-secondary: #94a3b8;
@@ -40,7 +40,7 @@
         .hero-banner { 
             margin: 10px; 
             border-radius: 14px; 
-            background: linear-gradient(135deg, rgba(211,47,47,0.85) 0%, rgba(10,14,20,0.95) 40%, rgba(0,200,83,0.85) 100%); 
+            background: linear-gradient(135deg, rgba(229,40,59,0.85) 0%, rgba(10,14,20,0.95) 45%, rgba(0,200,83,0.85) 100%); 
             border: 1.5px solid var(--cassa-gold); 
             padding: 16px; 
             position: relative; 
@@ -57,25 +57,26 @@
         .chip-icon { font-size: 1.3rem; margin-bottom: 2px; }
         .chip-title { font-size: 0.65rem; font-weight: 700; color: #cbd5e1; }
 
-        /* EXACT CASSA SQUARE AVIATOR CARD */
-        .official-card { margin: 10px; background: #0c0f14; border: 1.5px solid rgba(229,40,59,0.4); border-radius: 14px; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.8); }
+        /* EXACT AVICTOR 4-CORNER SQUARE CARD */
+        .official-card { margin: 10px; background: #0c0f14; border: 1.5px solid rgba(255,42,75,0.4); border-radius: 14px; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.8); }
         .official-left { display: flex; align-items: center; gap: 12px; }
-        .aviator-square-logo { width: 58px; height: 58px; background: radial-gradient(circle, #2a0810 0%, #0c0205 100%); border: 1.5px solid var(--cassa-red-bright); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-        .aviator-square-logo svg { width: 34px; height: 34px; transform: rotate(-10deg); filter: drop-shadow(0 0 4px #e5283b); }
-        .aviator-square-logo span { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 0.8rem; color: var(--cassa-red-bright); font-weight: 900; margin-top: -3px; }
+        
+        .avictor-square-logo { width: 62px; height: 62px; background: radial-gradient(circle, #2d0a14 0%, #0c0205 100%); border: 1.5px solid #ff2a4b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 14px rgba(255,42,75,0.4); overflow: hidden; }
+        .avictor-square-logo svg { width: 38px; height: 38px; }
+        .avictor-square-logo span { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 0.85rem; color: #ff2a4b; font-weight: 900; margin-top: -4px; text-shadow: 0 0 5px rgba(255,42,75,0.8); }
 
-        /* AVIATOR CASSA ARENA */
+        /* AVIATOR RADAR ARENA */
         .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
         .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 6px; }
-        .aviator-brand-text { display: flex; align-items: center; gap: 5px; font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.8rem; font-style: italic; font-weight: 900; color: var(--cassa-red-bright); text-shadow: 0 0 10px rgba(229,40,59,0.5); }
+        .aviator-brand-text { display: flex; align-items: center; gap: 5px; font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.8rem; font-style: italic; font-weight: 900; color: var(--cassa-red-bright); text-shadow: 0 0 10px rgba(255,42,75,0.5); }
         
         .aviator-history-ribbon { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
         .aviator-history-ribbon::-webkit-scrollbar { display: none; }
         .hist-chip { background: #121722; border: 1px solid var(--border-dim); padding: 2px 7px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; color: #3f51b5; white-space: nowrap; }
         .hist-chip.high { color: #9c27b0; border-color: rgba(156,39,176,0.4); }
 
-        .radar-box { position: relative; width: 100%; height: 175px; background: radial-gradient(circle at 85% 50%, #290813 0%, #09090d 80%); border: 1px solid #331520; border-radius: 10px; overflow: hidden; }
-        .sunburst-bg { position: absolute; inset: -40px; background: repeating-conic-gradient(from 0deg, rgba(229,40,59,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 55s linear infinite; pointer-events: none; }
+        .radar-box { position: relative; width: 100%; height: 175px; background: radial-gradient(circle at 85% 50%, #2b0813 0%, #08090e 80%); border: 1.5px solid #441420; border-radius: 10px; overflow: hidden; }
+        .sunburst-bg { position: absolute; inset: -40px; background: repeating-conic-gradient(from 0deg, rgba(255,42,75,0.06) 0deg 15deg, transparent 15deg 30deg); animation: rotateSunburst 55s linear infinite; pointer-events: none; }
         @keyframes rotateSunburst { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .radar-dots-axis { position: absolute; bottom: 10px; left: 0; right: 0; height: 6px; display: flex; gap: 14px; animation: slideDots 1s linear infinite; pointer-events: none; }
@@ -84,7 +85,7 @@
 
         .stage-svg { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
         .flight-curve-fill { fill: url(#curveGrad); }
-        .flight-curve-line { fill: none; stroke: var(--cassa-red-bright); stroke-width: 3.5; stroke-linecap: round; filter: drop-shadow(0 0 6px #e5283b); }
+        .flight-curve-line { fill: none; stroke: var(--cassa-red-bright); stroke-width: 3.5; stroke-linecap: round; filter: drop-shadow(0 0 6px #ff2a4b); }
         .plane-group { transition: transform 0.05s linear; }
 
         .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
@@ -98,7 +99,7 @@
         .cashout-banner span { font-size: 0.72rem; color: #fff; font-weight: 700; }
         .cashout-banner .cashout-num { font-size: 0.85rem; font-weight: 900; color: var(--cassa-green); margin-left: 4px; }
 
-        /* DUAL BET MODULES */
+        /* BET MODULES */
         .betting-dock-vertical { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
         .dock-module { background: #13171d; border: 1px solid var(--border-dim); border-radius: 12px; padding: 8px 10px; display: flex; flex-direction: column; }
         .dock-mode-tabs { display: flex; justify-content: flex-start; gap: 14px; font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
@@ -200,7 +201,6 @@
 
     <!-- 1. LOBBY VIEW -->
     <div id="viewLobby" class="view-pane active">
-        <!-- MULTI-COLOR GRADIENT BANNER -->
         <div class="hero-banner">
             <h2>እንኳን ደህና መጡ ወደ NIRO GAMES! 🎰<br><span>ጓደኛዎን ይጋብዙ፣ ነፃ ስፒን ይሸለሙ!</span></h2>
             <p>በቴሌብር እና በኢትዮጵያ ንግድ ባንክ ፈጣን ዲፖዚትና ክፍያ።</p>
@@ -218,7 +218,7 @@
                 <div class="chip-title">Shamo (<span id="shamoUserChances">3</span>)</div>
             </div>
             <div class="chip-box" onclick="openCouponModal()">
-                <div class="chip-icon">🎟️️</div>
+                <div class="chip-icon">🎟</div>
                 <div class="chip-title">Coupon</div>
             </div>
             <div class="chip-box" onclick="switchNavTab('vip')">
@@ -233,31 +233,38 @@
             </div>
         </div>
 
-        <!-- EXACT CASSA SQUARE AVIATOR CARD -->
+        <!-- AVICTOR RETRO JET 4-CORNER CARD -->
         <div class="official-card" onclick="openAviatorGame()">
             <div class="official-left">
-                <div class="aviator-square-logo">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#e5283b"/>
+                <div class="avictor-square-logo">
+                    <svg viewBox="0 0 100 100">
+                        <!-- Neon Ring Glow -->
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#ff2a4b" stroke-width="4" filter="drop-shadow(0 0 4px #ff2a4b)"/>
+                        <!-- Propeller Jet Silhouette -->
+                        <path d="M 20 62 L 78 30 C 82 28 86 31 84 35 L 75 42 L 88 47 L 85 53 L 70 48 L 52 58 L 56 68 L 48 70 L 40 60 L 25 66 Z" fill="#ff2a4b"/>
+                        <!-- White Cowling & Spinner Nose -->
+                        <circle cx="83" cy="33" r="5" fill="#ffffff"/>
+                        <!-- Propeller Spin Line -->
+                        <line x1="86" y1="20" x2="80" y2="46" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
                     </svg>
-                    <span>Aviator</span>
+                    <span>Avictor</span>
                 </div>
                 <div>
-                    <h4 style="font-size:1.1rem; font-weight:900; color:#fff;">Aviator Spribe</h4>
-                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Official Cassa Red Jet • Real Engine</p>
+                    <h4 style="font-size:1.1rem; font-weight:900; color:#fff;">Avictor Retro Jet</h4>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Neon Ring Engine • Official Spribe Sound</p>
                 </div>
             </div>
             <div style="font-size:1.4rem; color:var(--cassa-red-bright); font-weight:900;">▶</div>
         </div>
     </div>
 
-    <!-- 2. AVIATOR CASSA ARENA -->
+    <!-- 2. AVIATOR ARENA (EXACT AVICTOR JET & CASINO NIGHT ARENA) -->
     <div id="viewAviator" class="view-pane">
         <div class="aviator-viewport">
             <div class="aviator-top-nav">
                 <span onclick="exitAviatorGame()" style="color:var(--text-secondary); cursor:pointer; font-weight:700; font-size:0.85rem;">⬅ Lobby</span>
                 <div class="aviator-brand-text">
-                    <span>Aviator</span>
+                    <span>Avictor</span>
                 </div>
             </div>
 
@@ -285,22 +292,32 @@
                 <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 175" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#e5283b" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="#e5283b" stop-opacity="0.0"/>
+                            <stop offset="0%" stop-color="#ff2a4b" stop-opacity="0.55"/>
+                            <stop offset="100%" stop-color="#ff2a4b" stop-opacity="0.0"/>
                         </linearGradient>
                     </defs>
 
                     <path id="curveFill" class="flight-curve-fill" d="M 20 160 Q 20 160 20 160 L 20 160 Z" />
                     <path id="curveLine" class="flight-curve-line" d="M 20 160 Q 20 160 20 160" />
 
-                    <!-- EXACT RED CASSA PLANE -->
+                    <!-- FULL DETAIL RETRO RED AVICTOR JET -->
                     <g id="planeG" class="plane-group" transform="translate(20, 160) rotate(-10)">
-                        <line x1="28" y1="-15" x2="28" y2="15" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
-                        <path d="M -24 3 C -20 -9 20 -7 27 0 C 20 7 -20 9 -24 3 Z" fill="#e5283b"/>
-                        <polygon points="-7,-18 9,-2 4,2 -12,-14" fill="#d32f2f"/>
-                        <polygon points="-9,2 4,2 -2,16 -12,12" fill="#b71c1c"/>
-                        <polygon points="-20,2 -27,-13 -22,-13 -15,2" fill="#d32f2f"/>
-                        <text x="-25" y="-3" font-size="7.5" font-weight="900" fill="#ffffff">X</text>
+                        <!-- Propeller Blur Effect -->
+                        <line x1="34" y1="-22" x2="34" y2="22" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" opacity="0.95"/>
+                        <!-- Streamlined Fuselage -->
+                        <path d="M -30 4 C -26 -12 26 -10 33 0 C 26 10 -26 12 -30 4 Z" fill="#ff2a4b"/>
+                        <!-- Cockpit Glass Window (Blue/White Tint) -->
+                        <path d="M -8 -4 C -2 -8 12 -7 16 -3 L -3 0 Z" fill="#90caf9" opacity="0.9"/>
+                        <!-- Upper Wing -->
+                        <polygon points="-8,-23 12,-2 6,2 -15,-18" fill="#d50000"/>
+                        <!-- Lower Wing -->
+                        <polygon points="-12,2 6,2 -2,21 -15,16" fill="#b71c1c"/>
+                        <!-- Tail Vertical Stabilizer -->
+                        <polygon points="-26,2 -33,-16 -27,-16 -20,2" fill="#d50000"/>
+                        <!-- White Engine Cowl Nose Ring -->
+                        <ellipse cx="32" cy="0" rx="3.5" ry="7" fill="#ffffff"/>
+                        <!-- Tail Logo X -->
+                        <text x="-31" y="-4" font-size="9" font-weight="900" fill="#ffffff">X</text>
                     </g>
                 </svg>
 
@@ -575,7 +592,7 @@
             <div class="admin-card">
                 <h4>✈️ Aviator Controller Modes</h4>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <button class="btn-adm" style="background:#e5283b; color:#fff;" onclick="openPilotCockpit()">🕹️️ Only Control (Live)</button>
+                    <button class="btn-adm" style="background:#e5283b; color:#fff;" onclick="openPilotCockpit()">🕹 Only Control (Live)</button>
                     <button class="btn-adm" style="background:#00e676; color:#000;" onclick="toggleAutoAviator()">🤖 Auto Control (<span id="autoModeStatus">ON</span>)</button>
                 </div>
                 <div style="margin-top:10px;">
@@ -600,7 +617,7 @@
     <!-- LIVE ONLY-CONTROL PILOT COCKPIT MODAL -->
     <div id="pilotCockpitModal" class="pilot-modal">
         <div class="pilot-header">
-            <h3 style="color:#e5283b;">🕹️️ Live Aviator Pilot Cockpit</h3>
+            <h3 style="color:#e5283b;">🕹 Live Aviator Pilot Cockpit</h3>
             <span onclick="closePilotCockpit()" style="cursor:pointer; font-size:1.4rem;">✕</span>
         </div>
 
@@ -1034,6 +1051,7 @@
                     }
                 }
 
+                // S-Curve with Floating Wave Motion
                 let progress = Math.min(elapsed / 8.5, 1);
                 let currentX = 20 + 295 * progress;
                 let waveOffset = Math.sin(elapsed * 3.8) * 5.5;
@@ -1567,7 +1585,6 @@
             let deg = 1440 + Math.floor(Math.random() * 360);
             w.style.transform = `rotate(${deg}deg)`;
 
-            // Spin Ticking Sound
             let tickCount = 0;
             let tickInterval = setInterval(() => {
                 playWheelTickSound();
