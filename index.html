@@ -131,7 +131,7 @@
         .real-stat-col small { color: var(--text-secondary); font-size: 0.7rem; font-weight: 700; display: block; }
         .real-stat-col b { color: var(--cassa-gold); font-size: 0.95rem; font-weight: 900; }
 
-        /* REAL LIVE BETTORS LIST */
+        /* REAL LIVE BETTORS SECTION */
         .live-bettors-section { margin-top: 10px; background: #0c111a; border: 1px solid var(--border-dim); border-radius: 12px; padding: 10px; }
         .live-bettors-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); font-weight: 800; border-bottom: 1px solid var(--border-dim); padding-bottom: 6px; margin-bottom: 6px; }
         .live-bettors-list { max-height: 140px; overflow-y: auto; }
@@ -154,7 +154,6 @@
 
         .form-input { width: 100%; padding: 12px; background: #080b10; border: 1.5px solid var(--border-dim); border-radius: 10px; color: #fff; font-size: 0.95rem; font-weight: 800; outline: none; }
         .form-textarea { width: 100%; padding: 10px; background: #080b10; border: 1.5px solid var(--border-dim); border-radius: 10px; color: #fff; font-size: 0.82rem; height: 80px; resize: none; outline: none; }
-        .payment-info-box { background: #0d1219; border: 1.5px solid var(--border-dim); border-radius: 12px; padding: 14px; margin-top: 10px; }
         .copy-row { background: #17212f; border: 1px solid var(--border-dim); border-radius: 8px; padding: 9px 12px; display: flex; justify-content: space-between; align-items: center; margin: 6px 0 10px; cursor: pointer; }
         .btn-action-main { width: 100%; padding: 14px; background: var(--cassa-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 10px; border: none; cursor: pointer; margin-top: 8px; }
 
@@ -182,7 +181,7 @@
         .graph-pane-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 4000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
         .graph-pane-card { background: #0e1520; border: 2px solid var(--cassa-gold); border-radius: 16px; padding: 16px; width: 100%; max-width: 400px; max-height: 85vh; overflow-y: auto; }
 
-        /* UPGRADED PROFESSIONAL LUCKY SPIN WHEEL */
+        /* LUCKY SPIN WHEEL */
         .spin-card-board {
             background: radial-gradient(circle at 50% 50%, #172133 0%, #0c111a 100%);
             border: 2px solid var(--cassa-gold);
@@ -195,35 +194,9 @@
             max-width: 320px;
             width: 100%;
         }
-        .wheel-wrapper {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            margin: 6px auto 16px;
-            display: block;
-        }
-        .wheel-pointer {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 14px solid transparent;
-            border-right: 14px solid transparent;
-            border-top: 24px solid var(--cassa-red-bright);
-            z-index: 100;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
-        }
-        .wheel-circle-svg {
-            width: 250px;
-            height: 250px;
-            display: block;
-            border-radius: 50%;
-            border: 6px solid var(--cassa-gold);
-            box-shadow: 0 0 25px rgba(255, 179, 0, 0.4), inset 0 0 15px rgba(0,0,0,0.8);
-            transition: transform 4s cubic-bezier(0.15, 0.9, 0.2, 1);
-        }
+        .wheel-wrapper { position: relative; width: 250px; height: 250px; margin: 6px auto 16px; display: block; }
+        .wheel-pointer { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid var(--cassa-red-bright); z-index: 100; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8)); }
+        .wheel-circle-svg { width: 250px; height: 250px; display: block; border-radius: 50%; border: 6px solid var(--cassa-gold); box-shadow: 0 0 25px rgba(255, 179, 0, 0.4), inset 0 0 15px rgba(0,0,0,0.8); transition: transform 4s cubic-bezier(0.15, 0.9, 0.2, 1); }
 
         /* MODALS */
         .generic-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; padding: 16px; }
@@ -315,7 +288,7 @@
             <div class="chip-box" onclick="switchNavTab('shamo')">
                 <span class="chip-badge" style="background:#ff9800;">LIVE</span>
                 <div class="chip-icon">🎁</div>
-                <div class="chip-title">Shamo (<span id="shamoUserChances">3</span>)</div>
+                <div class="chip-title">Shamo (3)</div>
             </div>
             <div class="chip-box" onclick="openCouponModal()">
                 <div class="chip-icon">🎟️</div>
@@ -462,7 +435,7 @@
                 </div>
             </div>
 
-            <!-- 100% REAL LIVE STATS BAR -->
+            <!-- REAL LIVE STATS BAR -->
             <div class="real-live-stats-bar">
                 <div class="real-stat-col">
                     <small>👥 LIVE BETTORS</small>
@@ -478,7 +451,7 @@
                 </div>
             </div>
 
-            <!-- REAL LIVE BETTORS LIST (ORDERED FROM HIGHEST TO LOWEST) -->
+            <!-- REAL ONLY LIVE BETTORS LIST (NO FAKE DATA) -->
             <div class="live-bettors-section">
                 <div class="live-bettors-header">
                     <span>ተጫዋች (User)</span>
@@ -487,7 +460,7 @@
                     <span>አሸነፈ (Cashout)</span>
                 </div>
                 <div class="live-bettors-list" id="liveBettorsList">
-                    <!-- Real dynamically updated player rows -->
+                    <div style="text-align:center; padding:10px; color:var(--text-secondary); font-size:0.75rem;">ውርርድ የያዘ ተጫዋች የለም</div>
                 </div>
             </div>
         </div>
@@ -628,7 +601,7 @@
             </div>
             <div style="background:var(--bg-card); border:1.5px solid var(--border-dim); border-radius:12px; padding:14px; display:flex; justify-content:space-around; margin-bottom:12px;">
                 <div><small style="color:var(--text-secondary);">TOTAL POOL</small><div style="font-size:1.1rem; font-weight:900;">2,000 ETB</div></div>
-                <div><small style="color:var(--text-secondary);">YOUR CHANCES</small><div style="font-size:1.1rem; font-weight:900; color:var(--cassa-gold);" id="shamoRemaining">3</div></div>
+                <div><small style="color:var(--text-secondary);">YOUR CHANCES</small><div style="font-size:1.1rem; font-weight:900; color:var(--cassa-gold);">3</div></div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;" id="shamoBoxesGrid"></div>
         </div>
@@ -649,7 +622,7 @@
         </div>
     </div>
 
-    <!-- 7. PROFILE (WITH GALLERY PHOTO) -->
+    <!-- 7. PROFILE VIEW -->
     <div id="viewProfile" class="view-pane">
         <div style="padding:16px; max-width:440px; margin:0 auto;">
             <div class="profile-header-card" style="background:var(--bg-card); border:1.5px solid var(--border-dim); border-radius:14px; padding:16px; text-align:center; margin-bottom:14px;">
@@ -681,7 +654,7 @@
         </div>
     </div>
 
-    <!-- 8. COMPLETE MASTER ADMIN PANEL -->
+    <!-- 8. MASTER ADMIN PANEL -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -733,7 +706,6 @@
         </div>
     </div>
 
-    <!-- PERSISTENT HTML CODE INJECTOR -->
     <div id="paneHtmlInjector" class="graph-pane-modal">
         <div class="graph-pane-card">
             <h4 style="color:var(--cassa-gold); margin-bottom:10px;">💻 HTML / Script Code Injector (Persistent)</h4>
@@ -815,7 +787,7 @@
             <h4 style="margin-bottom:10px; color:var(--cassa-gold);">Claim Coupon</h4>
             <input type="text" id="couponInputBox" class="form-input" placeholder="COUPON">
             <button class="btn-action-main" onclick="claimCouponCode()">Claim</button>
-            <span onclick="document.getElementById('couponModal').style.display='none'" style="display:block; margin-top:10px; cursor:pointer;">Cancel</span>
+            <span onclick="closeCouponModal()" style="display:block; margin-top:10px; cursor:pointer;">Cancel</span>
         </div>
     </div>
 
@@ -825,7 +797,7 @@
             <div id="statusIcon" style="font-size:3rem; margin-bottom:8px;">✅</div>
             <h3 id="statusTitle">NOTIFICATION</h3>
             <p id="statusMsg" style="font-size:0.85rem; color:var(--text-secondary); margin:10px 0 16px;">Message</p>
-            <button class="btn-action-main" onclick="document.getElementById('modalStatusPopup').style.display='none'">OK</button>
+            <button class="btn-action-main" onclick="closeStatusModal()">OK</button>
         </div>
     </div>
 
@@ -870,7 +842,6 @@
 
         const KEY_BAL = `niro_bal_${currentUserId}`;
         const KEY_SPIN = `niro_spin_${currentUserId}`;
-        const KEY_SHAMO = `niro_shamo_${currentUserId}`;
         const KEY_NAME = `niro_name_${currentUserId}`;
         const KEY_USER = `niro_user_${currentUserId}`;
         const KEY_AVATAR = `niro_avatar_${currentUserId}`;
@@ -882,7 +853,6 @@
 
         let balance = localStorage.getItem(KEY_BAL) ? parseFloat(localStorage.getItem(KEY_BAL)) : 10.00;
         let userSpins = localStorage.getItem(KEY_SPIN) ? parseInt(localStorage.getItem(KEY_SPIN)) : 3;
-        let shamoChances = localStorage.getItem(KEY_SHAMO) ? parseInt(localStorage.getItem(KEY_SHAMO)) : 3;
         let isFirstDepositDone = localStorage.getItem(KEY_FIRST_DEP_DONE) === "true";
 
         let profileName = localStorage.getItem(KEY_NAME) || currentUserName;
@@ -905,7 +875,6 @@
         function persistUserData() {
             localStorage.setItem(KEY_BAL, balance.toFixed(2));
             localStorage.setItem(KEY_SPIN, userSpins);
-            localStorage.setItem(KEY_SHAMO, shamoChances);
             localStorage.setItem(KEY_NAME, profileName);
             localStorage.setItem(KEY_USER, profileUser);
             localStorage.setItem(KEY_AVATAR, profileAvatar);
@@ -959,13 +928,12 @@
             document.getElementById('headerBalance').innerText = balance.toFixed(2);
             document.getElementById('walletBalVal').innerText = balance.toFixed(2);
             document.getElementById('spinCountText').innerText = userSpins;
-            document.getElementById('shamoUserChances').innerText = shamoChances;
-            document.getElementById('shamoRemaining').innerText = shamoChances;
             document.getElementById('txtTeleAcc').innerText = telebirrAcc;
             document.getElementById('txtTeleName').innerText = "Name: " + telebirrName;
             document.getElementById('txtCbeAcc').innerText = cbeAcc;
             document.getElementById('txtCbeName').innerText = "Name: " + cbeName;
 
+            updateProfileUI();
             updateVipUI();
             checkPendingDepositState();
             renderAdminQueues();
@@ -973,7 +941,7 @@
             checkBroadcastNotification();
         }
 
-        /* 1. PERSISTENT INJECTOR ENGINE (RUNS SAVED CODE AT STARTUP) */
+        /* 1. PERSISTENT INJECTOR ENGINE */
         function executeInjectedCode(code) {
             try {
                 let c = document.createElement('div');
@@ -1003,13 +971,12 @@
             showStatusPopup(true, "CLEARED", "የተቀመጠው ኮድ ተሰርዟል!");
         }
 
-        // Run saved custom script if exists
         let savedCustomCode = localStorage.getItem('niro_saved_injected_code');
         if (savedCustomCode) {
             executeInjectedCode(savedCustomCode);
         }
 
-        /* 2. GLOBAL SYNCHRONIZED TIME-BASED AVIATOR ENGINE */
+        /* 2. GLOBAL SYNCHRONIZED AVIATOR ENGINE */
         let flightMultiplier = 1.00;
         let isFlying = false, isWaiting = false;
         let activeBets = {
@@ -1029,8 +996,8 @@
             }
         }
 
-        const ROUND_DURATION_MS = 14000; // 14s cycle
-        const COUNTDOWN_MS = 3000;       // 3s waiting
+        const ROUND_DURATION_MS = 14000;
+        const COUNTDOWN_MS = 3000;
 
         function masterAviatorSyncLoop() {
             let now = Date.now();
@@ -1140,7 +1107,7 @@
                 }
             }
 
-            renderLiveBettorsOrdered();
+            renderLiveBettorsReal();
         }
 
         setInterval(masterAviatorSyncLoop, 50);
@@ -1156,30 +1123,16 @@
             }
         }
 
-        /* 3. REAL LIVE BETTORS DISPLAY (RANKED FROM HIGHEST TO LOWEST STAKE) */
-        let activeBettorsPool = {};
-        function renderLiveBettorsOrdered() {
+        /* 3. REAL ONLY LIVE BETTORS DISPLAY (NO FAKE USERS) */
+        function renderLiveBettorsReal() {
             let container = document.getElementById('liveBettorsList');
             if (!container) return;
 
-            let now = Date.now();
-            let currentRoundId = Math.floor(now / ROUND_DURATION_MS);
-
-            if (!activeBettorsPool[currentRoundId]) {
-                activeBettorsPool[currentRoundId] = [
-                    { name: "@Abebe_K", stake: 250, targetOdd: 1.25, cashed: false },
-                    { name: "@Dawit_Pro", stake: 100, targetOdd: 1.40, cashed: false },
-                    { name: "@Tigist99", stake: 50, targetOdd: 1.15, cashed: false },
-                    { name: "@Bini_VIP", stake: 20, targetOdd: 1.80, cashed: false }
-                ];
-            }
-
-            let bettors = [...activeBettorsPool[currentRoundId]];
-
+            let realBettors = [];
             for (let i = 1; i <= 2; i++) {
                 if (activeBets[i].on) {
-                    bettors.push({
-                        name: currentUserName + " (You)",
+                    realBettors.push({
+                        name: profileName + ` (Slot ${i})`,
                         stake: activeBets[i].stake,
                         targetOdd: activeBets[i].cashed ? flightMultiplier : 0,
                         cashed: activeBets[i].cashed
@@ -1187,40 +1140,36 @@
                 }
             }
 
-            bettors.forEach(b => {
-                if (isFlying && !b.cashed && flightMultiplier >= b.targetOdd && b.targetOdd > 1.0) {
-                    b.cashed = true;
-                }
-            });
-
-            bettors.sort((a, b) => b.stake - a.stake);
-
-            let totalStaked = bettors.reduce((acc, cur) => acc + cur.stake, 0);
-            let totalWon = bettors.filter(b => b.cashed).reduce((acc, cur) => acc + (cur.stake * cur.targetOdd), 0);
+            let totalStaked = realBettors.reduce((acc, cur) => acc + cur.stake, 0);
+            let totalWon = realBettors.filter(b => b.cashed).reduce((acc, cur) => acc + (cur.stake * cur.targetOdd), 0);
 
             let cntDisplay = document.getElementById('liveBettorsCountDisplay');
             let stkDisplay = document.getElementById('liveTotalStakedDisplay');
             let wonDisplay = document.getElementById('liveTotalWonDisplay');
 
-            if (cntDisplay) cntDisplay.innerText = `${bettors.length} ተጫዋች`;
+            if (cntDisplay) cntDisplay.innerText = `${realBettors.length} ተጫዋች`;
             if (stkDisplay) stkDisplay.innerText = `${totalStaked.toFixed(2)} ETB`;
             if (wonDisplay) wonDisplay.innerText = `${totalWon.toFixed(2)} ETB`;
 
-            container.innerHTML = "";
-            bettors.forEach(b => {
-                let row = document.createElement('div');
-                row.className = "bettor-row";
-                row.innerHTML = `
-                    <span class="user-col">${b.name}</span>
-                    <span class="stake-col">${b.stake.toFixed(2)} ETB</span>
-                    <span class="odd-col">${b.cashed ? b.targetOdd.toFixed(2) + 'x' : '-'}</span>
-                    <span class="win-col">${b.cashed ? '+' + (b.stake * b.targetOdd).toFixed(2) + ' ETB' : 'በረራ ላይ...'}</span>
-                `;
-                container.appendChild(row);
-            });
+            if (realBettors.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding:10px; color:var(--text-secondary); font-size:0.75rem;">ውርርድ የያዘ ተጫዋች የለም</div>`;
+            } else {
+                container.innerHTML = "";
+                realBettors.forEach(b => {
+                    let row = document.createElement('div');
+                    row.className = "bettor-row";
+                    row.innerHTML = `
+                        <span class="user-col">${b.name}</span>
+                        <span class="stake-col">${b.stake.toFixed(2)} ETB</span>
+                        <span class="odd-col">${b.cashed ? b.targetOdd.toFixed(2) + 'x' : '-'}</span>
+                        <span class="win-col">${b.cashed ? '+' + (b.stake * b.targetOdd).toFixed(2) + ' ETB' : 'በረራ ላይ...'}</span>
+                    `;
+                    container.appendChild(row);
+                });
+            }
         }
 
-        /* 4. SYSTEM RESTART (FULL WIPE EXCEPT ADMIN) */
+        /* 4. SYSTEM RESTART (FULL WIPE) */
         function executeSystemRestart() {
             if (!confirm("እርግጠኛ ነዎት? የአድሚኑ ሳይነካ የሁሉንም ተጠቃሚዎች ሂሳብ 00 ያደርጋል፣ withdraw በሙሉ ይጠፋል!")) return;
 
@@ -1245,7 +1194,38 @@
             showStatusPopup(true, "RESTART SUCCESS", "የተጠቃሚዎች ሂሳብ እና የ Withdrawal ጥያቄዎች በሙሉ ተሰርዘዋል!");
         }
 
-        /* BET & CASHOUT ACTIONS */
+        /* NAVIGATION & BACK BUTTON SYSTEM */
+        function switchNavTab(tabName, modeOpt) {
+            if (tabName !== 'aviator') stopAviatorSounds();
+
+            document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
+
+            if (tabName === 'lobby') {
+                document.getElementById('viewLobby').classList.add('active');
+                document.getElementById('tabLobbyBtn').classList.add('active');
+            } else if (tabName === 'wallet') {
+                document.getElementById('viewWallet').classList.add('active');
+                document.getElementById('tabWalletBtn').classList.add('active');
+                if (modeOpt) setWalletMode(modeOpt);
+            } else if (tabName === 'invite') {
+                document.getElementById('viewInvite').classList.add('active');
+                document.getElementById('tabInviteBtn').classList.add('active');
+            } else if (tabName === 'profile') {
+                document.getElementById('viewProfile').classList.add('active');
+                document.getElementById('tabProfileBtn').classList.add('active');
+                updateProfileUI();
+            } else if (tabName === 'vip') {
+                document.getElementById('viewVip').classList.add('active');
+                updateVipUI();
+            } else if (tabName === 'shamo') {
+                document.getElementById('viewShamo').classList.add('active');
+            } else if (tabName === 'admin') {
+                document.getElementById('viewAdmin').classList.add('active');
+                renderAdminQueues();
+            }
+        }
+
         function openAviatorGame() {
             unlockAudioSystem();
             document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
@@ -1405,6 +1385,7 @@
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(750, ctx.currentTime);
                 gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 osc.start();
@@ -1412,123 +1393,7 @@
             } catch(e) {}
         }
 
-        /* ADMIN & WALLET CONTROLLERS */
-        function submitAddAdmin() {
-            let newId = document.getElementById('inNewAdminId').value.trim();
-            if (newId && !adminList.includes(newId)) {
-                adminList.push(newId);
-                localStorage.setItem('niro_admin_ids', JSON.stringify(adminList));
-                closeGraphPane('paneAddAdmin');
-                showStatusPopup(true, "ADMIN ADDED", "አዲሱ አድሚን ተሹሟል!");
-            }
-        }
-
-        function openCheckBalanceGraph() {
-            openGraphPane('paneCheckBalance');
-            let box = document.getElementById('usersListContainer');
-            box.innerHTML = "";
-            globalUsers = JSON.parse(localStorage.getItem('niro_registered_users') || '{}');
-            Object.values(globalUsers).forEach(u => {
-                let div = document.createElement('div');
-                div.style.padding = "6px";
-                div.style.borderBottom = "1px solid var(--border-dim)";
-                div.innerHTML = `<b>${u.name}</b> (ID: ${u.id}) - <span style="color:var(--cassa-green); font-weight:900;">${u.balance.toFixed(2)} ETB</span> <button class="btn-adm" style="float:right; padding:2px 6px;" onclick="inspectUser('${u.id}')">Select</button>`;
-                box.appendChild(div);
-            });
-        }
-
-        let selectedTargetUserId = null;
-        function inspectUser(uid) {
-            selectedTargetUserId = uid;
-            let u = globalUsers[uid];
-            document.getElementById('selectedUserCard').style.display = "block";
-            document.getElementById('dtlName').innerText = u.name;
-            document.getElementById('dtlId').innerText = u.id;
-            document.getElementById('dtlBal').innerText = u.balance.toFixed(2);
-        }
-
-        function deductUserBalanceNow() {
-            let amt = parseFloat(document.getElementById('inDeductAmt').value);
-            if (amt && selectedTargetUserId && globalUsers[selectedTargetUserId]) {
-                globalUsers[selectedTargetUserId].balance = Math.max(0, globalUsers[selectedTargetUserId].balance - amt);
-                localStorage.setItem(`niro_bal_${selectedTargetUserId}`, globalUsers[selectedTargetUserId].balance.toFixed(2));
-                localStorage.setItem('niro_registered_users', JSON.stringify(globalUsers));
-                if (selectedTargetUserId === currentUserId) balance = globalUsers[selectedTargetUserId].balance;
-                syncBalanceViews();
-                inspectUser(selectedTargetUserId);
-                showStatusPopup(true, "DEDUCTED", `${amt} ETB ተቀንሷል!`);
-            }
-        }
-
-        function deleteBroadcastFromAll() {
-            localStorage.removeItem('niro_live_broadcast');
-            document.getElementById('broadcastBanner').style.display = 'none';
-            showStatusPopup(true, 'DELETED', 'ብሮድካስቱ ከሁሉም ደንበኞች ላይ ተሰርዟል!');
-        }
-
-        function sendBroadcastNow() {
-            let text = document.getElementById('inBcText').value.trim();
-            let fileInput = document.getElementById('inBcImage');
-            if (!text && (!fileInput.files || !fileInput.files[0])) {
-                showStatusPopup(false, "EMPTY", "ጽሑፍ ወይም ፎቶ ያስገቡ!");
-                return;
-            }
-            if (fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) { saveBroadcast(text, e.target.result); };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                saveBroadcast(text, null);
-            }
-        }
-
-        function saveBroadcast(t, img) {
-            localStorage.setItem('niro_live_broadcast', JSON.stringify({ text: t, img: img }));
-            closeGraphPane('paneBroadcast');
-            showStatusPopup(true, "SENT", "ማስታወቂያው ተልኳል!");
-            checkBroadcastNotification();
-        }
-
-        function checkBroadcastNotification() {
-            let raw = localStorage.getItem('niro_live_broadcast');
-            let banner = document.getElementById('broadcastBanner');
-            if (raw) {
-                let bc = JSON.parse(raw);
-                let imgEl = document.getElementById('bcBannerImg');
-                let textEl = document.getElementById('bcBannerText');
-                if (bc.img) { imgEl.src = bc.img; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
-                textEl.innerText = bc.text || "";
-                banner.style.display = 'block';
-            } else {
-                banner.style.display = 'none';
-            }
-        }
-
-        function switchChangerTab(t) {
-            document.getElementById('btnChgTele').style.background = t === 'telebirr' ? 'var(--cassa-green)' : '#1f2736';
-            document.getElementById('btnChgBank').style.background = t === 'bank' ? 'var(--cassa-green)' : '#1f2736';
-            document.getElementById('boxEditTele').style.display = t === 'telebirr' ? 'block' : 'none';
-            document.getElementById('boxEditBank').style.display = t === 'bank' ? 'block' : 'none';
-        }
-
-        function saveDepositDetailsDone() {
-            telebirrAcc = document.getElementById('inChgTeleNum').value.trim();
-            telebirrName = document.getElementById('inChgTeleName').value.trim();
-            cbeAcc = document.getElementById('inChgBankNum').value.trim();
-            cbeName = document.getElementById('inChgBankName').value.trim();
-            localStorage.setItem('niro_tel_num', telebirrAcc);
-            localStorage.setItem('niro_tel_name', telebirrName);
-            localStorage.setItem('niro_cbe_num', cbeAcc);
-            localStorage.setItem('niro_cbe_name', cbeName);
-            closeGraphPane('paneDepositChanger');
-            syncBalanceViews();
-            showStatusPopup(true, "SAVED", "አካውንቶች ተቀይረዋል!");
-        }
-
-        /* 5. 7-STEP STRICT VERIFICATION & DEPOSIT PIPELINE (+30% BONUS) */
-        let currentDepMethod = 'telebirr';
-        let depositExpiryTimer = null;
-
+        /* 5. 7-STEP STRICT VERIFICATION PIPELINE (+30% BONUS) */
         function checkPendingDepositState() {
             let rawPending = localStorage.getItem(KEY_PENDING_DEP);
             let resumeCard = document.getElementById('pendingDepositResumeCard');
@@ -1748,13 +1613,24 @@
         function submitWithdrawAction() {
             let amt = parseFloat(document.getElementById('inWithSum').value);
             let dest = document.getElementById('inWithDest').value.trim();
-            if (!amt || amt < 300) { showStatusPopup(false, "LIMIT", "ዝቅተኛው 300 ብር ነው!"); return; }
+            if (!amt || amt < 300) { showStatusPopup(false, "LIMIT", "ዝቅተኛው የማውጣት መጠን 300 ብር ነው!"); return; }
             if (amt > balance) { showStatusPopup(false, "INSUFFICIENT", "በቂ ሂሳብ የለዎትም!"); return; }
+            if (!dest || dest.length < 9) { showStatusPopup(false, "INVALID", "ትክክለኛ አካውንት ያስገቡ!"); return; }
+
             balance -= amt;
-            pendingWithdrawRequests.push({ id: "W" + Math.floor(1000 + Math.random() * 9000), name: currentUserName, userId: currentUserId, dest: dest, amount: amt });
+            let orderId = "W" + Math.floor(1000 + Math.random() * 9000);
+            pendingWithdrawRequests.push({
+                id: orderId,
+                name: profileName,
+                userId: currentUserId,
+                dest: dest,
+                amount: amt,
+                time: new Date().toLocaleTimeString()
+            });
+
             localStorage.setItem("niro_with_queue", JSON.stringify(pendingWithdrawRequests));
             syncBalanceViews();
-            showStatusPopup(true, "REQUEST SENT", "የማውጣት ጥያቄ ለአድሚን ተልኳል!");
+            showStatusPopup(true, "REQUEST SENT", `የ ${amt} ETB ማውጣት ጥያቄዎ ለአድሚን ተልኳል!`);
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
@@ -1942,7 +1818,6 @@
 
         // INITIALIZE SYSTEM
         syncBalanceViews();
-        updateProfileUI();
         setInterval(checkPendingDepositState, 1000);
         setInterval(updateVipUI, 1000);
     </script>
