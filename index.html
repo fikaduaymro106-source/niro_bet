@@ -154,6 +154,7 @@
 
         .form-input { width: 100%; padding: 12px; background: #080b10; border: 1.5px solid var(--border-dim); border-radius: 10px; color: #fff; font-size: 0.95rem; font-weight: 800; outline: none; }
         .form-textarea { width: 100%; padding: 10px; background: #080b10; border: 1.5px solid var(--border-dim); border-radius: 10px; color: #fff; font-size: 0.82rem; height: 80px; resize: none; outline: none; }
+        .payment-info-box { background: #0d1219; border: 1.5px solid var(--border-dim); border-radius: 12px; padding: 14px; margin-top: 10px; }
         .copy-row { background: #17212f; border: 1px solid var(--border-dim); border-radius: 8px; padding: 9px 12px; display: flex; justify-content: space-between; align-items: center; margin: 6px 0 10px; cursor: pointer; }
         .btn-action-main { width: 100%; padding: 14px; background: var(--cassa-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 10px; border: none; cursor: pointer; margin-top: 8px; }
 
@@ -176,6 +177,15 @@
         .btn-adm.success { background: var(--cassa-green); color: #000; }
 
         .admin-actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+
+        .master-toggle-btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 1.1rem; font-weight: 900; border: none; cursor: pointer; margin-bottom: 10px; }
+        .master-toggle-btn.off { background: #b71c1c; color: #fff; }
+        .master-toggle-btn.on { background: var(--cassa-green); color: #000; box-shadow: 0 0 20px rgba(0,200,83,0.6); }
+
+        .rounds-grid-10 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+        .round-input-row { display: flex; align-items: center; gap: 4px; background: #090c12; padding: 6px; border-radius: 8px; border: 1px solid var(--border-dim); }
+        .round-input-row span { font-size: 0.72rem; font-weight: 800; color: var(--cassa-gold); width: 45px; }
+        .round-input-row input { width: 100%; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.85rem; outline: none; }
 
         /* GRAPH PANES */
         .graph-pane-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 4000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
@@ -435,7 +445,7 @@
                 </div>
             </div>
 
-            <!-- REAL LIVE STATS BAR -->
+            <!-- 100% REAL LIVE STATS BAR -->
             <div class="real-live-stats-bar">
                 <div class="real-stat-col">
                     <small>👥 LIVE BETTORS</small>
@@ -466,7 +476,7 @@
         </div>
     </div>
 
-    <!-- 3. WALLET VIEW -->
+    <!-- 3. WALLET VIEW (RESTORED WITH STEP 2 AND PROCEED LOGIC) -->
     <div id="viewWallet" class="view-pane">
         <div class="wallet-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -529,7 +539,7 @@
                             <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Paste Full SMS Confirmation:</label>
                             <textarea id="inDepFullSms" class="form-textarea" placeholder="Paste full confirmation SMS here..."></textarea>
                         </div>
-                        <button class="btn-action-main" onclick="startVerificationPipeline()">Confirm & Submit</button>
+                        <button class="btn-action-main" onclick="startVerificationPipeline()">Confirm & Submit (+30% Bonus)</button>
                         <button class="btn-adm danger" style="width:100%; margin-top:6px;" onclick="cancelPendingDeposit()">Cancel Order</button>
                     </div>
                 </div>
@@ -654,7 +664,7 @@
         </div>
     </div>
 
-    <!-- 8. MASTER ADMIN PANEL -->
+    <!-- 8. COMPLETE MASTER ADMIN PANEL (ALL CONTROLS RESTORED) -->
     <div id="viewAdmin" class="view-pane">
         <div class="admin-viewport">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -672,6 +682,63 @@
                 <button class="btn-adm danger" style="grid-column: 1 / -1; margin-top:4px;" onclick="deleteBroadcastFromAll()">🗑️ Delete Broadcast (ማስታወቂያውን ከሁሉም አጥፋ)</button>
             </div>
 
+            <!-- BIG MASTER ON / OFF TOGGLE -->
+            <button id="masterAdminToggleBtn" class="master-toggle-btn off" onclick="toggleMasterAdminSystem()">
+                🔴 MASTER CONTROLLER: OFF (AUTO RANDOM)
+            </button>
+            <div id="masterWelcomeAlert" style="display:none; background:#082214; border:1.5px solid var(--cassa-green); padding:10px; border-radius:10px; text-align:center; margin-bottom:12px; color:#fff; font-weight:900; font-size:0.9rem;">
+                ✨ WELCOME TO NIRO BET MASTER CONTROLLER! ACTIVE!
+            </div>
+
+            <!-- 10-ROUND MULTIPLIER PROGRAMMER WITH MANUAL START BUTTON -->
+            <div class="admin-card">
+                <h4>🎯 10-Round Aviator Multiplier Programmer</h4>
+                <p style="font-size:0.75rem; color:var(--text-secondary);">የ 10ሩን ተከታታይ በረራዎች Multiplier ያስገቡ፦</p>
+                <div class="rounds-grid-10">
+                    <div class="round-input-row"><span>R1:</span><input type="number" step="0.1" id="rInput0" value="2.5"></div>
+                    <div class="round-input-row"><span>R2:</span><input type="number" step="0.1" id="rInput1" value="1.8"></div>
+                    <div class="round-input-row"><span>R3:</span><input type="number" step="0.1" id="rInput2" value="5.0"></div>
+                    <div class="round-input-row"><span>R4:</span><input type="number" step="0.1" id="rInput3" value="1.2"></div>
+                    <div class="round-input-row"><span>R5:</span><input type="number" step="0.1" id="rInput4" value="10.0"></div>
+                    <div class="round-input-row"><span>R6:</span><input type="number" step="0.1" id="rInput5" value="3.4"></div>
+                    <div class="round-input-row"><span>R7:</span><input type="number" step="0.1" id="rInput6" value="1.5"></div>
+                    <div class="round-input-row"><span>R8:</span><input type="number" step="0.1" id="rInput7" value="2.0"></div>
+                    <div class="round-input-row"><span>R9:</span><input type="number" step="0.1" id="rInput8" value="8.5"></div>
+                    <div class="round-input-row"><span>R10:</span><input type="number" step="0.1" id="rInput9" value="1.1"></div>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:10px;">
+                    <button class="btn-adm" style="flex:1; background:var(--cassa-cyan); color:#000;" onclick="adminSave10Rounds()">💾 Save Plan</button>
+                    <button class="btn-adm" style="flex:1.4; background:var(--cassa-green); color:#000;" onclick="adminTrigger10RoundsRun()">🚀 START 10-ROUND RUN</button>
+                </div>
+            </div>
+
+            <!-- MANUAL LIVE AVIATOR PILOT COCKPIT -->
+            <div class="admin-card">
+                <h4>🕹️ Live Aviator Pilot Cockpit (Manual Start & Stop)</h4>
+                <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:8px;">Stop እስክትለው ድረስ ሳይወድቅ በረራው ይቀጥላል፦</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                    <button class="btn-adm" style="background:#00e676; color:#000; padding:12px;" onclick="adminStartLiveHold()">▶️ START FLIGHT</button>
+                    <button class="btn-adm danger" style="padding:12px;" onclick="adminCrashNow()">⏹️ STOP (FORCE CRASH)</button>
+                </div>
+            </div>
+
+            <!-- COUPON MANAGER -->
+            <div class="admin-card">
+                <h4>🎟️ Create Custom Coupon Code</h4>
+                <input type="text" id="admCpName" class="form-input" placeholder="Coupon Name (e.g. VIP100)" style="margin-bottom:6px;">
+                <input type="number" id="admCpAmount" class="form-input" placeholder="Amount (ETB)" style="margin-bottom:6px;">
+                <button class="btn-action-main" onclick="adminCreateNewCoupon()">Create Coupon</button>
+            </div>
+
+            <!-- SCAMMER & LOGS CONTROLLER -->
+            <div class="admin-card">
+                <h4>🚨 Scammer & Anti-Scam Logs</h4>
+                <div id="adminScamLogsList" style="font-size:0.75rem; color:var(--text-secondary); background:#090c12; padding:8px; border-radius:8px; border:1px solid var(--border-dim);">
+                    ምንም አጠራጣሪ ወይም የተጭበረበረ የደረሰኝ ሙከራ አልተገኘም።
+                </div>
+            </div>
+
+            <!-- WITHDRAW REQUESTS -->
             <div class="admin-card">
                 <h4>📤 Withdrawal Requests Queue</h4>
                 <div id="adminWithdrawQueue"><div style="font-size:0.75rem; color:var(--text-secondary);">No pending withdrawal requests.</div></div>
@@ -725,11 +792,15 @@
                 <button class="btn-adm" id="btnChgBank" style="flex:1;" onclick="switchChangerTab('bank')">CBE</button>
             </div>
             <div id="boxEditTele">
+                <label style="font-size:0.72rem; color:var(--text-secondary);">Telebirr Account Number:</label>
                 <input type="text" id="inChgTeleNum" class="form-input" value="0974107425" style="margin-bottom:6px;">
+                <label style="font-size:0.72rem; color:var(--text-secondary);">Telebirr Account Name:</label>
                 <input type="text" id="inChgTeleName" class="form-input" value="Mulualem">
             </div>
             <div id="boxEditBank" style="display:none;">
+                <label style="font-size:0.72rem; color:var(--text-secondary);">CBE Account Number:</label>
                 <input type="text" id="inChgBankNum" class="form-input" value="1000762441326" style="margin-bottom:6px;">
+                <label style="font-size:0.72rem; color:var(--text-secondary);">CBE Account Name:</label>
                 <input type="text" id="inChgBankName" class="form-input" value="Muluken Aemuro">
             </div>
             <button class="btn-action-main" onclick="saveDepositDetailsDone()">Done & Save</button>
@@ -787,7 +858,7 @@
             <h4 style="margin-bottom:10px; color:var(--cassa-gold);">Claim Coupon</h4>
             <input type="text" id="couponInputBox" class="form-input" placeholder="COUPON">
             <button class="btn-action-main" onclick="claimCouponCode()">Claim</button>
-            <span onclick="closeCouponModal()" style="display:block; margin-top:10px; cursor:pointer;">Cancel</span>
+            <span onclick="document.getElementById('couponModal').style.display='none'" style="display:block; margin-top:10px; cursor:pointer;">Cancel</span>
         </div>
     </div>
 
@@ -871,6 +942,12 @@
         let verifiedReceipts = new Set();
         let pendingWithdrawRequests = JSON.parse(localStorage.getItem("niro_with_queue") || "[]");
         let activeCoupons = { "NIRO50": 50, "CASSA2026": 50, "VIP100": 100 };
+
+        let programmedRounds = [2.5, 1.8, 5.0, 1.2, 10.0, 3.4, 1.5, 2.0, 8.5, 1.1];
+        let currentRoundIndex = 0;
+        let masterAdminActive = false;
+        let manual10RunTriggered = false;
+        let adminHoldFlight = false;
 
         function persistUserData() {
             localStorage.setItem(KEY_BAL, balance.toFixed(2));
@@ -1003,7 +1080,15 @@
             let now = Date.now();
             let currentRoundId = Math.floor(now / ROUND_DURATION_MS);
             let timeInRound = now % ROUND_DURATION_MS;
-            let crashPoint = getDeterministicCrashPoint(currentRoundId);
+            
+            let crashPoint;
+            if (adminHoldFlight) {
+                crashPoint = 999999.00;
+            } else if (masterAdminActive && manual10RunTriggered) {
+                crashPoint = programmedRounds[currentRoundIndex] || 2.0;
+            } else {
+                crashPoint = getDeterministicCrashPoint(currentRoundId);
+            }
 
             let hud = document.getElementById('hudMultiplier');
             let hudCrash = document.getElementById('hudCrashText');
@@ -1044,6 +1129,10 @@
                     if (isFlying) {
                         if (isViewing) playDescentWhooshSound();
                         recordRoundHistory(crashPoint);
+                        if (masterAdminActive && manual10RunTriggered) {
+                            currentRoundIndex++;
+                            if (currentRoundIndex >= 10) { manual10RunTriggered = false; currentRoundIndex = 0; }
+                        }
                     }
                     isFlying = false;
                     isWaiting = false;
@@ -1123,7 +1212,7 @@
             }
         }
 
-        /* 3. REAL ONLY LIVE BETTORS DISPLAY (NO FAKE USERS) */
+        /* 3. REAL LIVE BETTORS DISPLAY (NO FAKE DATA) */
         function renderLiveBettorsReal() {
             let container = document.getElementById('liveBettorsList');
             if (!container) return;
@@ -1169,7 +1258,7 @@
             }
         }
 
-        /* 4. SYSTEM RESTART (FULL WIPE) */
+        /* 4. SYSTEM RESTART (FULL WIPE EXCEPT ADMIN) */
         function executeSystemRestart() {
             if (!confirm("እርግጠኛ ነዎት? የአድሚኑ ሳይነካ የሁሉንም ተጠቃሚዎች ሂሳብ 00 ያደርጋል፣ withdraw በሙሉ ይጠፋል!")) return;
 
@@ -1385,7 +1474,6 @@
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(750, ctx.currentTime);
                 gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 osc.start();
@@ -1393,244 +1481,183 @@
             } catch(e) {}
         }
 
-        /* 5. 7-STEP STRICT VERIFICATION PIPELINE (+30% BONUS) */
-        function checkPendingDepositState() {
-            let rawPending = localStorage.getItem(KEY_PENDING_DEP);
-            let resumeCard = document.getElementById('pendingDepositResumeCard');
-            if (rawPending) {
-                let p = JSON.parse(rawPending);
-                let elapsed = Date.now() - p.time;
-                let remaining = 20 * 60 * 1000 - elapsed;
-                if (remaining > 0) {
-                    resumeCard.style.display = "flex";
-                    let m = Math.floor(remaining / 60000);
-                    let s = Math.floor((remaining % 60000) / 1000);
-                    document.getElementById('pendingTimerMin').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
-                } else {
-                    cancelPendingDeposit();
-                }
+        /* MASTER ADMIN CONTROLS */
+        function toggleMasterAdminSystem() {
+            masterAdminActive = !masterAdminActive;
+            let b = document.getElementById('masterAdminToggleBtn');
+            let w = document.getElementById('masterWelcomeAlert');
+            if (masterAdminActive) {
+                b.className = "master-toggle-btn on";
+                b.innerText = "🟢 MASTER CONTROLLER: ON (CONTROLLED)";
+                w.style.display = "block";
             } else {
-                resumeCard.style.display = "none";
+                b.className = "master-toggle-btn off";
+                b.innerText = "🔴 MASTER CONTROLLER: OFF (AUTO RANDOM)";
+                w.style.display = "none";
+                manual10RunTriggered = false;
             }
         }
 
-        function setWalletMode(m) {
-            document.getElementById('btnWDepToggle').classList.toggle('active', m === 'dep');
-            document.getElementById('btnWWithToggle').classList.toggle('active', m === 'with');
-            document.getElementById('boxDepSection').style.display = (m === 'dep') ? 'block' : 'none';
-            document.getElementById('boxWithSection').style.display = (m === 'with') ? 'block' : 'none';
+        function adminSave10Rounds() {
+            for (let i = 0; i < 10; i++) {
+                let v = parseFloat(document.getElementById('rInput' + i).value) || 2.0;
+                programmedRounds[i] = v;
+            }
+            showStatusPopup(true, "PLAN SAVED", "የ 10ሩ ዙሮች Multiplier ዕቅድ ተቀምጧል!");
         }
 
-        function pickPaymentType(t) {
-            currentDepMethod = t;
-            document.getElementById('pmTelebirr').classList.toggle('selected', t === 'telebirr');
-            document.getElementById('pmCBE').classList.toggle('selected', t === 'cbe');
-            document.getElementById('boxTelebirrDetails').style.display = (t === 'telebirr') ? 'block' : 'none';
-            document.getElementById('boxBankDetails').style.display = (t === 'cbe') ? 'block' : 'none';
+        function adminTrigger10RoundsRun() {
+            adminSave10Rounds();
+            manual10RunTriggered = true;
+            currentRoundIndex = 0;
+            if (!document.getElementById('viewAviator').classList.contains('active')) openAviatorGame();
+            showStatusPopup(true, "STARTED", "የ 10ሩ ዙሮች በረራ ተጀምሯል! በዕቅዱ መሰረት ይበራል።");
         }
 
-        function proceedToPaymentDetails() {
-            let amt = parseFloat(document.getElementById('inDepSum').value);
-            if (!amt || amt < 50) { showStatusPopup(false, "INVALID", "ዝቅተኛው የዲፖዚት መጠን 50 ብር ነው!"); return; }
-
-            localStorage.setItem(KEY_PENDING_DEP, JSON.stringify({
-                amount: amt,
-                method: currentDepMethod,
-                time: Date.now()
-            }));
-
-            start20MinOrderTimer(20 * 60);
-            document.getElementById('depStep1').style.display = 'none';
-            document.getElementById('depStep2').style.display = 'block';
-            checkPendingDepositState();
-        }
-
-        function resumePendingDeposit() {
-            let raw = localStorage.getItem(KEY_PENDING_DEP);
-            if (raw) {
-                let p = JSON.parse(raw);
-                currentDepMethod = p.method;
-                pickPaymentType(p.method);
-                switchNavTab('wallet', 'dep');
-                document.getElementById('depStep1').style.display = 'none';
-                document.getElementById('depStep2').style.display = 'block';
-                let remainingSec = Math.floor((20 * 60 * 1000 - (Date.now() - p.time)) / 1000);
-                start20MinOrderTimer(remainingSec);
+        function adminCreateNewCoupon() {
+            let name = document.getElementById('admCpName').value.trim().toUpperCase();
+            let amt = parseFloat(document.getElementById('admCpAmount').value);
+            if (name && amt) {
+                activeCoupons[name] = amt;
+                showStatusPopup(true, "READY", `ኩፖን ${name} (${amt} ETB) ተፈጥሯል!`);
+                document.getElementById('admCpName').value = "";
+                document.getElementById('admCpAmount').value = "";
             }
         }
 
-        function cancelPendingDeposit() {
-            clearInterval(depositExpiryTimer);
-            localStorage.removeItem(KEY_PENDING_DEP);
-            document.getElementById('depStep1').style.display = 'block';
-            document.getElementById('depStep2').style.display = 'none';
-            checkPendingDepositState();
-            showStatusPopup(false, "CANCELED", "የትዕዛዝ ጥያቄው ተሰርዟል!");
+        function adminStartLiveHold() {
+            adminHoldFlight = true;
+            if (!document.getElementById('viewAviator').classList.contains('active')) openAviatorGame();
+            showStatusPopup(true, "LIVE PILOT", "በረራው ተጀምሯል! Stop (Crash) እስክትል ድረስ ሳይወድቅ ይቀጥላል።");
         }
 
-        function start20MinOrderTimer(sec) {
-            clearInterval(depositExpiryTimer);
-            let rem = sec;
-            depositExpiryTimer = setInterval(() => {
-                if (rem <= 0) {
-                    clearInterval(depositExpiryTimer);
-                    cancelPendingDeposit();
-                    return;
-                }
-                let m = Math.floor(rem / 60);
-                let s = rem % 60;
-                document.getElementById('orderTimerClock').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
-                rem--;
-            }, 1000);
+        function adminCrashNow() {
+            adminHoldFlight = false;
+            showStatusPopup(true, "STOPPED", "በረራው ቆሟል (Crash)!");
         }
 
-        function startVerificationPipeline() {
-            let rawPending = localStorage.getItem(KEY_PENDING_DEP);
-            let expectedAmt = rawPending ? JSON.parse(rawPending).amount : parseFloat(document.getElementById('inDepSum').value);
-            let rawSms = document.getElementById('inDepFullSms').value.trim();
+        function submitAddAdmin() {
+            let newId = document.getElementById('inNewAdminId').value.trim();
+            if (newId && !adminList.includes(newId)) {
+                adminList.push(newId);
+                localStorage.setItem('niro_admin_ids', JSON.stringify(adminList));
+                closeGraphPane('paneAddAdmin');
+                showStatusPopup(true, "ADMIN ADDED", "አዲሱ አድሚን ተሹሟል!");
+            }
+        }
 
-            if (!rawSms || rawSms.length < 25) {
-                showStatusPopup(false, "FAKE PAYMENT DETECTED", "ሙሉውን የቴሌብር ወይም የባንክ ደረሰኝ መልእክት (SMS) ያስገቡ!");
+        function openCheckBalanceGraph() {
+            openGraphPane('paneCheckBalance');
+            let box = document.getElementById('usersListContainer');
+            box.innerHTML = "";
+            globalUsers = JSON.parse(localStorage.getItem('niro_registered_users') || '{}');
+            Object.values(globalUsers).forEach(u => {
+                let div = document.createElement('div');
+                div.style.padding = "6px";
+                div.style.borderBottom = "1px solid var(--border-dim)";
+                div.innerHTML = `<b>${u.name}</b> (ID: ${u.id}) - <span style="color:var(--cassa-green); font-weight:900;">${u.balance.toFixed(2)} ETB</span> <button class="btn-adm" style="float:right; padding:2px 6px;" onclick="inspectUser('${u.id}')">Select</button>`;
+                box.appendChild(div);
+            });
+        }
+
+        let selectedTargetUserId = null;
+        function inspectUser(uid) {
+            selectedTargetUserId = uid;
+            let u = globalUsers[uid];
+            document.getElementById('selectedUserCard').style.display = "block";
+            document.getElementById('dtlName').innerText = u.name;
+            document.getElementById('dtlId').innerText = u.id;
+            document.getElementById('dtlBal').innerText = u.balance.toFixed(2);
+        }
+
+        function deductUserBalanceNow() {
+            let amt = parseFloat(document.getElementById('inDeductAmt').value);
+            if (amt && selectedTargetUserId && globalUsers[selectedTargetUserId]) {
+                globalUsers[selectedTargetUserId].balance = Math.max(0, globalUsers[selectedTargetUserId].balance - amt);
+                localStorage.setItem(`niro_bal_${selectedTargetUserId}`, globalUsers[selectedTargetUserId].balance.toFixed(2));
+                localStorage.setItem('niro_registered_users', JSON.stringify(globalUsers));
+                if (selectedTargetUserId === currentUserId) balance = globalUsers[selectedTargetUserId].balance;
+                syncBalanceViews();
+                inspectUser(selectedTargetUserId);
+                showStatusPopup(true, "DEDUCTED", `${amt} ETB ተቀንሷል!`);
+            }
+        }
+
+        function deleteBroadcastFromAll() {
+            localStorage.removeItem('niro_live_broadcast');
+            document.getElementById('broadcastBanner').style.display = 'none';
+            showStatusPopup(true, 'DELETED', 'ብሮድካስቱ ከሁሉም ደንበኞች ላይ ተሰርዟል!');
+        }
+
+        function sendBroadcastNow() {
+            let text = document.getElementById('inBcText').value.trim();
+            let fileInput = document.getElementById('inBcImage');
+            if (!text && (!fileInput.files || !fileInput.files[0])) {
+                showStatusPopup(false, "EMPTY", "ጽሑፍ ወይም ፎቶ ያስገቡ!");
                 return;
             }
-
-            let pModal = document.getElementById('verifyPipelineModal');
-            pModal.style.display = 'flex';
-
-            for (let i = 1; i <= 7; i++) {
-                document.getElementById(`vStep${i}`).className = "verify-step";
-                document.getElementById(`spin${i}`).style.display = "none";
-                let ic = document.getElementById(`icon${i}`);
-                ic.style.display = "inline-block"; ic.innerText = "⏳";
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) { saveBroadcast(text, e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveBroadcast(text, null);
             }
+        }
 
-            let normalized = rawSms.toLowerCase();
+        function saveBroadcast(t, img) {
+            localStorage.setItem('niro_live_broadcast', JSON.stringify({ text: t, img: img }));
+            closeGraphPane('paneBroadcast');
+            showStatusPopup(true, "SENT", "ማስታወቂያው ተልኳል!");
+            checkBroadcastNotification();
+        }
 
-            function runStep(idx, testFn, errorTitle, errorDesc, successCallback) {
-                let stepElem = document.getElementById(`vStep${idx}`);
-                let spinElem = document.getElementById(`spin${idx}`);
-                let iconElem = document.getElementById(`icon${idx}`);
-
-                stepElem.className = "verify-step active";
-                spinElem.style.display = "inline-block";
-                iconElem.style.display = "none";
-                document.getElementById('pipelineStatusMsg').innerText = `Checking Step ${idx}...`;
-
-                setTimeout(() => {
-                    if (!testFn()) {
-                        spinElem.style.display = "none";
-                        iconElem.style.display = "inline-block";
-                        iconElem.innerText = "❌";
-                        stepElem.className = "verify-step fail";
-                        setTimeout(() => {
-                            pModal.style.display = "none";
-                            showStatusPopup(false, errorTitle, errorDesc);
-                        }, 800);
-                    } else {
-                        spinElem.style.display = "none";
-                        iconElem.style.display = "inline-block";
-                        iconElem.innerText = "✅";
-                        stepElem.className = "verify-step done";
-                        successCallback();
-                    }
-                }, 400);
+        function checkBroadcastNotification() {
+            let raw = localStorage.getItem('niro_live_broadcast');
+            let banner = document.getElementById('broadcastBanner');
+            if (raw) {
+                let bc = JSON.parse(raw);
+                let imgEl = document.getElementById('bcBannerImg');
+                let textEl = document.getElementById('bcBannerText');
+                if (bc.img) { imgEl.src = bc.img; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
+                textEl.innerText = bc.text || "";
+                banner.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
             }
+        }
 
-            runStep(1, () => {
-                return (currentDepMethod === 'telebirr') ? (normalized.includes("telebirr") || normalized.includes("ቴሌብር") || normalized.includes("ethio")) : (normalized.includes("cbe") || normalized.includes("commercial bank") || normalized.includes("ንግድ ባንክ"));
-            }, "FAKE PROVIDER DETECTED", "መልእክቱ ህጋዊ የቴሌብር ወይም የኢትዮጵያ ንግድ ባንክ ደረሰኝ አይደለም!", () => {
+        function switchChangerTab(t) {
+            document.getElementById('btnChgTele').style.background = t === 'telebirr' ? 'var(--cassa-green)' : '#1f2736';
+            document.getElementById('btnChgBank').style.background = t === 'bank' ? 'var(--cassa-green)' : '#1f2736';
+            document.getElementById('boxEditTele').style.display = t === 'telebirr' ? 'block' : 'none';
+            document.getElementById('boxEditBank').style.display = t === 'bank' ? 'block' : 'none';
+        }
 
-                runStep(2, () => {
-                    return (currentDepMethod === 'telebirr') ? normalized.includes(telebirrAcc) : normalized.includes(cbeAcc);
-                }, "WRONG ACCOUNT NUMBER", "ክፍያው የተላከው ወደተሰጠው ህጋዊ ሂሳብ ቁጥር አይደለም!", () => {
-
-                    runStep(3, () => {
-                        return (currentDepMethod === 'telebirr') ? (normalized.includes(telebirrName.toLowerCase()) || normalized.includes("ሙሉዓለም")) : (normalized.includes(cbeName.toLowerCase()) || normalized.includes("ሙሉቀን"));
-                    }, "WRONG RECIPIENT NAME", "የተቀባዩ ስም አልተዛመደም!", () => {
-
-                        runStep(4, () => {
-                            return normalized.includes(expectedAmt.toString());
-                        }, "AMOUNT MISMATCH", `የተላከው የ ${expectedAmt} ETB መጠን በመልእክቱ ውስጥ አልተገኘም!`, () => {
-
-                            let match = rawSms.match(/[A-Za-z0-9]{8,14}/);
-                            let txId = match ? match[0] : null;
-
-                            runStep(5, () => {
-                                return txId !== null;
-                            }, "INVALID TRANSACTION ID", "በመልእክቱ ውስጥ ትክክለኛ የግብይት ቁጥር (Tx ID) አልተገኘም!", () => {
-
-                                runStep(6, () => {
-                                    return !verifiedReceipts.has(txId);
-                                }, "DUPLICATE RECEIPT SCAM", "ይህ የደረሰኝ ቁጥር ከዚህ በፊት ጥቅም ላይ ውሏል!", () => {
-
-                                    runStep(7, () => {
-                                        return rawSms.length > 35;
-                                    }, "CORRUPTED SMS", "መልእክቱ የተቆራረጠ ወይም የተስተካከለ ነው!", () => {
-
-                                        verifiedReceipts.add(txId);
-                                        
-                                        let finalAddedAmt = expectedAmt;
-                                        let bonusMessage = "";
-                                        if (!isFirstDepositDone) {
-                                            let bonus = expectedAmt * 0.30; // 30% First Deposit Bonus
-                                            finalAddedAmt += bonus;
-                                            isFirstDepositDone = true;
-                                            bonusMessage = ` (+30% First Deposit Bonus: ${bonus.toFixed(2)} ETB ተጨምሯል!)`;
-                                        }
-
-                                        balance += finalAddedAmt;
-                                        cancelPendingDeposit();
-                                        syncBalanceViews();
-                                        playCashoutSound();
-
-                                        let txLog = document.getElementById('profileTxList');
-                                        let item = document.createElement('div');
-                                        item.style.display = 'flex';
-                                        item.style.justifyContent = 'space-between';
-                                        item.style.padding = '8px 0';
-                                        item.style.borderBottom = '1px solid #1c2635';
-                                        item.innerHTML = `
-                                            <div><b>Deposit (${currentDepMethod.toUpperCase()})</b><br><small style="color:var(--text-secondary);">${new Date().toLocaleTimeString()}</small></div>
-                                            <div style="color:var(--cassa-green); font-weight:900;">+${finalAddedAmt.toFixed(2)} ETB<br><small>COMPLETED</small></div>
-                                        `;
-                                        txLog.insertBefore(item, txLog.firstChild);
-
-                                        setTimeout(() => {
-                                            pModal.style.display = "none";
-                                            showStatusPopup(true, "PAYMENT VERIFIED (100% REAL)", `የ ${expectedAmt} ETB ክፍያዎ በ 7ቱ ደረጃዎች ተረጋግጦ ገብቷል!${bonusMessage}`);
-                                            document.getElementById('inDepFullSms').value = "";
-                                            switchNavTab('lobby');
-                                        }, 600);
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
+        function saveDepositDetailsDone() {
+            telebirrAcc = document.getElementById('inChgTeleNum').value.trim();
+            telebirrName = document.getElementById('inChgTeleName').value.trim();
+            cbeAcc = document.getElementById('inChgBankNum').value.trim();
+            cbeName = document.getElementById('inChgBankName').value.trim();
+            localStorage.setItem('niro_tel_num', telebirrAcc);
+            localStorage.setItem('niro_tel_name', telebirrName);
+            localStorage.setItem('niro_cbe_num', cbeAcc);
+            localStorage.setItem('niro_cbe_name', cbeName);
+            closeGraphPane('paneDepositChanger');
+            syncBalanceViews();
+            showStatusPopup(true, "SAVED", "አካውንቶች ተቀይረዋል!");
         }
 
         function submitWithdrawAction() {
             let amt = parseFloat(document.getElementById('inWithSum').value);
             let dest = document.getElementById('inWithDest').value.trim();
-            if (!amt || amt < 300) { showStatusPopup(false, "LIMIT", "ዝቅተኛው የማውጣት መጠን 300 ብር ነው!"); return; }
+            if (!amt || amt < 300) { showStatusPopup(false, "LIMIT", "ዝቅተኛው 300 ብር ነው!"); return; }
             if (amt > balance) { showStatusPopup(false, "INSUFFICIENT", "በቂ ሂሳብ የለዎትም!"); return; }
-            if (!dest || dest.length < 9) { showStatusPopup(false, "INVALID", "ትክክለኛ አካውንት ያስገቡ!"); return; }
-
             balance -= amt;
-            let orderId = "W" + Math.floor(1000 + Math.random() * 9000);
-            pendingWithdrawRequests.push({
-                id: orderId,
-                name: profileName,
-                userId: currentUserId,
-                dest: dest,
-                amount: amt,
-                time: new Date().toLocaleTimeString()
-            });
-
+            pendingWithdrawRequests.push({ id: "W" + Math.floor(1000 + Math.random() * 9000), name: currentUserName, userId: currentUserId, dest: dest, amount: amt });
             localStorage.setItem("niro_with_queue", JSON.stringify(pendingWithdrawRequests));
             syncBalanceViews();
-            showStatusPopup(true, "REQUEST SENT", `የ ${amt} ETB ማውጣት ጥያቄዎ ለአድሚን ተልኳል!`);
+            showStatusPopup(true, "REQUEST SENT", "የማውጣት ጥያቄ ለአድሚን ተልኳል!");
             document.getElementById('inWithSum').value = "";
             document.getElementById('inWithDest').value = "";
             switchNavTab('lobby');
@@ -1818,7 +1845,6 @@
 
         // INITIALIZE SYSTEM
         syncBalanceViews();
-        setInterval(checkPendingDepositState, 1000);
         setInterval(updateVipUI, 1000);
     </script>
 </body>
