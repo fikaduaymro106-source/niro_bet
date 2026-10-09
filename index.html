@@ -60,6 +60,9 @@
         .welcome-text-card p { font-size: 0.78rem; color: #cbd5e1; margin-top: 4px; font-weight: 600; }
         .welcome-badge-line { display: flex; gap: 8px; margin-top: 6px; font-size: 0.7rem; font-weight: 800; color: var(--cassa-green); }
 
+        /* PENDING DEPOSIT RESUME CARD */
+        .pending-resume-card { margin: 0 10px 10px; background: #231604; border: 1.5px solid var(--cassa-gold); border-radius: 12px; padding: 10px 14px; display: none; justify-content: space-between; align-items: center; }
+
         /* NAV CHIPS */
         .nav-chips-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 4px 10px 12px; }
         .chip-box { background: var(--bg-card); border: 1.5px solid var(--border-dim); border-radius: 12px; padding: 10px 2px; text-align: center; cursor: pointer; position: relative; }
@@ -955,7 +958,7 @@
             checkBroadcastNotification();
         }
 
-        /* 1. AUTO-CLEARING INJECTOR ENGINE */
+        /* 1. AUTO-CLEARING SCRIPT INJECTOR */
         function injectHtmlCodeNowAndClear() {
             let inputEl = document.getElementById('inCustomHtmlCode');
             let code = inputEl.value.trim();
@@ -971,7 +974,7 @@
                     n.text = s.innerText; 
                     document.body.appendChild(n); 
                 });
-                inputEl.value = ""; // ወዲያውኑ ሳጥኑን ያጸዳል
+                inputEl.value = "";
                 closeGraphPane('paneHtmlInjector');
                 showStatusPopup(true, "EXECUTED", "ኮዱ በተሳካ ሁኔታ ሰርቶ ሳጥኑ ጸድቷል!");
             } catch(e) {
@@ -1026,6 +1029,7 @@
                 isWaiting = true;
                 isFlying = false;
                 flightMultiplier = 1.00;
+                stopAviatorSounds();
 
                 if (waitBar) waitBar.style.display = 'block';
                 if (bar) bar.style.width = ((1 - (timeInRound / COUNTDOWN_MS)) * 100) + '%';
@@ -1054,6 +1058,7 @@
                 if (flightMultiplier >= crashPoint) {
                     if (isFlying) {
                         if (isViewing) playDescentWhooshSound();
+                        stopAviatorSounds();
                         recordRoundHistory(crashPoint);
                         if (masterAdminActive && manual10RunTriggered) {
                             currentRoundIndex++;
@@ -1080,6 +1085,9 @@
                         }
                     }
                 } else {
+                    if (!isFlying && isViewing) {
+                        startAviatorSounds();
+                    }
                     isFlying = true;
                     isWaiting = false;
 
@@ -1179,7 +1187,7 @@
 
         /* 4. NAVIGATION & BACK BUTTON SYSTEM */
         function switchNavTab(tabName, modeOpt) {
-            if (tabName !== 'aviator') stopAviatorSounds();
+            stopAviatorSounds();
 
             document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
@@ -1214,7 +1222,9 @@
             document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
             document.getElementById('viewAviator').classList.add('active');
-            startAviatorSounds();
+            if (isFlying && !isWaiting) {
+                startAviatorSounds();
+            }
         }
 
         function exitAviatorGame() {
@@ -1279,7 +1289,7 @@
             document.getElementById(`tabAuto${slot}`).classList.toggle('active', isAuto);
         }
 
-        /* SOUND CONTROLLER */
+        /* SOUND CONTROLLER: NO SOUND ON WAITING */
         let audioCtx = null;
         function getAudioContext() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1290,22 +1300,28 @@
 
         let jetOscLow = null, jetOscHigh = null, jetGain = null;
         function startAviatorSounds() {
+            stopAviatorSounds();
             try {
                 let ctx = getAudioContext();
                 jetOscLow = ctx.createOscillator();
                 jetOscHigh = ctx.createOscillator();
                 jetGain = ctx.createGain();
+
                 jetOscLow.type = 'sawtooth';
                 jetOscHigh.type = 'sine';
+
                 jetOscLow.frequency.setValueAtTime(60, ctx.currentTime);
                 jetOscHigh.frequency.setValueAtTime(140, ctx.currentTime);
+
                 let filter = ctx.createBiquadFilter();
                 filter.type = 'lowpass';
                 filter.frequency.setValueAtTime(260, ctx.currentTime);
+
                 jetOscLow.connect(filter);
                 jetOscHigh.connect(filter);
                 filter.connect(jetGain);
                 jetGain.connect(ctx.destination);
+
                 jetGain.gain.setValueAtTime(0.08, ctx.currentTime);
                 jetOscLow.start();
                 jetOscHigh.start();
@@ -1325,6 +1341,7 @@
             try {
                 if (jetOscLow) { jetOscLow.stop(); jetOscLow.disconnect(); jetOscLow = null; }
                 if (jetOscHigh) { jetOscHigh.stop(); jetOscHigh.disconnect(); jetOscHigh = null; }
+                if (jetGain) { jetGain.disconnect(); jetGain = null; }
             } catch(e) {}
         }
 
@@ -1375,10 +1392,25 @@
             } catch(e) {}
         }
 
-        /* 5. DEPOSIT (CONTINUE, 20-MIN TIMER & 7-STEP CHECK) */
+        /* 5. DEPOSIT (TELEBIRR & CBE, 20-MIN TIMER & 7-STEP CHECK) */
         let currentDepMethod = 'telebirr';
         let depositExpiryTimer = null;
         let remainingSeconds = 1200;
+
+        function setWalletMode(m) {
+            document.getElementById('btnWDepToggle').classList.toggle('active', m === 'dep');
+            document.getElementById('btnWWithToggle').classList.toggle('active', m === 'with');
+            document.getElementById('boxDepSection').style.display = (m === 'dep') ? 'block' : 'none';
+            document.getElementById('boxWithSection').style.display = (m === 'with') ? 'block' : 'none';
+        }
+
+        function pickPaymentType(t) {
+            currentDepMethod = t;
+            document.getElementById('pmTelebirr').classList.toggle('selected', t === 'telebirr');
+            document.getElementById('pmCBE').classList.toggle('selected', t === 'cbe');
+            document.getElementById('boxTelebirrDetails').style.display = (t === 'telebirr') ? 'block' : 'none';
+            document.getElementById('boxBankDetails').style.display = (t === 'cbe') ? 'block' : 'none';
+        }
 
         function updateOrderClockDisplay() {
             let clockEl = document.getElementById('orderTimerClock');
