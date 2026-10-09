@@ -2,987 +2,1637 @@
 <html lang="am">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Niro Bet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>NIRO BET - Official Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --bg-dark: #070b12;
-            --card-dark: #0f172a;
-            --border-dark: #1e293b;
+            --bg-base: #0a0e14;
+            --bg-surface: #101622;
+            --bg-card: #151d2c;
+            --bg-elevated: #1b2538;
+            --cassa-green: #00c853;
             --cassa-red: #d50000;
             --cassa-red-bright: #ff1744;
-            --cassa-green: #00c853;
+            --cassa-gold: #ffb300;
             --cassa-cyan: #00e5ff;
-            --gold: #f59e0b;
-            --text-gray: #94a3b8;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --border-dim: #222d42;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-            -webkit-user-select: none;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg-base); color: var(--text-primary); padding-bottom: 75px; overflow-x: hidden; user-select: none; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+        /* HEADER */
+        .app-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-surface); border-bottom: 1.5px solid var(--border-dim); position: sticky; top: 0; z-index: 1000; }
+        .brand-cluster { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+        .brand-title { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.5px; color: #fff; text-shadow: 0 0 10px rgba(255,23,68,0.6); }
+        .brand-badge { background: var(--cassa-green); color: #000; font-size: 0.65rem; font-weight: 900; padding: 2px 7px; border-radius: 4px; }
+        .wallet-cluster { display: flex; align-items: center; gap: 8px; }
+        .balance-pill { display: flex; align-items: center; gap: 6px; background: var(--bg-card); border: 1.5px solid var(--border-dim); padding: 5px 12px; border-radius: 20px; font-size: 0.88rem; font-weight: 800; }
+        .curr-sign { background: var(--cassa-cyan); color: #000; width: 19px; height: 19px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 900; }
+        .btn-deposit-header { background: var(--cassa-green); color: #000; border: none; font-weight: 900; font-size: 0.85rem; padding: 7px 15px; border-radius: 8px; cursor: pointer; }
 
-        /* Top Header */
-        header {
-            background: #0b111e;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-dark);
-        }
+        .view-pane { display: none; }
+        .view-pane.active { display: block; }
 
-        .brand-box {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        /* TICKER */
+        .casino-ticker { background: #14050a; border-bottom: 1px solid rgba(255,23,68,0.3); color: var(--cassa-gold); font-size: 0.72rem; font-weight: 800; padding: 5px 0; overflow: hidden; white-space: nowrap; }
+        .ticker-content { display: inline-block; animation: tickerScroll 20s linear infinite; }
+        @keyframes tickerScroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        .brand-title {
-            font-size: 1.25rem;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-        }
+        /* BROADCAST NOTIFICATION BANNER */
+        #broadcastBanner { display: none; margin: 10px; background: radial-gradient(circle, #2c1a04 0%, #110d06 100%); border: 2px solid var(--cassa-gold); border-radius: 12px; padding: 12px; box-shadow: 0 0 15px rgba(255,179,0,0.3); position: relative; }
+        #broadcastBanner img { width: 100%; max-height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; display: none; }
+        #broadcastBanner p { font-size: 0.85rem; font-weight: 800; color: #fff; }
 
-        .brand-tag {
-            background: var(--cassa-green);
-            color: #000;
-            font-size: 0.65rem;
-            font-weight: 900;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
+        /* WELCOME CARD */
+        .welcome-text-card { margin: 10px; border-radius: 14px; background: linear-gradient(135deg, #111722 0%, #0c1017 100%); border: 1.5px solid var(--cassa-gold); padding: 12px 14px; box-shadow: 0 4px 16px rgba(255,179,0,0.25); }
+        .welcome-text-card h2 { font-size: 1.15rem; font-weight: 900; color: #fff; line-height: 1.3; }
+        .welcome-text-card h2 span { color: var(--cassa-gold); font-size: 1.25rem; }
+        .welcome-text-card p { font-size: 0.78rem; color: #cbd5e1; margin-top: 4px; font-weight: 600; }
+        .welcome-badge-line { display: flex; gap: 8px; margin-top: 6px; font-size: 0.7rem; font-weight: 800; color: var(--cassa-green); }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        /* PENDING DEPOSIT RESUME CARD */
+        .pending-resume-card { margin: 0 10px 10px; background: #231604; border: 1.5px solid var(--cassa-gold); border-radius: 12px; padding: 10px 14px; display: none; justify-content: space-between; align-items: center; }
 
-        .balance-chip {
-            background: #111b2b;
-            border: 1px solid var(--border-dark);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+        /* NAV CHIPS */
+        .nav-chips-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 4px 10px 12px; }
+        .chip-box { background: var(--bg-card); border: 1.5px solid var(--border-dim); border-radius: 12px; padding: 10px 2px; text-align: center; cursor: pointer; position: relative; }
+        .chip-badge { position: absolute; top: -5px; right: 2px; background: var(--cassa-red-bright); font-size: 0.5rem; font-weight: 900; padding: 1px 4px; border-radius: 4px; }
+        .chip-icon { font-size: 1.35rem; margin-bottom: 2px; }
+        .chip-title { font-size: 0.65rem; font-weight: 800; color: #cbd5e1; }
 
-        .balance-icon {
-            background: #00b0ff;
-            color: #000;
-            font-size: 0.7rem;
-            padding: 2px 4px;
-            border-radius: 50%;
-            font-weight: 900;
-        }
+        /* AVIATOR CARD */
+        .official-card { margin: 10px; background: radial-gradient(circle at 85% 50%, #2b0610 0%, #0c1017 80%); border: 2px solid rgba(255,23,68,0.5); border-radius: 16px; padding: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+        .official-left { display: flex; align-items: center; gap: 14px; }
+        .avictor-square-logo { width: 68px; height: 68px; background: radial-gradient(circle, #380814 0%, #0c0205 100%); border: 2px solid #ff1744; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .avictor-square-logo svg { width: 44px; height: 44px; }
+        .avictor-square-logo span { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 0.9rem; color: #ff1744; font-weight: 900; margin-top: -5px; }
 
-        .btn-deposit-top {
-            background: var(--cassa-green);
-            color: #000;
-            font-weight: 900;
-            font-size: 0.8rem;
-            padding: 6px 14px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-        }
+        /* REAL CASH GAMES AVIATOR ARENA (EXACT VIDEO MATCH) */
+        .aviator-viewport { max-width: 480px; margin: 0 auto; padding: 6px; }
+        .aviator-top-nav { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; }
+        .aviator-brand-text { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.9rem; font-style: italic; font-weight: 900; color: var(--cassa-red-bright); }
+        
+        .aviator-history-ribbon { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+        .hist-chip { background: #121824; border: 1px solid var(--border-dim); padding: 3px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 900; color: #3f51b5; white-space: nowrap; }
+        .hist-chip.high { color: #ab47bc; border-color: rgba(171,71,188,0.4); }
 
-        /* Main View Container */
-        main {
-            flex: 1;
-            position: relative;
-            overflow-y: auto;
-        }
+        .radar-box { position: relative; width: 100%; height: 240px; background: #000000; border: 2px solid #231217; border-radius: 14px; overflow: hidden; }
+        .stage-svg { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
+        .flight-curve-fill { fill: url(#curveGrad); }
+        .flight-curve-line { fill: none; stroke: var(--cassa-red-bright); stroke-width: 4.5; stroke-linecap: round; filter: drop-shadow(0 0 10px #ff1744); }
 
-        .view-pane {
-            display: none;
-            padding: 12px;
-            min-height: 100%;
-        }
+        .radar-center-hud { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 10; }
+        .multiplier-counter { font-size: 4rem; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; }
+        .multiplier-bust { font-size: 1.4rem; font-weight: 900; color: var(--cassa-red-bright); margin-top: 2px; display: none; }
 
-        .view-pane.active {
-            display: block;
-        }
+        /* WAITING SLIDER (STEP 2 PROGRESS BAR) */
+        .waiting-bar-container { position: absolute; bottom: 0; left: 0; right: 0; height: 6px; background: rgba(255,255,255,0.08); display: none; z-index: 20; }
+        .waiting-bar-progress { height: 100%; width: 100%; background: var(--cassa-red-bright); transition: width 0.05s linear; }
 
-        /* Casino Lobby View */
-        .promo-banner {
-            background: #111827;
-            border: 1.5px solid var(--gold);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            margin-bottom: 12px;
-        }
+        .cashout-banner { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: #112818; border: 1.5px solid var(--cassa-green); border-radius: 8px; padding: 4px 14px; text-align: center; z-index: 100; display: none; white-space: nowrap; }
+        .cashout-banner span { font-size: 0.72rem; color: #fff; font-weight: 800; }
+        .cashout-banner .cashout-num { font-size: 0.88rem; font-weight: 900; color: var(--cassa-green); margin-left: 4px; }
 
-        .promo-title {
-            color: var(--gold);
-            font-weight: 900;
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-        }
+        /* BET DOCKS */
+        .betting-dock-vertical { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+        .dock-module { background: #111722; border: 1.5px solid var(--border-dim); border-radius: 14px; padding: 8px 10px; display: flex; flex-direction: column; }
+        .dock-mode-tabs { display: flex; justify-content: flex-start; gap: 14px; font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 6px; border-bottom: 1px solid var(--border-dim); padding-bottom: 4px; }
+        .dock-mode-tabs span { cursor: pointer; padding: 2px 10px; border-radius: 4px; }
+        .dock-mode-tabs span.active { color: #fff; background: var(--bg-elevated); }
 
-        .promo-sub {
-            font-size: 0.82rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
+        .dock-row-controls { display: grid; grid-template-columns: 1fr 1.3fr; gap: 10px; align-items: center; }
+        .stepper-row { display: flex; justify-content: space-between; align-items: center; background: #080b10; border: 1px solid var(--border-dim); border-radius: 8px; padding: 4px 6px; }
+        .step-btn { background: none; border: none; color: #fff; font-size: 1.25rem; width: 28px; cursor: pointer; }
+        .step-val { width: 45px; text-align: center; background: none; border: none; color: #fff; font-weight: 900; font-size: 1rem; }
 
-        .promo-desc {
-            color: var(--text-gray);
-            font-size: 0.7rem;
-        }
+        .chip-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px; }
+        .chip-tag { background: #1a2230; border: none; color: #cbd5e1; border-radius: 6px; padding: 6px 0; font-size: 0.72rem; font-weight: 800; cursor: pointer; }
 
-        .quick-actions-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
-            margin-bottom: 14px;
-        }
+        .btn-bet-trigger { width: 100%; height: 100%; min-height: 54px; border-radius: 12px; border: none; font-size: 1.15rem; font-weight: 900; background: var(--cassa-green); color: #000; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .btn-bet-trigger.cashing { background: #ff9800; color: #000; }
+        .btn-bet-trigger.cancel-state { background: var(--cassa-red) !important; color: #fff !important; }
+        .btn-bet-trigger.waiting-state { background: var(--cassa-red) !important; color: #fff !important; cursor: not-allowed; font-size: 0.85rem; }
 
-        .quick-action-item {
-            background: var(--card-dark);
-            border: 1px solid var(--border-dark);
-            border-radius: 10px;
-            padding: 8px 4px;
-            text-align: center;
-            cursor: pointer;
-        }
+        /* REAL LIVE STATS BAR */
+        .real-live-stats-bar { margin-top: 10px; background: #0d131e; border: 1.5px solid var(--border-dim); border-radius: 12px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+        .real-stat-col small { color: var(--text-secondary); font-size: 0.7rem; font-weight: 700; display: block; }
+        .real-stat-col b { color: var(--cassa-gold); font-size: 0.95rem; font-weight: 900; }
 
-        .quick-action-item.admin-btn {
-            border-color: var(--gold);
-        }
+        /* WALLET VIEW */
+        .wallet-viewport { max-width: 440px; margin: 0 auto; padding: 14px; }
+        .wallet-balance-card { background: var(--bg-card); border: 1.5px solid var(--border-dim); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+        .wallet-nav-switch { display: grid; grid-template-columns: 1fr 1fr; background: #080b10; border-radius: 10px; padding: 3px; gap: 4px; margin-top: 10px; }
+        .w-toggle-btn { background: none; border: none; padding: 9px; color: var(--text-secondary); font-weight: 800; font-size: 0.88rem; border-radius: 8px; cursor: pointer; }
+        .w-toggle-btn.active { background: var(--bg-elevated); color: #fff; }
 
-        .quick-action-icon {
-            font-size: 1.2rem;
-            margin-bottom: 2px;
-        }
+        .method-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+        .method-card { background: var(--bg-card); border: 1.5px solid var(--border-dim); border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; }
+        .method-card.selected { border-color: var(--cassa-green); background: #0d2417; }
 
-        .quick-action-text {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #fff;
-        }
+        .form-input { width: 100%; padding: 12px; background: #080b10; border: 1.5px solid var(--border-dim); border-radius: 10px; color: #fff; font-size: 0.95rem; font-weight: 800; outline: none; }
+        .form-textarea { width: 100%; padding: 10px; background: #080b10; border: 1.5px solid var(--border-dim); border-radius: 10px; color: #fff; font-size: 0.82rem; height: 80px; resize: none; outline: none; }
+        .payment-info-box { background: #0d1219; border: 1.5px solid var(--border-dim); border-radius: 12px; padding: 14px; margin-top: 10px; }
+        .copy-row { background: #17212f; border: 1px solid var(--border-dim); border-radius: 8px; padding: 9px 12px; display: flex; justify-content: space-between; align-items: center; margin: 6px 0 10px; cursor: pointer; }
+        .btn-action-main { width: 100%; padding: 14px; background: var(--cassa-green); color: #000; font-size: 0.95rem; font-weight: 900; border-radius: 10px; border: none; cursor: pointer; margin-top: 8px; }
 
-        .game-card-aviator {
-            background: radial-gradient(circle at right, #2a080c, #0d1117);
-            border: 2px solid var(--cassa-red-bright);
-            border-radius: 16px;
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(239,68,68,0.25);
-        }
+        /* 7-STEP STRICT ANIMATED VERIFICATION MODAL */
+        .verify-progress-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; z-index: 6000; display: none; padding: 16px; }
+        .verify-card { background: #121720; border: 2px solid var(--cassa-gold); border-radius: 14px; padding: 20px; width: 100%; max-width: 340px; text-align: left; }
+        .verify-step { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.78rem; color: var(--text-secondary); }
+        .verify-step.active { color: var(--cassa-gold); font-weight: 800; }
+        .verify-step.done { color: var(--cassa-green); font-weight: 800; }
+        .verify-step.fail { color: var(--cassa-red-bright); font-weight: 800; }
 
-        .aviator-card-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        /* MASTER ADMIN SUITE */
+        .admin-viewport { max-width: 480px; margin: 0 auto; padding: 14px; }
+        .admin-card { background: var(--bg-card); border: 1.5px solid var(--border-dim); border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+        .admin-card h4 { font-size: 0.95rem; color: var(--cassa-gold); margin-bottom: 10px; }
+        .btn-adm { background: #1f2736; border: 1.5px solid var(--border-dim); color: #fff; padding: 8px 12px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.8rem; }
+        .btn-adm.danger { background: #b71c1c; }
+        .btn-adm.success { background: var(--cassa-green); color: #000; }
 
-        .aviator-badge-icon {
-            background: var(--cassa-red-bright);
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-        }
+        .admin-actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
 
-        /* Aviator Arena View */
-        .aviator-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
+        .master-toggle-btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 1.1rem; font-weight: 900; border: none; cursor: pointer; margin-bottom: 10px; }
+        .master-toggle-btn.off { background: #b71c1c; color: #fff; }
+        .master-toggle-btn.on { background: var(--cassa-green); color: #000; }
 
-        .back-lobby-btn {
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            font-weight: 800;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
+        .rounds-grid-10 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+        .round-input-row { display: flex; align-items: center; gap: 4px; background: #090c12; padding: 6px; border-radius: 8px; border: 1px solid var(--border-dim); }
+        .round-input-row span { font-size: 0.72rem; font-weight: 800; color: var(--cassa-gold); width: 45px; }
+        .round-input-row input { width: 100%; background: none; border: none; color: #fff; font-weight: 800; font-size: 0.85rem; outline: none; }
 
-        .aviator-brand-title {
-            color: var(--cassa-red-bright);
-            font-weight: 900;
-            font-size: 1.3rem;
-            font-style: italic;
-        }
+        /* GRAPH PANES */
+        .graph-pane-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 4000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+        .graph-pane-card { background: #0e1520; border: 2px solid var(--cassa-gold); border-radius: 16px; padding: 16px; width: 100%; max-width: 400px; max-height: 85vh; overflow-y: auto; }
 
-        .history-pills {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 8px;
-            overflow-x: auto;
-        }
+        /* MODALS */
+        .generic-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; display: none; padding: 16px; }
+        .status-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; z-index: 5000; display: none; padding: 16px; }
+        .status-card { background: #121822; border-radius: 16px; padding: 22px; width: 100%; max-width: 320px; text-align: center; border: 2px solid var(--border-dim); }
 
-        .pill {
-            background: #111a2e;
-            color: #38bdf8;
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 12px;
-        }
-
-        .radar-box {
-            position: relative;
-            background: radial-gradient(circle at center, #160408 0%, #06080e 100%);
-            border: 2px solid #2a1118;
-            border-radius: 16px;
-            height: 230px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 12px;
-        }
-
-        .hud-multiplier {
-            font-size: 3.4rem;
-            font-weight: 900;
-            z-index: 10;
-        }
-
-        .hud-crash-text {
-            display: none;
-            color: var(--cassa-red-bright);
-            font-size: 1.1rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            margin-top: 4px;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .betting-panels {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .bet-control-row {
-            background: #0b111e;
-            border: 1px solid var(--border-dark);
-            border-radius: 12px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .bet-amount-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #070b12;
-            border-radius: 8px;
-            padding: 6px 12px;
-        }
-
-        .btn-green-bet {
-            background: var(--cassa-green);
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 28px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            cursor: pointer;
-        }
-
-        .live-stats-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px;
-            background: #090e17;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 800;
-        }
-
-        /* Admin Suite View */
-        .admin-suite-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .admin-header-title {
-            color: var(--gold);
-            font-size: 1.15rem;
-            font-weight: 900;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-actions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .btn-admin {
-            border: none;
-            border-radius: 8px;
-            padding: 10px;
-            font-weight: 900;
-            font-size: 0.8rem;
-            color: #fff;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .radar-toggle-box {
-            background: #0a0e17;
-            border: 1.5px solid #1e293b;
-            border-radius: 12px;
-            padding: 12px;
-        }
-
-        .radar-status-bar {
-            background: var(--cassa-red);
-            padding: 8px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
-        .admin-hud-display {
-            background: #000;
-            border-radius: 10px;
-            padding: 18px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .admin-live-odd {
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: var(--cassa-cyan);
-        }
-
-        .admin-run-controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        /* Bottom Navigation */
-        nav {
-            background: #080d17;
-            border-top: 1px solid var(--border-dark);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0 10px;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            color: var(--text-gray);
-            font-size: 0.7rem;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        .nav-item.active {
-            color: var(--cassa-green);
-        }
-
-        .nav-icon {
-            font-size: 1.25rem;
-        }
+        /* FOOTER */
+        .app-footer-dock { position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: var(--bg-surface); border-top: 1.5px solid var(--border-dim); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+        .footer-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-secondary); border: none; background: none; font-size: 0.65rem; font-weight: 800; cursor: pointer; flex: 1; }
+        .footer-item.active { color: var(--cassa-green); }
+        .footer-item .f-icon { font-size: 1.35rem; }
     </style>
 </head>
-<body>
+<body onclick="unlockAudioSystem()">
 
-    <!-- Header -->
-    <header>
-        <div class="brand-box">
-            <span class="brand-title">NIRO</span>
-            <span class="brand-tag">GAMES</span>
-        </div>
-        <div class="header-actions">
-            <div class="balance-chip">
-                <span class="balance-icon">Br</span>
-                <span id="topBalanceTxt">0.31</span>
-            </div>
-            <button class="btn-deposit-top" onclick="switchView('viewDeposit', 'Deposit')">Deposit</button>
-        </div>
-    </header>
-
-    <!-- Main Views -->
-    <main>
-        <!-- 1. CASINO LOBBY -->
-        <div id="viewCasino" class="view-pane active">
-            <div class="promo-banner">
-                <div class="promo-title">🎰 እንኳን ወደ NIRO GAMES በደህና መጡ! 🎰</div>
-                <div class="promo-sub">ጓደኛዎን ይጋብዙ፣ ነፃ ስፒን ይሸለሙ!</div>
-                <div class="promo-desc">በቴሌብር እና በኢትዮጵያ ንግድ ባንክ ፈጣን ዲፖዚትና ክፍያ</div>
-            </div>
-
-            <div class="quick-actions-grid">
-                <div class="quick-action-item">
-                    <div class="quick-action-icon">🎡</div>
-                    <div class="quick-action-text">Spin</div>
-                </div>
-                <div class="quick-action-item">
-                    <div class="quick-action-icon">🎁</div>
-                    <div class="quick-action-text">Shamo</div>
-                </div>
-                <div class="quick-action-item">
-                    <div class="quick-action-icon">🎟️</div>
-                    <div class="quick-action-text">Coupon</div>
-                </div>
-                <div class="quick-action-item">
-                    <div class="quick-action-icon">👑</div>
-                    <div class="quick-action-text">VIP</div>
-                </div>
-                <div class="quick-action-item admin-btn" onclick="switchView('viewAdmin', '')">
-                    <div class="quick-action-icon">⚙️</div>
-                    <div class="quick-action-text" style="color:var(--gold);">Admin</div>
-                </div>
-            </div>
-
-            <div class="game-card-aviator" onclick="switchView('viewAviator', '')">
-                <div class="aviator-card-info">
-                    <div class="aviator-badge-icon">✈️</div>
-                    <div>
-                        <div style="font-size:1.05rem; font-weight:900;">Aviator Cash Game</div>
-                        <div style="color:var(--text-gray); font-size:0.75rem; margin-top:2px;">Real Spribe Engine • Min 2 ETB</div>
-                    </div>
-                </div>
-                <div style="color:var(--cassa-red-bright); font-size:1.4rem; font-weight:900;">▶</div>
-            </div>
-        </div>
-
-        <!-- 2. AVIATOR ARENA -->
-        <div id="viewAviator" class="view-pane">
-            <div class="aviator-header-bar">
-                <button class="back-lobby-btn" onclick="switchView('viewCasino', 'Casino')">← Lobby</button>
-                <div class="aviator-brand-title">Aviator</div>
-            </div>
-
-            <div class="history-pills">
-                <div class="pill">1.19x</div>
-                <div class="pill" style="color:#c084fc;">2.39x</div>
-                <div class="pill">1.30x</div>
-            </div>
-
-            <div class="radar-box">
-                <!-- SVG Canvas for Airplane and Curve -->
-                <svg id="aviatorCanvas" viewBox="0 0 400 220" style="position:absolute; inset:0; width:100%; height:100%;">
-                    <path id="curveFill" fill="rgba(213, 0, 0, 0.28)" d="M 25 195 Q 25 195 25 195 L 25 195 Z"></path>
-                    <path id="curveLine" stroke="#ff1744" stroke-width="3.5" fill="none" d="M 25 195 Q 25 195 25 195"></path>
-                    <g id="planeG" transform="translate(30, 192) rotate(-8)">
-                        <polygon points="0,0 28,-7 38,-3 22,6" fill="#ff1744"></polygon>
-                        <polygon points="12,-4 18,-14 24,-14 20,-3" fill="#ffffff"></polygon>
-                        <circle cx="36" cy="-2" r="3" fill="#ffffff"></circle>
-                    </g>
-                </svg>
-
-                <div id="hudMultiplier" class="hud-multiplier">1.00x</div>
-                <div id="hudCrashText" class="hud-crash-text">FLEW AWAY!</div>
-
-                <!-- UFC Transition Banner -->
-                <div id="spribeUfcTransitionCard" style="position:absolute; inset:0; background:radial-gradient(circle at center, #1b050b 0%, #050608 100%); display:none; flex-direction:column; align-items:center; justify-content:center; z-index:30;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                        <span style="font-size:1.6rem; font-weight:900; color:#fff;">UFC</span>
-                        <span style="font-size:1.2rem; color:#ff1744; font-weight:900;">✕</span>
-                        <span style="font-family:'Brush Script MT', cursive; font-size:1.9rem; color:#ff1744; font-weight:900;">Aviator</span>
-                    </div>
-                    <div style="font-size:0.72rem; font-weight:900; letter-spacing:2px; color:#cbd5e1; margin-bottom:12px;">OFFICIAL PARTNERS</div>
-                    <div style="background:#111823; border:1px solid #ff1744; border-radius:12px; padding:6px 14px; display:flex; align-items:center; gap:8px;">
-                        <span style="color:#ff1744;">✈️</span>
-                        <span style="font-weight:900; font-size:0.82rem;">SPRIBE</span>
-                        <span style="background:#00c853; color:#000; font-size:0.6rem; font-weight:900; padding:1px 5px; border-radius:4px;">Official Game</span>
-                    </div>
-                    <div style="width:75%; height:6px; background:rgba(255,255,255,0.15); border-radius:4px; margin-top:14px; overflow:hidden;">
-                        <div id="ufcDirectProgressLine" style="height:100%; width:100%; background:linear-gradient(90deg, #ff1744, #ff0000);"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="betting-panels">
-                <div class="bet-control-row">
-                    <div class="bet-amount-box">
-                        <span style="font-size:1.1rem; cursor:pointer;" onclick="adjustBet(-1)">-</span>
-                        <span id="currentBetVal" style="font-weight:900; font-size:1.1rem;">2</span>
-                        <span style="font-size:1.1rem; cursor:pointer;" onclick="adjustBet(1)">+</span>
-                    </div>
-                    <button class="btn-green-bet" onclick="alert('ውርርድ ተይዟል!')">Bet<br><span style="font-size:0.7rem; font-weight:800;">2.00 ETB</span></button>
-                </div>
-            </div>
-
-            <div class="live-stats-bar">
-                <div>👥 LIVE BETTORS: <span id="liveBettorsTxt" style="color:var(--cassa-cyan);">0 ተጫዋች</span></div>
-                <div>💰 TOTAL STAKED: <span id="totalStakedTxt" style="color:var(--gold);">0.00 ETB</span></div>
-                <div>🏆 TOTAL WON: <span id="totalWonTxt" style="color:var(--cassa-green);">0.00 ETB</span></div>
-            </div>
-        </div>
-
-        <!-- 3. ADMIN SUITE -->
-        <div id="viewAdmin" class="view-pane">
-            <div class="admin-suite-container">
-                <div class="admin-header-title">
-                    <span>👑 Master Admin Suite</span>
-                    <span onclick="switchView('viewCasino', 'Casino')" style="cursor:pointer;">✕</span>
-                </div>
-
-                <div class="admin-actions-grid">
-                    <button class="btn-admin" style="background:#00c853;" onclick="alert('Admin መጨመሪያ')">➕ Add Admin</button>
-                    <button class="btn-admin" style="background:#00b0ff;" onclick="openStatisticsModal()">📊 Statistics</button>
-                    <button class="btn-admin" style="background:#d50000;" onclick="location.reload()">🔄 System Restart</button>
-                    <button class="btn-admin" style="background:#f59e0b;" onclick="alert('HTML Injector ክፍት ነው')">💻 Add HTML Code</button>
-                </div>
-
-                <div class="radar-toggle-box">
-                    <div id="radarToggleBtn" class="radar-status-bar" onclick="toggleRadarMode()">
-                        🔴 ሲስተም: ጠፍቷል (OFF)
-                    </div>
-                    <div style="font-size:0.75rem; color:var(--text-gray); margin-bottom:10px;">
-                        ይህን ON ስታደርገው ራሱ መብረሩ ይቆማል፤ አንተ በምትሰጠው ትዕዛዝ ብቻ ይበርራል፦
-                    </div>
-
-                    <div class="admin-hud-display">
-                        <div id="adminLiveDisplay" class="admin-live-odd">1.00x</div>
-                    </div>
-
-                    <div class="admin-run-controls">
-                        <button class="btn-admin" style="background:var(--cassa-green);" onclick="triggerStartRun()">▶ START RUN</button>
-                        <button class="btn-admin" style="background:var(--cassa-red);" onclick="triggerStopFlight()">⏹ STOP FLIGHT</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. DEPOSIT VIEW -->
-        <div id="viewDeposit" class="view-pane">
-            <div style="font-size:1.1rem; font-weight:900; margin-bottom:14px;">💳 My Wallet / Deposit</div>
-            <div style="background:#111927; border:1px solid var(--border-dark); border-radius:12px; padding:14px; margin-bottom:12px;">
-                <div style="font-size:0.8rem; color:var(--text-gray);">ያለዎት ቀሪ ሂሳብ (Balance)</div>
-                <div style="font-size:1.6rem; font-weight:900; color:var(--cassa-cyan); margin-top:4px;">
-                    <span id="depositPageBalTxt">0.31</span> ETB
-                </div>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <button style="background:#00c853; border:none; border-radius:10px; padding:12px; font-weight:900; color:#000; cursor:pointer;">በቴሌብር (Telebirr) አስገባ</button>
-                <button style="background:#1e293b; border:1px solid #334155; border-radius:10px; padding:12px; font-weight:900; color:#fff; cursor:pointer;">በንግድ ባንክ (CBE) አስገባ</button>
-            </div>
-        </div>
-
-        <!-- 5. INVITE VIEW -->
-        <div id="viewInvite" class="view-pane">
-            <div style="font-size:1.1rem; font-weight:900; margin-bottom:14px;">👥 ጓደኛን ይጋብዙ (Invite)</div>
-            <div style="background:#111927; border:1px solid var(--border-dark); border-radius:12px; padding:14px; text-align:center;">
-                <div style="font-size:0.85rem; font-weight:800; margin-bottom:8px;">የእርስዎ መጋበዣ ሊንክ</div>
-                <input type="text" value="https://t.me/NiroBetBot?start=8797798511" readonly style="width:100%; padding:10px; background:#070b12; border:1px solid #1e293b; color:#00e5ff; border-radius:8px; text-align:center; font-weight:800;">
-                <button style="width:100%; margin-top:12px; background:var(--gold); border:none; border-radius:8px; padding:10px; font-weight:900; color:#000; cursor:pointer;">ሊንኩን ኮፒ አድርግ</button>
-            </div>
-        </div>
-
-        <!-- 6. PROFILE VIEW -->
-        <div id="viewProfile" class="view-pane">
-            <div style="font-size:1.1rem; font-weight:900; margin-bottom:14px;">👤 የእኔ መለያ (Profile)</div>
-            <div style="background:#111927; border:1px solid var(--border-dark); border-radius:12px; padding:14px;">
-                <div style="font-size:1rem; font-weight:900; margin-bottom:4px;">༺Niro༻ (@Niro_X12)</div>
-                <div style="font-size:0.75rem; color:var(--text-gray);">ID: 8797798511</div>
-                <div style="margin-top:14px; padding-top:10px; border-top:1px solid var(--border-dark); display:flex; justify-content:space-between;">
-                    <span style="font-size:0.85rem; color:var(--text-gray);">ዋና ባላንስ:</span>
-                    <span id="profileBalTxt" style="font-weight:900; color:var(--cassa-cyan);">0.31 ETB</span>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav>
-        <div class="nav-item active" onclick="switchView('viewCasino', 'Casino')">
-            <div class="nav-icon">🏛️</div>
-            <div>Casino</div>
-        </div>
-        <div class="nav-item" onclick="switchView('viewDeposit', 'Deposit')">
-            <div class="nav-icon">💳</div>
-            <div>Deposit</div>
-        </div>
-        <div class="nav-item" onclick="switchView('viewInvite', 'Invite')">
-            <div class="nav-icon">👥</div>
-            <div>Invite</div>
-        </div>
-        <div class="nav-item" onclick="switchView('viewProfile', 'Profile')">
-            <div class="nav-icon">👤</div>
-            <div>Profile</div>
-        </div>
-    </nav>
-
-    <!-- Statistics Modal Popup -->
-    <div id="customStatsModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(4px); align-items:center; justify-content:center; z-index:10000; padding:16px;">
-        <div style="background:#0a0f18; border:2px solid var(--cassa-cyan); border-radius:18px; width:100%; max-width:400px; padding:18px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <span style="color:var(--gold); font-weight:900; font-size:1.05rem;">📊 ጠቅላላ የተጠቃሚዎች መረጃ</span>
-                <span onclick="closeStatisticsModal()" style="color:#94a3b8; font-size:1.2rem; cursor:pointer; font-weight:900;">✕</span>
-            </div>
-            <div style="background:#111927; border:1px solid #1e293b; border-radius:12px; padding:8px 12px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.8rem; color:#94a3b8; font-weight:700;">ጠቅላላ የተመዘገቡ ተጠቃሚዎች:</span>
-                <span id="statTotalUsersCount" style="font-size:1.3rem; font-weight:900; color:var(--cassa-green);">11</span>
-            </div>
-            <div id="statUsersListContainer" style="max-height:280px; overflow-y:auto; padding-right:4px;"></div>
-            <button onclick="closeStatisticsModal()" style="width:100%; padding:10px; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:10px; font-weight:800; font-size:0.85rem; margin-top:12px; cursor:pointer;">
-                ዝጋ (Close)
-            </button>
+    <div class="casino-ticker">
+        <div class="ticker-content">
+            🎰 ENKUAN WODE NIRO BET BESELAM METU! • 🚀 AVIATOR MULTIPLIER 100X+ • 🎁 FIRST DEPOSIT 30% BONUS • ⚡ FAST TELEBIRR & CBE WITHDRAWAL • 👑 VIP POOL 2X CLAIM NOW!
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <header class="app-header">
+        <div class="brand-cluster" onclick="switchNavTab('lobby')">
+            <span class="brand-title">NIRO</span>
+            <span class="brand-badge">GAMES</span>
+        </div>
+        <div class="wallet-cluster">
+            <div class="balance-pill">
+                <span class="curr-sign">Br</span>
+                <span id="headerBalance">10.00</span>
+            </div>
+            <button class="btn-deposit-header" onclick="switchNavTab('wallet', 'dep')">Deposit</button>
+        </div>
+    </header>
+
+    <div id="broadcastBanner">
+        <img id="bcBannerImg" src="" alt="Broadcast">
+        <p id="bcBannerText"></p>
+        <span onclick="document.getElementById('broadcastBanner').style.display='none'" style="position:absolute; top:6px; right:10px; cursor:pointer; color:var(--text-secondary); font-size:0.8rem; font-weight:900;">✕</span>
+    </div>
+
+    <div id="viewLobby" class="view-pane active">
+        <div class="welcome-text-card">
+            <h2>እንኳን ወደ NIRO GAMES በደህና መጡ! 🎰<br><span>ጓደኛዎን ይጋብዙ፣ ነፃ ስፒን ይሸለሙ!</span></h2>
+            <p>በቴሌብር እና በኢትዮጵያ ንግድ ባንክ ፈጣን ዲፖዚትና ክፍያ።</p>
+            <div class="welcome-badge-line">
+                <span>⚡ 97% RTP</span>
+                <span>•</span>
+                <span>🎁 30% የመጀመሪያ ቦነስ</span>
+                <span>•</span>
+                <span>🔒 100% አስተማማኝ</span>
+            </div>
+        </div>
+
+        <div id="pendingDepositResumeCard" class="pending-resume-card">
+            <div>
+                <b style="color:var(--cassa-gold); font-size:0.85rem;">⏳ በመጠባበቅ ላይ ያለ ዲፖዚት አለ!</b>
+                <div style="font-size:0.75rem; color:#cbd5e1;">የቀረው ጊዜ፦ <span id="pendingTimerMin">20:00</span></div>
+            </div>
+            <div style="display:flex; gap:6px;">
+                <button class="btn-adm" style="background:var(--cassa-green); color:#000;" onclick="resumePendingDeposit()">ቀጥል</button>
+                <button class="btn-adm danger" onclick="cancelPendingDeposit()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="nav-chips-grid">
+            <div class="chip-box" onclick="alert('Spin Active!')">
+                <span class="chip-badge">NEW</span>
+                <div class="chip-icon">🎡</div>
+                <div class="chip-title">Spin (<span id="spinCountText">3</span>)</div>
+            </div>
+            <div class="chip-box" onclick="alert('Shamo Box Active!')">
+                <span class="chip-badge" style="background:#ff9800;">LIVE</span>
+                <div class="chip-icon">🎁</div>
+                <div class="chip-title">Shamo (3)</div>
+            </div>
+            <div class="chip-box" onclick="openCouponModal()">
+                <div class="chip-icon">🎟️</div>
+                <div class="chip-title">Coupon</div>
+            </div>
+            <div class="chip-box" onclick="switchNavTab('vip')">
+                <span class="chip-badge" style="background:#9c27b0;">VIP</span>
+                <div class="chip-icon">👑</div>
+                <div class="chip-title">VIP</div>
+            </div>
+            <div class="chip-box" id="adminNavBtn" style="display:none;" onclick="switchNavTab('admin')">
+                <span class="chip-badge" style="background:#ff9800;">ADM</span>
+                <div class="chip-icon">⚙️</div>
+                <div class="chip-title">Admin</div>
+            </div>
+        </div>
+
+        <div class="official-card" onclick="openAviatorGame()">
+            <div class="official-left">
+                <div class="avictor-square-logo">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#ff1744" stroke-width="4"/>
+                        <path d="M 18 64 L 80 28 C 84 26 88 29 86 33 L 76 40 L 90 45 L 87 51 L 71 46 L 50 58 L 54 68 L 46 70 L 38 60 L 22 66 Z" fill="#ff1744"/>
+                    </svg>
+                    <span>Aviator</span>
+                </div>
+                <div>
+                    <h4 style="font-size:1.15rem; font-weight:900; color:#fff;">Aviator Cash Game</h4>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Real Spribe Engine • Min 2 ETB • 97.5% RTP</p>
+                </div>
+            </div>
+            <div style="font-size:1.5rem; color:var(--cassa-red-bright); font-weight:900;">▶</div>
+        </div>
+    </div>
+
+    <div id="viewAviator" class="view-pane">
+        <div class="aviator-viewport">
+            <div class="aviator-top-nav">
+                <span onclick="exitAviatorGame()" style="color:var(--text-secondary); cursor:pointer; font-weight:800; font-size:0.85rem;">⬅ Lobby</span>
+                <div class="aviator-brand-text"><span>Aviator</span></div>
+            </div>
+
+            <div class="aviator-history-ribbon" id="historyChips">
+                <div class="hist-chip">1.19x</div>
+                <div class="hist-chip high">2.39x</div>
+                <div class="hist-chip">1.30x</div>
+            </div>
+
+            <div class="radar-box">
+                <div id="cashoutNotification" class="cashout-banner">
+                    <span>You have cashed out!</span>
+                    <span class="cashout-num" id="cashoutAmtVal">Win ETB 0.00</span>
+                </div>
+
+                <svg id="aviatorSvg" class="stage-svg" viewBox="0 0 350 240" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ff1744" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="#ff1744" stop-opacity="0.0"/>
+                        </linearGradient>
+                    </defs>
+
+                    <path id="curveFill" class="flight-curve-fill" d="M 20 220 Q 20 220 20 220 L 20 220 Z" />
+                    <path id="curveLine" class="flight-curve-line" d="M 20 220 Q 20 220 20 220" />
+
+                    <g id="planeG" transform="translate(20, 220) rotate(-10)">
+                        <line x1="42" y1="-25" x2="42" y2="25" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M -40 4 C -36 -14 34 -12 42 0 C 34 12 -36 14 -40 4 Z" fill="#ff1744"/>
+                        <path d="M -14 -5 C -5 -10 18 -9 24 -3 L -3 0 Z" fill="#ffffff" opacity="0.8"/>
+                        <polygon points="-14,-28 18,-2 7,2 -21,-22" fill="#d50000"/>
+                        <polygon points="-18,2 7,2 -2,26 -21,20" fill="#b71c1c"/>
+                        <polygon points="-36,2 -42,-18 -36,-18 -28,2" fill="#d50000"/>
+                        <ellipse cx="41" cy="0" rx="4" ry="8" fill="#ffffff"/>
+                        <text x="-42" y="-3" font-size="9" font-weight="900" fill="#ffffff">X</text>
+                    </g>
+                </svg>
+
+                <div class="radar-center-hud">
+                    <div id="hudMultiplier" class="multiplier-counter">1.00x</div>
+                    <div id="hudCrashText" class="multiplier-bust">FLEW AWAY!</div>
+                </div>
+
+                <div id="waitingCountdownBar" class="waiting-bar-container">
+                    <div id="waitingProgress" class="waiting-bar-progress"></div>
+                </div>
+            </div>
+
+            <div class="betting-dock-vertical">
+                <div class="dock-module">
+                    <div class="dock-mode-tabs">
+                        <span id="tabBet1" class="active" onclick="switchBetMode(1, 'manual')">Bet</span>
+                        <span id="tabAuto1" onclick="switchBetMode(1, 'auto')">Auto</span>
+                    </div>
+                    <div class="dock-row-controls">
+                        <div>
+                            <div class="stepper-row">
+                                <button class="step-btn" onclick="adjustStake(1, -1)">-</button>
+                                <input type="number" id="stakeInput1" class="step-val" value="2" min="2">
+                                <button class="step-btn" onclick="adjustStake(1, 1)">+</button>
+                            </div>
+                            <div class="chip-shortcuts">
+                                <button class="chip-tag" onclick="setStake(1, 2)">2</button>
+                                <button class="chip-tag" onclick="setStake(1, 5)">5</button>
+                                <button class="chip-tag" onclick="setStake(1, 20)">20</button>
+                                <button class="chip-tag" onclick="setStake(1, 50)">50</button>
+                            </div>
+                        </div>
+                        <button id="btnDockAction1" class="btn-bet-trigger" onclick="onBetTrigger(1)">
+                            <span>Bet</span>
+                            <span style="font-size:0.8rem; font-weight:800;">2.00 ETB</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dock-module">
+                    <div class="dock-mode-tabs">
+                        <span id="tabBet2" class="active" onclick="switchBetMode(2, 'manual')">Bet</span>
+                        <span id="tabAuto2" onclick="switchBetMode(2, 'auto')">Auto</span>
+                    </div>
+                    <div class="dock-row-controls">
+                        <div>
+                            <div class="stepper-row">
+                                <button class="step-btn" onclick="adjustStake(2, -1)">-</button>
+                                <input type="number" id="stakeInput2" class="step-val" value="2" min="2">
+                                <button class="step-btn" onclick="adjustStake(2, 1)">+</button>
+                            </div>
+                            <div class="chip-shortcuts">
+                                <button class="chip-tag" onclick="setStake(2, 2)">2</button>
+                                <button class="chip-tag" onclick="setStake(2, 5)">5</button>
+                                <button class="chip-tag" onclick="setStake(2, 20)">20</button>
+                                <button class="chip-tag" onclick="setStake(2, 50)">50</button>
+                            </div>
+                        </div>
+                        <button id="btnDockAction2" class="btn-bet-trigger" onclick="onBetTrigger(2)">
+                            <span>Bet</span>
+                            <span style="font-size:0.8rem; font-weight:800;">2.00 ETB</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="real-live-stats-bar">
+                <div class="real-stat-col">
+                    <small>👥 LIVE BETTORS</small>
+                    <b id="liveBettorsCountDisplay">0 ተጫዋች</b>
+                </div>
+                <div class="real-stat-col">
+                    <small>💰 TOTAL STAKED</small>
+                    <b id="liveTotalStakedDisplay">0.00 ETB</b>
+                </div>
+                <div class="real-stat-col">
+                    <small>🏆 TOTAL WON</small>
+                    <b id="liveTotalWonDisplay">0.00 ETB</b>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewWallet" class="view-pane">
+        <div class="wallet-viewport">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:1.15rem; font-weight:900;">My Wallet</span>
+                <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
+            </div>
+
+            <div class="wallet-balance-card">
+                <small style="color:var(--text-secondary); font-weight:800;">TOTAL BALANCE</small>
+                <div style="font-size:1.85rem; font-weight:900; margin:4px 0 8px;">ETB <span id="walletBalVal">10.00</span></div>
+                <div class="wallet-nav-switch">
+                    <button id="btnWDepToggle" class="w-toggle-btn active" onclick="setWalletMode('dep')">Deposit</button>
+                    <button id="btnWWithToggle" class="w-toggle-btn" onclick="setWalletMode('with')">Withdraw</button>
+                </div>
+            </div>
+
+            <div id="boxDepSection">
+                <div id="depStep1">
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:5px;">Deposit Amount (Minimum 50 ETB)</label>
+                        <input type="number" id="inDepSum" class="form-input" placeholder="e.g. 100" min="50">
+                    </div>
+                    <div class="method-select-grid">
+                        <div id="pmTelebirr" class="method-card selected" onclick="pickPaymentType('telebirr')">
+                            <b>📱 Telebirr</b>
+                            <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:2px;">Instant</p>
+                        </div>
+                        <div id="pmCBE" class="method-card" onclick="pickPaymentType('cbe')">
+                            <b>🏦 CBE Bank</b>
+                            <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:2px;">Bank of Ethiopia</p>
+                        </div>
+                    </div>
+                    <button class="btn-action-main" onclick="proceedToPaymentDetails()">Continue</button>
+                </div>
+
+                <div id="depStep2" style="display:none;">
+                    <div class="payment-info-box">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span style="font-size:0.8rem; font-weight:800; color:var(--cassa-gold);">⏰ የቀረው ጊዜ:</span>
+                            <span style="font-size:0.95rem; font-weight:900; color:var(--cassa-cyan);" id="orderTimerClock">20:00</span>
+                        </div>
+
+                        <div id="boxTelebirrDetails">
+                            <p style="font-size:0.75rem; color:var(--text-secondary);">Transfer to Telebirr Account:</p>
+                            <div class="copy-row" onclick="copyText(telebirrAcc, 'Telebirr Copied!')">
+                                <div><div style="font-weight:900;" id="txtTeleAcc">0974107425</div><small id="txtTeleName">Name: Mulualem</small></div>
+                                <span style="font-size:0.8rem; color:var(--cassa-green); font-weight:800;">📋 Copy</span>
+                            </div>
+                        </div>
+
+                        <div id="boxBankDetails" style="display:none;">
+                            <p style="font-size:0.75rem; color:var(--text-secondary);">Transfer to CBE Bank:</p>
+                            <div class="copy-row" onclick="copyText(cbeAcc, 'CBE Copied!')">
+                                <div><div style="font-weight:900;" id="txtCbeAcc">1000762441326</div><small id="txtCbeName">Name: Muluken Aemuro</small></div>
+                                <span style="font-size:0.8rem; color:var(--cassa-green); font-weight:800;">📋 Copy</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:10px;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Paste Full SMS Confirmation:</label>
+                            <textarea id="inDepFullSms" class="form-textarea" placeholder="Paste full confirmation SMS here..."></textarea>
+                        </div>
+                        <button class="btn-action-main" onclick="startVerificationPipeline()">Confirm & Submit (+30% Bonus)</button>
+                        <button class="btn-adm danger" style="width:100%; margin-top:6px;" onclick="cancelPendingDeposit()">Cancel Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="boxWithSection" style="display:none;">
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:5px;">Amount (ETB) * (300 - 10,000 ETB)</label>
+                    <input type="number" id="inWithSum" class="form-input" placeholder="300" min="300">
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-bottom:5px;">Recipient Mobile / Bank Account</label>
+                    <input type="text" id="inWithDest" class="form-input" placeholder="09xxxxxxxx">
+                </div>
+                <button class="btn-action-main" onclick="submitWithdrawAction()">Request Withdrawal</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="verifyPipelineModal" class="verify-progress-modal">
+        <div class="verify-card">
+            <h3 style="color:var(--cassa-gold); font-size:0.95rem; margin-bottom:12px; text-align:center;">🔍 7-Step Anti-Scam Verification</h3>
+            <div id="vStep1" class="verify-step active"><span>1. Verifying Official Provider Tags</span></div>
+            <div id="vStep2" class="verify-step"><span>2. Checking Exact Recipient Account</span></div>
+            <div id="vStep3" class="verify-step"><span>3. Checking Authorized Recipient Name</span></div>
+            <div id="vStep4" class="verify-step"><span>4. Matching Exact ETB Amount</span></div>
+            <div id="vStep5" class="verify-step"><span>5. Parsing Transaction ID Format</span></div>
+            <div id="vStep6" class="verify-step"><span>6. Anti-Duplicate ID Verification</span></div>
+            <div id="vStep7" class="verify-step"><span>7. Message Integrity & Security Passed</span></div>
+            <div id="pipelineStatusMsg" style="font-size:0.72rem; color:#ffe082; text-align:center; margin-top:10px;">Checking message integrity...</div>
+        </div>
+    </div>
+
+    <div id="viewVip" class="view-pane">
+        <div style="padding:16px; max-width:440px; margin:0 auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-weight:800;">⬅ Back</span>
+                <span style="font-weight:900; color:var(--cassa-gold);">VIP 7-Day Club</span>
+            </div>
+            
+            <div class="vip-card" style="background:var(--bg-card); border:1.5px solid var(--cassa-gold); border-radius:16px; padding:18px; text-align:center;">
+                <div style="font-size:3rem; margin-bottom:6px;">🏆</div>
+                <h3 style="font-size:1.3rem; font-weight:900; color:var(--cassa-gold);">VIP INVESTMENT POOL</h3>
+                <p style="font-size:0.78rem; color:#cbd5e1; margin-top:4px;">7 ቀን ሙሉ በየቀኑ የመደቡት ብር በፐርሰንት ተደምሮ በ 7ኛው ቀን በ 2 እጥፍ (2X) ይሸለሙ!</p>
+                
+                <div class="vip-timer-box" style="background:#090d14; border:1px solid var(--border-dim); border-radius:12px; padding:12px; margin:12px 0;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary);">ጠቅላላ የተመደበ ብር (Total Stake)</div>
+                    <div style="font-size:1.6rem; font-weight:900; color:var(--cassa-green); margin:4px 0;" id="vipTotalStakedText">0.00 ETB</div>
+                    <div style="font-size:0.75rem; color:var(--cassa-gold);">የተጠራቀመ ትርፍ: <b id="vipDailyAccruedText">0.00 ETB</b></div>
+                    <div style="font-size:0.85rem; font-weight:900; color:var(--cassa-cyan); margin-top:6px;" id="vipPreciseTimerText">ቆጣሪ: አልተጀመረም</div>
+                </div>
+
+                <div id="vipActionArea">
+                    <button class="btn-action-main" id="btnStartVip" onclick="startVipSevenDays()">🚀 START VIP (7 Days Pool)</button>
+                    <button class="btn-action-main" id="btnClaimVip" style="display:none; background:var(--cassa-gold);" onclick="claimVipTwoX()">🎁 CLAIM 2X REWARD!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewAdmin" class="view-pane">
+        <div class="admin-viewport">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <span style="font-size:1.15rem; font-weight:900; color:var(--cassa-gold);">👑 Master Admin Suite</span>
+                <span onclick="switchNavTab('lobby')" style="cursor:pointer; font-size:1.2rem;">✕</span>
+            </div>
+
+            <div class="admin-actions-grid">
+                <button class="btn-adm success" onclick="openGraphPane('paneAddAdmin')">➕ Add Admin</button>
+                <button class="btn-adm" style="background:var(--cassa-cyan); color:#000;" onclick="openStatisticsModal()">📊 Statistics</button>
+                <button class="btn-adm danger" onclick="executeSystemRestart()">🔄 System Restart</button>
+                <button class="btn-adm" style="background:#ff9800; color:#000;" onclick="openGraphPane('paneHtmlInjector')">💻 Add HTML Code</button>
+                <button class="btn-adm" style="background:#9c27b0;" onclick="openGraphPane('paneDepositChanger')">📱 Number Change</button>
+                <button class="btn-adm" style="background:#00b0ff; color:#000;" onclick="openGraphPane('paneBroadcast')">📢 Broadcast</button>
+                <button class="btn-adm danger" style="grid-column: 1 / -1; margin-top:4px;" onclick="deleteBroadcastFromAll()">🗑️ Delete Broadcast</button>
+            </div>
+
+            <button id="masterAdminToggleBtn" class="master-toggle-btn off" onclick="toggleMasterAdminSystem()">
+                🔴 MASTER CONTROLLER: OFF (AUTO RANDOM)
+            </button>
+
+            <div class="admin-card">
+                <h4>🎯 10-Round Aviator Multiplier Programmer</h4>
+                <div class="rounds-grid-10">
+                    <div class="round-input-row"><span>R1:</span><input type="number" step="0.1" id="rInput0" value="2.5"></div>
+                    <div class="round-input-row"><span>R2:</span><input type="number" step="0.1" id="rInput1" value="1.8"></div>
+                    <div class="round-input-row"><span>R3:</span><input type="number" step="0.1" id="rInput2" value="5.0"></div>
+                    <div class="round-input-row"><span>R4:</span><input type="number" step="0.1" id="rInput3" value="1.2"></div>
+                    <div class="round-input-row"><span>R5:</span><input type="number" step="0.1" id="rInput4" value="10.0"></div>
+                    <div class="round-input-row"><span>R6:</span><input type="number" step="0.1" id="rInput5" value="3.4"></div>
+                    <div class="round-input-row"><span>R7:</span><input type="number" step="0.1" id="rInput6" value="1.5"></div>
+                    <div class="round-input-row"><span>R8:</span><input type="number" step="0.1" id="rInput7" value="2.0"></div>
+                    <div class="round-input-row"><span>R9:</span><input type="number" step="0.1" id="rInput8" value="8.5"></div>
+                    <div class="round-input-row"><span>R10:</span><input type="number" step="0.1" id="rInput9" value="1.1"></div>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:10px;">
+                    <button class="btn-adm" style="flex:1; background:var(--cassa-cyan); color:#000;" onclick="adminSave10Rounds()">💾 Save Plan</button>
+                    <button class="btn-adm" style="flex:1.4; background:var(--cassa-green); color:#000;" onclick="adminTrigger10RoundsRun()">🚀 START 10-ROUND RUN</button>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <h4>🎟️ Create Time-Limited Coupon Code</h4>
+                <input type="text" id="admCpName" class="form-input" placeholder="Coupon Name (e.g. 12FIKADU)" style="margin-bottom:6px;">
+                <input type="number" id="admCpAmount" class="form-input" placeholder="Amount (ETB)" style="margin-bottom:6px;">
+                <input type="number" id="admCpDuration" class="form-input" placeholder="Valid Duration (Minutes e.g. 2)" style="margin-bottom:6px;">
+                <button class="btn-action-main" onclick="adminCreateTimedCoupon()">Create Expiring Coupon</button>
+            </div>
+
+            <div class="admin-card">
+                <h4>📤 Withdrawal Requests Queue</h4>
+                <div id="adminWithdrawQueue"><div style="font-size:0.75rem; color:var(--text-secondary);">No pending withdrawal requests.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="paneStatistics" class="graph-pane-modal">
+        <div class="graph-pane-card">
+            <h4 style="color:var(--cassa-gold); margin-bottom:6px;">📊 Total Users Statistics</h4>
+            <div style="background:#090d14; border:1px solid var(--border-dim); border-radius:10px; padding:10px; margin-bottom:12px; text-align:center;">
+                <span style="font-size:0.8rem; color:var(--text-secondary);">ጠቅላላ የተመዘገቡ ተጠቃሚዎች ብዛት፦</span>
+                <div id="totalUsersCountHeader" style="font-size:1.8rem; font-weight:900; color:var(--cassa-green);">0</div>
+            </div>
+            <div id="usersStatisticsListContainer" style="max-height:260px; overflow-y:auto;"></div>
+            <button class="btn-adm" style="width:100%; margin-top:10px;" onclick="closeGraphPane('paneStatistics')">Close</button>
+        </div>
+    </div>
+
+    <div id="paneHtmlInjector" class="graph-pane-modal">
+        <div class="graph-pane-card">
+            <h4 style="color:var(--cassa-gold); margin-bottom:10px;">💻 HTML / Script Code Injector</h4>
+            <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:6px;">ኮዱ ሲገባ በቋሚነት ተቀምጦ ይሰራል፤ ሳጥኑ ወዲያውኑ ጸድቶ ይቀመጣል፦</p>
+            <textarea id="inCustomHtmlCode" class="form-textarea" style="height:120px;" placeholder="Paste code here..."></textarea>
+            <button class="btn-action-main" onclick="injectAndStorePersistentCode()">Save & Run Code</button>
+            <button class="btn-adm" style="width:100%; margin-top:8px;" onclick="closeGraphPane('paneHtmlInjector')">Close</button>
+        </div>
+    </div>
+
+    <div id="paneAddAdmin" class="graph-pane-modal">
+        <div class="graph-pane-card">
+            <h4 style="color:var(--cassa-gold); margin-bottom:10px;">➕ Add Admin</h4>
+            <input type="text" id="inNewAdminId" class="form-input" placeholder="Telegram ID">
+            <button class="btn-action-main" onclick="submitAddAdmin()">Set Admin</button>
+            <button class="btn-adm" style="width:100%; margin-top:8px;" onclick="closeGraphPane('paneAddAdmin')">Close</button>
+        </div>
+    </div>
+
+    <div id="paneDepositChanger" class="graph-pane-modal">
+        <div class="graph-pane-card">
+            <h4 style="color:var(--cassa-gold); margin-bottom:10px;">📱 Account Number Changer</h4>
+            <div style="display:flex; gap:6px; margin-bottom:10px;">
+                <button class="btn-adm" id="btnChgTele" style="flex:1; background:var(--cassa-green); color:#000;" onclick="switchChangerTab('telebirr')">Telebirr</button>
+                <button class="btn-adm" id="btnChgBank" style="flex:1;" onclick="switchChangerTab('bank')">CBE</button>
+            </div>
+            <div id="boxEditTele">
+                <input type="text" id="inChgTeleNum" class="form-input" value="0974107425" style="margin-bottom:6px;">
+                <input type="text" id="inChgTeleName" class="form-input" value="Mulualem">
+            </div>
+            <div id="boxEditBank" style="display:none;">
+                <input type="text" id="inChgBankNum" class="form-input" value="1000762441326" style="margin-bottom:6px;">
+                <input type="text" id="inChgBankName" class="form-input" value="Muluken Aemuro">
+            </div>
+            <button class="btn-action-main" onclick="saveDepositDetailsDone()">Done & Save</button>
+            <button class="btn-adm" style="width:100%; margin-top:8px;" onclick="closeGraphPane('paneDepositChanger')">Close</button>
+        </div>
+    </div>
+
+    <div id="paneBroadcast" class="graph-pane-modal">
+        <div class="graph-pane-card">
+            <h4 style="color:var(--cassa-gold); margin-bottom:10px;">📢 Send Broadcast</h4>
+            <input type="file" id="inBcImage" accept="image/*" class="form-input" style="margin-bottom:6px;">
+            <textarea id="inBcText" class="form-textarea" placeholder="Message..."></textarea>
+            <button class="btn-action-main" onclick="sendBroadcastNow()">Send</button>
+            <button class="btn-adm" style="width:100%; margin-top:8px;" onclick="closeGraphPane('paneBroadcast')">Close</button>
+        </div>
+    </div>
+
+    <div id="couponModal" class="generic-modal">
+        <div style="background:var(--bg-card); border-radius:16px; padding:20px; width:100%; max-width:320px; text-align:center;">
+            <h4 style="margin-bottom:10px; color:var(--cassa-gold);">Claim Coupon</h4>
+            <input type="text" id="couponInputBox" class="form-input" placeholder="COUPON CODE" style="text-align:center; text-transform:uppercase;">
+            <button class="btn-action-main" onclick="claimCouponCode()">Claim</button>
+            <span onclick="closeCouponModal()" style="display:block; margin-top:10px; cursor:pointer;">Cancel</span>
+        </div>
+    </div>
+
+    <div id="modalStatusPopup" class="status-modal">
+        <div id="statusPopupCard" class="status-card">
+            <div id="statusIcon" style="font-size:3rem; margin-bottom:8px;">✅</div>
+            <h3 id="statusTitle">NOTIFICATION</h3>
+            <p id="statusMsg" style="font-size:0.85rem; color:var(--text-secondary); margin:10px 0 16px;">Message</p>
+            <button class="btn-action-main" onclick="closeStatusModal()">OK</button>
+        </div>
+    </div>
+
+    <nav class="app-footer-dock">
+        <button class="footer-item active" id="tabLobbyBtn" onclick="switchNavTab('lobby')">
+            <span class="f-icon">🏛️</span>
+            <span>Casino</span>
+        </button>
+        <button class="footer-item" id="tabWalletBtn" onclick="switchNavTab('wallet')">
+            <span class="f-icon">💳</span>
+            <span>Deposit</span>
+        </button>
+        <button class="footer-item" id="tabProfileBtn" onclick="switchNavTab('profile')">
+            <span class="f-icon">👤</span>
+            <span>Profile</span>
+        </button>
+    </nav>
+
     <script>
-        // 1. Database Management
-        const DB_KEY = "niro_users_master_db";
-        let defaultUsers = [
-            { name: "༺Niro༻", user: "@Niro_X12", id: "8797798511", bal: 0.31 },
-            { name: "Scolfield", user: "@Auto_Realeses", id: "8610336481", bal: 0.00 },
-            { name: "Ajabiw", user: "@Roki_1pro", id: "8720904213", bal: 0.00 },
-            { name: "Ermias T.", user: "@Ermi_Bet", id: "8912443019", bal: 15.50 },
-            { name: "Kidus", user: "@Kidu_Winner", id: "8540991823", bal: 120.00 },
-            { name: "Samuel M.", user: "@Sam_Ethio", id: "8701928374", bal: 5.00 },
-            { name: "Natnael", user: "@Nati_Boss", id: "8677112094", bal: 42.00 },
-            { name: "Biniyam", user: "@Bini_Pro", id: "8899012345", bal: 0.00 },
-            { name: "Dawit K.", user: "@Dawa_King", id: "8920192811", bal: 250.00 },
-            { name: "Abel G.", user: "@Abel_G", id: "8933214455", bal: 80.00 },
-            { name: "Yonas P.", user: "@Yoni_Pro", id: "8955123984", bal: 12.00 }
-        ];
+        const tg = window.Telegram?.WebApp;
+        if (tg) tg.expand();
 
-        let stored = localStorage.getItem(DB_KEY);
-        let usersList = stored ? JSON.parse(stored) : defaultUsers;
+        let adminList = JSON.parse(localStorage.getItem('niro_admin_ids') || '["8797798511"]');
+        const currentUserId = tg?.initDataUnsafe?.user?.id ? tg.initDataUnsafe.user.id.toString() : "8797798511";
+        const currentUserName = tg?.initDataUnsafe?.user?.first_name || "Niro Player";
+        const currentUserHandle = tg?.initDataUnsafe?.user?.username ? "@" + tg.initDataUnsafe.user.username : "@user";
 
-        function saveUsers() {
-            localStorage.setItem(DB_KEY, JSON.stringify(usersList));
-            updateUiBalances();
+        let globalUsers = JSON.parse(localStorage.getItem('niro_registered_users') || '{}');
+        if (!globalUsers[currentUserId]) {
+            globalUsers[currentUserId] = { id: currentUserId, name: currentUserName, username: currentUserHandle, balance: 10.00 };
+            localStorage.setItem('niro_registered_users', JSON.stringify(globalUsers));
         }
 
-        function updateUiBalances() {
-            let myAcc = usersList.find(u => u.id === "8797798511");
-            if (myAcc) {
-                let formatted = parseFloat(myAcc.bal).toFixed(2);
-                document.getElementById('topBalanceTxt').innerText = formatted;
-                document.getElementById('depositPageBalTxt').innerText = formatted;
-                document.getElementById('profileBalTxt').innerText = formatted + " ETB";
+        if (adminList.includes(currentUserId)) {
+            document.getElementById('adminNavBtn').style.display = "block";
+        }
+
+        const KEY_BAL = `niro_bal_${currentUserId}`;
+        const KEY_VIP_START = `niro_vip_start_${currentUserId}`;
+        const KEY_VIP_TOTAL = `niro_vip_tot_${currentUserId}`;
+        const KEY_FIRST_DEP_DONE = `niro_first_dep_${currentUserId}`;
+        const KEY_PENDING_DEP = `niro_pending_dep_${currentUserId}`;
+
+        let balance = localStorage.getItem(KEY_BAL) ? parseFloat(localStorage.getItem(KEY_BAL)) : 10.00;
+        let isFirstDepositDone = localStorage.getItem(KEY_FIRST_DEP_DONE) === "true";
+        let vipStartTime = localStorage.getItem(KEY_VIP_START) ? parseInt(localStorage.getItem(KEY_VIP_START)) : 0;
+        let vipTotalStaked = localStorage.getItem(KEY_VIP_TOTAL) ? parseFloat(localStorage.getItem(KEY_VIP_TOTAL)) : 0.0;
+
+        let telebirrAcc = localStorage.getItem('niro_tel_num') || "0974107425";
+        let telebirrName = localStorage.getItem('niro_tel_name') || "Mulualem";
+        let cbeAcc = localStorage.getItem('niro_cbe_num') || "1000762441326";
+        let cbeName = localStorage.getItem('niro_cbe_name') || "Muluken Aemuro";
+
+        let verifiedReceipts = new Set();
+        let pendingWithdrawRequests = JSON.parse(localStorage.getItem("niro_with_queue") || "[]");
+        let activeCoupons = JSON.parse(localStorage.getItem("niro_timed_coupons") || '{"12FIKADU":{"amount":50,"expiry":9999999999999}}');
+
+        let programmedRounds = [2.5, 1.8, 5.0, 1.2, 10.0, 3.4, 1.5, 2.0, 8.5, 1.1];
+        let currentRoundIndex = 0;
+        let masterAdminActive = false;
+        let manual10RunTriggered = false;
+
+        function persistUserData() {
+            localStorage.setItem(KEY_BAL, balance.toFixed(2));
+            localStorage.setItem(KEY_VIP_START, vipStartTime);
+            localStorage.setItem(KEY_VIP_TOTAL, vipTotalStaked);
+            localStorage.setItem(KEY_FIRST_DEP_DONE, isFirstDepositDone);
+            globalUsers = JSON.parse(localStorage.getItem('niro_registered_users') || '{}');
+            if (globalUsers[currentUserId]) {
+                globalUsers[currentUserId].balance = balance;
+                localStorage.setItem('niro_registered_users', JSON.stringify(globalUsers));
             }
         }
-        updateUiBalances();
 
-        // 2. Tab Navigation
-        function switchView(viewId, navText) {
-            document.querySelectorAll('.view-pane').forEach(p => p.classList.remove('active'));
-            let target = document.getElementById(viewId);
-            if (target) target.classList.add('active');
+        function syncBalanceViews() {
+            document.getElementById('headerBalance').innerText = balance.toFixed(2);
+            document.getElementById('walletBalVal').innerText = balance.toFixed(2);
+            document.getElementById('txtTeleAcc').innerText = telebirrAcc;
+            document.getElementById('txtTeleName').innerText = "Name: " + telebirrName;
+            document.getElementById('txtCbeAcc').innerText = cbeAcc;
+            document.getElementById('txtCbeName').innerText = "Name: " + cbeName;
+            persistUserData();
+            checkBroadcastNotification();
+        }
 
-            document.querySelectorAll('.nav-item').forEach(btn => {
-                btn.classList.remove('active');
-                if (navText && btn.innerText.includes(navText)) {
-                    btn.classList.add('active');
+        /* 1. PERSISTENT INJECTOR ENGINE (RUNS & AUTO-CLEARS BOX) */
+        function injectAndStorePersistentCode() {
+            let inputEl = document.getElementById('inCustomHtmlCode');
+            let code = inputEl.value.trim();
+            if (!code) return;
+
+            let history = JSON.parse(localStorage.getItem('niro_permanent_injections') || '[]');
+            history.push(code);
+            localStorage.setItem('niro_permanent_injections', JSON.stringify(history));
+
+            runScriptText(code);
+            inputEl.value = ""; // ሳጥኑን ወዲያውኑ ያጸዳል
+            closeGraphPane('paneHtmlInjector');
+            showStatusPopup(true, "EXECUTED & STORED", "ኮዱ በቋሚነት ተመዝግቧል፤ ሳጥኑም ጸድቷል!");
+        }
+
+        function runScriptText(code) {
+            try {
+                let c = document.createElement('div');
+                c.innerHTML = code;
+                document.body.appendChild(c);
+                let sc = c.querySelectorAll("script");
+                sc.forEach(s => {
+                    let n = document.createElement("script");
+                    n.text = s.innerText;
+                    document.body.appendChild(n);
+                });
+            } catch(e) { console.error("Script Run Error:", e); }
+        }
+
+        // ገጹ Reload በሚሆንበት ጊዜ ሁሉንም የተመዘገቡ ስክሪፕቶች ዳግም ያነሳል
+        window.addEventListener('DOMContentLoaded', () => {
+            let history = JSON.parse(localStorage.getItem('niro_permanent_injections') || '[]');
+            history.forEach(code => runScriptText(code));
+        });
+
+        /* 2. AVIATOR ENGINE & WAITING SLIDER TRANSITION */
+        let flightMultiplier = 1.00;
+        let isFlying = false, isWaiting = false;
+        let activeBets = {
+            1: { on: false, stake: 2, cashed: false },
+            2: { on: false, stake: 2, cashed: false }
+        };
+
+        const ROUND_DURATION_MS = 14000;
+        const COUNTDOWN_MS = 3500; // 3.5 ሰከንድ የመጠባበቂያ ቆጣሪ
+
+        function masterAviatorSyncLoop() {
+            let now = Date.now();
+            let currentRoundId = Math.floor(now / ROUND_DURATION_MS);
+            let timeInRound = now % ROUND_DURATION_MS;
+
+            let crashPoint;
+            if (masterAdminActive && manual10RunTriggered) {
+                crashPoint = programmedRounds[currentRoundIndex] || 2.0;
+            } else {
+                let x = Math.sin(currentRoundId) * 10000;
+                let rand = x - Math.floor(x);
+                crashPoint = (rand < 0.85) ? parseFloat((1.08 + rand * 0.40).toFixed(2)) : parseFloat((1.55 + rand * 0.95).toFixed(2));
+            }
+
+            let hud = document.getElementById('hudMultiplier');
+            let hudCrash = document.getElementById('hudCrashText');
+            let waitBar = document.getElementById('waitingCountdownBar');
+            let bar = document.getElementById('waitingProgress');
+            let isViewing = document.getElementById('viewAviator')?.classList.contains('active');
+
+            if (timeInRound < COUNTDOWN_MS) {
+                // WAITING TRANSITION SLIDER (ልክ በቪዲዮው መሰረት)
+                isWaiting = true;
+                isFlying = false;
+                flightMultiplier = 1.00;
+                stopAviatorSounds();
+
+                if (waitBar) waitBar.style.display = 'block';
+                if (bar) bar.style.width = ((1 - (timeInRound / COUNTDOWN_MS)) * 100) + '%';
+                if (hud) { hud.style.color = '#fff'; hud.innerText = "1.00x"; }
+                if (hudCrash) hudCrash.style.display = 'none';
+
+                for (let i = 1; i <= 2; i++) {
+                    let b = document.getElementById('btnDockAction' + i);
+                    if (b) {
+                        b.classList.remove('cashing', 'waiting-state');
+                        if (activeBets[i].on) {
+                            b.classList.add('cancel-state');
+                            b.innerHTML = `<span>Cancel</span><span style="font-size:0.8rem; font-weight:800;">${activeBets[i].stake.toFixed(2)} ETB</span>`;
+                        } else {
+                            b.classList.remove('cancel-state');
+                            let cur = Math.max(2, parseFloat(document.getElementById('stakeInput' + i)?.value) || 2);
+                            b.innerHTML = `<span>Bet</span><span style="font-size:0.8rem; font-weight:800;">${cur.toFixed(2)} ETB</span>`;
+                        }
+                    }
                 }
-            });
+            } else {
+                // IN-FLIGHT SESSION
+                if (waitBar) waitBar.style.display = 'none';
+                let flightElapsedSec = (timeInRound - COUNTDOWN_MS) / 1000;
+                flightMultiplier = 1.00 + (flightElapsedSec * 0.28) + Math.pow(flightElapsedSec * 0.14, 2);
 
-            if (viewId !== 'viewAviator') {
-                stopJetAudio();
+                if (flightMultiplier >= crashPoint) {
+                    // FLEW AWAY CRASH
+                    if (isFlying) {
+                        if (isViewing) playDescentWhooshSound();
+                        stopAviatorSounds();
+                        recordRoundHistory(crashPoint);
+                        if (masterAdminActive && manual10RunTriggered) {
+                            currentRoundIndex = (currentRoundIndex + 1) % 10;
+                        }
+                    }
+                    isFlying = false;
+                    isWaiting = false;
+
+                    if (hud) { hud.style.color = 'var(--cassa-red-bright)'; hud.innerText = crashPoint.toFixed(2) + "x"; }
+                    if (hudCrash) hudCrash.style.display = 'block';
+
+                    let pGroup = document.getElementById('planeG');
+                    if (pGroup && isViewing) pGroup.setAttribute('transform', `translate(420, -70) rotate(-35)`);
+
+                    for (let i = 1; i <= 2; i++) {
+                        activeBets[i].on = false;
+                        activeBets[i].cashed = false;
+                        let b = document.getElementById('btnDockAction' + i);
+                        if (b) {
+                            b.classList.remove('cashing', 'cancel-state');
+                            b.classList.add('waiting-state');
+                            b.innerHTML = `<span>Waiting for next round...</span>`;
+                        }
+                    }
+                } else {
+                    // SMOOTH FLIGHT
+                    if (!isFlying && isViewing) startAviatorSounds();
+                    isFlying = true;
+                    isWaiting = false;
+
+                    if (hud) { hud.style.color = '#fff'; hud.innerText = flightMultiplier.toFixed(2) + "x"; }
+                    if (hudCrash) hudCrash.style.display = 'none';
+                    if (isViewing) updateAviatorTone(flightMultiplier);
+
+                    for (let i = 1; i <= 2; i++) {
+                        let b = document.getElementById('btnDockAction' + i);
+                        if (b) {
+                            b.classList.remove('cancel-state');
+                            if (activeBets[i].on && !activeBets[i].cashed) {
+                                b.innerHTML = `<span>Cash out</span><span style="font-size:0.8rem; font-weight:800;">${(activeBets[i].stake * flightMultiplier).toFixed(2)} ETB</span>`;
+                                b.classList.add('cashing');
+                            } else {
+                                b.classList.add('waiting-state');
+                                b.innerHTML = `<span>Waiting for next round...</span>`;
+                            }
+                        }
+                    }
+
+                    if (isViewing) {
+                        let progress = Math.min(flightElapsedSec / 8, 1);
+                        let currentX = 20 + 295 * progress;
+                        let waveOffset = Math.sin(flightElapsedSec * 3.8) * 6;
+                        let currentY = (220 - 175 * Math.pow(progress, 1.35)) + waveOffset;
+                        let controlX = 20 + (currentX - 20) * 0.45;
+
+                        let cLine = document.getElementById('curveLine');
+                        let cFill = document.getElementById('curveFill');
+                        let pGroup = document.getElementById('planeG');
+
+                        if (cLine) cLine.setAttribute('d', `M 20 220 Q ${controlX} 220 ${currentX} ${currentY}`);
+                        if (cFill) cFill.setAttribute('d', `M 20 220 Q ${controlX} 220 ${currentX} ${currentY} L ${currentX} 220 Z`);
+                        if (pGroup) {
+                            let planeAngle = -10 + (Math.cos(flightElapsedSec * 3.8) * 4);
+                            pGroup.setAttribute('transform', `translate(${currentX}, ${currentY}) rotate(${planeAngle})`);
+                        }
+                    }
+                }
+            }
+
+            updateLiveStatsView();
+        }
+
+        setInterval(masterAviatorSyncLoop, 50);
+
+        function recordRoundHistory(val) {
+            let rib = document.getElementById('historyChips');
+            if (rib) {
+                let chip = document.createElement('div');
+                chip.className = 'hist-chip' + (val >= 2.0 ? ' high' : '');
+                chip.innerText = val.toFixed(2) + 'x';
+                rib.insertBefore(chip, rib.firstChild);
+                if (rib.children.length > 10) rib.removeChild(rib.lastChild);
             }
         }
 
-        // 3. Audio Engine
-        let audioCtx = null, jetOsc = null, jetGain = null;
-        function getSafeAudio() {
+        function updateLiveStatsView() {
+            let count = (activeBets[1].on ? 1 : 0) + (activeBets[2].on ? 1 : 0);
+            let staked = (activeBets[1].on ? activeBets[1].stake : 0) + (activeBets[2].on ? activeBets[2].stake : 0);
+            let won = (activeBets[1].cashed ? activeBets[1].stake * flightMultiplier : 0) + (activeBets[2].cashed ? activeBets[2].stake * flightMultiplier : 0);
+
+            let cntDisplay = document.getElementById('liveBettorsCountDisplay');
+            let stkDisplay = document.getElementById('liveTotalStakedDisplay');
+            let wonDisplay = document.getElementById('liveTotalWonDisplay');
+
+            if (cntDisplay) cntDisplay.innerText = `${count} ተጫዋች`;
+            if (stkDisplay) stkDisplay.innerText = `${staked.toFixed(2)} ETB`;
+            if (wonDisplay) wonDisplay.innerText = `${won.toFixed(2)} ETB`;
+        }
+
+        /* 3. TIME-LIMITED COUPONS WITH EXPIRY & REPEAT BLOCK */
+        let claimedCouponsSet = JSON.parse(localStorage.getItem(`niro_claimed_cps_${currentUserId}`) || '[]');
+
+        function adminCreateTimedCoupon() {
+            let name = document.getElementById('admCpName').value.trim().toUpperCase();
+            let amt = parseFloat(document.getElementById('admCpAmount').value);
+            let durationMins = parseFloat(document.getElementById('admCpDuration').value) || 2;
+
+            if (!name || !amt) { showStatusPopup(false, "EMPTY", "ስም እና መጠን ያስገቡ!"); return; }
+
+            let expiryTime = Date.now() + (durationMins * 60 * 1000);
+            activeCoupons[name] = { amount: amt, expiry: expiryTime };
+            localStorage.setItem("niro_timed_coupons", JSON.stringify(activeCoupons));
+
+            showStatusPopup(true, "COUPON READY", `ኩፖን ${name} ለ ${durationMins} ደቂቃ ብቻ እንዲቆይ ተደርጎ ተፈጥሯል!`);
+            document.getElementById('admCpName').value = "";
+            document.getElementById('admCpAmount').value = "";
+            document.getElementById('admCpDuration').value = "";
+        }
+
+        function claimCouponCode() {
+            let code = document.getElementById('couponInputBox').value.trim().toUpperCase();
+            if (!activeCoupons[code]) {
+                showStatusPopup(false, "INVALID", "የተሳሳተ ኩፖን!");
+                return;
+            }
+
+            let cp = activeCoupons[code];
+
+            // 1. ጊዜው ካለቀ ማረጋገጥ (Expired check)
+            if (Date.now() > cp.expiry) {
+                showStatusPopup(false, "EXPIRED", "Time expired! ይህ ኩፖን ጊዜው አልፏል።");
+                return;
+            }
+
+            // 2. ደግሞ እንዳይሞክሩ ማገድ (Already claimed check)
+            if (claimedCouponsSet.includes(code)) {
+                showStatusPopup(false, "ALREADY CLAIMED", "You have already claimed this coupon!");
+                return;
+            }
+
+            claimedCouponsSet.push(code);
+            localStorage.setItem(`niro_claimed_cps_${currentUserId}`, JSON.stringify(claimedCouponsSet));
+
+            balance += cp.amount;
+            syncBalanceViews();
+            playCashoutSound();
+            closeCouponModal();
+            showStatusPopup(true, "SUCCESSFUL", `+${cp.amount} ETB ቦነስ ተጨምሯል!`);
+            document.getElementById('couponInputBox').value = "";
+        }
+
+        /* 4. STATISTICS MODAL (TOTAL COUNT & LIST) */
+        function openStatisticsModal() {
+            openGraphPane('paneStatistics');
+            let box = document.getElementById('usersStatisticsListContainer');
+            box.innerHTML = "";
+            globalUsers = JSON.parse(localStorage.getItem('niro_registered_users') || '{}');
+            let usersArr = Object.values(globalUsers);
+
+            document.getElementById('totalUsersCountHeader').innerText = usersArr.length;
+
+            usersArr.forEach(u => {
+                let div = document.createElement('div');
+                div.style.background = "#141c28";
+                div.style.border = "1px solid var(--border-dim)";
+                div.style.padding = "8px 10px";
+                div.style.borderRadius = "8px";
+                div.style.marginBottom = "6px";
+                div.style.display = "flex";
+                div.style.justifyContent = "space-between";
+                div.style.alignItems = "center";
+                div.innerHTML = `
+                    <div>
+                        <b style="font-size:0.85rem; color:#fff;">${u.name}</b> (${u.username || '@user'})<br>
+                        <small style="color:var(--text-secondary);">ID: ${u.id}</small>
+                    </div>
+                    <div style="color:var(--cassa-green); font-weight:900;">${(u.balance || 0).toFixed(2)} ETB</div>
+                `;
+                box.appendChild(div);
+            });
+        }
+
+        /* 5. LIVE VIP TICKER (REAL SECONDS COUNTDOWN) */
+        function updateVipUI() {
+            let totalStakedEl = document.getElementById('vipTotalStakedText');
+            let accruedEl = document.getElementById('vipDailyAccruedText');
+            let timerEl = document.getElementById('vipPreciseTimerText');
+            let btnStart = document.getElementById('btnStartVip');
+            let btnClaim = document.getElementById('btnClaimVip');
+
+            if (!totalStakedEl) return;
+            totalStakedEl.innerText = vipTotalStaked.toFixed(2) + " ETB";
+
+            if (vipStartTime === 0) {
+                if (accruedEl) accruedEl.innerText = "0.00 ETB";
+                if (timerEl) { timerEl.innerText = "ቆጣሪ: አልተጀመረም"; timerEl.style.color = "var(--cassa-cyan)"; }
+                if (btnStart) btnStart.style.display = "block";
+                if (btnClaim) btnClaim.style.display = "none";
+                return;
+            }
+
+            let now = Date.now();
+            let totalDuration = 7 * 24 * 60 * 60 * 1000;
+            let elapsed = now - vipStartTime;
+            let remaining = Math.max(0, totalDuration - elapsed);
+
+            let profit = (vipTotalStaked / 100) * Math.min(7, elapsed / (24 * 60 * 60 * 1000));
+            if (accruedEl) accruedEl.innerText = profit.toFixed(2) + " ETB";
+
+            if (remaining <= 0) {
+                if (timerEl) { timerEl.innerText = "🎉 የ 7 ቀናት ቆይታ ተጠናቋል! አሁኑኑ ያውጡ!"; timerEl.style.color = "var(--cassa-green)"; }
+                if (btnStart) btnStart.style.display = "none";
+                if (btnClaim) btnClaim.style.display = "block";
+            } else {
+                let d = Math.floor(remaining / (24 * 60 * 60 * 1000));
+                let h = Math.floor((remaining % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+                let m = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                let s = Math.floor((remaining % (60 * 1000)) / 1000);
+                if (timerEl) { timerEl.innerText = `የሚቀረው ሰዓት: ${d}ቀን ${h}ሰዓት ${m}ደቂቃ ${s}ሰከንድ`; timerEl.style.color = "var(--cassa-cyan)"; }
+                if (btnStart) btnStart.style.display = "none";
+                if (btnClaim) btnClaim.style.display = "none";
+            }
+        }
+
+        function startVipSevenDays() {
+            vipStartTime = Date.now();
+            vipTotalStaked = Math.max(50, vipTotalStaked);
+            syncBalanceViews();
+            showStatusPopup(true, "VIP STARTED", "የ 7 ቀን VIP ኢንቨስትመንት ተጀምሯል!");
+        }
+
+        function claimVipTwoX() {
+            let profit = (vipTotalStaked / 100) * 7;
+            let twoXBonus = (vipTotalStaked + profit) * 2;
+            balance += twoXBonus;
+            vipStartTime = 0;
+            vipTotalStaked = 0;
+            syncBalanceViews();
+            playCashoutSound();
+            showStatusPopup(true, "2X CLAIMED! 👑", `የ 2X VIP ሽልማት ${twoXBonus.toFixed(2)} ETB ተጨምሯል!`);
+        }
+
+        /* 6. PERSISTENT PENDING DEPOSIT (SURVIVES RELOADS) */
+        let currentDepMethod = 'telebirr';
+        let depositExpiryTimer = null;
+        let remainingSeconds = 1200;
+
+        function setWalletMode(m) {
+            document.getElementById('btnWDepToggle').classList.toggle('active', m === 'dep');
+            document.getElementById('btnWWithToggle').classList.toggle('active', m === 'with');
+            document.getElementById('boxDepSection').style.display = (m === 'dep') ? 'block' : 'none';
+            document.getElementById('boxWithSection').style.display = (m === 'with') ? 'block' : 'none';
+        }
+
+        function pickPaymentType(t) {
+            currentDepMethod = t;
+            document.getElementById('pmTelebirr').classList.toggle('selected', t === 'telebirr');
+            document.getElementById('pmCBE').classList.toggle('selected', t === 'cbe');
+            document.getElementById('boxTelebirrDetails').style.display = (t === 'telebirr') ? 'block' : 'none';
+            document.getElementById('boxBankDetails').style.display = (t === 'cbe') ? 'block' : 'none';
+        }
+
+        function checkPendingDepositState() {
+            let raw = localStorage.getItem(KEY_PENDING_DEP);
+            let resumeCard = document.getElementById('pendingDepositResumeCard');
+            let pendingMinEl = document.getElementById('pendingTimerMin');
+
+            if (raw) {
+                let order = JSON.parse(raw);
+                let elapsed = Date.now() - order.startTime;
+                let remainingMs = order.duration - elapsed;
+
+                if (remainingMs > 0) {
+                    let totalSecs = Math.floor(remainingMs / 1000);
+                    let m = Math.floor(totalSecs / 60);
+                    let s = totalSecs % 60;
+                    let f = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+
+                    if (resumeCard) resumeCard.style.display = 'flex';
+                    if (pendingMinEl) pendingMinEl.innerText = f;
+                    let clockEl = document.getElementById('orderTimerClock');
+                    if (clockEl) clockEl.innerText = f;
+                } else {
+                    cancelPendingDeposit();
+                }
+            } else {
+                if (resumeCard) resumeCard.style.display = 'none';
+            }
+        }
+
+        function proceedToPaymentDetails() {
+            let amt = parseFloat(document.getElementById('inDepSum').value);
+            if (!amt || amt < 50) { showStatusPopup(false, "INVALID", "ዝቅተኛው የዲፖዚት መጠን 50 ብር ነው!"); return; }
+
+            let orderData = { amount: amt, method: currentDepMethod, startTime: Date.now(), duration: 20 * 60 * 1000 };
+            localStorage.setItem(KEY_PENDING_DEP, JSON.stringify(orderData));
+
+            renderOrderUI(orderData);
+        }
+
+        function renderOrderUI(order) {
+            document.getElementById('txtTeleAcc').innerText = telebirrAcc;
+            document.getElementById('txtTeleName').innerText = "Name: " + telebirrName;
+            document.getElementById('txtCbeAcc').innerText = cbeAcc;
+            document.getElementById('txtCbeName').innerText = "Name: " + cbeName;
+
+            document.getElementById('boxTelebirrDetails').style.display = (order.method === 'telebirr') ? 'block' : 'none';
+            document.getElementById('boxBankDetails').style.display = (order.method === 'cbe') ? 'block' : 'none';
+
+            document.getElementById('depStep1').style.display = 'none';
+            document.getElementById('depStep2').style.display = 'block';
+        }
+
+        function resumePendingDeposit() {
+            let raw = localStorage.getItem(KEY_PENDING_DEP);
+            if (raw) {
+                let order = JSON.parse(raw);
+                currentDepMethod = order.method;
+                switchNavTab('wallet', 'dep');
+                renderOrderUI(order);
+            }
+        }
+
+        function cancelPendingDeposit() {
+            localStorage.removeItem(KEY_PENDING_DEP);
+            document.getElementById('depStep1').style.display = 'block';
+            document.getElementById('depStep2').style.display = 'none';
+            document.getElementById('inDepFullSms').value = "";
+            let resumeCard = document.getElementById('pendingDepositResumeCard');
+            if (resumeCard) resumeCard.style.display = 'none';
+            showStatusPopup(false, "CANCELED", "የትዕዛዝ ጥያቄው ተሰርዟል!");
+        }
+
+        function startVerificationPipeline() {
+            let rawOrder = localStorage.getItem(KEY_PENDING_DEP);
+            let expectedAmt = rawOrder ? JSON.parse(rawOrder).amount : parseFloat(document.getElementById('inDepSum').value);
+            let rawSms = document.getElementById('inDepFullSms').value.trim();
+
+            if (!rawSms || rawSms.length < 25) {
+                showStatusPopup(false, "FAKE PAYMENT DETECTED", "ሙሉውን የቴሌብር ወይም የባንክ ደረሰኝ መልእክት (SMS) ያስገቡ!");
+                return;
+            }
+
+            let pModal = document.getElementById('verifyPipelineModal');
+            pModal.style.display = 'flex';
+
+            for (let i = 1; i <= 7; i++) {
+                document.getElementById(`vStep${i}`).className = "verify-step";
+            }
+
+            let normalized = rawSms.toLowerCase();
+            let targetAcc = (currentDepMethod === 'telebirr') ? telebirrAcc : cbeAcc;
+            let targetName = (currentDepMethod === 'telebirr') ? telebirrName : cbeName;
+
+            function runStep(idx, testFn, errorTitle, errorDesc, successCallback) {
+                let stepElem = document.getElementById(`vStep${idx}`);
+                stepElem.className = "verify-step active";
+                setTimeout(() => {
+                    if (!testFn()) {
+                        stepElem.className = "verify-step fail";
+                        setTimeout(() => { pModal.style.display = "none"; showStatusPopup(false, errorTitle, errorDesc); }, 700);
+                    } else {
+                        stepElem.className = "verify-step done";
+                        successCallback();
+                    }
+                }, 350);
+            }
+
+            runStep(1, () => (currentDepMethod === 'telebirr') ? (normalized.includes("telebirr") || normalized.includes("ቴሌብር") || normalized.includes("ethio")) : (normalized.includes("cbe") || normalized.includes("commercial bank") || normalized.includes("ንግድ ባንክ")), "FAKE PROVIDER", "መልእክቱ ህጋዊ ደረሰኝ አይደለም!", () => {
+                runStep(2, () => normalized.includes(targetAcc.toLowerCase()), "WRONG ACCOUNT", "ክፍያው ወደተሰጠው አካውንት አልተላከም!", () => {
+                    runStep(3, () => normalized.includes(targetName.toLowerCase().slice(0, 5)), "WRONG NAME", "የተቀባዩ ስም አልተዛመደም!", () => {
+                        runStep(4, () => normalized.includes(expectedAmt.toString()), "AMOUNT MISMATCH", `የ ${expectedAmt} ETB መጠን በመልእክቱ ውስጥ የለም!`, () => {
+                            let match = rawSms.match(/[A-Za-z0-9]{8,14}/);
+                            let txId = match ? match[0] : null;
+                            runStep(5, () => txId !== null, "INVALID TRANSACTION ID", "ትክክለኛ የግብይት ቁጥር አልተገኘም!", () => {
+                                runStep(6, () => !verifiedReceipts.has(txId), "DUPLICATE RECEIPT", "ይህ ደረሰኝ ከዚህ በፊት ገብቷል!", () => {
+                                    runStep(7, () => rawSms.length > 35, "CORRUPTED SMS", "መልእክቱ የተቆራረጠ ነው!", () => {
+                                        verifiedReceipts.add(txId);
+                                        let bonus = (!isFirstDepositDone) ? (expectedAmt * 0.30) : 0;
+                                        isFirstDepositDone = true;
+                                        balance += (expectedAmt + bonus);
+                                        localStorage.removeItem(KEY_PENDING_DEP);
+                                        syncBalanceViews();
+                                        playCashoutSound();
+
+                                        setTimeout(() => {
+                                            pModal.style.display = "none";
+                                            showStatusPopup(true, "PAYMENT VERIFIED", `የ ${expectedAmt} ETB ዲፖዚት ገብቷል!${bonus > 0 ? " (+30% ቦነስ: " + bonus.toFixed(2) + " ETB ተጨምሯል!)" : ""}`);
+                                            document.getElementById('depStep1').style.display = 'block';
+                                            document.getElementById('depStep2').style.display = 'none';
+                                            document.getElementById('inDepFullSms').value = "";
+                                            switchNavTab('lobby');
+                                        }, 600);
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }
+
+        /* 7. WITHDRAWAL SYSTEM */
+        function submitWithdrawAction() {
+            let amt = parseFloat(document.getElementById('inWithSum').value);
+            let dest = document.getElementById('inWithDest').value.trim();
+            if (!amt || amt < 300) { showStatusPopup(false, "LIMIT", "ዝቅተኛው የማውጣት መጠን 300 ብር ነው!"); return; }
+            if (amt > balance) { showStatusPopup(false, "INSUFFICIENT", "በቂ ሂሳብ የለዎትም!"); return; }
+            if (!dest || dest.length < 9) { showStatusPopup(false, "INVALID", "ትክክለኛ አካውንት ያስገቡ!"); return; }
+
+            balance -= amt;
+            let orderId = "W" + Math.floor(1000 + Math.random() * 9000);
+            pendingWithdrawRequests.push({ id: orderId, name: currentUserName, userId: currentUserId, dest: dest, amount: amt, time: new Date().toLocaleTimeString() });
+            localStorage.setItem("niro_with_queue", JSON.stringify(pendingWithdrawRequests));
+            syncBalanceViews();
+            showStatusPopup(true, "REQUEST SENT", `የ ${amt} ETB ማውጣት ጥያቄ ለአድሚን ተልኳል!`);
+            document.getElementById('inWithSum').value = "";
+            document.getElementById('inWithDest').value = "";
+            switchNavTab('lobby');
+        }
+
+        function renderAdminQueues() {
+            let withBox = document.getElementById('adminWithdrawQueue');
+            if (!withBox) return;
+            if (pendingWithdrawRequests.length === 0) {
+                withBox.innerHTML = `<div style="font-size:0.75rem; color:var(--text-secondary);">No pending withdrawal requests.</div>`;
+            } else {
+                withBox.innerHTML = "";
+                pendingWithdrawRequests.forEach((req, idx) => {
+                    let div = document.createElement('div');
+                    div.style.background = "#0a0d14";
+                    div.style.border = "1px solid var(--border-dim)";
+                    div.style.borderRadius = "10px";
+                    div.style.padding = "10px";
+                    div.style.marginBottom = "8px";
+                    div.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                            <b>👤 ${req.name} (ID: ${req.userId})</b>
+                            <span style="color:var(--cassa-gold); font-weight:900;">${req.amount.toFixed(2)} ETB</span>
+                        </div>
+                        <div style="font-size:0.75rem; color:#cbd5e1; margin:4px 0;">📱 Account: <code>${req.dest}</code></div>
+                        <div style="display:flex; gap:6px; margin-top:8px;">
+                            <button class="btn-adm success" style="flex:1;" onclick="adminApproveWithdraw(${idx})">✅ Approve</button>
+                            <button class="btn-adm danger" style="flex:1;" onclick="adminRejectWithdraw(${idx})">❌ Reject</button>
+                        </div>
+                    `;
+                    withBox.appendChild(div);
+                });
+            }
+        }
+
+        function adminApproveWithdraw(idx) {
+            pendingWithdrawRequests.splice(idx, 1);
+            localStorage.setItem("niro_with_queue", JSON.stringify(pendingWithdrawRequests));
+            syncBalanceViews();
+            showStatusPopup(true, "APPROVED", "ክፍያው ጸድቋል!");
+        }
+
+        function adminRejectWithdraw(idx) {
+            let req = pendingWithdrawRequests[idx];
+            if (req.userId === currentUserId) balance += req.amount;
+            pendingWithdrawRequests.splice(idx, 1);
+            localStorage.setItem("niro_with_queue", JSON.stringify(pendingWithdrawRequests));
+            syncBalanceViews();
+            showStatusPopup(false, "REJECTED", "ክፍያው ተሰርዞ ወደ ተጠቃሚው ተመልሷል!");
+        }
+
+        /* 8. SOUND CONTROLS (ONLY IN-FLIGHT & CRASH) */
+        let audioCtx = null;
+        function getAudioContext() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             if (audioCtx.state === 'suspended') audioCtx.resume();
             return audioCtx;
         }
-        window.addEventListener('click', getSafeAudio, { once: true });
-        window.addEventListener('touchstart', getSafeAudio, { once: true });
+        function unlockAudioSystem() { try { getAudioContext(); } catch(e) {} }
 
-        function startJetAudio() {
-            let isAviator = document.getElementById('viewAviator').classList.contains('active');
-            if (!isAviator) return;
+        let jetOscLow = null, jetOscHigh = null, jetGain = null;
+        function startAviatorSounds() {
+            stopAviatorSounds();
             try {
-                let ctx = getSafeAudio();
-                if (jetOsc) return;
-                jetOsc = ctx.createOscillator();
+                let ctx = getAudioContext();
+                jetOscLow = ctx.createOscillator();
+                jetOscHigh = ctx.createOscillator();
                 jetGain = ctx.createGain();
-                jetOsc.type = 'sawtooth';
-                jetOsc.frequency.setValueAtTime(80, ctx.currentTime);
-                jetGain.gain.setValueAtTime(0.20, ctx.currentTime);
-                jetOsc.connect(jetGain);
+
+                jetOscLow.type = 'sawtooth';
+                jetOscHigh.type = 'sine';
+                jetOscLow.frequency.setValueAtTime(60, ctx.currentTime);
+                jetOscHigh.frequency.setValueAtTime(140, ctx.currentTime);
+
+                let filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(260, ctx.currentTime);
+
+                jetOscLow.connect(filter);
+                jetOscHigh.connect(filter);
+                filter.connect(jetGain);
                 jetGain.connect(ctx.destination);
-                jetOsc.start();
+                jetGain.gain.setValueAtTime(0.08, ctx.currentTime);
+
+                jetOscLow.start();
+                jetOscHigh.start();
             } catch(e) {}
         }
 
-        function tuneJetAudio(mult) {
+        function updateAviatorTone(mult) {
             try {
-                if (jetOsc && audioCtx) {
-                    let f = Math.min(320, 80 + Math.log10(mult + 1) * 90);
-                    jetOsc.frequency.setTargetAtTime(f, audioCtx.currentTime, 0.1);
+                let ctx = getAudioContext();
+                if (jetOscHigh && ctx) {
+                    jetOscHigh.frequency.setValueAtTime(Math.min(350, 140 + (mult - 1) * 16), ctx.currentTime);
                 }
             } catch(e) {}
         }
 
-        function stopJetAudio() {
+        function stopAviatorSounds() {
             try {
-                if (jetOsc) { jetOsc.stop(); jetOsc.disconnect(); jetOsc = null; }
+                if (jetOscLow) { jetOscLow.stop(); jetOscLow.disconnect(); jetOscLow = null; }
+                if (jetOscHigh) { jetOscHigh.stop(); jetOscHigh.disconnect(); jetOscHigh = null; }
                 if (jetGain) { jetGain.disconnect(); jetGain = null; }
             } catch(e) {}
         }
 
-        function playBoomAudio() {
-            let isAviator = document.getElementById('viewAviator').classList.contains('active');
-            if (!isAviator) return;
+        function playDescentWhooshSound() {
             try {
-                let ctx = getSafeAudio();
+                let ctx = getAudioContext();
                 let osc = ctx.createOscillator();
-                let g = ctx.createGain();
+                let gain = ctx.createGain();
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(140, ctx.currentTime);
+                osc.frequency.setValueAtTime(130, ctx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.4);
-                g.gain.setValueAtTime(0.25, ctx.currentTime);
-                g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-                osc.connect(g);
-                g.connect(ctx.destination);
+                gain.gain.setValueAtTime(0.18, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
                 osc.start();
                 osc.stop(ctx.currentTime + 0.4);
             } catch(e) {}
         }
 
-        // 4. Admin Radar Controls
-        let radarMasterMode = false;
-        let radarManualFlying = false;
-        let radarForceCrash = false;
+        function playCashoutSound() {
+            try {
+                let ctx = getAudioContext();
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(659.25, ctx.currentTime);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch(e) {}
+        }
 
-        function toggleRadarMode() {
-            radarMasterMode = !radarMasterMode;
-            let btn = document.getElementById('radarToggleBtn');
-            if (radarMasterMode) {
-                btn.innerHTML = "🟢 ሲስተም: በርቷል (ON)";
-                btn.style.background = "var(--cassa-green)";
+        /* 9. MASTER ADMIN CONTROLS */
+        function toggleMasterAdminSystem() {
+            masterAdminActive = !masterAdminActive;
+            let b = document.getElementById('masterAdminToggleBtn');
+            if (masterAdminActive) {
+                b.className = "master-toggle-btn on";
+                b.innerText = "🟢 MASTER CONTROLLER: ON (CONTROLLED)";
             } else {
-                btn.innerHTML = "🔴 ሲስተም: ጠፍቷል (OFF)";
-                btn.style.background = "var(--cassa-red)";
+                b.className = "master-toggle-btn off";
+                b.innerText = "🔴 MASTER CONTROLLER: OFF (AUTO RANDOM)";
+                manual10RunTriggered = false;
             }
         }
 
-        function triggerStartRun() {
-            radarManualFlying = true;
-            radarForceCrash = false;
-        }
-
-        function triggerStopFlight() {
-            radarForceCrash = true;
-            radarManualFlying = false;
-        }
-
-        // 5. Aviator Flight Engine
-        let flightState = 'WAITING';
-        let stateStart = Date.now();
-        const WAIT_MS = 4000;
-        let currentMultiplier = 1.00;
-        let crashTargetX = 2.40;
-
-        function pickRandomOdd() {
-            let r = Math.random();
-            if (r < 0.45) return parseFloat((1.15 + Math.random() * 0.85).toFixed(2));
-            if (r < 0.75) return parseFloat((2.00 + Math.random() * 2.80).toFixed(2));
-            return parseFloat((5.00 + Math.random() * 8.50).toFixed(2));
-        }
-        crashTargetX = pickRandomOdd();
-
-        setInterval(function() {
-            let now = Date.now();
-            let elapsed = now - stateStart;
-
-            let hud = document.getElementById('hudMultiplier');
-            let hudCrash = document.getElementById('hudCrashText');
-            let plane = document.getElementById('planeG');
-            let cLine = document.getElementById('curveLine');
-            let cFill = document.getElementById('curveFill');
-            let ufcCard = document.getElementById('spribeUfcTransitionCard');
-            let ufcBar = document.getElementById('ufcDirectProgressLine');
-            let adminLive = document.getElementById('adminLiveDisplay');
-
-            if (flightState === 'WAITING') {
-                stopJetAudio();
-                if (ufcCard) ufcCard.style.display = 'flex';
-                if (hud) hud.style.display = 'none';
-                if (hudCrash) hudCrash.style.display = 'none';
-
-                let frac = Math.max(0, 1 - (elapsed / WAIT_MS));
-                if (ufcBar) ufcBar.style.width = (frac * 100) + '%';
-
-                if (cLine) cLine.setAttribute('d', 'M 25 195 Q 25 195 25 195');
-                if (cFill) cFill.setAttribute('d', 'M 25 195 Q 25 195 25 195 L 25 195 Z');
-                if (plane) plane.setAttribute('transform', 'translate(30, 192) rotate(-8)');
-
-                if (adminLive) {
-                    adminLive.innerText = "1.00x";
-                    adminLive.style.color = "var(--cassa-cyan)";
-                }
-
-                document.getElementById('liveBettorsTxt').innerText = "0 ተጫዋች";
-                document.getElementById('totalStakedTxt').innerText = "0.00 ETB";
-                document.getElementById('totalWonTxt').innerText = "0.00 ETB";
-
-                let ready = (!radarMasterMode && elapsed >= WAIT_MS) || (radarMasterMode && radarManualFlying);
-                if (ready) {
-                    flightState = 'FLYING';
-                    stateStart = Date.now();
-                    crashTargetX = pickRandomOdd();
-                    currentMultiplier = 1.00;
-                    radarForceCrash = false;
-                    startJetAudio();
-                }
-            } else if (flightState === 'FLYING') {
-                if (ufcCard) ufcCard.style.display = 'none';
-                if (hud) {
-                    hud.style.display = 'block';
-                    hud.style.color = '#ffffff';
-                }
-                if (hudCrash) hudCrash.style.display = 'none';
-
-                let t = elapsed / 1000;
-                currentMultiplier = parseFloat((1.00 + (t * 0.09) + Math.pow(t * 0.018, 2)).toFixed(2));
-
-                // Live Bettors Simulation
-                let totalPl = 15;
-                let stakedVal = 450.00;
-                let leftPl = Math.max(2, Math.floor(totalPl - (currentMultiplier * 1.5)));
-                let wonVal = stakedVal * (currentMultiplier - 1) * 0.65;
-
-                document.getElementById('liveBettorsTxt').innerText = leftPl + " ተጫዋች";
-                document.getElementById('totalStakedTxt').innerText = stakedVal.toFixed(2) + " ETB";
-                document.getElementById('totalWonTxt').innerText = wonVal.toFixed(2) + " ETB";
-
-                let shouldCrash = false;
-                if (!radarMasterMode) {
-                    if (currentMultiplier >= crashTargetX) shouldCrash = true;
-                } else {
-                    if (radarForceCrash) shouldCrash = true;
-                }
-
-                if (shouldCrash) {
-                    flightState = 'CRASHED';
-                    stopJetAudio();
-                    playBoomAudio();
-
-                    let finalVal = radarForceCrash ? currentMultiplier : crashTargetX;
-
-                    if (hud) {
-                        hud.innerText = finalVal.toFixed(2) + "x";
-                        hud.style.color = 'var(--cassa-red-bright)';
-                    }
-                    if (hudCrash) hudCrash.style.display = 'block';
-                    if (plane) plane.setAttribute('transform', 'translate(440, -90) rotate(-40)');
-
-                    if (adminLive) {
-                        adminLive.innerText = finalVal.toFixed(2) + "x";
-                        adminLive.style.color = "var(--cassa-red-bright)";
-                    }
-
-                    radarForceCrash = false;
-                    radarManualFlying = false;
-
-                    setTimeout(() => {
-                        flightState = 'WAITING';
-                        stateStart = Date.now();
-                    }, 1100);
-                } else {
-                    startJetAudio();
-                    if (hud) hud.innerText = currentMultiplier.toFixed(2) + "x";
-                    if (adminLive) {
-                        adminLive.innerText = currentMultiplier.toFixed(2) + "x";
-                        adminLive.style.color = "var(--cassa-cyan)";
-                    }
-                    tuneJetAudio(currentMultiplier);
-
-                    let p = Math.min(t / 14.0, 1);
-                    let curX = 30 + (230 * p) + Math.sin(t * 1.8) * 4;
-                    let curY = 192 - (135 * Math.pow(p, 0.85)) + Math.cos(t * 2.2) * 3;
-                    let ctrlX = 30 + (curX - 30) * 0.42;
-
-                    if (cLine) cLine.setAttribute('d', `M 25 195 Q ${ctrlX} 195 ${curX} ${curY}`);
-                    if (cFill) cFill.setAttribute('d', `M 25 195 Q ${ctrlX} 195 ${curX} ${curY} L ${curX} 195 Z`);
-                    if (plane) plane.setAttribute('transform', `translate(${curX}, ${curY}) rotate(${-8 - (p * 12)})`);
-                }
+        function adminSave10Rounds() {
+            for (let i = 0; i < 10; i++) {
+                let v = parseFloat(document.getElementById('rInput' + i).value) || 2.0;
+                programmedRounds[i] = v;
             }
-        }, 40);
-
-        // 6. Statistics Modal Functions
-        function openStatisticsModal() {
-            document.getElementById('statTotalUsersCount').innerText = usersList.length;
-            let listHtml = usersList.map((u, i) => `
-                <div style="background:#0d1522; border:1px solid #1e293b; border-radius:10px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <div style="font-weight:900; font-size:0.85rem; color:#fff;">${u.name} <span style="color:#64748b; font-size:0.75rem;">(${u.user})</span></div>
-                        <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">ID: ${u.id}</div>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <span style="font-weight:900; font-size:0.85rem; color:var(--cassa-cyan);">${parseFloat(u.bal).toFixed(2)} ETB</span>
-                        <button onclick="editBalancePrompt(${i})" style="background:var(--cassa-green); color:#000; border:none; border-radius:6px; padding:4px 8px; font-size:0.7rem; font-weight:900; cursor:pointer;">Edit</button>
-                    </div>
-                </div>
-            `).join('');
-
-            document.getElementById('statUsersListContainer').innerHTML = listHtml;
-            document.getElementById('customStatsModal').style.display = 'flex';
+            showStatusPopup(true, "PLAN SAVED", "የ 10ሩ ዙሮች Multiplier ዕቅድ ተቀምጧል!");
         }
 
-        function closeStatisticsModal() {
-            document.getElementById('customStatsModal').style.display = 'none';
+        function adminTrigger10RoundsRun() {
+            adminSave10Rounds();
+            masterAdminActive = true;
+            manual10RunTriggered = true;
+            currentRoundIndex = 0;
+            let b = document.getElementById('masterAdminToggleBtn');
+            if (b) { b.className = "master-toggle-btn on"; b.innerText = "🟢 MASTER CONTROLLER: ON (10-ROUND PLAN)"; }
+            if (!document.getElementById('viewAviator').classList.contains('active')) openAviatorGame();
+            showStatusPopup(true, "STARTED", "የ 10ሩ ዙሮች በረራ ተጀምሯል!");
         }
 
-        function editBalancePrompt(idx) {
-            let u = usersList[idx];
-            let newAmount = prompt(`ለ ${u.name} አዲስ ባላንስ (ETB) ያስገቡ፦`, u.bal);
-            if (newAmount !== null && !isNaN(parseFloat(newAmount))) {
-                usersList[idx].bal = parseFloat(newAmount);
-                saveUsers();
-                openStatisticsModal();
-                alert(`${u.name} ባላንስ በተሳካ ሁኔታ ተስተካክሏል!`);
+        function executeSystemRestart() {
+            if (!confirm("የሁሉንም ተጠቃሚዎች ሂሳብ 00 ያደርጋል! እርግጠኛ ነዎት?")) return;
+            globalUsers = JSON.parse(localStorage.getItem('niro_registered_users') || '{}');
+            Object.keys(globalUsers).forEach(uId => {
+                if (!adminList.includes(uId)) {
+                    globalUsers[uId].balance = 0.00;
+                    localStorage.setItem(`niro_bal_${uId}`, "0.00");
+                }
+            });
+            localStorage.setItem('niro_registered_users', JSON.stringify(globalUsers));
+            pendingWithdrawRequests = [];
+            localStorage.setItem("niro_with_queue", "[]");
+            renderAdminQueues();
+            if (!adminList.includes(currentUserId)) balance = 0.00;
+            syncBalanceViews();
+            showStatusPopup(true, "RESTART SUCCESS", "ሲስተሙ እንደ አዲስ ተጀምሯል!");
+        }
+
+        function submitAddAdmin() {
+            let newId = document.getElementById('inNewAdminId').value.trim();
+            if (newId && !adminList.includes(newId)) {
+                adminList.push(newId);
+                localStorage.setItem('niro_admin_ids', JSON.stringify(adminList));
+                closeGraphPane('paneAddAdmin');
+                showStatusPopup(true, "ADMIN ADDED", "አዲሱ አድሚን ተሹሟል!");
             }
         }
 
-        function adjustBet(delta) {
-            let el = document.getElementById('currentBetVal');
-            let val = Math.max(1, parseInt(el.innerText) + delta);
-            el.innerText = val;
+        function deleteBroadcastFromAll() {
+            localStorage.removeItem('niro_live_broadcast');
+            document.getElementById('broadcastBanner').style.display = 'none';
+            showStatusPopup(true, 'DELETED', 'ብሮድካስቱ ተሰርዟል!');
         }
+
+        function sendBroadcastNow() {
+            let text = document.getElementById('inBcText').value.trim();
+            let fileInput = document.getElementById('inBcImage');
+            if (!text && (!fileInput.files || !fileInput.files[0])) return;
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) { saveBroadcast(text, e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveBroadcast(text, null);
+            }
+        }
+
+        function saveBroadcast(t, img) {
+            localStorage.setItem('niro_live_broadcast', JSON.stringify({ text: t, img: img }));
+            closeGraphPane('paneBroadcast');
+            showStatusPopup(true, "SENT", "ማስታወቂያው ተልኳል!");
+            checkBroadcastNotification();
+        }
+
+        function checkBroadcastNotification() {
+            let raw = localStorage.getItem('niro_live_broadcast');
+            let banner = document.getElementById('broadcastBanner');
+            if (raw) {
+                let bc = JSON.parse(raw);
+                let imgEl = document.getElementById('bcBannerImg');
+                let textEl = document.getElementById('bcBannerText');
+                if (bc.img) { imgEl.src = bc.img; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
+                textEl.innerText = bc.text || "";
+                banner.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+
+        function switchChangerTab(t) {
+            document.getElementById('btnChgTele').style.background = t === 'telebirr' ? 'var(--cassa-green)' : '#1f2736';
+            document.getElementById('btnChgBank').style.background = t === 'bank' ? 'var(--cassa-green)' : '#1f2736';
+            document.getElementById('boxEditTele').style.display = t === 'telebirr' ? 'block' : 'none';
+            document.getElementById('boxEditBank').style.display = t === 'bank' ? 'block' : 'none';
+        }
+
+        function saveDepositDetailsDone() {
+            telebirrAcc = document.getElementById('inChgTeleNum').value.trim();
+            telebirrName = document.getElementById('inChgTeleName').value.trim();
+            cbeAcc = document.getElementById('inChgBankNum').value.trim();
+            cbeName = document.getElementById('inChgBankName').value.trim();
+            localStorage.setItem('niro_tel_num', telebirrAcc);
+            localStorage.setItem('niro_tel_name', telebirrName);
+            localStorage.setItem('niro_cbe_num', cbeAcc);
+            localStorage.setItem('niro_cbe_name', cbeName);
+            closeGraphPane('paneDepositChanger');
+            syncBalanceViews();
+            showStatusPopup(true, "SAVED", "አካውንቶች ተቀይረዋል!");
+        }
+
+        /* 10. UI & NAVIGATION HELPERS */
+        function switchNavTab(tabName, modeOpt) {
+            stopAviatorSounds();
+            document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
+
+            if (tabName === 'lobby') {
+                document.getElementById('viewLobby').classList.add('active');
+                document.getElementById('tabLobbyBtn').classList.add('active');
+            } else if (tabName === 'wallet') {
+                document.getElementById('viewWallet').classList.add('active');
+                document.getElementById('tabWalletBtn').classList.add('active');
+                if (modeOpt) setWalletMode(modeOpt);
+            } else if (tabName === 'vip') {
+                document.getElementById('viewVip').classList.add('active');
+                updateVipUI();
+            } else if (tabName === 'admin') {
+                document.getElementById('viewAdmin').classList.add('active');
+                renderAdminQueues();
+            }
+        }
+
+        function openAviatorGame() {
+            unlockAudioSystem();
+            document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
+            document.getElementById('viewAviator').classList.add('active');
+            if (isFlying && !isWaiting) startAviatorSounds();
+        }
+
+        function exitAviatorGame() {
+            stopAviatorSounds();
+            switchNavTab('lobby');
+        }
+
+        function onBetTrigger(slot) {
+            let stake = Math.max(2, parseFloat(document.getElementById('stakeInput' + slot).value) || 2);
+            let btn = document.getElementById('btnDockAction' + slot);
+
+            if (isWaiting && activeBets[slot].on) {
+                balance += activeBets[slot].stake;
+                activeBets[slot].on = false;
+                syncBalanceViews();
+                btn.classList.remove('cancel-state');
+                btn.innerHTML = `<span>Bet</span><span style="font-size:0.8rem; font-weight:800;">${stake.toFixed(2)} ETB</span>`;
+                return;
+            }
+
+            if (!activeBets[slot].on && isWaiting) {
+                if (stake > balance) { showStatusPopup(false, "ALERT", "በቂ ሂሳብ የለዎትም!"); return; }
+                balance -= stake;
+                activeBets[slot].stake = stake;
+                activeBets[slot].on = true;
+                activeBets[slot].cashed = false;
+                syncBalanceViews();
+                btn.classList.add('cancel-state');
+                btn.innerHTML = `<span>Cancel</span><span style="font-size:0.8rem; font-weight:800;">${stake.toFixed(2)} ETB</span>`;
+                return;
+            }
+
+            if (isFlying && activeBets[slot].on && !activeBets[slot].cashed) {
+                let win = activeBets[slot].stake * flightMultiplier;
+                balance += win;
+                activeBets[slot].cashed = true;
+                activeBets[slot].on = false;
+                syncBalanceViews();
+                playCashoutSound();
+                btn.classList.remove('cashing');
+                btn.classList.add('waiting-state');
+                btn.innerHTML = `<span>Waiting for next round...</span>`;
+
+                let m = document.getElementById('cashoutNotification');
+                document.getElementById('cashoutAmtVal').innerText = `Win ETB ${win.toFixed(2)}`;
+                m.style.display = 'block';
+                setTimeout(() => { m.style.display = 'none'; }, 2000);
+            }
+        }
+
+        function adjustStake(slot, step) {
+            let el = document.getElementById('stakeInput' + slot);
+            el.value = Math.max(2, (parseFloat(el.value) || 2) + step);
+        }
+        function setStake(slot, val) {
+            document.getElementById('stakeInput' + slot).value = val;
+        }
+
+        function switchBetMode(slot, mode) {
+            let isAuto = (mode === 'auto');
+            document.getElementById(`tabBet${slot}`).classList.toggle('active', !isAuto);
+            document.getElementById(`tabAuto${slot}`).classList.toggle('active', isAuto);
+        }
+
+        function openCouponModal() { document.getElementById('couponModal').style.display = 'flex'; }
+        function closeCouponModal() { document.getElementById('couponModal').style.display = 'none'; }
+        function openGraphPane(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeGraphPane(id) { document.getElementById(id).style.display = 'none'; }
+        function showStatusPopup(ok, title, msg) {
+            let m = document.getElementById('modalStatusPopup');
+            document.getElementById('statusIcon').innerText = ok ? '✅' : '⚠️';
+            document.getElementById('statusTitle').innerText = title;
+            document.getElementById('statusMsg').innerText = msg;
+            m.style.display = 'flex';
+        }
+        function closeStatusModal() { document.getElementById('modalStatusPopup').style.display = 'none'; }
+        function copyText(txt, m) { navigator.clipboard.writeText(txt); showStatusPopup(true, "COPIED", m); }
+
+        // INITIALIZE SYSTEM
+        syncBalanceViews();
+        setInterval(checkPendingDepositState, 1000);
+        setInterval(updateVipUI, 1000);
     </script>
 </body>
 </html>
